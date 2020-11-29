@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import * as S from './styles'
 
 const Search = ({ onChange }) => {
-  const [searchClick, setSearchClick] = useState(false)
+  const [searchClick, setSearchClick] = useState(true)
   const inputRef = useRef(null)
 
   function inputFocus() {
