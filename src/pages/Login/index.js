@@ -24,7 +24,6 @@ const Login = () => {
       await schema.validate(data, {
         abortEarly: false
       })
-
       // api.put(`/events/client/update/${eventID}`, data)
       history.push('dashboard')
 

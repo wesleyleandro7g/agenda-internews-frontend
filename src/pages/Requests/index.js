@@ -4,14 +4,14 @@ import Layout from '../../components/layout'
 
 import * as S from './styles'
 
-const Dashboard = () => {
+const Requests = () => {
   return (
-    <Layout page="Bem vindo(a), Jarbas.">
+    <Layout page="Solicitações">
       <S.Container>
-        <h1>Dashboard</h1>
+        <h1>Solicitações</h1>
       </S.Container>
     </Layout>
   )
 }
 
-export default Dashboard
+export default Requests
