@@ -9,7 +9,10 @@ import {
   RiFileListLine,
   RiCalendarEventLine,
   RiQuestionAnswerLine,
-  RiSpam2Line
+  RiSpam2Line,
+  RiFilter2Line,
+  RiSearchLine,
+  RiCloseLine
 } from 'react-icons/ri'
 
 const Icons = {
@@ -23,7 +26,10 @@ const Icons = {
   RiFileListLine,
   RiCalendarEventLine,
   RiQuestionAnswerLine,
-  RiSpam2Line
+  RiSpam2Line,
+  RiFilter2Line,
+  RiSearchLine,
+  RiCloseLine
 }
 
 export default Icons
