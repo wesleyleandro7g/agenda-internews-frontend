@@ -46,3 +46,6 @@ export const RegisterButtonWrapper = styled.div`
   bottom: 10px;
   right: 2%;
 `
+export const CityInputWrapper = styled.div`
+  display: flex;
+`
