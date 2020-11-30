@@ -203,6 +203,8 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
   const [filtered, setFiltered] = useState([])
   const [clientSelected, setClientSelected] = useState(false)
   const [selected, setSelected] = useState(false)
+  const [Checks] = useState(CheckBoxData)
+  const [itemChecked, setItemChecked] = useState('')
 
   useEffect(() => {
     handleFilterData()
@@ -220,9 +222,6 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
     setSelected(!selected)
     setClientSelected(item)
   }
-
-  const [Checks] = useState(CheckBoxData)
-  const [itemChecked, setItemChecked] = useState('')
 
   function handleCheckBox(props) {
     Checks.map(item => {
