@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 100%;
+  width: 98%;
   position: relative;
   padding-top: 13px;
-  margin-top: 10px;
 `
 export const Input = styled.input`
   border: 0;
@@ -17,10 +16,9 @@ export const Input = styled.input`
   -moz-transition: all 0.3s ease-out;
   -webkit-appearance: none;
   border-radius: 0;
-  background-color: transparent;
-  border-bottom: 1px solid ${props => (props.error ? '#ff6666' : '#FFFFFF')};
-  color: ${props => (props.error ? '#ff6666' : '#FFFFFF')};
   padding-left: 5px;
+  background-color: ${props => (props.error ? '#ffe6e6' : '#EEEEEE')};
+  border: 1px solid ${props => (props.error ? '#ffcccc' : '#FFFFFF')};
 
   :focus + label,
   :not(:placeholder-shown) + label {
@@ -33,12 +31,12 @@ export const Label = styled.label`
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 25px;
+  margin: 20px 0 0 5px;
   transition: all 0.3s ease-out;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   font-weight: 400;
   font-size: 12px;
   font-family: 'Montserrat', sans-serif;
-  color: ${props => (props.error ? '#ff6666' : '#FFFFFF')};
+  color: ${props => (props.error ? '#ff6666' : '#333')};
 `

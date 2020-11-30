@@ -6,6 +6,7 @@ import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Modal from '../../components/modal'
 import Button01 from '../../components/buttons/button01'
+import Button02 from '../../components/buttons/button02'
 import CheckBox from '../../components/inputs/checkbox'
 
 import I from '../../utils/Icons'
@@ -220,6 +221,22 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
     setClientSelected(item)
   }
 
+  const [Checks] = useState(CheckBoxData)
+  const [itemChecked, setItemChecked] = useState('')
+
+  function handleCheckBox(props) {
+    Checks.map(item => {
+      if (item.id === props.id) {
+        item.checked = true
+        setItemChecked(item.label)
+      } else {
+        item.checked = false
+      }
+    })
+  }
+
+  console.log(itemChecked)
+
   return (
     <Modal visible={newAttendenceVisible}>
       <S.ModalContentBig>
@@ -265,7 +282,17 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
           )}
           <S.ModalBigContent>
             <S.ItemsRightTop>
-              <h4>Right</h4>
+              <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
+              <S.ModalMainGridDuo>
+                {Checks.map(item => (
+                  <CheckBox
+                    key={item.id}
+                    label={item.label}
+                    checked={item.checked}
+                    onChange={() => handleCheckBox(item)}
+                  />
+                ))}
+              </S.ModalMainGridDuo>
             </S.ItemsRightTop>
 
             <S.ModalFooterBig>
@@ -291,7 +318,7 @@ const Attendences = () => {
   const [modalScheduledVisible, setModalScheduledVisible] = useState(false)
   const [modalRepassVisible, setModalRepassVisible] = useState(false)
   const [attendenceDataTemp, setAttendenceDataTemp] = useState({})
-  const [newAttendenceVisible, setNewAttendenceVisible] = useState(true)
+  const [newAttendenceVisible, setNewAttendenceVisible] = useState(false)
 
   useEffect(() => {
     handleFilterData()
@@ -330,10 +357,12 @@ const Attendences = () => {
       <S.Container>
         <S.SubHeader>
           <S.ItemsLeftSubHeader>
-            <Button01 label="Abrir atendimento" bgColor="#79D279" />
-            <S.TextItemsLeftSubHeader>
-              <h5>Total de atendimentos: 5</h5>
-            </S.TextItemsLeftSubHeader>
+            <Button02
+              label="Abrir atendimento"
+              icon={I.RiAddCircleLine}
+              onClick={() => setNewAttendenceVisible(!newAttendenceVisible)}
+            />
+            <h5>Total de atendimentos: 5</h5>
           </S.ItemsLeftSubHeader>
 
           <S.ItemsRigthSubHeader>

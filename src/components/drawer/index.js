@@ -10,7 +10,7 @@ import * as S from './styles'
 
 const HandleUserType = ({ open }) => {
   const history = useHistory()
-  const [userType] = useState('Externo')
+  const [userType] = useState('Interno')
 
   function handleInternalNavigation(page) {
     DataInternal.map(item => {

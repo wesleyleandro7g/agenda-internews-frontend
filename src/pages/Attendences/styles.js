@@ -14,11 +14,6 @@ export const ItemsLeftSubHeader = styled.div`
   display: flex;
   align-items: center;
 `
-export const TextItemsLeftSubHeader = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-`
 export const ItemsRigthSubHeader = styled.div`
   width: 50%;
   height: 100%;
@@ -88,6 +83,11 @@ export const ModalMain = styled.div`
 export const ModalMainGrid = styled(ModalMain)`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  padding: 10px 5px;
+`
+export const ModalMainGridDuo = styled(ModalMain)`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   padding: 10px 5px;
 `
 export const ModalFooter = styled.div`

@@ -53,7 +53,7 @@ const Login = () => {
         <S.InputWrapper>
           <Form ref={formRef} onSubmit={handleLogin}>
             <Input01 label="Nome" name="nome" type="text" />
-            <Input01 label="Senha" name="senha" type="text" security="Disc" />
+            <Input01 label="Senha" name="senha" type="password" />
 
             <S.Button type="submit">Entrar</S.Button>
           </Form>
