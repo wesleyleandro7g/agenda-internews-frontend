@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 const BarChartComponent = ({ data }) => {
   return (
     <BarChart
-      width={800}
+      width={900}
       height={250}
       data={data}
       margin={{
@@ -14,6 +14,7 @@ const BarChartComponent = ({ data }) => {
         bottom: 5
       }}
       barSize={10}
+      fontSize={10}
     >
       <XAxis dataKey="name" scale="auto" padding={{ left: 10, right: 10 }} />
       <YAxis />

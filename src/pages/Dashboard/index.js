@@ -3,13 +3,9 @@ import React from 'react'
 import Layout from '../../components/layout'
 import PieChart from '../../components/charts/piechart'
 import BarChart from '../../components/charts/barchart'
+import BarVertical from '../../components/charts/barverticalchart'
 
-import {
-  atendimentosMensais,
-  clientesAtividade,
-  osRealizada,
-  dataBarChart
-} from './dataTemp'
+import { atendimentosMensais, osRealizada, dataBarChart } from './dataTemp'
 import * as S from './styles'
 
 const HandlePieChartCards = ({ title, data, onChange }) => {
@@ -25,6 +21,14 @@ const HandlePieChartCards = ({ title, data, onChange }) => {
         </S.ChartContent>
         <S.ChartInfo></S.ChartInfo>
       </S.ChartMain>
+    </S.ChartWrapper>
+  )
+}
+
+const HandleLineChart = () => {
+  return (
+    <S.ChartWrapper>
+      <BarVertical />
     </S.ChartWrapper>
   )
 }
@@ -67,11 +71,7 @@ const Dashboard = () => {
             data={osRealizada}
             onChange={e => handleSelectDate(e)}
           />
-          <HandlePieChartCards
-            title="Clientes por atividade"
-            data={clientesAtividade}
-            onChange={e => handleSelectDate(e)}
-          />
+          <HandleLineChart />
         </S.ContentCharts>
 
         <S.ContentBarCharts>

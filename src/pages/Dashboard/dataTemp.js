@@ -12,7 +12,7 @@ export const clientesAtividade = [
   { name: 'Ativos', value: 50 },
   { name: 'Inadimplentes', value: 5 },
   { name: 'Cancelados', value: 10 },
-  { name: 'Bloqueados', value: 1 },
+  { name: 'Bloqueados', value: 0 },
   { name: 'Parceiros', value: 0 }
 ]
 
