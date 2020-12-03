@@ -9,7 +9,7 @@ const Header = ({ page, alert }) => {
   const [modalAlertVisible, setModalAlertVisible] = useState(false)
   const { open, setOpen } = useDrawer()
 
-  //   const sig = localStorage.getItem('user-sig')
+  const sig = localStorage.getItem('user-sig')
 
   function handleModalAlertVisible() {
     setModalAlertVisible(!modalAlertVisible)
@@ -31,7 +31,7 @@ const Header = ({ page, alert }) => {
         <S.WrapperItems>
           {alert && <S.AlertIcon onClick={handleModalAlertVisible} />}
           <S.Avatar onClick={handleModalUserVisible}>
-            <S.AvatarText> WL </S.AvatarText>
+            <S.AvatarText> {sig} </S.AvatarText>
           </S.Avatar>
         </S.WrapperItems>
       </S.Container>

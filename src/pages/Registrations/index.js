@@ -1,23 +1,36 @@
-import React, { useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form } from '@unform/web'
 import * as Yup from 'yup'
+
+import api from '../../services/API'
 
 import Layout from '../../components/layout'
 import Input03 from '../../components/inputs/input03'
 import Input04 from '../../components/inputs/input04'
 import Button01 from '../../components/buttons/button01'
 
-import { InputsClientData, ModuleOptions } from './data'
+import { InputsClientData, ModuleOptions, StateOptions } from './data'
 
 import * as S from './styles'
 
 const Registrations = () => {
   const formRef = useRef(null)
+  const [cities, setCities] = useState([])
+  const [industry, setIndustry] = useState([])
+  const [users, setUsers] = useState([])
+  const [supports, setSupports] = useState([])
+
+  useEffect(() => {
+    api.get('/cities/index').then(res => setCities(res.data))
+    api.get('/industry/index').then(res => setIndustry(res.data))
+    api.get('/users/index').then(res => setUsers(res.data))
+    api.get('/support/index').then(res => setSupports(res.data))
+  }, [])
 
   async function handleRegisterClient(data, { reset }) {
     try {
       const schema = Yup.object().shape({
-        nome: Yup.string().min(3).required('Informe o nome da empresa')
+        razao_social: Yup.string().min(3).required('Informe o nome da empresa')
       })
 
       await schema.validate(data, {
@@ -26,9 +39,22 @@ const Registrations = () => {
 
       console.log(data)
 
-      formRef.current.setErrors({})
+      api
+        .post('/clients/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Cliente cadastrado!')
+            formRef.current.setErrors({})
 
-      reset()
+            reset()
+          } else if (res.status === 400) {
+            alert('Erro! Cliente já cadastrado!')
+            console.log(res.data)
+          }
+        })
+        .catch(err => {
+          if (err) console.log(err)
+        })
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessages = {}
@@ -136,7 +162,18 @@ const Registrations = () => {
         abortEarly: false
       })
 
-      console.log(data)
+      api
+        .post('/industry/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Ramo cadastrado!')
+          } else if (res.status === 400) {
+            alert('Erro! Ramo já cadastrado!')
+          }
+        })
+        .catch(err => {
+          if (err) console.log('Houve um erro inexperado! Tente novamente.')
+        })
 
       formRef.current.setErrors({})
 
@@ -164,7 +201,18 @@ const Registrations = () => {
         abortEarly: false
       })
 
-      console.log(data)
+      api
+        .post('/cities/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Cidade cadastrada!')
+          } else if (res.status === 400) {
+            alert('Erro! Cidade já cadastrada!')
+          }
+        })
+        .catch(err => {
+          if (err) console.log('Houve um erro inexperado! Tente novamente.')
+        })
 
       formRef.current.setErrors({})
 
@@ -210,6 +258,34 @@ const Registrations = () => {
     }
   }
 
+  async function handleRegisterSupport(data, { reset }) {
+    try {
+      const schema = Yup.object().shape({
+        nome: Yup.string().min(5).required('Informe a descrição')
+      })
+
+      await schema.validate(data, {
+        abortEarly: false
+      })
+
+      api.post('/support/create', data)
+
+      formRef.current.setErrors({})
+
+      reset()
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {}
+
+        error.inner.forEach(err => {
+          errorMessages[err.path] = err.message
+        })
+
+        formRef.current.setErrors(errorMessages)
+      }
+    }
+  }
+
   return (
     <Layout page="Cadastros">
       <S.ScrollArea speed={0.6}>
@@ -231,22 +307,22 @@ const Registrations = () => {
             <S.ScopeWrapper>
               <S.OptionWrapper>
                 <S.TitleInputOptions>Modulo do sistema</S.TitleInputOptions>
-                <Input04 name="modulo" Options={ModuleOptions} />
+                <Input04 name="id_modulo" Options={ModuleOptions} />
               </S.OptionWrapper>
 
               <S.OptionWrapper>
                 <S.TitleInputOptions>Ramo de atividade</S.TitleInputOptions>
-                <Input04 name="ramo_ativiadade" Options={ModuleOptions} />
+                <Input04 name="id_atividade" Options={industry} />
               </S.OptionWrapper>
 
               <S.OptionWrapper>
                 <S.TitleInputOptions>Suporte responsável</S.TitleInputOptions>
-                <Input04 name="suporte" Options={ModuleOptions} />
+                <Input04 name="id_suporte" Options={supports} />
               </S.OptionWrapper>
 
               <S.OptionWrapper>
                 <S.TitleInputOptions>Cidade</S.TitleInputOptions>
-                <Input04 name="cidade" Options={ModuleOptions} />
+                <Input04 name="id_cidade" Options={cities} />
               </S.OptionWrapper>
             </S.ScopeWrapper>
 
@@ -312,9 +388,9 @@ const Registrations = () => {
               </S.ContentHeader>
               <S.CityInputWrapper>
                 <Input03 label="Descrição" name="descricao" type="text" />
-                <S.OptionWrapper>
-                  <Input04 name="estado" Options={ModuleOptions} />
-                </S.OptionWrapper>
+                <S.OptionWrapperState>
+                  <Input04 name="id_estado" Options={StateOptions} />
+                </S.OptionWrapperState>
               </S.CityInputWrapper>
 
               <S.RegisterButtonWrapper>
@@ -328,6 +404,22 @@ const Registrations = () => {
                 <h6>Sistema concorrente</h6>
               </S.ContentHeader>
               <Input03 label="Descrição" name="descricao" type="text" />
+
+              <S.RegisterButtonWrapper>
+                <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
+              </S.RegisterButtonWrapper>
+            </S.ContentSimple>
+          </Form>
+          <Form ref={formRef} onSubmit={handleRegisterSupport}>
+            <S.ContentSimple>
+              <S.ContentHeader>
+                <h6>Suporte</h6>
+              </S.ContentHeader>
+              <S.SupportInputWrapper>
+                <Input03 label="Nome" name="nome" type="text" />
+
+                <Input04 name="id_usuario" Options={users} />
+              </S.SupportInputWrapper>
 
               <S.RegisterButtonWrapper>
                 <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />

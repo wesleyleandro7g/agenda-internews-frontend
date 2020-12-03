@@ -48,11 +48,13 @@ const HandleBarChartCard = ({ data }) => {
 }
 
 const Dashboard = () => {
+  const user = localStorage.getItem('user-name')
+
   function handleSelectDate(e) {
     console.log(e.target.value)
   }
   return (
-    <Layout page="Bem vindo(a), Jarbas.">
+    <Layout page={`Bem vindo(a), ${user}.`}>
       <S.Container>
         <S.SubHeader>
           <h6>Você possui 5 novas solicitações de atendimento</h6>

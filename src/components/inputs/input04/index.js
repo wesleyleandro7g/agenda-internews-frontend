@@ -21,7 +21,7 @@ const Input04 = ({ Options, name }) => {
         <S.Select ref={inputRef}>
           {Options.map(option => (
             <S.Option key={option.id} value={option.id}>
-              {option.value}
+              {option.descricao || option.nome}
             </S.Option>
           ))}
         </S.Select>

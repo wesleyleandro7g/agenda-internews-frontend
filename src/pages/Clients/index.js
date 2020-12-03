@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from 'react'
 
+import api from '../../services/API'
+
 import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Filter from '../../components/filter'
 
 import I from '../../utils/Icons'
 
-import { DataTemp } from './dataTemp'
+// import { DataTemp } from './dataTemp'
 import { DataInfoOptions } from './data'
 
 import * as S from './styles'
 
 const Clients = () => {
+  const [data, setData] = useState([])
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
 
   useEffect(() => {
-    handleFilterData()
-  }, [searchInput])
+    api.get('/clients/index').then(res => {
+      setData(res.data)
+    })
 
+    handleFilterData()
+  }, [handleFilterData])
+
+  useEffect(() => {
+    handleFilterData()
+  }, [handleFilterData, searchInput])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function handleFilterData() {
-    const dataFiltered = DataTemp.filter(item =>
-      item.nome.toLowerCase().includes(searchInput)
+    const dataFiltered = data.filter(item =>
+      item.razao_social.toLowerCase().includes(searchInput)
     )
 
     setFiltered(dataFiltered)
@@ -56,15 +68,19 @@ const Clients = () => {
           <S.ScrollArea speed={0.6}>
             {filtered.map(item => (
               <S.ProvidersListWrapper key={item.id}>
-                <S.ProvidersInfoText> {item.nome} </S.ProvidersInfoText>
-                <S.ProvidersInfoText> {item.cidade} </S.ProvidersInfoText>
-                <S.ProvidersInfoText>{item.ramo_atividade}</S.ProvidersInfoText>
-                <S.ProvidersInfoText> {item.cnpj} </S.ProvidersInfoText>
+                <S.ProvidersInfoText> {item.razao_social} </S.ProvidersInfoText>
                 <S.ProvidersInfoText>
-                  {item.codigo_internews}
+                  {item.cidade.descricao}
                 </S.ProvidersInfoText>
                 <S.ProvidersInfoText>
-                  {item.codigo_alternativo}
+                  {item.atividade.descricao}
+                </S.ProvidersInfoText>
+                <S.ProvidersInfoText> {item.cnpj} </S.ProvidersInfoText>
+                <S.ProvidersInfoText>
+                  {item.identificador_internews}
+                </S.ProvidersInfoText>
+                <S.ProvidersInfoText>
+                  {item.identificador_servidor}
                 </S.ProvidersInfoText>
               </S.ProvidersListWrapper>
             ))}

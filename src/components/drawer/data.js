@@ -83,3 +83,36 @@ export const DataExternal = [
     select: false
   }
 ]
+
+export const DataAdmin = [
+  {
+    id: 0,
+    handlePage: 'Dashboard',
+    icon: I.RiLineChartLine,
+    select: true
+  },
+  {
+    id: 1,
+    handlePage: 'Clientes',
+    icon: I.RiGroupLine,
+    select: false
+  },
+  {
+    id: 2,
+    handlePage: 'Atendimentos',
+    icon: I.RiQuestionAnswerLine,
+    select: false
+  },
+  {
+    id: 3,
+    handlePage: 'Solicitações',
+    icon: I.RiMailDownloadLine,
+    select: false
+  },
+  {
+    id: 4,
+    handlePage: 'Cadastros',
+    icon: I.RiAddCircleLine,
+    select: false
+  }
+]

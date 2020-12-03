@@ -3,6 +3,8 @@ import { Form } from '@unform/web'
 import * as Yup from 'yup'
 import { useHistory } from 'react-router-dom'
 
+import api from '../../services/API'
+
 import ParticlesEffect from '../../components/particles'
 import Input01 from '../../components/inputs/input01'
 
@@ -24,12 +26,35 @@ const Login = () => {
       await schema.validate(data, {
         abortEarly: false
       })
-      // api.put(`/events/client/update/${eventID}`, data)
-      history.push('dashboard')
 
-      formRef.current.setErrors({})
+      api
+        .post('/auth/authenticate', data)
+        .then(response => {
+          const sig = response.data.payload.userName.substr(0, 1).toUpperCase()
 
-      reset()
+          localStorage.setItem('user-name', response.data.payload.userName)
+          localStorage.setItem('user-sig', sig)
+          localStorage.setItem('user-section', response.data.payload.sectorName)
+          localStorage.setItem('Access-token', response.data.token)
+
+          history.push('dashboard')
+
+          reset()
+        })
+        .catch(err => {
+          if (err) {
+            console.log({ Caralho: err })
+            if (err.response.status === 404) {
+              formRef.current.setErrors({
+                nome: 'Erro'
+              })
+            } else if (err.response.status === 401) {
+              formRef.current.setErrors({
+                senha: 'Erro'
+              })
+            }
+          }
+        })
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessages = {}

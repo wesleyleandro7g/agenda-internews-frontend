@@ -36,6 +36,9 @@ export const ScopeWrapper = styled.div`
 export const OptionWrapper = styled.div`
   margin-top: 15px;
 `
+export const OptionWrapperState = styled(OptionWrapper)`
+  width: 50px;
+`
 export const TitleInputOptions = styled.h6`
   font-size: 12px;
   font-weight: 500;
@@ -49,3 +52,4 @@ export const RegisterButtonWrapper = styled.div`
 export const CityInputWrapper = styled.div`
   display: flex;
 `
+export const SupportInputWrapper = styled.div``

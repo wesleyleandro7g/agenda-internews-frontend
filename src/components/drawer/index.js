@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 import logo from '../../assets/TPLogo.png'
@@ -10,7 +10,8 @@ import * as S from './styles'
 
 const HandleUserType = ({ open }) => {
   const history = useHistory()
-  const [userType] = useState('Externo')
+  // const [userType] = useState('Externo')
+  const userType = localStorage.getItem('user-section')
 
   function handleInternalNavigation(page) {
     DataInternal.map(item => {
@@ -41,7 +42,7 @@ const HandleUserType = ({ open }) => {
   }
 
   switch (userType) {
-    case 'Interno':
+    case 'interno':
       return (
         <S.SectionNav>
           {DataInternal.map(item => (
@@ -56,7 +57,22 @@ const HandleUserType = ({ open }) => {
           ))}
         </S.SectionNav>
       )
-    case 'Externo':
+    case 'externo':
+      return (
+        <S.SectionNav>
+          {DataExternal.map(item => (
+            <S.IconsWrapper
+              key={item.id}
+              onClick={() => handleExternalNavigation(item)}
+              select={item.select}
+            >
+              <item.icon size={16} />
+              {open && <S.Text> {item.handlePage} </S.Text>}
+            </S.IconsWrapper>
+          ))}
+        </S.SectionNav>
+      )
+    case 'administrativo':
       return (
         <S.SectionNav>
           {DataExternal.map(item => (
