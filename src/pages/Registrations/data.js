@@ -70,7 +70,26 @@ export const ModuleOptions = [
   },
   {
     id: 4,
-    descricao: 'Avaçado'
+    descricao: 'Avançado'
+  }
+]
+
+export const SectorOptions = [
+  {
+    id: 1,
+    descricao: 'administrativo'
+  },
+  {
+    id: 2,
+    descricao: 'online'
+  },
+  {
+    id: 3,
+    descricao: 'interno'
+  },
+  {
+    id: 4,
+    descricao: 'externo'
   }
 ]
 

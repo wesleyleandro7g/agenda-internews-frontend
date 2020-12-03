@@ -52,3 +52,10 @@ export const ProvidersInfoText = styled.h6`
   font-size: 12px;
   font-weight: 400;
 `
+export const AnimationWrapper = styled.div`
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

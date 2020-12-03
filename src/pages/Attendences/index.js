@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
+
+import api from '../../services/API'
 
 import Layout from '../../components/layout'
 import Search from '../../components/search'
@@ -200,19 +203,32 @@ const ModalRepassAttendence = ({
 
 const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
   const [searchInput, setSearchInput] = useState(false)
+  const [data, setData] = useState([])
   const [filtered, setFiltered] = useState([])
   const [clientSelected, setClientSelected] = useState(false)
   const [selected, setSelected] = useState(false)
   const [Checks] = useState(CheckBoxData)
   const [itemChecked, setItemChecked] = useState('')
+  const userID = localStorage.getItem('user-id')
+
+  useEffect(() => {
+    handleCallApi()
+  })
 
   useEffect(() => {
     handleFilterData()
   }, [searchInput])
 
+  function handleCallApi() {
+    api.get('/clients/list', { headers: { id_usuario: userID } }).then(res => {
+      setData(res.data)
+      setFiltered(res.data)
+    })
+  }
+
   function handleFilterData() {
-    const dataFiltered = DataTemp.filter(item =>
-      item.empresa.toLowerCase().includes(searchInput)
+    const dataFiltered = data.filter(item =>
+      item.razao_social.toLowerCase().includes(searchInput)
     )
 
     setFiltered(dataFiltered)
@@ -247,7 +263,7 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
             <S.ModalBigContent>
               <S.ClientSelected>
                 <S.TextClientSelected>
-                  {clientSelected.empresa}
+                  {clientSelected.razao_social}
                 </S.TextClientSelected>
                 <I.RiCloseLine
                   cursor="pointer"
@@ -272,8 +288,8 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
                     key={item.id}
                     onClick={() => handleSelectClient(item)}
                   >
-                    <S.ClientText>00000</S.ClientText>
-                    <S.ClientText> {item.empresa} </S.ClientText>
+                    <S.ClientText> {item.identificador_servidor} </S.ClientText>
+                    <S.ClientText> {item.razao_social} </S.ClientText>
                   </S.ClientWrapper>
                 ))}
               </S.ScrollClients>

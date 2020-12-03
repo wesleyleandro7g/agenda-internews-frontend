@@ -9,7 +9,12 @@ import Input03 from '../../components/inputs/input03'
 import Input04 from '../../components/inputs/input04'
 import Button01 from '../../components/buttons/button01'
 
-import { InputsClientData, ModuleOptions, StateOptions } from './data'
+import {
+  InputsClientData,
+  ModuleOptions,
+  StateOptions,
+  SectorOptions
+} from './data'
 
 import * as S from './styles'
 
@@ -49,11 +54,13 @@ const Registrations = () => {
             reset()
           } else if (res.status === 400) {
             alert('Erro! Cliente já cadastrado!')
-            console.log(res.data)
           }
         })
         .catch(err => {
-          if (err) console.log(err)
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
         })
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
@@ -74,11 +81,26 @@ const Registrations = () => {
         descricao: Yup.string().min(5).required('Informe a descrição')
       })
 
-      await schema.validate(data, {
-        abortEarly: false
-      })
+      await schema.validate(data)
 
-      console.log(data)
+      api
+        .post('/reasons/opening/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Motivo cadastrado!')
+            formRef.current.setErrors({})
+
+            reset()
+          } else if (res.status === 400) {
+            alert('Erro! Motivo já cadastrado!')
+          }
+        })
+        .catch(err => {
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
+        })
 
       formRef.current.setErrors({})
 
@@ -102,11 +124,26 @@ const Registrations = () => {
         descricao: Yup.string().min(5).required('Informe a descrição')
       })
 
-      await schema.validate(data, {
-        abortEarly: false
-      })
+      await schema.validate(data)
 
-      console.log(data)
+      api
+        .post('/reasons/closing/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Motivo cadastrado!')
+            formRef.current.setErrors({})
+
+            reset()
+          } else if (res.status === 400) {
+            alert('Erro! Motivo já cadastrado!')
+          }
+        })
+        .catch(err => {
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
+        })
 
       formRef.current.setErrors({})
 
@@ -134,7 +171,24 @@ const Registrations = () => {
         abortEarly: false
       })
 
-      console.log(data)
+      api
+        .post('/tools/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Ferramenta cadastrada!')
+            formRef.current.setErrors({})
+
+            reset()
+          } else if (res.status === 400) {
+            alert('Erro! Ferramenta já cadastrada!')
+          }
+        })
+        .catch(err => {
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
+        })
 
       formRef.current.setErrors({})
 
@@ -172,7 +226,10 @@ const Registrations = () => {
           }
         })
         .catch(err => {
-          if (err) console.log('Houve um erro inexperado! Tente novamente.')
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
         })
 
       formRef.current.setErrors({})
@@ -211,7 +268,10 @@ const Registrations = () => {
           }
         })
         .catch(err => {
-          if (err) console.log('Houve um erro inexperado! Tente novamente.')
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
         })
 
       formRef.current.setErrors({})
@@ -268,7 +328,63 @@ const Registrations = () => {
         abortEarly: false
       })
 
-      api.post('/support/create', data)
+      api
+        .post('/support/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Suporte cadastrado!')
+          } else if (res.status === 400) {
+            alert('Erro! Suporte já cadastrado!')
+          }
+        })
+        .catch(err => {
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
+        })
+
+      formRef.current.setErrors({})
+
+      reset()
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {}
+
+        error.inner.forEach(err => {
+          errorMessages[err.path] = err.message
+        })
+
+        formRef.current.setErrors(errorMessages)
+      }
+    }
+  }
+
+  async function handleRegisterUser(data, { reset }) {
+    try {
+      const schema = Yup.object().shape({
+        nome: Yup.string().min(5).required('Informe o nome')
+      })
+
+      await schema.validate(data, {
+        abortEarly: false
+      })
+
+      api
+        .post('/users/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert('Usuário cadastrado!')
+          } else if (res.status === 400) {
+            alert('Erro! Usuário já cadastrado!')
+          }
+        })
+        .catch(err => {
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
+        })
 
       formRef.current.setErrors({})
 
@@ -345,6 +461,7 @@ const Registrations = () => {
               </S.RegisterButtonWrapper>
             </S.ContentSimple>
           </Form>
+
           <Form ref={formRef} onSubmit={handleRegisterClosingReason}>
             <S.ContentSimple>
               <S.ContentHeader>
@@ -357,6 +474,7 @@ const Registrations = () => {
               </S.RegisterButtonWrapper>
             </S.ContentSimple>
           </Form>
+
           <Form ref={formRef} onSubmit={handleRegisterTool}>
             <S.ContentSimple>
               <S.ContentHeader>
@@ -369,6 +487,7 @@ const Registrations = () => {
               </S.RegisterButtonWrapper>
             </S.ContentSimple>
           </Form>
+
           <Form ref={formRef} onSubmit={handleRegisterActivite}>
             <S.ContentSimple>
               <S.ContentHeader>
@@ -381,6 +500,43 @@ const Registrations = () => {
               </S.RegisterButtonWrapper>
             </S.ContentSimple>
           </Form>
+
+          <Form useRef={formRef} onSubmit={handleRegisterUser}>
+            <S.ContentSimple>
+              <S.ContentHeader>
+                <h6>Usuário</h6>
+              </S.ContentHeader>
+              <S.SupportInputWrapper>
+                <Input03 label="Nome" name="nome" type="text" />
+                <Input03 label="Contato" name="contato" type="text" />
+                <Input03 label="Senha" name="senha" type="text" />
+
+                <Input04 name="id_setor" Options={SectorOptions} />
+              </S.SupportInputWrapper>
+
+              <S.RegisterButtonWrapper>
+                <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
+              </S.RegisterButtonWrapper>
+            </S.ContentSimple>
+          </Form>
+
+          <Form ref={formRef} onSubmit={handleRegisterSupport}>
+            <S.ContentSimple>
+              <S.ContentHeader>
+                <h6>Suporte</h6>
+              </S.ContentHeader>
+              <S.SupportInputWrapper>
+                <Input03 label="Nome" name="nome" type="text" />
+
+                <Input04 name="id_usuario" Options={users} />
+              </S.SupportInputWrapper>
+
+              <S.RegisterButtonWrapper>
+                <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
+              </S.RegisterButtonWrapper>
+            </S.ContentSimple>
+          </Form>
+
           <Form ref={formRef} onSubmit={handleRegisterCity}>
             <S.ContentSimple>
               <S.ContentHeader>
@@ -398,28 +554,13 @@ const Registrations = () => {
               </S.RegisterButtonWrapper>
             </S.ContentSimple>
           </Form>
+
           <Form useRef={formRef} onSubmit={handleRegisterCompetitor}>
             <S.ContentSimple>
               <S.ContentHeader>
                 <h6>Sistema concorrente</h6>
               </S.ContentHeader>
               <Input03 label="Descrição" name="descricao" type="text" />
-
-              <S.RegisterButtonWrapper>
-                <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              </S.RegisterButtonWrapper>
-            </S.ContentSimple>
-          </Form>
-          <Form ref={formRef} onSubmit={handleRegisterSupport}>
-            <S.ContentSimple>
-              <S.ContentHeader>
-                <h6>Suporte</h6>
-              </S.ContentHeader>
-              <S.SupportInputWrapper>
-                <Input03 label="Nome" name="nome" type="text" />
-
-                <Input04 name="id_usuario" Options={users} />
-              </S.SupportInputWrapper>
 
               <S.RegisterButtonWrapper>
                 <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />

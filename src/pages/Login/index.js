@@ -33,6 +33,7 @@ const Login = () => {
           const sig = response.data.payload.userName.substr(0, 1).toUpperCase()
 
           localStorage.setItem('user-name', response.data.payload.userName)
+          localStorage.setItem('user-id', response.data.payload.userID)
           localStorage.setItem('user-sig', sig)
           localStorage.setItem('user-section', response.data.payload.sectorName)
           localStorage.setItem('Access-token', response.data.token)
