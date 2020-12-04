@@ -188,3 +188,4 @@ export const TextClientSelected = styled.h6`
 export const ItemsRightTop = styled.div`
   height: 90%;
 `
+export const InputRequesterName = styled(InputSchedule)``

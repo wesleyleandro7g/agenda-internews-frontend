@@ -5,7 +5,7 @@ import logo from '../../assets/TPLogo.png'
 
 import { useDrawer } from '../../context/DrawerContext'
 
-import { DataInternal, DataExternal } from './data'
+import { DataInternal, DataExternal, DataAdmin } from './data'
 import * as S from './styles'
 
 const HandleUserType = ({ open }) => {
@@ -29,6 +29,20 @@ const HandleUserType = ({ open }) => {
 
   function handleExternalNavigation(page) {
     DataExternal.map(item => {
+      if (item.id !== page.id) {
+        item.select = false
+      } else {
+        item.select = true
+      }
+
+      return item
+    })
+
+    history.push(`/${page.handlePage}`)
+  }
+
+  function handleManagerNavigation(page) {
+    DataAdmin.map(item => {
       if (item.id !== page.id) {
         item.select = false
       } else {
@@ -75,10 +89,10 @@ const HandleUserType = ({ open }) => {
     case 'administrativo':
       return (
         <S.SectionNav>
-          {DataExternal.map(item => (
+          {DataAdmin.map(item => (
             <S.IconsWrapper
               key={item.id}
-              onClick={() => handleExternalNavigation(item)}
+              onClick={() => handleManagerNavigation(item)}
               select={item.select}
             >
               <item.icon size={16} />

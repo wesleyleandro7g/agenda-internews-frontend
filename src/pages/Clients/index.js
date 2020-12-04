@@ -5,6 +5,8 @@ import Lottie from 'react-lottie'
 
 import api from '../../services/API'
 
+import { useClientContext } from '../../context/ClientContext'
+
 import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Filter from '../../components/filter'
@@ -23,6 +25,7 @@ const Clients = () => {
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
   const [loading, setLoading] = useState(true)
+  const { setDataClientContext } = useClientContext()
   const userID = localStorage.getItem('user-id')
 
   const defaultOptions = {
@@ -44,6 +47,7 @@ const Clients = () => {
     api.get('/clients/list', { headers: { id_usuario: userID } }).then(res => {
       setData(res.data)
       setFiltered(res.data)
+      setDataClientContext(res.data)
     })
     setLoading(true)
   }
