@@ -5,8 +5,6 @@ import React, { useState, useEffect } from 'react'
 
 import api from '../../../services/API'
 
-import { useClientContext } from '../../../context/ClientContext'
-
 import Modal from '../../../components/modal'
 import Button01 from '../../../components/buttons/button01'
 import CheckBox from '../../../components/inputs/checkbox'
@@ -15,14 +13,24 @@ import I from '../../../utils/Icons'
 
 import * as S from './styles'
 
-const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
-  const { dataClientContext } = useClientContext()
+const OpenNewAttendence = ({
+  newAttendenceVisible,
+  cancelable,
+  dataClient,
+  finish
+}) => {
   const [searchInput, setSearchInput] = useState(false)
   const [filtered, setFiltered] = useState([])
-  const [clientSelected, setClientSelected] = useState(false)
+  const [clientSelected, setClientSelected] = useState('')
   const [selected, setSelected] = useState(false)
   const [checkBoxData, setCheckBoxData] = useState([])
   const [itemChecked, setItemChecked] = useState('')
+  const [clientNotRequested, setClientNotRequested] = useState(true)
+  const [requestedName, setRequestedName] = useState('')
+  const [requestedContact, setRequestedContact] = useState('')
+  const userID = localStorage.getItem('user-id')
+  const sectorID = localStorage.getItem('user-sector-id')
+  const supportID = localStorage.getItem('support-id')
 
   useEffect(() => {
     handleData()
@@ -38,11 +46,11 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
   }
 
   function handleData() {
-    setFiltered(dataClientContext)
+    setFiltered(dataClient)
   }
 
   function handleFilterData() {
-    const dataFiltered = dataClientContext.filter(item =>
+    const dataFiltered = dataClient.filter(item =>
       item.razao_social.toLowerCase().includes(searchInput)
     )
 
@@ -63,8 +71,31 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
   }
 
   function handleNewAttendence() {
-    console.log(clientSelected.id)
-    console.log(itemChecked)
+    api
+      .post('/attendence/create', {
+        nome_solicitante: clientNotRequested
+          ? requestedName
+          : 'sem solicitante',
+        contato_solicitante: clientNotRequested
+          ? requestedContact
+          : 'sem solicitante',
+        cliente_solicitou: clientNotRequested,
+        reagendado: false,
+        data_agendamento: null,
+        hora_agendamento: '',
+        status: 'aberto',
+        id_cliente: clientSelected.id,
+        id_usuario: userID,
+        id_abertura: itemChecked,
+        id_fechamento: null,
+        id_suporte: supportID,
+        id_setor: sectorID
+      })
+      .then(res => {
+        alert('Atendimento aberto!')
+        finish()
+      })
+      .catch(err => console.log(err))
   }
 
   return (
@@ -113,17 +144,37 @@ const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
           <S.ModalBigContent>
             <S.ItemsRightTop>
               <S.TextClientSelected>Solicitante</S.TextClientSelected>
-              <S.InputRequesterName placeholder="Nome do solicitante" />
-              <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
-              <S.ModalMainGridDuo>
-                {checkBoxData.map(item => (
-                  <CheckBox
-                    key={item.id}
-                    label={item.descricao}
-                    onChange={() => handleCheckBox(item)}
+              <S.RequestWrapper>
+                <CheckBox
+                  label="Sem solicitante"
+                  onChange={() => setClientNotRequested(!clientNotRequested)}
+                />
+              </S.RequestWrapper>
+              {clientNotRequested && (
+                <S.RequestWrapper>
+                  <S.InputRequesterName
+                    placeholder="Nome*"
+                    onChange={e => setRequestedName(e.target.value)}
                   />
-                ))}
-              </S.ModalMainGridDuo>
+                  <S.InputRequesterName
+                    placeholder="Contato"
+                    onChange={e => setRequestedContact(e.target.value)}
+                  />
+                </S.RequestWrapper>
+              )}
+
+              <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
+              <S.ScrollReasons>
+                <S.ModalMainGridDuo>
+                  {checkBoxData.map(item => (
+                    <CheckBox
+                      key={item.id}
+                      label={item.descricao}
+                      onChange={() => handleCheckBox(item)}
+                    />
+                  ))}
+                </S.ModalMainGridDuo>
+              </S.ScrollReasons>
             </S.ItemsRightTop>
 
             <S.ModalFooter>

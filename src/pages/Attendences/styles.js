@@ -56,6 +56,7 @@ export const ProvidersInfo = styled.div`
 export const ProvidersInfoText = styled.h6`
   font-size: 12px;
   font-weight: 400;
+  text-transform: uppercase;
 `
 export const TextDetailsModal = styled.h4`
   font-size: 14px;
@@ -108,7 +109,7 @@ export const StatusContent = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${props =>
-    props.status === 'Aberto' ? '#79D279' : '#FFB84D'};
+    props.status === 'aberto' ? '#79D279' : '#FFB84D'};
 `
 export const TextStatus = styled.h6`
   font-size: 10px;
@@ -189,3 +190,10 @@ export const ItemsRightTop = styled.div`
   height: 90%;
 `
 export const InputRequesterName = styled(InputSchedule)``
+export const AnimationWrapper = styled.div`
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

@@ -51,6 +51,7 @@ export const ProvidersInfo = styled.div`
 export const ProvidersInfoText = styled.h6`
   font-size: 12px;
   font-weight: 400;
+  text-transform: uppercase;
 `
 export const AnimationWrapper = styled.div`
   width: 100%;

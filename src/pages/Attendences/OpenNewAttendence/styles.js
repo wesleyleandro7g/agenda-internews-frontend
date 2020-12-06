@@ -60,6 +60,11 @@ export const ScrollClients = styled(Scroll)`
   height: 90%;
   margin-top: 10px;
 `
+export const ScrollReasons = styled(Scroll)`
+  width: 90%;
+  height: 60%;
+  margin-top: 10px;
+`
 export const InputNewAttendence = styled.input`
   width: 90%;
   border: 0;
@@ -84,11 +89,14 @@ export const ClientText = styled.h6`
   font-size: 12px;
   font-weight: 400;
   color: #333;
+  text-transform: uppercase;
 `
 export const ItemsRightTop = styled.div`
   height: 90%;
 `
-export const InputRequesterName = styled(InputNewAttendence)``
+export const InputRequesterName = styled(InputNewAttendence)`
+  margin: 0 2px;
+`
 export const ModalFooter = styled.div`
   width: 100%;
   height: 10%;
@@ -96,4 +104,10 @@ export const ModalFooter = styled.div`
   align-items: flex-end;
   padding-bottom: 15px;
   grid-template-columns: repeat(2, 1fr);
+`
+export const RequestWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 `

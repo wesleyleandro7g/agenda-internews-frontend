@@ -19,24 +19,31 @@ const DetailsAttendence = ({
     <Modal visible={modalDetailsVisible}>
       <S.ModalContent>
         <S.ModalHeader>
-          <h4> {attendenceDataTemp.empresa} </h4>
+          <S.Title>
+            {attendenceDataTemp.cliente &&
+              attendenceDataTemp.cliente.razao_social}
+          </S.Title>
           <S.StatusContent status={attendenceDataTemp.status}>
             <S.TextStatus>{attendenceDataTemp.status}</S.TextStatus>
           </S.StatusContent>
         </S.ModalHeader>
         <S.ModalMain>
           <S.TextDetailsModal>
-            Tipo de solicitação: {attendenceDataTemp.id_abertura}
+            <S.Span>Tipo de solicitação: </S.Span>
+            {attendenceDataTemp.abertura &&
+              attendenceDataTemp.abertura.descricao}
           </S.TextDetailsModal>
           <S.TextDetailsModal>
-            Solicitante: {attendenceDataTemp.nome_solicitante}
+            <S.Span>Solicitante: </S.Span>
+            {attendenceDataTemp.nome_solicitante}
           </S.TextDetailsModal>
           <S.TextDetailsModal>
-            Contato: {attendenceDataTemp.contato_solicitante}
+            <S.Span>Contato: </S.Span>
+            {attendenceDataTemp.contato_solicitante}
           </S.TextDetailsModal>
         </S.ModalMain>
         <S.ModalFooter>
-          {attendenceDataTemp.status === 'Aberto' ? (
+          {attendenceDataTemp.status === 'aberto' ? (
             <Button01
               label="Finalizar"
               bgColor="#79D279"

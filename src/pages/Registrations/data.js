@@ -62,7 +62,7 @@ export const ModuleOptions = [
   },
   {
     id: 2,
-    descricao: 'Normal'
+    descricao: 'Basico'
   },
   {
     id: 3,

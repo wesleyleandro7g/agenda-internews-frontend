@@ -20,7 +20,7 @@ export const StatusContent = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${props =>
-    props.status === 'Aberto' ? '#79D279' : '#FFB84D'};
+    props.status === 'aberto' ? '#79D279' : '#FFB84D'};
 `
 export const TextStatus = styled.h6`
   font-size: 10px;
@@ -33,10 +33,14 @@ export const ModalMain = styled.div`
   height: 60%;
   padding: 0 10px;
 `
+export const Title = styled.h4`
+  text-transform: uppercase;
+`
 export const TextDetailsModal = styled.h4`
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 15px;
+  text-transform: uppercase;
 `
 export const ModalFooter = styled.div`
   width: 100%;
@@ -45,4 +49,7 @@ export const ModalFooter = styled.div`
   align-items: flex-end;
   padding-bottom: 15px;
   grid-template-columns: repeat(4, 1fr);
+`
+export const Span = styled.span`
+  font-weight: 700;
 `

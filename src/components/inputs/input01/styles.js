@@ -21,6 +21,7 @@ export const Input = styled.input`
   border-bottom: 1px solid ${props => (props.error ? '#ff6666' : '#FFFFFF')};
   color: ${props => (props.error ? '#ff6666' : '#FFFFFF')};
   padding-left: 5px;
+  text-transform: uppercase;
 
   :focus + label,
   :not(:placeholder-shown) + label {

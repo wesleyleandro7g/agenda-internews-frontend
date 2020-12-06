@@ -35,8 +35,13 @@ const Login = () => {
           localStorage.setItem('user-name', response.data.payload.userName)
           localStorage.setItem('user-id', response.data.payload.userID)
           localStorage.setItem('user-sig', sig)
-          localStorage.setItem('user-section', response.data.payload.sectorName)
+          localStorage.setItem(
+            'user-sector-name',
+            response.data.payload.sectorName
+          )
+          localStorage.setItem('user-sector-id', response.data.payload.sectorID)
           localStorage.setItem('Access-token', response.data.token)
+          localStorage.setItem('support-id', response.data.payload.supportID)
 
           history.push('dashboard')
 
@@ -45,15 +50,15 @@ const Login = () => {
         .catch(err => {
           if (err) {
             console.log({ Caralho: err })
-            if (err.response.status === 404) {
-              formRef.current.setErrors({
-                nome: 'Erro'
-              })
-            } else if (err.response.status === 401) {
-              formRef.current.setErrors({
-                senha: 'Erro'
-              })
-            }
+            // if (err.response.status === 404) {
+            //   formRef.current.setErrors({
+            //     nome: 'Erro'
+            //   })
+            // } else if (err.response.status === 401) {
+            //   formRef.current.setErrors({
+            //     senha: 'Erro'
+            //   })
+            // }
           }
         })
     } catch (error) {

@@ -21,6 +21,7 @@ import * as S from './styles'
 
 const Clients = () => {
   const [data, setData] = useState([])
+  const [totalClients, setTotalClients] = useState('')
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
@@ -45,9 +46,10 @@ const Clients = () => {
   function handleCallApi() {
     setLoading(false)
     api.get('/clients/list', { headers: { id_usuario: userID } }).then(res => {
-      setData(res.data)
-      setFiltered(res.data)
-      setDataClientContext(res.data)
+      setData(res.data.clients)
+      setTotalClients(res.data.count)
+      setFiltered(res.data.clients)
+      setDataClientContext(res.data.clients)
     })
     setLoading(true)
   }
@@ -65,7 +67,7 @@ const Clients = () => {
     <Layout page="Clientes">
       <S.Container>
         <S.SubHeader>
-          <h5>Total de clientes: 5</h5>
+          <h5>Total de clientes: {totalClients}</h5>
           <S.ItemsRigthSubHeader>
             <Search onChange={e => setSearchInput(e.target.value)} />
             {/* <I.RiFilter2Line

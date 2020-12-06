@@ -10,8 +10,7 @@ import * as S from './styles'
 
 const HandleUserType = ({ open }) => {
   const history = useHistory()
-  // const [userType] = useState('Externo')
-  const userType = localStorage.getItem('user-section')
+  const userType = localStorage.getItem('user-sector-name')
 
   function handleInternalNavigation(page) {
     DataInternal.map(item => {
@@ -56,7 +55,7 @@ const HandleUserType = ({ open }) => {
   }
 
   switch (userType) {
-    case 'interno':
+    case 'INTERNO':
       return (
         <S.SectionNav>
           {DataInternal.map(item => (
@@ -71,7 +70,7 @@ const HandleUserType = ({ open }) => {
           ))}
         </S.SectionNav>
       )
-    case 'externo':
+    case 'EXTERNO':
       return (
         <S.SectionNav>
           {DataExternal.map(item => (
@@ -86,7 +85,7 @@ const HandleUserType = ({ open }) => {
           ))}
         </S.SectionNav>
       )
-    case 'administrativo':
+    case 'ADMINISTRATIVO':
       return (
         <S.SectionNav>
           {DataAdmin.map(item => (

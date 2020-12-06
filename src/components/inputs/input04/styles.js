@@ -17,6 +17,7 @@ export const Select = styled.select`
   border: none;
   cursor: pointer;
   background-color: transparent;
+  text-transform: uppercase;
 `
 export const Option = styled.option``
 export const Conte = styled.div`
