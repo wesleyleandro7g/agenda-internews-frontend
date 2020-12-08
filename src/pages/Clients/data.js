@@ -22,5 +22,9 @@ export const DataInfoOptions = [
   {
     id: 6,
     title: 'Código Alternativo'
+  },
+  {
+    id: 7,
+    title: 'Suporte'
   }
 ]

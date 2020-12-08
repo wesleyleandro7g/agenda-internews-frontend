@@ -110,3 +110,18 @@ export const CheckBoxUsersData = [
     checked: false
   }
 ]
+
+export const StatusAttendence = [
+  {
+    id: 1,
+    label: 'Abertos'
+  },
+  {
+    id: 2,
+    label: 'Aguardando'
+  },
+  {
+    id: 3,
+    label: 'Agendados'
+  }
+]

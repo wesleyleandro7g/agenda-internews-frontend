@@ -23,7 +23,7 @@ import CloseAttendence from './CloseAttendence'
 
 import I from '../../utils/Icons'
 
-import { DataInfoOptions } from './data'
+import { DataInfoOptions, StatusAttendence } from './data'
 
 import * as S from './styles'
 
@@ -40,6 +40,9 @@ const Attendences = () => {
   const [attendenceDataTemp, setAttendenceDataTemp] = useState({})
   const [newAttendenceVisible, setNewAttendenceVisible] = useState(false)
   const { dataClientContext, setDataClientContext } = useClientContext()
+
+  const dateNow = new Date().toISOString()
+  const fullDate = new Date(dateNow).toLocaleDateString()
 
   const userID = localStorage.getItem('user-id')
 
@@ -74,11 +77,35 @@ const Attendences = () => {
         setTotalAttendeces(res.data.count)
       })
 
-    api.get('/clients/list', { headers: { id_usuario: userID } }).then(res => {
+    api.get('/clients/index').then(res => {
       setDataClientContext(res.data.clients)
     })
 
     setLoading(true)
+  }
+
+  function handleAttendences() {
+    api
+      .get('/attendence/support', {
+        headers: { id_usuario: userID }
+      })
+      .then(res => {
+        setAttendenceData(res.data.attendences)
+        setFiltered(res.data.attendences)
+        setTotalAttendeces(res.data.count)
+      })
+  }
+
+  function handleClosedAttendences() {
+    api
+      .get('/attendence/support-closed', {
+        headers: { id_usuario: userID }
+      })
+      .then(res => {
+        setAttendenceData(res.data.attendences)
+        setFiltered(res.data.attendences)
+        setTotalAttendeces(res.data.count)
+      })
   }
 
   function handleFilterData() {
@@ -119,13 +146,33 @@ const Attendences = () => {
     setModalRepassVisible(!modalRepassVisible)
   }
 
+  function openAttendence() {
+    api.put('/attendence/open')
+
+    handleCallApi()
+
+    setModalDetailsVisible(!modalDetailsVisible)
+  }
+
   function convertDate(date) {
     const converted = new Date(date)
 
     const days = converted.toLocaleDateString()
     const hours = converted.toLocaleTimeString()
 
-    return `${days} - ${hours}`
+    const today = new Date()
+
+    const AUX_01 = new Date(today.getTime())
+    AUX_01.setDate(today.getDate() - 1)
+    const yesterday = AUX_01.toLocaleDateString()
+
+    if (days === fullDate) {
+      return `Hoje as ${hours}`
+    } else if (days === yesterday) {
+      return `Ontem as ${hours}`
+    } else {
+      return `${days} as ${hours}`
+    }
   }
 
   return (
@@ -145,13 +192,21 @@ const Attendences = () => {
             <Search onChange={e => setSearchInput(e.target.value)} />
           </S.ItemsRigthSubHeader>
         </S.SubHeader>
-        <SelectOptions
-          handleAll={() => handleCallApi()}
-          handleOpen={() => handleToggleStatusAttendences(1)}
-          handleWaiting={() => handleToggleStatusAttendences(2)}
-          handleSchedule={() => handleToggleStatusAttendences(3)}
-          handleClose={() => handleToggleStatusAttendences(4)}
-        />
+        <S.OptionsWraper>
+          <S.Button onClick={() => handleAttendences()}>
+            <S.Text>Todos</S.Text>
+          </S.Button>
+          {StatusAttendence.map(item => (
+            <SelectOptions
+              key={item.id}
+              title={item.label}
+              handle={() => handleToggleStatusAttendences(item.id)}
+            />
+          ))}
+          <S.Button onClick={() => handleClosedAttendences()}>
+            <S.Text>Finalizados</S.Text>
+          </S.Button>
+        </S.OptionsWraper>
       </S.Container>
 
       {loading ? (
@@ -209,7 +264,7 @@ const Attendences = () => {
         attendenceDataTemp={attendenceDataTemp}
         modalDetailsVisible={modalDetailsVisible}
         closeModal={() => setModalDetailsVisible(!modalDetailsVisible)}
-        openAttendence={() => setModalDetailsVisible(!modalDetailsVisible)}
+        openAttendence={() => openAttendence()}
         closeAttendence={() => toggleModalCloseAndDetailsAttendence()}
         scheduleAttendence={() => toggleModalSchuledAndDetailsAttendence()}
         repassAttendence={() => toggleModalRepassAndDetailsAttedence()}

@@ -55,6 +55,10 @@ const DetailsAttendence = ({
             {attendenceDataTemp.contato_solicitante}
           </S.TextDetailsModal>
           <S.TextDetailsModal>
+            <S.Span>Aberto por: </S.Span>
+            {attendenceDataTemp.usuario && attendenceDataTemp.usuario.nome}
+          </S.TextDetailsModal>
+          <S.TextDetailsModal>
             <S.Span>Solicitado em: </S.Span>
             {convertDate(attendenceDataTemp.createdAt)}
           </S.TextDetailsModal>

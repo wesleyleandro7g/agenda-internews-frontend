@@ -34,7 +34,7 @@ export const ProvidersListWrapper = styled.button`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   background-color: #fff;
   padding: 5px;
@@ -45,7 +45,7 @@ export const ProvidersInfo = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
 `
 export const ProvidersInfoText = styled.h6`
@@ -59,4 +59,25 @@ export const AnimationWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+export const OptionsWraper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #d9d9d9;
+`
+export const Button = styled.button`
+  background-color: transparent;
+  margin: 0 5px;
+
+  color: #797979;
+
+  :hover {
+    color: #040e18;
+  }
+`
+export const Text = styled.h6`
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-style: italic;
 `

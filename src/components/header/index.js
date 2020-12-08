@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import PlataformOptions from '../plataform-options'
+
 import { useDrawer } from '../../context/DrawerContext'
 
 import * as S from './styles'
@@ -35,6 +37,11 @@ const Header = ({ page, alert }) => {
           </S.Avatar>
         </S.WrapperItems>
       </S.Container>
+
+      <PlataformOptions
+        visible={modalUserVisible}
+        onClose={() => setModalUserVisible(!modalUserVisible)}
+      />
     </>
   )
 }

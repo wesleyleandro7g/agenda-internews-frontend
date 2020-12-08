@@ -72,37 +72,38 @@ const OpenNewAttendence = ({
       return alert('Selecione um cliente!')
     }
 
-    if (
-      clientNotRequested &&
-      (requestedName.length <= 2 || requestedContact.length <= 2)
-    ) {
-      return alert('Informe os dados do solicitante!')
+    if (clientNotRequested && requestedName.length <= 2) {
+      return alert('Informe o nome do solicitante!')
     } else {
       api
         .post('/attendence/create', {
           nome_solicitante: clientNotRequested
             ? requestedName
             : 'sem solicitante',
-          contato_solicitante: clientNotRequested
-            ? requestedContact
-            : 'sem contato',
+          contato_solicitante:
+            requestedContact.length <= 4 ? 'sem contato' : requestedContact,
           cliente_solicitou: clientNotRequested,
           reagendado: false,
           data_agendamento: null,
           hora_agendamento: '',
-          id_status: 1,
+          id_status: supportID === 'null' ? 2 : 1,
           id_cliente: clientSelected.id,
           id_usuario: userID,
           id_abertura: idAbertura,
           id_fechamento: null,
-          id_suporte: supportID,
+          // eslint-disable-next-line no-unneeded-ternary
+          id_suporte:
+            supportID === 'null' ? clientSelected.id_suporte : supportID,
           id_setor: sectorID
         })
         .then(res => {
-          alert('Atendimento aberto!')
+          alert(res.statusText)
           finish()
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          alert(err)
+          return console.log(err)
+        })
 
       setSelected(false)
       setClientSelected(null)

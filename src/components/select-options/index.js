@@ -2,32 +2,12 @@ import React from 'react'
 
 import * as S from './styles'
 
-const SelectOtions = ({
-  handleAll,
-  handleOpen,
-  handleWaiting,
-  handleSchedule,
-  handleClose
-}) => {
+const SelectOptions = ({ handle, title }) => {
   return (
-    <S.Container>
-      <S.Button onClick={handleAll}>
-        <S.Text>Todos</S.Text>
-      </S.Button>
-      <S.Button onClick={handleOpen}>
-        <S.Text>Abertos</S.Text>
-      </S.Button>
-      <S.Button onClick={handleWaiting}>
-        <S.Text>Aguardando</S.Text>
-      </S.Button>
-      <S.Button onClick={handleSchedule}>
-        <S.Text>Agendados</S.Text>
-      </S.Button>
-      <S.Button onClick={handleClose}>
-        <S.Text>Finalizados</S.Text>
-      </S.Button>
-    </S.Container>
+    <S.Button onClick={handle}>
+      <S.Text> {title} </S.Text>
+    </S.Button>
   )
 }
 
-export default SelectOtions
+export default SelectOptions

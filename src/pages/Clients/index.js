@@ -10,6 +10,7 @@ import { useClientContext } from '../../context/ClientContext'
 import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Filter from '../../components/filter'
+import SelectOptions from '../../components/select-options'
 
 import LoadingAnimation from '../../assets/loader.json'
 
@@ -21,13 +22,13 @@ import * as S from './styles'
 
 const Clients = () => {
   const [data, setData] = useState([])
+  const [supports, setSupports] = useState([])
   const [totalClients, setTotalClients] = useState('')
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
   const [loading, setLoading] = useState(true)
   const { setDataClientContext } = useClientContext()
-  const userID = localStorage.getItem('user-id')
 
   const defaultOptions = {
     loop: true,
@@ -45,13 +46,38 @@ const Clients = () => {
 
   function handleCallApi() {
     setLoading(false)
-    api.get('/clients/list', { headers: { id_usuario: userID } }).then(res => {
+    api.get('/clients/index').then(res => {
+      setData(res.data.clients)
+      setTotalClients(res.data.count)
+      setFiltered(res.data.clients)
+      setDataClientContext(res.data.clients)
+    })
+
+    api.get('/support/index').then(res => {
+      setSupports(res.data)
+    })
+    setLoading(true)
+  }
+
+  function handleClients() {
+    setLoading(false)
+    api.get('/clients/index').then(res => {
       setData(res.data.clients)
       setTotalClients(res.data.count)
       setFiltered(res.data.clients)
       setDataClientContext(res.data.clients)
     })
     setLoading(true)
+  }
+
+  function handleToggleSupportClients(type) {
+    if (type === 0) {
+      return handleCallApi()
+    }
+
+    const dataFiltered = data.filter(item => item.suporte.id === type)
+
+    setFiltered(dataFiltered)
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,6 +102,19 @@ const Clients = () => {
             /> */}
           </S.ItemsRigthSubHeader>
         </S.SubHeader>
+
+        <S.OptionsWraper>
+          <S.Button onClick={() => handleClients()}>
+            <S.Text>Todos</S.Text>
+          </S.Button>
+          {supports.map(item => (
+            <SelectOptions
+              key={item.id}
+              title={item.nome}
+              handle={() => handleToggleSupportClients(item.id)}
+            />
+          ))}
+        </S.OptionsWraper>
       </S.Container>
 
       {loading ? (
@@ -112,6 +151,9 @@ const Clients = () => {
                     </S.ProvidersInfoText>
                     <S.ProvidersInfoText>
                       {item.identificador_servidor}
+                    </S.ProvidersInfoText>
+                    <S.ProvidersInfoText>
+                      {item.suporte.nome}
                     </S.ProvidersInfoText>
                   </S.ProvidersListWrapper>
                 ))}

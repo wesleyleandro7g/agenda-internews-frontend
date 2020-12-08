@@ -1,10 +1,5 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  border-bottom: 1px solid #d9d9d9;
-`
 export const Button = styled.button`
   background-color: transparent;
   margin: 0 5px;
