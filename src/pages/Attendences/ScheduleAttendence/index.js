@@ -14,7 +14,7 @@ const ScheduledAttendence = ({
     <Modal visible={modalScheduledVisible}>
       <S.ModalContent>
         <S.ModalHeader>
-          <h4> {clientName} </h4>
+          <S.Title> {clientName} </S.Title>
         </S.ModalHeader>
         <S.ModalMain>
           <S.InputSchedule placeholder="Data" type="date" />

@@ -8,6 +8,7 @@ import api from '../../../services/API'
 import Modal from '../../../components/modal'
 import Button01 from '../../../components/buttons/button01'
 import CheckBox from '../../../components/inputs/checkbox'
+import Radio from '../../../components/inputs/radio'
 
 import I from '../../../utils/Icons'
 
@@ -23,8 +24,8 @@ const OpenNewAttendence = ({
   const [filtered, setFiltered] = useState([])
   const [clientSelected, setClientSelected] = useState('')
   const [selected, setSelected] = useState(false)
-  const [checkBoxData, setCheckBoxData] = useState([])
-  const [itemChecked, setItemChecked] = useState('')
+  const [reasonOpening, setReasonOpening] = useState([])
+  const [idAbertura, setIdAbertura] = useState()
   const [clientNotRequested, setClientNotRequested] = useState(true)
   const [requestedName, setRequestedName] = useState('')
   const [requestedContact, setRequestedContact] = useState('')
@@ -42,7 +43,7 @@ const OpenNewAttendence = ({
   }, [searchInput])
 
   function handleCallApi() {
-    api.get('/reasons/opening/index').then(res => setCheckBoxData(res.data))
+    api.get('/reasons/opening/index').then(res => setReasonOpening(res.data))
   }
 
   function handleData() {
@@ -62,40 +63,52 @@ const OpenNewAttendence = ({
     setClientSelected(item)
   }
 
-  function handleCheckBox(props) {
-    checkBoxData.map(item => {
-      if (item.id === props.id) {
-        setItemChecked(item.id)
-      }
-    })
+  function handleInputRadio(e) {
+    setIdAbertura(e.target.value)
   }
 
   function handleNewAttendence() {
-    api
-      .post('/attendence/create', {
-        nome_solicitante: clientNotRequested
-          ? requestedName
-          : 'sem solicitante',
-        contato_solicitante: clientNotRequested
-          ? requestedContact
-          : 'sem solicitante',
-        cliente_solicitou: clientNotRequested,
-        reagendado: false,
-        data_agendamento: null,
-        hora_agendamento: '',
-        status: 'aberto',
-        id_cliente: clientSelected.id,
-        id_usuario: userID,
-        id_abertura: itemChecked,
-        id_fechamento: null,
-        id_suporte: supportID,
-        id_setor: sectorID
-      })
-      .then(res => {
-        alert('Atendimento aberto!')
-        finish()
-      })
-      .catch(err => console.log(err))
+    if (!selected) {
+      return alert('Selecione um cliente!')
+    }
+
+    if (
+      clientNotRequested &&
+      (requestedName.length <= 2 || requestedContact.length <= 2)
+    ) {
+      return alert('Informe os dados do solicitante!')
+    } else {
+      api
+        .post('/attendence/create', {
+          nome_solicitante: clientNotRequested
+            ? requestedName
+            : 'sem solicitante',
+          contato_solicitante: clientNotRequested
+            ? requestedContact
+            : 'sem contato',
+          cliente_solicitou: clientNotRequested,
+          reagendado: false,
+          data_agendamento: null,
+          hora_agendamento: '',
+          id_status: 1,
+          id_cliente: clientSelected.id,
+          id_usuario: userID,
+          id_abertura: idAbertura,
+          id_fechamento: null,
+          id_suporte: supportID,
+          id_setor: sectorID
+        })
+        .then(res => {
+          alert('Atendimento aberto!')
+          finish()
+        })
+        .catch(err => console.log(err))
+
+      setSelected(false)
+      setClientSelected(null)
+      setRequestedName('')
+      setRequestedContact('')
+    }
   }
 
   return (
@@ -165,15 +178,19 @@ const OpenNewAttendence = ({
 
               <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
               <S.ScrollReasons>
-                <S.ModalMainGridDuo>
-                  {checkBoxData.map(item => (
-                    <CheckBox
-                      key={item.id}
-                      label={item.descricao}
-                      onChange={() => handleCheckBox(item)}
-                    />
-                  ))}
-                </S.ModalMainGridDuo>
+                <form onChange={handleInputRadio}>
+                  <S.ModalMainGridDuo>
+                    {reasonOpening.map(item => (
+                      <Radio
+                        key={item.id}
+                        name="id_abertura"
+                        label={item.descricao}
+                        id={item.id}
+                        value={item.id}
+                      />
+                    ))}
+                  </S.ModalMainGridDuo>
+                </form>
               </S.ScrollReasons>
             </S.ItemsRightTop>
 

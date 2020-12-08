@@ -11,6 +11,7 @@ import { useClientContext } from '../../context/ClientContext'
 import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Button02 from '../../components/buttons/button02'
+import SelectOptions from '../../components/select-options'
 
 import LoadingAnimation from '../../assets/loader.json'
 
@@ -31,7 +32,7 @@ const Attendences = () => {
   const [totalAttendences, setTotalAttendeces] = useState('')
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [modalDetailsVisible, setModalDetailsVisible] = useState(false)
   const [modalCloseVisible, setModalCloseVisible] = useState(false)
   const [modalScheduledVisible, setModalScheduledVisible] = useState(false)
@@ -54,7 +55,7 @@ const Attendences = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [newAttendenceVisible])
+  }, [newAttendenceVisible, modalRepassVisible, modalCloseVisible])
 
   useEffect(() => {
     handleFilterData()
@@ -62,8 +63,11 @@ const Attendences = () => {
 
   async function handleCallApi() {
     setLoading(false)
+
     api
-      .get('/attendence/index', { headers: { id_usuario: userID } })
+      .get('/attendence/support', {
+        headers: { id_usuario: userID }
+      })
       .then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
@@ -73,6 +77,7 @@ const Attendences = () => {
     api.get('/clients/list', { headers: { id_usuario: userID } }).then(res => {
       setDataClientContext(res.data.clients)
     })
+
     setLoading(true)
   }
 
@@ -84,9 +89,14 @@ const Attendences = () => {
     setFiltered(dataFiltered)
   }
 
+  function handleToggleStatusAttendences(type) {
+    const dataFiltered = attendenceData.filter(item => item.status.id === type)
+
+    setFiltered(dataFiltered)
+  }
+
   function handlePreviewAttendence(item) {
     setAttendenceDataTemp(item)
-    console.log(item.cliente.razao_social)
     setModalDetailsVisible(!modalDetailsVisible)
   }
 
@@ -103,6 +113,19 @@ const Attendences = () => {
   function toggleModalRepassAndDetailsAttedence() {
     setModalRepassVisible(!modalRepassVisible)
     setModalDetailsVisible(!modalDetailsVisible)
+  }
+
+  function toggleModalOnRepassedAttendence() {
+    setModalRepassVisible(!modalRepassVisible)
+  }
+
+  function convertDate(date) {
+    const converted = new Date(date)
+
+    const days = converted.toLocaleDateString()
+    const hours = converted.toLocaleTimeString()
+
+    return `${days} - ${hours}`
   }
 
   return (
@@ -122,6 +145,13 @@ const Attendences = () => {
             <Search onChange={e => setSearchInput(e.target.value)} />
           </S.ItemsRigthSubHeader>
         </S.SubHeader>
+        <SelectOptions
+          handleAll={() => handleCallApi()}
+          handleOpen={() => handleToggleStatusAttendences(1)}
+          handleWaiting={() => handleToggleStatusAttendences(2)}
+          handleSchedule={() => handleToggleStatusAttendences(3)}
+          handleClose={() => handleToggleStatusAttendences(4)}
+        />
       </S.Container>
 
       {loading ? (
@@ -139,13 +169,15 @@ const Attendences = () => {
                   </S.ProvidersInfoText>
                 ))}
               </S.ProvidersInfo>
-
               <S.ScrollArea speed={0.6}>
                 {filtered.map(item => (
                   <S.ProvidersListWrapper
                     key={item.id}
                     onClick={() => handlePreviewAttendence(item)}
                   >
+                    <S.ProvidersInfoText>
+                      {convertDate(item.createdAt)}
+                    </S.ProvidersInfoText>
                     <S.ProvidersInfoText>
                       {item.cliente.razao_social}
                     </S.ProvidersInfoText>
@@ -158,7 +190,9 @@ const Attendences = () => {
                     <S.ProvidersInfoText>
                       {item.abertura.descricao}
                     </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>{item.status}</S.ProvidersInfoText>
+                    <S.ProvidersInfoText>
+                      {item.status.descricao}
+                    </S.ProvidersInfoText>
                   </S.ProvidersListWrapper>
                 ))}
               </S.ScrollArea>
@@ -183,20 +217,30 @@ const Attendences = () => {
 
       <CloseAttendence
         modalCloseVisible={modalCloseVisible}
-        clientName={attendenceDataTemp.empresa}
+        clientID={attendenceDataTemp.id}
+        clientName={
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+        }
         closeModal={() => toggleModalCloseAndDetailsAttendence()}
+        finish={() => setModalCloseVisible(!modalCloseVisible)}
       />
 
       <ScheduleAttendence
         modalScheduledVisible={modalScheduledVisible}
-        clientName={attendenceDataTemp.empresa}
+        clientName={
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+        }
         closeModal={() => toggleModalSchuledAndDetailsAttendence()}
       />
 
       <RepassAttendence
         modalRepassVisible={modalRepassVisible}
-        clientName={attendenceDataTemp.empresa}
+        clientName={
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+        }
+        attendenceID={attendenceDataTemp.id}
         closeModal={() => toggleModalRepassAndDetailsAttedence()}
+        repassed={() => toggleModalOnRepassedAttendence()}
       />
 
       <OpenNewAttendence

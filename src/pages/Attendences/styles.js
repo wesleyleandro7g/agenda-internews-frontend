@@ -39,7 +39,7 @@ export const ProvidersListWrapper = styled.button`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
   align-items: center;
   background-color: #fff;
   padding: 5px;
@@ -50,11 +50,11 @@ export const ProvidersInfo = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
   align-items: center;
 `
 export const ProvidersInfoText = styled.h6`
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
   text-transform: uppercase;
 `

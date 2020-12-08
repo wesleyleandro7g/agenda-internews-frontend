@@ -15,6 +15,15 @@ const DetailsAttendence = ({
   scheduleAttendence,
   repassAttendence
 }) => {
+  function convertDate(date) {
+    const converted = new Date(date)
+
+    const days = converted.toLocaleDateString()
+    const hours = converted.toLocaleTimeString()
+
+    return `${days} as ${hours}`
+  }
+
   return (
     <Modal visible={modalDetailsVisible}>
       <S.ModalContent>
@@ -23,8 +32,12 @@ const DetailsAttendence = ({
             {attendenceDataTemp.cliente &&
               attendenceDataTemp.cliente.razao_social}
           </S.Title>
-          <S.StatusContent status={attendenceDataTemp.status}>
-            <S.TextStatus>{attendenceDataTemp.status}</S.TextStatus>
+          <S.StatusContent
+            status={attendenceDataTemp.status && attendenceDataTemp.status.id}
+          >
+            <S.TextStatus>
+              {attendenceDataTemp.status && attendenceDataTemp.status.descricao}
+            </S.TextStatus>
           </S.StatusContent>
         </S.ModalHeader>
         <S.ModalMain>
@@ -41,33 +54,51 @@ const DetailsAttendence = ({
             <S.Span>Contato: </S.Span>
             {attendenceDataTemp.contato_solicitante}
           </S.TextDetailsModal>
-        </S.ModalMain>
-        <S.ModalFooter>
-          {attendenceDataTemp.status === 'aberto' ? (
-            <Button01
-              label="Finalizar"
-              bgColor="#79D279"
-              onClick={closeAttendence}
-            />
+          <S.TextDetailsModal>
+            <S.Span>Solicitado em: </S.Span>
+            {convertDate(attendenceDataTemp.createdAt)}
+          </S.TextDetailsModal>
+          {attendenceDataTemp.status && attendenceDataTemp.status.id !== 4 ? (
+            ''
           ) : (
-            <Button01
-              label="Iniciar"
-              bgColor="#79D279"
-              onClick={openAttendence}
-            />
+            <S.TextDetailsModal>
+              <S.Span>Finalizado em: </S.Span>
+              {convertDate(attendenceDataTemp.updatedAt)}
+            </S.TextDetailsModal>
           )}
-          <Button01
-            label="Agendar"
-            bgColor="#8CB3D9"
-            onClick={scheduleAttendence}
-          />
-          <Button01
-            label="Repassar"
-            bgColor="#FFB84D"
-            onClick={repassAttendence}
-          />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
-        </S.ModalFooter>
+        </S.ModalMain>
+        {attendenceDataTemp.status && attendenceDataTemp.status.id !== 4 ? (
+          <S.ModalFooter>
+            {attendenceDataTemp.status && attendenceDataTemp.status.id === 1 ? (
+              <Button01
+                label="Finalizar"
+                bgColor="#79D279"
+                onClick={closeAttendence}
+              />
+            ) : (
+              <Button01
+                label="Iniciar"
+                bgColor="#79D279"
+                onClick={openAttendence}
+              />
+            )}
+            <Button01
+              label="Agendar"
+              bgColor="#8CB3D9"
+              onClick={scheduleAttendence}
+            />
+            <Button01
+              label="Repassar"
+              bgColor="#FFB84D"
+              onClick={repassAttendence}
+            />
+            <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
+          </S.ModalFooter>
+        ) : (
+          <S.ModalFooter>
+            <Button01 label="Fechar" bgColor="#FF6666" onClick={closeModal} />
+          </S.ModalFooter>
+        )}
       </S.ModalContent>
     </Modal>
   )

@@ -19,8 +19,7 @@ export const StatusContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props =>
-    props.status === 'aberto' ? '#79D279' : '#FFB84D'};
+  background-color: ${props => (props.status === 1 ? '#79D279' : '#FFB84D')};
 `
 export const TextStatus = styled.h6`
   font-size: 10px;
@@ -37,8 +36,8 @@ export const Title = styled.h4`
   text-transform: uppercase;
 `
 export const TextDetailsModal = styled.h4`
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 12px;
+  font-weight: 500;
   margin-bottom: 15px;
   text-transform: uppercase;
 `
@@ -51,5 +50,5 @@ export const ModalFooter = styled.div`
   grid-template-columns: repeat(4, 1fr);
 `
 export const Span = styled.span`
-  font-weight: 700;
+  font-weight: bold;
 `

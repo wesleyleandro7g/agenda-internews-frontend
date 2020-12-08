@@ -35,3 +35,6 @@ export const ModalFooter = styled.div`
   padding-bottom: 15px;
   grid-template-columns: repeat(2, 1fr);
 `
+export const Title = styled.h4`
+  text-transform: uppercase;
+`
