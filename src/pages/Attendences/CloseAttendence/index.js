@@ -32,7 +32,7 @@ const CloseAttendence = ({
   }
 
   function handleCosingAttendence() {
-    api.put('/attendence/close', {
+    api.put('/attendence/update/close', {
       id: clientID,
       id_fechamento: reasonSelected
     })

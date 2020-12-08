@@ -36,7 +36,7 @@ const RepassAttendence = ({
   }
 
   function handleRepassAttendence() {
-    api.put('/attendence/repass', {
+    api.put('/attendence/update/repass', {
       id: attendenceID,
       id_suporte: supportSelected
     })

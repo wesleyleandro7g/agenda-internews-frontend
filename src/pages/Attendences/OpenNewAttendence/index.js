@@ -76,7 +76,7 @@ const OpenNewAttendence = ({
       return alert('Informe o nome do solicitante!')
     } else {
       api
-        .post('/attendence/create', {
+        .post('/attendence/update/create', {
           nome_solicitante: clientNotRequested
             ? requestedName
             : 'sem solicitante',

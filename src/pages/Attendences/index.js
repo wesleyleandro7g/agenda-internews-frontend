@@ -68,7 +68,7 @@ const Attendences = () => {
     setLoading(false)
 
     api
-      .get('/attendence/support', {
+      .get('/attendence/index/support', {
         headers: { id_usuario: userID }
       })
       .then(res => {
@@ -86,7 +86,7 @@ const Attendences = () => {
 
   function handleAttendences() {
     api
-      .get('/attendence/support', {
+      .get('/attendence/index/support', {
         headers: { id_usuario: userID }
       })
       .then(res => {
@@ -98,7 +98,7 @@ const Attendences = () => {
 
   function handleClosedAttendences() {
     api
-      .get('/attendence/support-closed', {
+      .get('/attendence/index/support-closed', {
         headers: { id_usuario: userID }
       })
       .then(res => {
@@ -147,7 +147,10 @@ const Attendences = () => {
   }
 
   function openAttendence() {
-    api.put('/attendence/open')
+    api
+      .put('/attendence/open')
+      .then(res => alert(res.statusText))
+      .catch(err => alert(err))
 
     handleCallApi()
 
