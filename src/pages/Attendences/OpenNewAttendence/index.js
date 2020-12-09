@@ -97,7 +97,7 @@ const OpenNewAttendence = ({
           id_setor: sectorID
         })
         .then(res => {
-          alert(res.statusText)
+          alert(res.data.mensage)
           finish()
         })
         .catch(err => {

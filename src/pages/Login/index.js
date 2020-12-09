@@ -43,7 +43,9 @@ const Login = () => {
           localStorage.setItem('Access-token', response.data.token)
           localStorage.setItem('support-id', response.data.payload.supportID)
 
-          history.push('dashboard')
+          response.data.payload.sectorID === 2
+            ? history.push('clientes')
+            : history.push('dashboard')
 
           reset()
         })

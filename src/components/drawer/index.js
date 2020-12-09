@@ -5,7 +5,7 @@ import logo from '../../assets/TPLogo.png'
 
 import { useDrawer } from '../../context/DrawerContext'
 
-import { DataInternal, DataExternal, DataAdmin } from './data'
+import { DataInternal, DataExternal, DataOnline, DataAdmin } from './data'
 import * as S from './styles'
 
 const HandleUserType = ({ open }) => {
@@ -28,6 +28,20 @@ const HandleUserType = ({ open }) => {
 
   function handleExternalNavigation(page) {
     DataExternal.map(item => {
+      if (item.id !== page.id) {
+        item.select = false
+      } else {
+        item.select = true
+      }
+
+      return item
+    })
+
+    history.push(`/${page.handlePage}`)
+  }
+
+  function handleOnlineNavigation(page) {
+    DataOnline.map(item => {
       if (item.id !== page.id) {
         item.select = false
       } else {
@@ -77,6 +91,21 @@ const HandleUserType = ({ open }) => {
             <S.IconsWrapper
               key={item.id}
               onClick={() => handleExternalNavigation(item)}
+              select={item.select}
+            >
+              <item.icon size={16} />
+              {open && <S.Text> {item.handlePage} </S.Text>}
+            </S.IconsWrapper>
+          ))}
+        </S.SectionNav>
+      )
+    case 'ONLINE':
+      return (
+        <S.SectionNav>
+          {DataOnline.map(item => (
+            <S.IconsWrapper
+              key={item.id}
+              onClick={() => handleOnlineNavigation(item)}
               select={item.select}
             >
               <item.icon size={16} />

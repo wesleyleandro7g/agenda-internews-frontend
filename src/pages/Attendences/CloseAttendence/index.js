@@ -5,19 +5,19 @@ import api from '../../../services/API'
 
 import Modal from '../../../components/modal'
 import Button01 from '../../../components/buttons/button01'
-import Radio from '../../../components/inputs/radio'
+import CheckBox from '../../../components/inputs/checkbox'
 
 import * as S from './styles'
 
 const CloseAttendence = ({
   modalCloseVisible,
-  clientID,
+  attendenceID,
   clientName,
   closeModal,
   finish
 }) => {
   const [reasonsClosing, setReasonsClosing] = useState([])
-  const [reasonSelected, setReasonSelected] = useState(1)
+  const [reasonSelected, setReasonSelected] = useState([])
 
   useEffect(() => {
     handleCallApi()
@@ -27,14 +27,22 @@ const CloseAttendence = ({
     api.get('/reasons/closing/index').then(res => setReasonsClosing(res.data))
   }
 
-  function handleReasonSelected(e) {
-    setReasonSelected(e.target.value)
+  function handleReasonsSelected(e, id) {
+    if (e) {
+      reasonSelected.push({
+        id_fechamento: id
+      })
+    } else {
+      setReasonSelected(
+        reasonSelected.filter(item => item.id_fechamento !== id)
+      )
+    }
   }
 
   function handleCosingAttendence() {
     api.put('/attendence/update/close', {
-      id: clientID,
-      id_fechamento: reasonSelected
+      id_atendimento: attendenceID,
+      fech_motivos: reasonSelected
     })
 
     finish()
@@ -48,19 +56,16 @@ const CloseAttendence = ({
         </S.ModalHeader>
         <S.ModalMain>
           <h6>Opções de fechamento</h6>
-          <form onChange={handleReasonSelected}>
-            <S.ModalMainGrid>
-              {reasonsClosing.map(item => (
-                <Radio
-                  key={item.id}
-                  name="id_fechamento"
-                  label={item.descricao}
-                  id={item.id}
-                  value={item.id}
-                />
-              ))}
-            </S.ModalMainGrid>
-          </form>
+          <S.ModalMainGrid>
+            {reasonsClosing.map(item => (
+              <CheckBox
+                key={item.id}
+                label={item.descricao}
+                value={item.id}
+                onChange={e => handleReasonsSelected(e.target.checked, item.id)}
+              />
+            ))}
+          </S.ModalMainGrid>
         </S.ModalMain>
         <S.ModalFooter>
           <Button01

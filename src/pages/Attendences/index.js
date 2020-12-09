@@ -146,10 +146,13 @@ const Attendences = () => {
     setModalRepassVisible(!modalRepassVisible)
   }
 
-  function openAttendence() {
+  function openAttendence(id) {
     api
-      .put('/attendence/open')
-      .then(res => alert(res.statusText))
+      .put('/attendence/update/open', { id })
+      .then(res => {
+        alert(res.data.mensage)
+        console.log(res)
+      })
       .catch(err => alert(err))
 
     handleCallApi()
@@ -267,7 +270,7 @@ const Attendences = () => {
         attendenceDataTemp={attendenceDataTemp}
         modalDetailsVisible={modalDetailsVisible}
         closeModal={() => setModalDetailsVisible(!modalDetailsVisible)}
-        openAttendence={() => openAttendence()}
+        openAttendence={() => openAttendence(attendenceDataTemp.id)}
         closeAttendence={() => toggleModalCloseAndDetailsAttendence()}
         scheduleAttendence={() => toggleModalSchuledAndDetailsAttendence()}
         repassAttendence={() => toggleModalRepassAndDetailsAttedence()}
@@ -275,7 +278,7 @@ const Attendences = () => {
 
       <CloseAttendence
         modalCloseVisible={modalCloseVisible}
-        clientID={attendenceDataTemp.id}
+        attendenceID={attendenceDataTemp.id}
         clientName={
           attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
         }

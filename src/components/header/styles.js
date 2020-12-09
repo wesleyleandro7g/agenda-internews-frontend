@@ -37,10 +37,11 @@ export const AlertIcon = styled(I.RiAlertLine)`
   margin-right: 15px;
 `
 export const Title = styled.h3`
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   margin-left: 10px;
   color: #000;
+  text-transform: uppercase;
 `
 export const AvatarText = styled.h6`
   font-size: 10px;
