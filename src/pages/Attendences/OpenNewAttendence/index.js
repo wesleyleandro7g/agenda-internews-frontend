@@ -25,6 +25,7 @@ const OpenNewAttendence = ({
   const [clientSelected, setClientSelected] = useState('')
   const [selected, setSelected] = useState(false)
   const [reasonOpening, setReasonOpening] = useState([])
+  // const [otherAttendences, setOtherAttendences] = useState([])
   const [idAbertura, setIdAbertura] = useState()
   const [clientNotRequested, setClientNotRequested] = useState(true)
   const [requestedName, setRequestedName] = useState('')
@@ -42,6 +43,10 @@ const OpenNewAttendence = ({
     handleFilterData()
   }, [searchInput])
 
+  // useEffect(() => {
+  //   handleAttendencesOpening()
+  // }, [selected])
+
   function handleCallApi() {
     api.get('/reasons/opening/index').then(res => setReasonOpening(res.data))
   }
@@ -57,6 +62,13 @@ const OpenNewAttendence = ({
 
     setFiltered(dataFiltered)
   }
+
+  // function handleAttendencesOpening() {
+  //   api.get(`/attendence/index/client/${clientSelected.id}`).then(res => {
+  //     setOtherAttendences(res.data)
+  //     console.log(res.data)
+  //   })
+  // }
 
   function handleSelectClient(item) {
     setSelected(!selected)
@@ -130,11 +142,18 @@ const OpenNewAttendence = ({
                   onClick={() => setSelected(!selected)}
                 />
               </S.ClientSelected>
-              <S.ScrollClients>
+              {/* <S.ScrollClients>
                 <S.TextClientSelected>
                   Outros atendimentos abertos
                 </S.TextClientSelected>
-              </S.ScrollClients>
+                {otherAttendences.length >= 1 &&
+                  otherAttendences.map(item => (
+                    <S.ClientWrapper key={item.id}>
+                      <S.ClientText> Outros atendimentos </S.ClientText>
+                      <S.ClientText> </S.ClientText>
+                    </S.ClientWrapper>
+                  ))}
+              </S.ScrollClients> */}
             </S.ModalBigContent>
           ) : (
             <S.ModalBigContent>

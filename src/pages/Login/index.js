@@ -51,16 +51,15 @@ const Login = () => {
         })
         .catch(err => {
           if (err) {
-            console.log({ Caralho: err })
-            // if (err.response.status === 404) {
-            //   formRef.current.setErrors({
-            //     nome: 'Erro'
-            //   })
-            // } else if (err.response.status === 401) {
-            //   formRef.current.setErrors({
-            //     senha: 'Erro'
-            //   })
-            // }
+            if (err.response && err.response.status === 404) {
+              formRef.current.setErrors({
+                nome: 'Erro'
+              })
+            } else if (err.response && err.response.status === 401) {
+              formRef.current.setErrors({
+                senha: 'Erro'
+              })
+            }
           }
         })
     } catch (error) {

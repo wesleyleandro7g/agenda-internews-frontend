@@ -151,7 +151,6 @@ const Attendences = () => {
       .put('/attendence/update/open', { id })
       .then(res => {
         alert(res.data.mensage)
-        console.log(res)
       })
       .catch(err => alert(err))
 

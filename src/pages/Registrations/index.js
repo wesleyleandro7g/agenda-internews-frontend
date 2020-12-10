@@ -22,12 +22,14 @@ const Registrations = () => {
   const formRef = useRef(null)
   const [cities, setCities] = useState([])
   const [industry, setIndustry] = useState([])
+  const [internalActivity, setInternalActivity] = useState([])
   const [users, setUsers] = useState([])
   const [supports, setSupports] = useState([])
 
   useEffect(() => {
     api.get('/cities/index').then(res => setCities(res.data))
     api.get('/industry/index').then(res => setIndustry(res.data))
+    api.get('/activity/index').then(res => setInternalActivity(res.data))
     api.get('/users/index').then(res => setUsers(res.data))
     api.get('/support/index').then(res => setSupports(res.data))
   }, [])
@@ -248,6 +250,48 @@ const Registrations = () => {
     }
   }
 
+  async function handleRegisterInternalActivite(data, { reset }) {
+    try {
+      const schema = Yup.object().shape({
+        descricao: Yup.string().min(5).required('Informe a descrição')
+      })
+
+      await schema.validate(data, {
+        abortEarly: false
+      })
+
+      api
+        .post('/activity/create', data)
+        .then(res => {
+          if (res.status === 200) {
+            alert(res.data.mensage)
+          } else if (res.status === 400) {
+            alert('Erro! Tente novamente!')
+          }
+        })
+        .catch(err => {
+          if (err) {
+            alert('Houve um erro inexperado! Tente novamente.')
+            console.log(err)
+          }
+        })
+
+      formRef.current.setErrors({})
+
+      reset()
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {}
+
+        error.inner.forEach(err => {
+          errorMessages[err.path] = err.message
+        })
+
+        formRef.current.setErrors(errorMessages)
+      }
+    }
+  }
+
   async function handleRegisterCity(data, { reset }) {
     try {
       const schema = Yup.object().shape({
@@ -363,7 +407,7 @@ const Registrations = () => {
   async function handleRegisterUser(data, { reset }) {
     try {
       const schema = Yup.object().shape({
-        nome: Yup.string().min(5).required('Informe o nome')
+        nome: Yup.string().min(3).required('Informe o nome')
       })
 
       await schema.validate(data, {
@@ -424,6 +468,14 @@ const Registrations = () => {
               <S.OptionWrapper>
                 <S.TitleInputOptions>Modulo do sistema</S.TitleInputOptions>
                 <Input04 name="id_modulo" Options={ModuleOptions} />
+              </S.OptionWrapper>
+
+              <S.OptionWrapper>
+                <S.TitleInputOptions>Atividade interna</S.TitleInputOptions>
+                <Input04
+                  name="id_atividade_interna"
+                  Options={internalActivity}
+                />
               </S.OptionWrapper>
 
               <S.OptionWrapper>
@@ -488,31 +540,12 @@ const Registrations = () => {
             </S.ContentSimple>
           </Form>
 
-          <Form ref={formRef} onSubmit={handleRegisterActivite}>
+          <Form ref={formRef} onSubmit={handleRegisterInternalActivite}>
             <S.ContentSimple>
               <S.ContentHeader>
-                <h6>Ramo de atividade</h6>
+                <h6>Atividade Interna</h6>
               </S.ContentHeader>
               <Input03 label="Descrição" name="descricao" type="text" />
-
-              <S.RegisterButtonWrapper>
-                <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              </S.RegisterButtonWrapper>
-            </S.ContentSimple>
-          </Form>
-
-          <Form useRef={formRef} onSubmit={handleRegisterUser}>
-            <S.ContentSimple>
-              <S.ContentHeader>
-                <h6>Usuário</h6>
-              </S.ContentHeader>
-              <S.SupportInputWrapper>
-                <Input03 label="Nome" name="nome" type="text" />
-                <Input03 label="Contato" name="contato" type="text" />
-                <Input03 label="Senha" name="senha" type="text" />
-
-                <Input04 name="id_setor" Options={SectorOptions} />
-              </S.SupportInputWrapper>
 
               <S.RegisterButtonWrapper>
                 <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
@@ -530,6 +563,19 @@ const Registrations = () => {
 
                 <Input04 name="id_usuario" Options={users} />
               </S.SupportInputWrapper>
+
+              <S.RegisterButtonWrapper>
+                <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
+              </S.RegisterButtonWrapper>
+            </S.ContentSimple>
+          </Form>
+
+          <Form ref={formRef} onSubmit={handleRegisterActivite}>
+            <S.ContentSimple>
+              <S.ContentHeader>
+                <h6>Ramo de atividade</h6>
+              </S.ContentHeader>
+              <Input03 label="Descrição" name="descricao" type="text" />
 
               <S.RegisterButtonWrapper>
                 <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
@@ -561,6 +607,25 @@ const Registrations = () => {
                 <h6>Sistema concorrente</h6>
               </S.ContentHeader>
               <Input03 label="Descrição" name="descricao" type="text" />
+
+              <S.RegisterButtonWrapper>
+                <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
+              </S.RegisterButtonWrapper>
+            </S.ContentSimple>
+          </Form>
+
+          <Form useRef={formRef} onSubmit={handleRegisterUser}>
+            <S.ContentSimple>
+              <S.ContentHeader>
+                <h6>Usuário</h6>
+              </S.ContentHeader>
+              <S.SupportInputWrapper>
+                <Input03 label="Nome" name="nome" type="text" />
+                <Input03 label="Contato" name="contato" type="text" />
+                <Input03 label="Senha" name="senha" type="text" />
+
+                <Input04 name="id_setor" Options={SectorOptions} />
+              </S.SupportInputWrapper>
 
               <S.RegisterButtonWrapper>
                 <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
