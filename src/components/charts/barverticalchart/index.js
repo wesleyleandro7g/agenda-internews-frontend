@@ -2,9 +2,9 @@ import React from 'react'
 import {
   ComposedChart,
   Bar,
-  // XAxis,
+  XAxis,
   YAxis,
-  CartesianGrid,
+  // CartesianGrid,
   Tooltip,
   ResponsiveContainer
 } from 'recharts'
@@ -23,8 +23,8 @@ const BarVerticalChart = ({ data }) => {
         }}
         fontSize={10}
       >
-        <CartesianGrid stroke="#f5f5f5" />
-        {/* <XAxis type="number" /> */}
+        {/* <CartesianGrid stroke="#f5f5f5" /> */}
+        <XAxis type="number" />
         <YAxis dataKey="nome" type="category" />
         <Tooltip />
         <Bar dataKey="quantidade" barSize={10} fill="#413ea0" />

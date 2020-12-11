@@ -7,10 +7,41 @@ import Layout from '../../components/layout'
 import PieChart from '../../components/charts/piechart'
 import BarChart from '../../components/charts/barchart'
 import BarVertical from '../../components/charts/barverticalchart'
+import Doughnut from '../../components/charts/doughnut'
 
 import * as S from './styles'
 
+const HandleDoughnutChart = ({ title, onChange, data, percentage }) => {
+  return (
+    <S.ChartWrapper2>
+      <S.ChartHeader>
+        <S.ChartTitle> {title} </S.ChartTitle>
+      </S.ChartHeader>
+      <Doughnut data={data} percentage={percentage} />
+    </S.ChartWrapper2>
+  )
+}
+
 const HandlePieChartCards = ({ title, data, onChange }) => {
+  const COLORS = [
+    '#0088FE',
+    '#00C49F',
+    '#FFBB28',
+    '#FF8042',
+    '#cc33ff',
+    '#666600',
+    '#6600cc',
+    '#006666',
+    '#009900',
+    '#ff6600',
+    '#333333',
+    '#ffff66',
+    '#ff99cc',
+    '#ff3333',
+    '#009933',
+    '#660033'
+  ]
+
   return (
     <S.ChartWrapper>
       <S.ChartHeader>
@@ -25,15 +56,22 @@ const HandlePieChartCards = ({ title, data, onChange }) => {
       </S.ChartHeader>
       <S.ChartMain>
         <S.ChartContent>
-          <PieChart data={data} />
+          <PieChart data={data} COLORS={COLORS} />
         </S.ChartContent>
-        <S.ChartInfo> </S.ChartInfo>
+        <S.ChartInfo>
+          {data.map((item, index) => (
+            <S.ChartInfoWrapperText key={item.id}>
+              <S.ChartInfoColor color={COLORS[index]} />
+              <S.ChartInfoText> {item.nome} </S.ChartInfoText>
+            </S.ChartInfoWrapperText>
+          ))}
+        </S.ChartInfo>
       </S.ChartMain>
     </S.ChartWrapper>
   )
 }
 
-const HandleLineChart = ({ data }) => {
+const HandleBarVerticalChart = ({ data }) => {
   return (
     <S.ChartWrapper>
       <S.ChartHeader>
@@ -66,6 +104,8 @@ const Dashboard = () => {
   ] = useState([])
   const [clientsForIndustries, setClientsForIndustries] = useState([])
   const [attendencesForType, setAttendencesForType] = useState([])
+  const [attendencesRealized, setAttendencesRealized] = useState([])
+  const [percentage, setPercentage] = useState([])
   const user = localStorage.getItem('user-name')
   const supportID = localStorage.getItem('support-id')
 
@@ -85,6 +125,11 @@ const Dashboard = () => {
     api.get(`/dashboard/attendences/${supportID}`).then(res => {
       setAttendencesForType(res.data.Data)
     })
+
+    api.get(`/dashboard/attendences-month/${supportID}`).then(res => {
+      setAttendencesRealized(res.data.Data)
+      setPercentage(res.data.percentage)
+    })
   }
 
   // function handleSelectDate(e) {
@@ -99,15 +144,16 @@ const Dashboard = () => {
           <S.ItemsRigthSubHeader></S.ItemsRigthSubHeader>
         </S.SubHeader>
         <S.ContentCharts>
-          <HandlePieChartCards
-            title="Atendimentos mensais"
-            data={clientsForIndustries}
+          <HandleDoughnutChart
+            title="Clientes atendindos este mês"
+            data={attendencesRealized}
+            percentage={percentage}
           />
           <HandlePieChartCards
             title="Clientes por ramo de atividade"
             data={clientsForIndustries}
           />
-          <HandleLineChart data={clientsForInternalActivities} />
+          <HandleBarVerticalChart data={clientsForInternalActivities} />
         </S.ContentCharts>
 
         <S.ContentBarCharts>

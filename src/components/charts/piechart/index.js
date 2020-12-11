@@ -1,8 +1,6 @@
 import React from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']
-
 const RADIAN = Math.PI / 180
 const renderCustomizedLabel = ({
   cx,
@@ -26,12 +24,12 @@ const renderCustomizedLabel = ({
       dominantBaseline="central"
       fontSize="12"
     >
-      {`${(percent * 100).toFixed(0)}%`}
+      {percent > 0 && `${(percent * 100).toFixed(0)}%`}
     </text>
   )
 }
 
-const PieChartComponent = ({ data }) => {
+const PieChartComponent = ({ data, COLORS }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart>

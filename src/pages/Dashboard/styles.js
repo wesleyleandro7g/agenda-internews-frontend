@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div``
 export const SubHeader = styled.div`
   width: 100%;
-  height: 10vh;
+  height: 5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,12 +18,12 @@ export const ItemsRigthSubHeader = styled.div`
 export const ContentCharts = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 0.5fr 1fr 1fr;
   grid-column-gap: 5px;
 `
 export const ChartWrapper = styled.div`
   width: 100%;
-  height: 27vh;
+  height: 32vh;
   border-radius: 2px;
   background-color: #fff;
 
@@ -32,6 +32,9 @@ export const ChartWrapper = styled.div`
     -moz-box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
     box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
   }
+`
+export const ChartWrapper2 = styled(ChartWrapper)`
+  width: 100%;
 `
 export const ChartHeader = styled.div`
   height: 20%;
@@ -55,9 +58,25 @@ export const ChartContent = styled.div`
 `
 export const ChartInfo = styled.div`
   width: 60%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
+`
+export const ChartInfoWrapperText = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 2%;
+`
+export const ChartInfoText = styled.h6`
+  font-size: 10px;
+  font-weight: 400;
+  margin-left: 2%;
+`
+export const ChartInfoColor = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: ${props => props.color};
 `
 export const ChartTitle = styled.h6`
   font-size: 10px;

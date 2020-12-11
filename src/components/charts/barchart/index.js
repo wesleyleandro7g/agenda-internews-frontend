@@ -26,7 +26,7 @@ const BarChartComponent = ({ data }) => {
         <XAxis dataKey="nome" scale="auto" padding={{ left: 10, right: 10 }} />
         <YAxis />
         <Tooltip />
-        <CartesianGrid strokeDasharray="3 3" />
+        <CartesianGrid strokeDasharray="2 2" />
         <Bar
           dataKey="quantidade"
           fill="#8884d8"
