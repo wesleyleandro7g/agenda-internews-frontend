@@ -40,6 +40,9 @@ export const ChartHeader = styled.div`
   align-items: center;
   padding: 0 5px;
 `
+export const ChartHeader2 = styled(ChartHeader)`
+  height: 10%;
+`
 export const ChartMain = styled.div`
   height: 80%;
   display: flex;
@@ -57,8 +60,8 @@ export const ChartInfo = styled.div`
   align-items: center;
 `
 export const ChartTitle = styled.h6`
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 400;
 `
 export const ChartInput = styled.input`
   width: 45%;
@@ -70,22 +73,22 @@ export const ChartInput = styled.input`
   background-color: #eee;
   color: #333;
 `
-export const BarChartContainer = styled(ChartWrapper)`
-  width: 100%;
-  height: 100%;
-`
-export const ContentBarCharts = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  margin: 10px 0;
-`
 export const LeftItemsWrapper = styled.div`
   width: 100%;
   height: 50vh;
 `
 export const RigthItemsWrapper = styled(LeftItemsWrapper)``
-export const MainBarChart = styled.div`
+
+export const ContentBarCharts = styled.div`
+  width: 100%;
+  height: 50vh;
+  margin: 10px 0;
+`
+export const BarChartContainer = styled(ChartWrapper)`
   width: 100%;
   height: 100%;
+`
+export const MainBarChart = styled.div`
+  width: 100%;
+  height: 90%;
 `
