@@ -4,9 +4,21 @@ const DrawerContext = createContext()
 
 export default function DrawerProvider({ children }) {
   const [open, setOpen] = useState(true)
+  const [
+    internalOptionsRegisterVisible,
+    setInternalOptionsRegisterVisible
+  ] = useState(false)
 
   return (
-    <DrawerContext.Provider value={{ open, setOpen }}>
+    <DrawerContext.Provider
+      value={{
+        open,
+        setOpen,
+
+        internalOptionsRegisterVisible,
+        setInternalOptionsRegisterVisible
+      }}
+    >
       {children}
     </DrawerContext.Provider>
   )
@@ -14,7 +26,18 @@ export default function DrawerProvider({ children }) {
 
 export function useDrawer() {
   const context = useContext(DrawerContext)
-  const { open, setOpen } = context
+  const {
+    open,
+    setOpen,
+    internalOptionsRegisterVisible,
+    setInternalOptionsRegisterVisible
+  } = context
 
-  return { open, setOpen }
+  return {
+    open,
+    setOpen,
+
+    internalOptionsRegisterVisible,
+    setInternalOptionsRegisterVisible
+  }
 }

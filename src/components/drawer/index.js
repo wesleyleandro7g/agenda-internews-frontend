@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -8,8 +9,12 @@ import { useDrawer } from '../../context/DrawerContext'
 import { DataInternal, DataExternal, DataOnline, DataAdmin } from './data'
 import * as S from './styles'
 
-const HandleUserType = ({ open }) => {
+const HandleUserType = ({ open, state }) => {
   const history = useHistory()
+  const {
+    internalOptionsRegisterVisible,
+    setInternalOptionsRegisterVisible
+  } = useDrawer()
   const userType = localStorage.getItem('user-sector-name')
 
   function handleInternalNavigation(page) {
@@ -19,8 +24,26 @@ const HandleUserType = ({ open }) => {
       } else {
         item.select = true
       }
+    })
 
-      return item
+    if (page.id !== 4) {
+      history.push(`/${page.handlePage}`)
+    } else {
+      setInternalOptionsRegisterVisible(!internalOptionsRegisterVisible)
+    }
+  }
+
+  function handleInternalNavigationOptions(page) {
+    DataInternal.map(item => {
+      if (item.id === 4) {
+        item.options.map(option => {
+          if (option.id !== page.id) {
+            option.select = false
+          } else {
+            option.select = true
+          }
+        })
+      }
     })
 
     history.push(`/${page.handlePage}`)
@@ -65,7 +88,7 @@ const HandleUserType = ({ open }) => {
       return item
     })
 
-    history.push(`/${page.handlePage}`)
+    if (page.id !== 4) history.push(`/${page.handlePage}`)
   }
 
   switch (userType) {
@@ -73,13 +96,32 @@ const HandleUserType = ({ open }) => {
       return (
         <S.SectionNav>
           {DataInternal.map(item => (
-            <S.IconsWrapper
-              key={item.id}
-              onClick={() => handleInternalNavigation(item)}
-              select={item.select}
-            >
-              <item.icon size={16} />
-              {open && <S.Text> {item.handlePage} </S.Text>}
+            <S.IconsWrapper key={item.id}>
+              <S.PrimaryOptionWrapper
+                select={item.select}
+                onClick={() => handleInternalNavigation(item)}
+              >
+                <item.icon size={16} />
+                {open && <S.Text> {item.handlePage} </S.Text>}
+              </S.PrimaryOptionWrapper>
+
+              {item.options && internalOptionsRegisterVisible && (
+                <S.SecondaryOptionWrapper>
+                  {item.options.map(option => (
+                    <S.SecondaryOptionsItemsWrapper
+                      key={option.id}
+                      onClick={() => handleInternalNavigationOptions(option)}
+                      select={option.select}
+                      state={state}
+                    >
+                      <option.icon size={16} />
+                      {open && (
+                        <S.TextOptions> {option.pageName} </S.TextOptions>
+                      )}
+                    </S.SecondaryOptionsItemsWrapper>
+                  ))}
+                </S.SecondaryOptionWrapper>
+              )}
             </S.IconsWrapper>
           ))}
         </S.SectionNav>
@@ -91,10 +133,11 @@ const HandleUserType = ({ open }) => {
             <S.IconsWrapper
               key={item.id}
               onClick={() => handleExternalNavigation(item)}
-              select={item.select}
             >
-              <item.icon size={16} />
-              {open && <S.Text> {item.handlePage} </S.Text>}
+              <S.PrimaryOptionWrapper select={item.select}>
+                <item.icon size={16} />
+                {open && <S.Text> {item.handlePage} </S.Text>}
+              </S.PrimaryOptionWrapper>
             </S.IconsWrapper>
           ))}
         </S.SectionNav>
@@ -106,10 +149,11 @@ const HandleUserType = ({ open }) => {
             <S.IconsWrapper
               key={item.id}
               onClick={() => handleOnlineNavigation(item)}
-              select={item.select}
             >
-              <item.icon size={16} />
-              {open && <S.Text> {item.handlePage} </S.Text>}
+              <S.PrimaryOptionWrapper select={item.select}>
+                <item.icon size={16} />
+                {open && <S.Text> {item.handlePage} </S.Text>}
+              </S.PrimaryOptionWrapper>
             </S.IconsWrapper>
           ))}
         </S.SectionNav>
@@ -121,10 +165,11 @@ const HandleUserType = ({ open }) => {
             <S.IconsWrapper
               key={item.id}
               onClick={() => handleManagerNavigation(item)}
-              select={item.select}
             >
-              <item.icon size={16} />
-              {open && <S.Text> {item.handlePage} </S.Text>}
+              <S.PrimaryOptionWrapper select={item.select}>
+                <item.icon size={16} />
+                {open && <S.Text> {item.handlePage} </S.Text>}
+              </S.PrimaryOptionWrapper>
             </S.IconsWrapper>
           ))}
         </S.SectionNav>
@@ -141,7 +186,7 @@ const Drawer = () => {
         {open ? <S.Img src={logo} /> : <S.Img2 src={logo} />}
       </S.SectionTitle>
 
-      <HandleUserType open={open} />
+      <HandleUserType open={open} state={open} />
     </S.Container>
   )
 }

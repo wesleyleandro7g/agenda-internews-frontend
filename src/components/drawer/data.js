@@ -29,7 +29,79 @@ export const DataInternal = [
     id: 4,
     handlePage: 'Cadastros',
     icon: I.RiAddCircleLine,
-    select: false
+    select: false,
+    options: [
+      {
+        id: 0,
+        pageName: 'Clientes',
+        handlePage: 'cadastros/clientes',
+        icon: I.RiGroupLine,
+        select: false
+      },
+      {
+        id: 2,
+        pageName: 'Ramo',
+        handlePage: 'cadastros/atividades',
+        icon: I.RiStore3Line,
+        select: false
+      },
+      {
+        id: 3,
+        pageName: 'Ferramentas',
+        handlePage: 'cadastros/ferramentas',
+        icon: I.RiToolsLine,
+        select: false
+      },
+      {
+        id: 4,
+        pageName: 'Cidades',
+        handlePage: 'cadastros/cidades',
+        icon: I.RiMapPinLine,
+        select: false
+      },
+      {
+        id: 5,
+        pageName: 'Abertura',
+        handlePage: 'cadastros/abertura',
+        icon: I.RiBookReadLine,
+        select: false
+      },
+      {
+        id: 6,
+        pageName: 'Fechamento',
+        handlePage: 'cadastros/fechamento',
+        icon: I.RiBookMarkLine,
+        select: false
+      },
+      {
+        id: 7,
+        pageName: 'A. Interna',
+        handlePage: 'cadastros/atividade-interna',
+        icon: I.RiStore2Line,
+        select: false
+      },
+      // {
+      //   id: 8,
+      //   pageName: 'Sistemas',
+      //   handlePage: 'cadastros/sistemas',
+      //   icon: I.RiMacLine,
+      //   select: false
+      // },
+      {
+        id: 9,
+        pageName: 'Suportes',
+        handlePage: 'cadastros/suportes',
+        icon: I.RiCustomerService2Line,
+        select: false
+      },
+      {
+        id: 10,
+        pageName: 'Usuários',
+        handlePage: 'cadastros/usuários',
+        icon: I.RiUserLine,
+        select: false
+      }
+    ]
   }
 ]
 

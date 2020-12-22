@@ -105,7 +105,6 @@ const Dashboard = () => {
   const [clientsForIndustries, setClientsForIndustries] = useState([])
   const [attendencesForType, setAttendencesForType] = useState([])
   const [attendencesRealized, setAttendencesRealized] = useState([])
-  const [percentage, setPercentage] = useState([])
   const user = localStorage.getItem('user-name')
   const supportID = localStorage.getItem('support-id')
 
@@ -128,7 +127,6 @@ const Dashboard = () => {
 
     api.get(`/dashboard/attendences-month/${supportID}`).then(res => {
       setAttendencesRealized(res.data.Data)
-      setPercentage(res.data.percentage)
     })
   }
 
@@ -147,7 +145,6 @@ const Dashboard = () => {
           <HandleDoughnutChart
             title="Clientes atendindos este mês"
             data={attendencesRealized}
-            percentage={percentage}
           />
           <HandlePieChartCards
             title="Clientes por ramo de atividade"

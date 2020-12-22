@@ -17,7 +17,7 @@ const renderCustomizedLabel = ({ name, percent }) => {
   )
 }
 
-const Doughnut = ({ data, percentage }) => {
+const Doughnut = ({ data }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart>

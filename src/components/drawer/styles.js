@@ -34,22 +34,17 @@ export const SectionNav = styled.section`
 export const IconsWrapper = styled.button`
   width: 100%;
   display: flex;
-  align-items: center;
-  flex-direction: row;
-  padding: 10px 15px;
-  color: #fff;
-  background-color: ${props => (props.select ? '#071a2c' : 'transparent')};
-  outline: none;
-  border: 0;
-  border-left: 3px solid ${props => (props.select ? '#fff' : '#040e18')};
-  cursor: pointer;
-
-  :hover {
-    background-color: #071a2c;
-  }
+  flex-direction: column;
+  padding: 0;
+  background-color: transparent;
 `
 export const Text = styled.h6`
   font-weight: 500;
+  font-size: 12px;
+  margin-left: 15px;
+`
+export const TextOptions = styled.h6`
+  font-weight: 400;
   font-size: 12px;
   margin-left: 15px;
 `
@@ -64,4 +59,45 @@ export const Img2 = styled.img`
   height: 50px;
   margin: 0;
   padding: 0;
+`
+export const PrimaryOptionWrapper = styled.button`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px 15px;
+  color: #fff;
+  background-color: ${props => (props.select ? '#071a2c' : 'transparent')};
+  outline: none;
+  border: 0;
+  border-left: 3px solid ${props => (props.select ? '#fff' : '#040e18')};
+  cursor: pointer;
+
+  :hover {
+    background-color: #071a2c;
+  }
+`
+export const SecondaryOptionWrapper = styled(PrimaryOptionWrapper)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  :hover {
+    background-color: transparent;
+  }
+`
+export const SecondaryOptionsItemsWrapper = styled.button`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px ${props => (props.state ? '10px' : '0')};
+  background-color: transparent;
+  color: #fff;
+  background-color: ${props => (props.select ? '#071a2c' : 'transparent')};
+  border-left: ${props => (props.state ? '3px' : '0')} solid
+    ${props => (props.select ? '#fff' : '#040e18')};
+
+  :hover {
+    background-color: #071a2c;
+  }
 `

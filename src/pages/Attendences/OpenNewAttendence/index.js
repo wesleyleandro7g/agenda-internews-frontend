@@ -80,9 +80,9 @@ const OpenNewAttendence = ({
   }
 
   function handleNewAttendence() {
-    if (!selected) {
-      return alert('Selecione um cliente!')
-    }
+    if (!selected) return alert('Selecione um cliente!')
+
+    if (!idAbertura) return alert('Selecione um motivo!')
 
     if (clientNotRequested && requestedName.length <= 2) {
       return alert('Informe o nome do solicitante!')

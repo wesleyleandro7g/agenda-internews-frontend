@@ -11,6 +11,7 @@ import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Filter from '../../components/filter'
 import SelectOptions from '../../components/select-options'
+import ClientDatils from './client-details'
 
 import LoadingAnimation from '../../assets/loader.json'
 
@@ -28,6 +29,25 @@ const Clients = () => {
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [modalDetailVisible, setModalDetailsVisible] = useState(false)
+  const [clientViewData, setClientViewData] = useState({
+    razao_social: '',
+    cnpj: '',
+    identificador_servidor: '',
+    identificador_internews: '',
+    quantidade_acessos: '',
+    endereco: '',
+    atividade: {
+      descricao: ''
+    },
+    cidade: {
+      descricao: ''
+    },
+    suporte: {
+      nome: ''
+    },
+    ferramentas: []
+  })
   const { setDataClientContext } = useClientContext()
 
   const defaultOptions = {
@@ -89,6 +109,11 @@ const Clients = () => {
     setFiltered(dataFiltered)
   }
 
+  function handleDetails(item) {
+    setClientViewData(item)
+    setModalDetailsVisible(!modalDetailVisible)
+  }
+
   return (
     <Layout page="Clientes">
       <S.Container>
@@ -135,7 +160,10 @@ const Clients = () => {
 
               <S.ScrollArea speed={0.6}>
                 {filtered.map(item => (
-                  <S.ProvidersListWrapper key={item.id}>
+                  <S.ProvidersListWrapper
+                    key={item.id}
+                    onClick={() => handleDetails(item)}
+                  >
                     <S.ProvidersInfoText>
                       {item.razao_social}
                     </S.ProvidersInfoText>
@@ -170,6 +198,11 @@ const Clients = () => {
           <Lottie options={defaultOptions} width="15%" height="15%" />
         </S.AnimationWrapper>
       )}
+      <ClientDatils
+        visible={modalDetailVisible}
+        data={clientViewData}
+        onClose={() => setModalDetailsVisible(!modalDetailVisible)}
+      />
     </Layout>
   )
 }
