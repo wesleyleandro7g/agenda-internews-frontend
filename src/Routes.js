@@ -9,7 +9,6 @@ import Dashboard from './pages/Dashboard'
 import Clients from './pages/Clients'
 import Attendences from './pages/Attendences'
 import Requests from './pages/Requests'
-import Registrations from './pages/Registrations'
 import RegistrationClients from './pages/Registrations/Clients'
 import RegistrationActivities from './pages/Registrations/Activities'
 import RegistrationCities from './pages/Registrations/Cities'
@@ -46,7 +45,6 @@ export default function Routes() {
       <PrivateRoutes path="/clientes" exact component={Clients} />
       <PrivateRoutes path="/atendimentos" exact component={Attendences} />
       <PrivateRoutes path="/solicitações" exact component={Requests} />
-      <PrivateRoutes path="/cadastros" exact component={Registrations} />
       <PrivateRoutes
         path="/cadastros/clientes"
         exact

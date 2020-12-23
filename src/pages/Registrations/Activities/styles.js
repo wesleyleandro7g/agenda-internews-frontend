@@ -19,6 +19,13 @@ export const ListWrapper = styled.div`
   margin-bottom: 1px;
   text-align: start;
 `
+export const Info = styled.div`
+  width: 100%;
+  height: 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+`
 export const ModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,5 +50,6 @@ export const ContentFooter = styled.div`
 `
 export const Text = styled.h6`
   font-size: 12px;
+  font-weight: 500;
   text-transform: uppercase;
 `

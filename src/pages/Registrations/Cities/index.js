@@ -13,7 +13,7 @@ import Modal from '../../../components/modal'
 
 import I from '../../../utils/Icons'
 
-import { StateOptions } from './data'
+import { StateOptions, DataInfoOptions } from './data'
 
 import * as S from './styles'
 
@@ -88,6 +88,12 @@ const RegisterCities = () => {
             onClick={() => toggleRegisterVisible()}
           />
         </S.HeaderWrapper>
+
+        <S.Info>
+          {DataInfoOptions.map(item => (
+            <S.Text key={item.id}>{item.descricao}</S.Text>
+          ))}
+        </S.Info>
 
         <S.ScrollArea speed={0.6}>
           {industries &&

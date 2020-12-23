@@ -84,11 +84,29 @@ const HandleUserType = ({ open, state }) => {
       } else {
         item.select = true
       }
-
-      return item
     })
 
-    if (page.id !== 4) history.push(`/${page.handlePage}`)
+    if (page.id !== 8) {
+      history.push(`/${page.handlePage}`)
+    } else {
+      setInternalOptionsRegisterVisible(!internalOptionsRegisterVisible)
+    }
+  }
+
+  function handleManagerNavigationOptions(page) {
+    DataAdmin.map(item => {
+      if (item.id === 8) {
+        item.options.map(option => {
+          if (option.id !== page.id) {
+            option.select = false
+          } else {
+            option.select = true
+          }
+        })
+      }
+    })
+
+    history.push(`/${page.handlePage}`)
   }
 
   switch (userType) {
@@ -162,14 +180,32 @@ const HandleUserType = ({ open, state }) => {
       return (
         <S.SectionNav>
           {DataAdmin.map(item => (
-            <S.IconsWrapper
-              key={item.id}
-              onClick={() => handleManagerNavigation(item)}
-            >
-              <S.PrimaryOptionWrapper select={item.select}>
+            <S.IconsWrapper key={item.id}>
+              <S.PrimaryOptionWrapper
+                select={item.select}
+                onClick={() => handleManagerNavigation(item)}
+              >
                 <item.icon size={16} />
                 {open && <S.Text> {item.handlePage} </S.Text>}
               </S.PrimaryOptionWrapper>
+
+              {item.options && internalOptionsRegisterVisible && (
+                <S.SecondaryOptionWrapper>
+                  {item.options.map(option => (
+                    <S.SecondaryOptionsItemsWrapper
+                      key={option.id}
+                      onClick={() => handleManagerNavigationOptions(option)}
+                      select={option.select}
+                      state={state}
+                    >
+                      <option.icon size={16} />
+                      {open && (
+                        <S.TextOptions> {option.pageName} </S.TextOptions>
+                      )}
+                    </S.SecondaryOptionsItemsWrapper>
+                  ))}
+                </S.SecondaryOptionWrapper>
+              )}
             </S.IconsWrapper>
           ))}
         </S.SectionNav>

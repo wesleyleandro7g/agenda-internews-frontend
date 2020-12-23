@@ -108,3 +108,14 @@ export const StateOptions = [
     descricao: 'DF'
   }
 ]
+
+export const DataInfoOptions = [
+  {
+    id: 0,
+    descricao: 'cidade'
+  },
+  {
+    id: 1,
+    descricao: 'estaddo'
+  }
+]

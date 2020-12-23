@@ -86,6 +86,10 @@ const RegisterTools = () => {
           />
         </S.HeaderWrapper>
 
+        <S.Info>
+          <S.Text> descrição </S.Text>
+        </S.Info>
+
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
