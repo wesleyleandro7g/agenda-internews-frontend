@@ -11,7 +11,10 @@ import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Filter from '../../components/filter'
 import SelectOptions from '../../components/select-options'
-import ClientDatils from './client-details'
+
+import ClientDatails from './client-details'
+import ClientTools from './client-tools'
+import ClientEditable from './client-edit'
 
 import LoadingAnimation from '../../assets/loader.json'
 
@@ -29,6 +32,8 @@ const Clients = () => {
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [modalTools, setModalTools] = useState(false)
+  const [modalEdit, setModalEdit] = useState(false)
   const [modalDetailVisible, setModalDetailsVisible] = useState(false)
   const [clientViewData, setClientViewData] = useState({
     razao_social: '',
@@ -112,6 +117,16 @@ const Clients = () => {
   function handleDetails(item) {
     setClientViewData(item)
     setModalDetailsVisible(!modalDetailVisible)
+  }
+
+  function toggleTools() {
+    setModalDetailsVisible(!modalDetailVisible)
+    setModalTools(!modalTools)
+  }
+
+  function toggleEdit() {
+    setModalDetailsVisible(!modalDetailVisible)
+    setModalEdit(!modalEdit)
   }
 
   return (
@@ -198,10 +213,25 @@ const Clients = () => {
           <Lottie options={defaultOptions} width="15%" height="15%" />
         </S.AnimationWrapper>
       )}
-      <ClientDatils
+
+      <ClientDatails
         visible={modalDetailVisible}
         data={clientViewData}
         onClose={() => setModalDetailsVisible(!modalDetailVisible)}
+        openTools={() => toggleTools()}
+        openEdit={() => toggleEdit()}
+      />
+
+      <ClientTools
+        visible={modalTools}
+        data={clientViewData}
+        onClose={() => toggleTools()}
+      />
+
+      <ClientEditable
+        visible={modalEdit}
+        dataOrigin={clientViewData}
+        onClose={() => toggleEdit()}
       />
     </Layout>
   )

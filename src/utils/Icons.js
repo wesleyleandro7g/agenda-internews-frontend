@@ -21,7 +21,9 @@ import {
   RiUserLine,
   RiCustomerService2Line,
   RiMacLine,
-  RiStore2Line
+  RiStore2Line,
+  RiEditBoxLine,
+  RiCheckboxCircleLine
 } from 'react-icons/ri'
 
 const Icons = {
@@ -47,7 +49,9 @@ const Icons = {
   RiUserLine,
   RiCustomerService2Line,
   RiMacLine,
-  RiStore2Line
+  RiStore2Line,
+  RiEditBoxLine,
+  RiCheckboxCircleLine
 }
 
 export default Icons

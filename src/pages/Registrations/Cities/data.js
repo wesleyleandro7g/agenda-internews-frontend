@@ -116,6 +116,6 @@ export const DataInfoOptions = [
   },
   {
     id: 1,
-    descricao: 'estaddo'
+    descricao: 'estado'
   }
 ]

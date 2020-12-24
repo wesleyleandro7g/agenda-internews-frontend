@@ -1,13 +1,13 @@
 import React from 'react'
 
 import Modal from '../../../components/modal'
-// import Button from '../../../components/buttons/button01'
+import Button02 from '../../../components/buttons/button02'
 
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
 
-const DetailsClient = ({ visible, onClose, data }) => {
+const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
   return (
     <Modal visible={visible}>
       <S.Container>
@@ -67,6 +67,20 @@ const DetailsClient = ({ visible, onClose, data }) => {
             </S.SectionToolsMain>
           </S.SectionTwo>
         </S.Main>
+        <S.Footer>
+          <Button02
+            label="Editar Cadastro"
+            icon={I.RiEditBoxLine}
+            bgColor="#bfbfbf"
+            onClick={openEdit}
+          />
+          <Button02
+            label="Editar Ferramentas"
+            icon={I.RiEditBoxLine}
+            bgColor="#bfbfbf"
+            onClick={openTools}
+          />
+        </S.Footer>
       </S.Container>
     </Modal>
   )

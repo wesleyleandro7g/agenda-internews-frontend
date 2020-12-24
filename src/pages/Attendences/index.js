@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable multiline-ternary */
@@ -45,6 +46,7 @@ const Attendences = () => {
   const fullDate = new Date(dateNow).toLocaleDateString()
 
   const userID = localStorage.getItem('user-id')
+  const sectorID = localStorage.getItem('user-sector-id')
 
   const defaultOptions = {
     loop: true,
@@ -53,11 +55,19 @@ const Attendences = () => {
   }
 
   useEffect(() => {
-    handleCallApi()
+    if (sectorID == 1) {
+      handleCallApiManager()
+    } else {
+      handleCallApi()
+    }
   }, [])
 
   useEffect(() => {
-    handleCallApi()
+    if (sectorID == 1) {
+      handleCallApiManager()
+    } else {
+      handleCallApi()
+    }
   }, [newAttendenceVisible, modalRepassVisible, modalCloseVisible])
 
   useEffect(() => {
@@ -85,27 +95,60 @@ const Attendences = () => {
   }
 
   function handleAttendences() {
-    api
-      .get('/attendence/index/support', {
-        headers: { id_usuario: userID }
-      })
-      .then(res => {
+    if (sectorID == 1) {
+      api.get('/attendence/index/index').then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
         setTotalAttendeces(res.data.count)
       })
+    } else {
+      api
+        .get('/attendence/index/support', {
+          headers: { id_usuario: userID }
+        })
+        .then(res => {
+          setAttendenceData(res.data.attendences)
+          setFiltered(res.data.attendences)
+          setTotalAttendeces(res.data.count)
+        })
+    }
   }
 
   function handleClosedAttendences() {
-    api
-      .get('/attendence/index/support-closed', {
-        headers: { id_usuario: userID }
-      })
-      .then(res => {
+    if (sectorID == 1) {
+      api.get('/attendence/index/closed').then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
         setTotalAttendeces(res.data.count)
       })
+    } else {
+      api
+        .get('/attendence/index/support-closed', {
+          headers: { id_usuario: userID }
+        })
+        .then(res => {
+          setAttendenceData(res.data.attendences)
+          setFiltered(res.data.attendences)
+          setTotalAttendeces(res.data.count)
+        })
+    }
+  }
+
+  // Manager Call API
+  async function handleCallApiManager() {
+    setLoading(false)
+
+    api.get('/attendence/index/index').then(res => {
+      setAttendenceData(res.data.attendences)
+      setFiltered(res.data.attendences)
+      setTotalAttendeces(res.data.count)
+    })
+
+    api.get('/clients/index').then(res => {
+      setDataClientContext(res.data.clients)
+    })
+
+    setLoading(true)
   }
 
   function handleFilterData() {

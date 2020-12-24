@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 
@@ -106,10 +107,18 @@ const Dashboard = () => {
   const [attendencesForType, setAttendencesForType] = useState([])
   const [attendencesRealized, setAttendencesRealized] = useState([])
   const user = localStorage.getItem('user-name')
+  const sectorID = localStorage.getItem('user-sector-id')
   const supportID = localStorage.getItem('support-id')
 
   useEffect(() => {
-    handleCallApi()
+    console.log(sectorID)
+    if (sectorID == 1) {
+      handleCallApiManager()
+      console.log('Manager!')
+    } else {
+      handleCallApi()
+      console.log('Other')
+    }
   }, [])
 
   function handleCallApi() {
@@ -130,6 +139,24 @@ const Dashboard = () => {
     })
   }
 
+  function handleCallApiManager() {
+    api.get('/dashboard/manager/activities').then(res => {
+      setClientsForInternalActivities(res.data.Data)
+    })
+
+    api.get('/dashboard/manager/industries').then(res => {
+      setClientsForIndustries(res.data.Data)
+    })
+
+    api.get('/dashboard/manager/attendences').then(res => {
+      setAttendencesForType(res.data.Data)
+    })
+
+    api.get('/dashboard/manager/attendences-month').then(res => {
+      setAttendencesRealized(res.data.Data)
+    })
+  }
+
   // function handleSelectDate(e) {
   //   console.log(e.target.value)
   // }
@@ -137,10 +164,10 @@ const Dashboard = () => {
   return (
     <Layout page={`Bem vindo(a), ${user}.`}>
       <S.Container>
-        <S.SubHeader>
+        {/* <S.SubHeader>
           <h6>Você possui 5 novas solicitações de atendimento</h6>
           <S.ItemsRigthSubHeader></S.ItemsRigthSubHeader>
-        </S.SubHeader>
+        </S.SubHeader> */}
         <S.ContentCharts>
           <HandleDoughnutChart
             title="Clientes atendindos este mês"

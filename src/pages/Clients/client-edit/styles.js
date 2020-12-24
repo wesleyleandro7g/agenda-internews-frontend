@@ -1,11 +1,37 @@
 import styled from 'styled-components'
 
+export const Container = styled.div`
+  width: 70%;
+  height: 80%;
+  padding: 0 10px;
+  background-color: #fff;
+`
+export const Header = styled.div`
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+export const Main = styled.section`
+  width: 100%;
+  padding: 10px;
+  padding-bottom: 70px;
+  margin-bottom: 3px;
+  position: relative;
+`
+export const Footer = styled.div`
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`
 export const Content = styled.section`
   width: 100%;
   padding: 10px;
   padding-bottom: 70px;
   margin-bottom: 3px;
-  background-color: #ffffff;
   position: relative;
 `
 export const ContentSimple = styled(Content)`
@@ -47,3 +73,8 @@ export const CityInputWrapper = styled.div`
   display: flex;
 `
 export const SupportInputWrapper = styled.div``
+export const Title = styled.h4`
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+`

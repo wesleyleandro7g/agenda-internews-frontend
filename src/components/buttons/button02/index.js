@@ -2,11 +2,11 @@ import React from 'react'
 
 import * as S from './styles'
 
-const Button02 = ({ label, icon, onClick }) => {
+const Button02 = ({ label, icon, onClick, bgColor = '#FFF' }) => {
   const Icon = icon
 
   return (
-    <S.Container onClick={onClick}>
+    <S.Container onClick={onClick} bgColor={bgColor}>
       <Icon />
       <S.Text> {label} </S.Text>
     </S.Container>

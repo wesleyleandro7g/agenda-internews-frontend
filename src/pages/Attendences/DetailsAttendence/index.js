@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-unneeded-ternary */
 /* eslint-disable multiline-ternary */
 import React from 'react'
 
@@ -15,6 +17,7 @@ const DetailsAttendence = ({
   scheduleAttendence,
   repassAttendence
 }) => {
+  const sectorID = localStorage.getItem('user-sector-id')
   function convertDate(date) {
     const converted = new Date(date)
 
@@ -78,6 +81,7 @@ const DetailsAttendence = ({
                 label="Finalizar"
                 bgColor="#79D279"
                 onClick={closeAttendence}
+                disabled={sectorID == 1 ? true : false}
               />
             ) : (
               <Button01
@@ -90,6 +94,7 @@ const DetailsAttendence = ({
               label="Agendar"
               bgColor="#8CB3D9"
               onClick={scheduleAttendence}
+              disabled={true}
             />
             <Button01
               label="Repassar"

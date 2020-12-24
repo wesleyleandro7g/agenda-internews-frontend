@@ -17,7 +17,7 @@ export const Main = styled.div`
   width: 100%;
   height: 80%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 2%;
 `
 export const Footer = styled.div`
@@ -26,42 +26,6 @@ export const Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-`
-export const SectionOne = styled.div`
-  width: 60%;
-  height: 100%;
-`
-export const SectionTwo = styled.div`
-  width: 40%;
-  height: 100%;
-  border-left: 1px solid #d9d9d9;
-  padding: 0 2%;
-`
-export const SectionInfoOne = styled.div`
-  display: flex;
-  width: 100%;
-  height: 40%;
-`
-export const SectionInfoTwo = styled(SectionInfoOne)`
-  height: 60%;
-  border-top: 1px solid #d9d9d9;
-  padding-top: 2%;
-`
-export const SectionDataInfoTitle = styled.div`
-  width: 35%;
-  height: 100%;
-`
-export const SectionDataInfoDetail = styled(SectionDataInfoTitle)`
-  width: 65%;
-`
-export const SectionToolsHeader = styled.div`
-  width: 100%;
-`
-export const SectionToolsMain = styled.div`
-  width: 100%;
-  margin: 0 5px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 `
 export const Title = styled.h4`
   font-size: 18px;
@@ -81,4 +45,10 @@ export const ToolsTitle = styled.h6`
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 500;
+`
+export const Grid = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 10px;
 `
