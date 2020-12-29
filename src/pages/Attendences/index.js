@@ -3,6 +3,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Lottie from 'react-lottie'
 
 import api from '../../services/API'
@@ -41,6 +42,7 @@ const Attendences = () => {
   const [attendenceDataTemp, setAttendenceDataTemp] = useState({})
   const [newAttendenceVisible, setNewAttendenceVisible] = useState(false)
   const { dataClientContext, setDataClientContext } = useClientContext()
+  const history = useHistory()
 
   const dateNow = new Date().toISOString()
   const fullDate = new Date(dateNow).toLocaleDateString()
@@ -73,6 +75,24 @@ const Attendences = () => {
   useEffect(() => {
     handleFilterData()
   }, [searchInput])
+
+  useEffect(() => {
+    setInterval(() => {
+      if (sectorID == 1) {
+        handleCallApiManager()
+      } else {
+        handleCallApi()
+      }
+    }, 30000)
+  }, [])
+
+  function handleRefresh() {
+    if (sectorID == 1) {
+      handleCallApiManager()
+    } else {
+      handleCallApi()
+    }
+  }
 
   async function handleCallApi() {
     setLoading(false)
@@ -233,11 +253,22 @@ const Attendences = () => {
               icon={I.RiAddCircleLine}
               onClick={() => setNewAttendenceVisible(!newAttendenceVisible)}
             />
+
+            <Button02
+              label="Relatório"
+              icon={I.RiFileTextLine}
+              onClick={() => history.push('atendimentos/relatório')}
+            />
             <h5>Total de atendimentos: {totalAttendences} </h5>
           </S.ItemsLeftSubHeader>
 
           <S.ItemsRigthSubHeader>
             <Search onChange={e => setSearchInput(e.target.value)} />
+            <I.RiRefreshLine
+              onClick={() => handleRefresh()}
+              cursor="pointer"
+              style={{ marginLeft: 5 }}
+            />
           </S.ItemsRigthSubHeader>
         </S.SubHeader>
         <S.OptionsWraper>
@@ -304,7 +335,7 @@ const Attendences = () => {
         )
       ) : (
         <S.AnimationWrapper>
-          <Lottie options={defaultOptions} width="15%" height="15%" />
+          <Lottie options={defaultOptions} width="10%" height="10%" />
         </S.AnimationWrapper>
       )}
 

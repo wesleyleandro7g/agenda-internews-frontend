@@ -10,7 +10,7 @@ export const SubHeader = styled.div`
   align-items: center;
 `
 export const ItemsLeftSubHeader = styled.div`
-  width: 30%;
+  width: 50%;
   display: flex;
   align-items: center;
 `

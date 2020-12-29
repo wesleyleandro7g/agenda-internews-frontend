@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Lottie from 'react-lottie'
 
 import api from '../../services/API'
@@ -14,7 +15,6 @@ import SelectOptions from '../../components/select-options'
 
 import ClientDatails from './client-details'
 import ClientTools from './client-tools'
-import ClientEditable from './client-edit'
 
 import LoadingAnimation from '../../assets/loader.json'
 
@@ -25,6 +25,7 @@ import { DataInfoOptions } from './data'
 import * as S from './styles'
 
 const Clients = () => {
+  const history = useHistory()
   const [data, setData] = useState([])
   const [supports, setSupports] = useState([])
   const [totalClients, setTotalClients] = useState('')
@@ -33,7 +34,6 @@ const Clients = () => {
   const [activeFilters, setActiveFilters] = useState(false)
   const [loading, setLoading] = useState(true)
   const [modalTools, setModalTools] = useState(false)
-  const [modalEdit, setModalEdit] = useState(false)
   const [modalDetailVisible, setModalDetailsVisible] = useState(false)
   const [clientViewData, setClientViewData] = useState({
     razao_social: '',
@@ -124,9 +124,11 @@ const Clients = () => {
     setModalTools(!modalTools)
   }
 
-  function toggleEdit() {
-    setModalDetailsVisible(!modalDetailVisible)
-    setModalEdit(!modalEdit)
+  function toggleEdit({ data }) {
+    history.push({
+      pathname: '/clientes/cadastro/editar',
+      state: { data }
+    })
   }
 
   return (
@@ -219,19 +221,13 @@ const Clients = () => {
         data={clientViewData}
         onClose={() => setModalDetailsVisible(!modalDetailVisible)}
         openTools={() => toggleTools()}
-        openEdit={() => toggleEdit()}
+        openEdit={() => toggleEdit({ data: clientViewData })}
       />
 
       <ClientTools
         visible={modalTools}
         data={clientViewData}
         onClose={() => toggleTools()}
-      />
-
-      <ClientEditable
-        visible={modalEdit}
-        dataOrigin={clientViewData}
-        onClose={() => toggleEdit()}
       />
     </Layout>
   )

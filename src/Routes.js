@@ -7,7 +7,9 @@ import { isAuthorized } from './config/VerifyAuthorization'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Clients from './pages/Clients'
+import ClientsEditRegister from './pages/Clients/client-edit'
 import Attendences from './pages/Attendences'
+import AttendenceReport from './pages/Attendences/AttendenceReport'
 import Requests from './pages/Requests'
 import RegistrationClients from './pages/Registrations/Clients'
 import RegistrationActivities from './pages/Registrations/Activities'
@@ -43,7 +45,17 @@ export default function Routes() {
       <Route path="/" exact component={Login} />
       <PrivateRoutes path="/dashboard" exact component={Dashboard} />
       <PrivateRoutes path="/clientes" exact component={Clients} />
+      <PrivateRoutes
+        path="/clientes/cadastro/editar"
+        exact
+        component={ClientsEditRegister}
+      />
       <PrivateRoutes path="/atendimentos" exact component={Attendences} />
+      <PrivateRoutes
+        path="/atendimentos/relatório"
+        exact
+        component={AttendenceReport}
+      />
       <PrivateRoutes path="/solicitações" exact component={Requests} />
       <PrivateRoutes
         path="/cadastros/clientes"

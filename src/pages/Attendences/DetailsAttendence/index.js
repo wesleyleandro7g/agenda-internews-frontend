@@ -88,6 +88,7 @@ const DetailsAttendence = ({
                 label="Iniciar"
                 bgColor="#79D279"
                 onClick={openAttendence}
+                disabled={sectorID == 1 ? true : false}
               />
             )}
             <Button01

@@ -111,13 +111,10 @@ const Dashboard = () => {
   const supportID = localStorage.getItem('support-id')
 
   useEffect(() => {
-    console.log(sectorID)
     if (sectorID == 1) {
       handleCallApiManager()
-      console.log('Manager!')
     } else {
       handleCallApi()
-      console.log('Other')
     }
   }, [])
 
