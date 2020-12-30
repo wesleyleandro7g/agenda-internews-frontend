@@ -6,10 +6,24 @@ export const Container = styled.header`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 50px;
+  height: 56px;
   top: 0%;
   padding: 0 10px;
   background-color: #e6e6e6;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`
+export const ContainerMobile = styled(Container)`
+  display: none;
+
+  @media (max-width: 800px) {
+    display: flex;
+    height: 56px;
+    background-color: #040e18;
+    position: relative;
+  }
 `
 export const WrapperItems = styled.div`
   display: flex;
@@ -26,10 +40,24 @@ export const Avatar = styled.button`
   border: 0;
   outline: none;
   cursor: pointer;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`
+export const AvatarText = styled.h6`
+  font-size: 10px;
+  color: #fff;
 `
 export const MenuIcon = styled(I.RiMenuLine)`
   color: #000;
   cursor: pointer;
+
+  @media (max-width: 800px) {
+    color: #fff;
+    font-size: 24px;
+    margin-right: 32px;
+  }
 `
 export const AlertIcon = styled(I.RiAlertLine)`
   color: #cccc00;
@@ -42,8 +70,9 @@ export const Title = styled.h3`
   margin-left: 10px;
   color: #000;
   text-transform: uppercase;
-`
-export const AvatarText = styled.h6`
-  font-size: 10px;
-  color: #fff;
+
+  @media (max-width: 800px) {
+    color: #fff;
+    font-size: 16px;
+  }
 `

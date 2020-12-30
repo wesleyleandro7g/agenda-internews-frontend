@@ -8,11 +8,19 @@ export const SubHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 800px) {
+    height: 5vh;
+  }
 `
 export const ItemsLeftSubHeader = styled.div`
   width: 50%;
   display: flex;
   align-items: center;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 export const ItemsRigthSubHeader = styled.div`
   width: 50%;
@@ -20,6 +28,11 @@ export const ItemsRigthSubHeader = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    display: none;
+  }
 `
 export const MainWrapper = styled.div`
   display: flex;
@@ -39,24 +52,51 @@ export const ProvidersListWrapper = styled.button`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr 1fr;
   align-items: center;
   background-color: #fff;
   padding: 5px;
   margin-bottom: 1px;
   text-align: start;
+
+  @media (max-width: 800px) {
+    height: 100px;
+    grid-template-columns: 1fr;
+    border-right: 3px solid
+      ${props => (props.statusBorder === 1 ? '#79D279' : '#FFB84D')};
+  }
 `
 export const ProvidersInfo = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr 1fr;
   align-items: center;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 export const ProvidersInfoText = styled.h6`
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`
+export const ProvidersInfoTextMobile = styled(ProvidersInfoText)`
+  @media (max-width: 800px) {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+  }
+`
+export const ProvidersInfoTextMobileDetails = styled(ProvidersInfoTextMobile)`
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 400;
 `
 export const TextDetailsModal = styled.h4`
   font-size: 14px;
@@ -201,6 +241,10 @@ export const OptionsWraper = styled.div`
   display: flex;
   justify-content: flex-end;
   border-bottom: 1px solid #d9d9d9;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 export const Button = styled.button`
   background-color: transparent;
@@ -217,4 +261,15 @@ export const Text = styled.h6`
   font-weight: 500;
   text-transform: uppercase;
   font-style: italic;
+`
+export const TextTotalAttendences = styled.h5`
+  display: none;
+
+  @media (max-width: 800px) {
+    display: block;
+    font-size: 16px;
+    color: #797979;
+    font-style: italic;
+    font-weight: 400;
+  }
 `

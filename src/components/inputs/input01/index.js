@@ -22,6 +22,7 @@ const Input02 = ({ name, label, ...rest }) => {
         placeholder=" "
         error={error}
         onFocus={clearError}
+        onkeyup="return forceLower(this);"
         {...rest}
       />
       <Label error={error}>{label}</Label>

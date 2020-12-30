@@ -108,7 +108,7 @@ const Clients = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function handleFilterData() {
     const dataFiltered = data.filter(item =>
-      item.razao_social.toLowerCase().includes(searchInput)
+      item.razao_social.toLowerCase().includes(searchInput.toLowerCase())
     )
 
     setFiltered(dataFiltered)
@@ -132,16 +132,14 @@ const Clients = () => {
   }
 
   return (
-    <Layout page="Clientes">
+    <Layout page="Clientes" search={e => setSearchInput(e.target.value)}>
       <S.Container>
         <S.SubHeader>
-          <h5>Total de clientes: {totalClients}</h5>
+          <S.TextTotalClients>
+            Total de clientes: {totalClients}
+          </S.TextTotalClients>
           <S.ItemsRigthSubHeader>
             <Search onChange={e => setSearchInput(e.target.value)} />
-            {/* <I.RiFilter2Line
-              onClick={() => setActiveFilters(!activeFilters)}
-              cursor="pointer"
-            /> */}
           </S.ItemsRigthSubHeader>
         </S.SubHeader>
 
@@ -181,25 +179,27 @@ const Clients = () => {
                     key={item.id}
                     onClick={() => handleDetails(item)}
                   >
-                    <S.ProvidersInfoText>
+                    <S.ProvidersInfoTextMobile>
                       {item.razao_social}
-                    </S.ProvidersInfoText>
+                    </S.ProvidersInfoTextMobile>
                     <S.ProvidersInfoText>
                       {item.cidade.descricao}
                     </S.ProvidersInfoText>
                     <S.ProvidersInfoText>
                       {item.atividade.descricao}
                     </S.ProvidersInfoText>
-                    <S.ProvidersInfoText> {item.cnpj} </S.ProvidersInfoText>
+                    <S.ProvidersInfoTextMobileDetails>
+                      {item.cnpj}
+                    </S.ProvidersInfoTextMobileDetails>
                     <S.ProvidersInfoText>
                       {item.identificador_internews}
                     </S.ProvidersInfoText>
                     <S.ProvidersInfoText>
                       {item.identificador_servidor}
                     </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>
+                    <S.ProvidersInfoTextMobileDetails>
                       {item.suporte.nome}
-                    </S.ProvidersInfoText>
+                    </S.ProvidersInfoTextMobileDetails>
                   </S.ProvidersListWrapper>
                 ))}
               </S.ScrollArea>

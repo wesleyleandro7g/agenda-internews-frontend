@@ -119,8 +119,9 @@ const HandleUserType = ({ open, state }) => {
                 select={item.select}
                 onClick={() => handleInternalNavigation(item)}
               >
-                <item.icon size={16} />
+                <item.icon size={18} />
                 {open && <S.Text> {item.handlePage} </S.Text>}
+                <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
 
               {item.options && internalOptionsRegisterVisible && (
@@ -132,10 +133,11 @@ const HandleUserType = ({ open, state }) => {
                       select={option.select}
                       state={state}
                     >
-                      <option.icon size={16} />
+                      <option.icon size={18} />
                       {open && (
                         <S.TextOptions> {option.pageName} </S.TextOptions>
                       )}
+                      <S.Text2> {option.pageName} </S.Text2>
                     </S.SecondaryOptionsItemsWrapper>
                   ))}
                 </S.SecondaryOptionWrapper>
@@ -153,8 +155,9 @@ const HandleUserType = ({ open, state }) => {
               onClick={() => handleExternalNavigation(item)}
             >
               <S.PrimaryOptionWrapper select={item.select}>
-                <item.icon size={16} />
+                <item.icon size={18} />
                 {open && <S.Text> {item.handlePage} </S.Text>}
+                <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
             </S.IconsWrapper>
           ))}
@@ -169,8 +172,9 @@ const HandleUserType = ({ open, state }) => {
               onClick={() => handleOnlineNavigation(item)}
             >
               <S.PrimaryOptionWrapper select={item.select}>
-                <item.icon size={16} />
+                <item.icon size={18} />
                 {open && <S.Text> {item.handlePage} </S.Text>}
+                <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
             </S.IconsWrapper>
           ))}
@@ -185,8 +189,9 @@ const HandleUserType = ({ open, state }) => {
                 select={item.select}
                 onClick={() => handleManagerNavigation(item)}
               >
-                <item.icon size={16} />
+                <item.icon size={18} />
                 {open && <S.Text> {item.handlePage} </S.Text>}
+                <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
 
               {item.options && internalOptionsRegisterVisible && (
@@ -198,10 +203,11 @@ const HandleUserType = ({ open, state }) => {
                       select={option.select}
                       state={state}
                     >
-                      <option.icon size={16} />
+                      <option.icon size={18} />
                       {open && (
                         <S.TextOptions> {option.pageName} </S.TextOptions>
                       )}
+                      <S.Text2> {option.pageName} </S.Text2>
                     </S.SecondaryOptionsItemsWrapper>
                   ))}
                 </S.SecondaryOptionWrapper>
@@ -214,15 +220,32 @@ const HandleUserType = ({ open, state }) => {
 }
 
 const Drawer = () => {
-  const { open } = useDrawer()
+  const { open, setOpen } = useDrawer()
+  const user = localStorage.getItem('user-name')
+  const userType = localStorage.getItem('user-sector-name')
+
+  function toggleDrawer() {
+    setOpen(!open)
+  }
 
   return (
     <S.Container state={open}>
       <S.SectionTitle state={open}>
         {open ? <S.Img src={logo} /> : <S.Img2 src={logo} />}
+
+        <S.UserDatailsMobileWrapper>
+          <S.UserDatailsMobileTitle> {user} </S.UserDatailsMobileTitle>
+          <S.UserDatailsMobileDescription>
+            suporte {userType}
+          </S.UserDatailsMobileDescription>
+        </S.UserDatailsMobileWrapper>
       </S.SectionTitle>
 
       <HandleUserType open={open} state={open} />
+
+      <S.CloseButtonWrapper>
+        <S.CloseButton onClick={() => toggleDrawer()} />
+      </S.CloseButtonWrapper>
     </S.Container>
   )
 }

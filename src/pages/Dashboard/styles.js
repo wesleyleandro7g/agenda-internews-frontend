@@ -1,6 +1,10 @@
 import styled from 'styled-components'
+import Scroll from 'react-scrollbar'
 
-export const Container = styled.div``
+export const Container = styled(Scroll)`
+  width: 100%;
+  height: 90vh;
+`
 export const SubHeader = styled.div`
   width: 100%;
   height: 5vh;
@@ -20,6 +24,10 @@ export const ContentCharts = styled.div`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr;
   grid-column-gap: 5px;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
 `
 export const ChartWrapper = styled.div`
   width: 100%;
@@ -31,6 +39,10 @@ export const ChartWrapper = styled.div`
     -webkit-box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
     box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
+  }
+
+  @media (max-width: 800px) {
+    margin: 5px 0;
   }
 `
 export const ChartWrapper2 = styled(ChartWrapper)`
@@ -106,6 +118,10 @@ export const ContentBarCharts = styled.div`
 export const BarChartContainer = styled(ChartWrapper)`
   width: 100%;
   height: 100%;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 export const MainBarChart = styled.div`
   width: 100%;

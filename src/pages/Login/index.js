@@ -1,4 +1,5 @@
-import React, { useRef } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useRef, useEffect } from 'react'
 import { Form } from '@unform/web'
 import * as Yup from 'yup'
 import { useHistory } from 'react-router-dom'
@@ -16,12 +17,33 @@ const Login = () => {
   const formRef = useRef(null)
   const history = useHistory()
 
+  useEffect(() => {
+    handleVerify()
+  }, [])
+
+  async function handleVerify() {
+    const Token = localStorage.getItem('Access-token')
+
+    if (Token) {
+      api.post('/auth/verify-token', Token).then(res => {
+        if (res.status === 200) {
+          history.push('/dashboard')
+        }
+      })
+    }
+  }
+
   async function handleLogin(data, { reset }) {
     try {
       const schema = Yup.object().shape({
         nome: Yup.string().required('Digite seu nome'),
         senha: Yup.string().required('Disgite sua senha')
       })
+
+      data.nome = data.nome.toLowerCase()
+      data.senha = data.senha.toLowerCase()
+
+      console.log(data)
 
       await schema.validate(data, {
         abortEarly: false

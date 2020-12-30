@@ -13,6 +13,7 @@ import { useClientContext } from '../../context/ClientContext'
 import Layout from '../../components/layout'
 import Search from '../../components/search'
 import Button02 from '../../components/buttons/button02'
+import Fab from '../../components/buttons/fab'
 import SelectOptions from '../../components/select-options'
 
 import LoadingAnimation from '../../assets/loader.json'
@@ -83,7 +84,7 @@ const Attendences = () => {
       } else {
         handleCallApi()
       }
-    }, 30000)
+    }, 100000)
   }, [])
 
   function handleRefresh() {
@@ -173,7 +174,9 @@ const Attendences = () => {
 
   function handleFilterData() {
     const dataFiltered = attendenceData.filter(item =>
-      item.cliente.razao_social.toLowerCase().includes(searchInput)
+      item.cliente.razao_social
+        .toLowerCase()
+        .includes(searchInput.toLowerCase())
     )
 
     setFiltered(dataFiltered)
@@ -244,9 +247,12 @@ const Attendences = () => {
   }
 
   return (
-    <Layout page="Atendimentos">
+    <Layout page="Atendimentos" search={e => setSearchInput(e.target.value)}>
       <S.Container>
         <S.SubHeader>
+          <S.TextTotalAttendences>
+            Total de solicitações: {totalAttendences}
+          </S.TextTotalAttendences>
           <S.ItemsLeftSubHeader>
             <Button02
               label="Abrir atendimento"
@@ -308,25 +314,26 @@ const Attendences = () => {
                   <S.ProvidersListWrapper
                     key={item.id}
                     onClick={() => handlePreviewAttendence(item)}
+                    statusBorder={item.status.id}
                   >
-                    <S.ProvidersInfoText>
-                      {convertDate(item.createdAt)}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>
+                    <S.ProvidersInfoTextMobile>
                       {item.cliente.razao_social}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>
+                    </S.ProvidersInfoTextMobile>
+                    <S.ProvidersInfoTextMobileDetails>
                       {item.nome_solicitante}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>
+                    </S.ProvidersInfoTextMobileDetails>
+                    <S.ProvidersInfoTextMobileDetails>
                       {item.contato_solicitante}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>
+                    </S.ProvidersInfoTextMobileDetails>
+                    <S.ProvidersInfoTextMobileDetails>
                       {item.abertura.descricao}
-                    </S.ProvidersInfoText>
+                    </S.ProvidersInfoTextMobileDetails>
                     <S.ProvidersInfoText>
                       {item.status.descricao}
                     </S.ProvidersInfoText>
+                    <S.ProvidersInfoTextMobileDetails>
+                      {convertDate(item.createdAt)}
+                    </S.ProvidersInfoTextMobileDetails>
                   </S.ProvidersListWrapper>
                 ))}
               </S.ScrollArea>
@@ -382,6 +389,11 @@ const Attendences = () => {
         cancelable={() => setNewAttendenceVisible(!newAttendenceVisible)}
         dataClient={dataClientContext}
         finish={() => setNewAttendenceVisible(!newAttendenceVisible)}
+      />
+
+      <Fab
+        icon={I.RiAddLine}
+        onClick={() => setNewAttendenceVisible(!newAttendenceVisible)}
       />
     </Layout>
   )

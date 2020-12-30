@@ -1,27 +1,28 @@
 export const DataInfoOptions = [
   {
     id: 0,
-    title: 'Abertura'
-  },
-  {
-    id: 1,
     title: 'Empresa'
   },
+
   {
-    id: 2,
+    id: 1,
     title: 'Solicitante'
   },
   {
-    id: 3,
+    id: 2,
     title: 'Contato'
   },
   {
+    id: 3,
+    title: 'Solicitação'
+  },
+  {
     id: 4,
-    title: 'Motivo de abertura'
+    title: 'Status'
   },
   {
     id: 5,
-    title: 'Status'
+    title: 'Abertura'
   }
 ]
 

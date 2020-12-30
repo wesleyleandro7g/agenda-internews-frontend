@@ -26,7 +26,10 @@ import {
   RiCheckboxCircleLine,
   RiRefreshLine,
   RiFileTextLine,
-  RiArrowLeftLine
+  RiArrowLeftLine,
+  RiArrowLeftSLine,
+  RiMore2Line,
+  RiAddLine
 } from 'react-icons/ri'
 
 const Icons = {
@@ -57,7 +60,10 @@ const Icons = {
   RiCheckboxCircleLine,
   RiRefreshLine,
   RiFileTextLine,
-  RiArrowLeftLine
+  RiArrowLeftLine,
+  RiArrowLeftSLine,
+  RiMore2Line,
+  RiAddLine
 }
 
 export default Icons

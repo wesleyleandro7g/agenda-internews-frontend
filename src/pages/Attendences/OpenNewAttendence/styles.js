@@ -1,15 +1,16 @@
 import styled from 'styled-components'
 import Scroll from 'react-scrollbar'
 
-export const ModalContent = styled.div`
-  width: 40%;
-  height: 50%;
-  padding: 0 10px;
-  background-color: #fff;
-`
-export const ModalContentBig = styled(ModalContent)`
+export const ModalWrapper = styled.div`
   width: 60%;
   height: 70%;
+  padding: 0 10px;
+  background-color: #fff;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    height: 80%;
+  }
 `
 export const ModalHeader = styled.div`
   width: 100%;
@@ -21,23 +22,35 @@ export const ModalHeader = styled.div`
 export const ModalHeaderBig = styled(ModalHeader)`
   height: 10%;
 `
-export const ModalMain = styled.div`
+export const MainGrid = styled.div`
   width: 100%;
   height: 60%;
-  padding: 0 10px;
-`
-export const ModalMainGridDuo = styled(ModalMain)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 10px 5px;
 `
-export const ModalMainBig = styled(ModalMain)`
+export const MainWrapper = styled.div`
+  width: 100%;
   height: 90%;
   display: flex;
   margin-left: 0;
+  padding: 0 10px;
+
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
-export const ModalBigContent = styled.div`
+export const LeftWrapper = styled.div`
   width: 100%;
+`
+export const RightWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+
+  @media (max-width: 800px) {
+    display: ${props => (props.selected ? 'block' : 'none')};
+  }
 `
 export const ClientSelected = styled.div`
   width: 90%;
@@ -50,6 +63,10 @@ export const ClientSelected = styled.div`
   color: #fff;
   text-transform: uppercase;
   background-color: #040e18;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `
 export const TextClientSelected = styled.h6`
   font-size: 12px;
@@ -59,6 +76,10 @@ export const ScrollClients = styled(Scroll)`
   width: 90%;
   height: 90%;
   margin-top: 10px;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `
 export const ScrollReasons = styled(Scroll)`
   width: 90%;
@@ -73,6 +94,12 @@ export const InputNewAttendence = styled.input`
   background-color: #eeeeee;
   padding-left: 5px;
   margin: 0;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+  }
 `
 export const ClientWrapper = styled.button`
   width: 100%;
@@ -93,6 +120,10 @@ export const ClientText = styled.h6`
 `
 export const ItemsRightTop = styled.div`
   height: 90%;
+
+  @media (max-width: 800px) {
+    padding: 15px 0;
+  }
 `
 export const InputRequesterName = styled(InputNewAttendence)`
   margin: 0 2px;
@@ -110,4 +141,9 @@ export const RequestWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+`
+export const TitleCard = styled.h6`
+  @media (max-width: 800px) {
+    font-size: 16px;
+  }
 `

@@ -11,6 +11,10 @@ export const Contain = styled.div`
   flex-direction: column;
   margin-left: ${props => (props.state ? '180px' : '50px')};
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
+
+  @media (max-width: 800px) {
+    margin-left: 0;
+  }
 `
 export const Content = styled.div`
   width: 100%;

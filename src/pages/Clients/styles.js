@@ -8,6 +8,10 @@ export const SubHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 800px) {
+    height: 5vh;
+  }
 `
 export const ItemsRigthSubHeader = styled.div`
   width: 50%;
@@ -15,6 +19,10 @@ export const ItemsRigthSubHeader = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 export const MainWrapper = styled.div`
   display: flex;
@@ -29,6 +37,10 @@ export const ScrollArea = styled(Scroll)`
   width: 100%;
   height: 70vh;
   margin-top: 10px;
+
+  @media (max-width: 800px) {
+    height: 75vh;
+  }
 `
 export const ProvidersListWrapper = styled.button`
   width: 100%;
@@ -40,6 +52,11 @@ export const ProvidersListWrapper = styled.button`
   padding: 5px;
   margin-bottom: 1px;
   text-align: start;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    height: 70px;
+  }
 `
 export const ProvidersInfo = styled.div`
   width: 100%;
@@ -47,11 +64,31 @@ export const ProvidersInfo = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 export const ProvidersInfoText = styled.h6`
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+`
+export const ProvidersInfoTextMobile = styled(ProvidersInfoText)`
+  @media (max-width: 800px) {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+  }
+`
+export const ProvidersInfoTextMobileDetails = styled(ProvidersInfoTextMobile)`
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 400;
 `
 export const AnimationWrapper = styled.div`
   width: 100%;
@@ -64,6 +101,10 @@ export const OptionsWraper = styled.div`
   display: flex;
   justify-content: flex-end;
   border-bottom: 1px solid #d9d9d9;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `
 export const Button = styled.button`
   background-color: transparent;
@@ -80,4 +121,12 @@ export const Text = styled.h6`
   font-weight: 500;
   text-transform: uppercase;
   font-style: italic;
+`
+export const TextTotalClients = styled.h5`
+  @media (max-width: 800px) {
+    font-size: 16px;
+    color: #797979;
+    font-style: italic;
+    font-weight: 400;
+  }
 `

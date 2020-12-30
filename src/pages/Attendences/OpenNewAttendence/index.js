@@ -126,13 +126,14 @@ const OpenNewAttendence = ({
 
   return (
     <Modal visible={newAttendenceVisible}>
-      <S.ModalContentBig>
+      <S.ModalWrapper>
         <S.ModalHeaderBig>
-          <h6>Novo atendimento</h6>
+          <S.TitleCard>Novo atendimento</S.TitleCard>
+          <I.RiCloseLine cursor="pointer" size={24} onClick={cancelable} />
         </S.ModalHeaderBig>
-        <S.ModalMainBig>
+        <S.MainWrapper>
           {selected ? (
-            <S.ModalBigContent>
+            <S.LeftWrapper>
               <S.ClientSelected>
                 <S.TextClientSelected>
                   {clientSelected.razao_social}
@@ -154,9 +155,9 @@ const OpenNewAttendence = ({
                     </S.ClientWrapper>
                   ))}
               </S.ScrollClients> */}
-            </S.ModalBigContent>
+            </S.LeftWrapper>
           ) : (
-            <S.ModalBigContent>
+            <S.LeftWrapper>
               <S.InputNewAttendence
                 placeholder="Cliente"
                 onChange={e => setSearchInput(e.target.value)}
@@ -172,9 +173,9 @@ const OpenNewAttendence = ({
                   </S.ClientWrapper>
                 ))}
               </S.ScrollClients>
-            </S.ModalBigContent>
+            </S.LeftWrapper>
           )}
-          <S.ModalBigContent>
+          <S.RightWrapper selected={selected}>
             <S.ItemsRightTop>
               <S.TextClientSelected>Solicitante</S.TextClientSelected>
               <S.RequestWrapper>
@@ -191,6 +192,7 @@ const OpenNewAttendence = ({
                   />
                   <S.InputRequesterName
                     placeholder="Contato"
+                    type="number"
                     onChange={e => setRequestedContact(e.target.value)}
                   />
                 </S.RequestWrapper>
@@ -199,7 +201,7 @@ const OpenNewAttendence = ({
               <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
               <S.ScrollReasons>
                 <form onChange={handleInputRadio}>
-                  <S.ModalMainGridDuo>
+                  <S.MainGrid>
                     {reasonOpening.map(item => (
                       <Radio
                         key={item.id}
@@ -209,7 +211,7 @@ const OpenNewAttendence = ({
                         value={item.id}
                       />
                     ))}
-                  </S.ModalMainGridDuo>
+                  </S.MainGrid>
                 </form>
               </S.ScrollReasons>
             </S.ItemsRightTop>
@@ -226,9 +228,9 @@ const OpenNewAttendence = ({
                 onClick={cancelable}
               />
             </S.ModalFooter>
-          </S.ModalBigContent>
-        </S.ModalMainBig>
-      </S.ModalContentBig>
+          </S.RightWrapper>
+        </S.MainWrapper>
+      </S.ModalWrapper>
     </Modal>
   )
 }

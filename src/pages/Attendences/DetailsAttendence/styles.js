@@ -5,6 +5,10 @@ export const ModalContent = styled.div`
   height: 50%;
   padding: 0 10px;
   background-color: #fff;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `
 export const ModalHeader = styled.div`
   width: 100%;

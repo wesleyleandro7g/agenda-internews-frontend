@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 
+import I from '../../utils/Icons'
+
 import PlataformOptions from '../plataform-options'
 
 import { useDrawer } from '../../context/DrawerContext'
 
+import Search from '../search-header'
+
 import * as S from './styles'
 
-const Header = ({ page, alert }) => {
+const Header = ({ page, alert, search }) => {
   const [modalUserVisible, setModalUserVisible] = useState(false)
   const [modalAlertVisible, setModalAlertVisible] = useState(false)
   const { open, setOpen } = useDrawer()
@@ -37,6 +41,17 @@ const Header = ({ page, alert }) => {
           </S.Avatar>
         </S.WrapperItems>
       </S.Container>
+
+      <S.ContainerMobile>
+        <S.WrapperItems>
+          <S.MenuIcon onClick={() => setOpen(!open)} />
+          <S.Title> {page} </S.Title>
+        </S.WrapperItems>
+        <S.WrapperItems>
+          {search && <Search onChange={search} />}
+          <I.RiMore2Line color="#fff" size={24} />
+        </S.WrapperItems>
+      </S.ContainerMobile>
 
       <PlataformOptions
         visible={modalUserVisible}
