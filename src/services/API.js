@@ -2,7 +2,7 @@ import axios from 'axios'
 const token = localStorage.getItem('Access-token')
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL || 'http://192.168.1.233:3333',
+  baseURL: process.env.REACT_APP_SERVER_URL || 'http://192.168.0.88:3333',
   headers: {
     Authorization: `Bearer ${token}`
   }
