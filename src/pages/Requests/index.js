@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
