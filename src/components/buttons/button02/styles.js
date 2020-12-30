@@ -5,7 +5,7 @@ export const Container = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #fff;
+  background-color: ${props => props.bgColor};
   border: 0;
   outline: none;
   cursor: pointer;

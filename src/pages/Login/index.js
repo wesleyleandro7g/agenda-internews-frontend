@@ -1,7 +1,10 @@
-import React, { useRef } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useRef, useEffect } from 'react'
 import { Form } from '@unform/web'
 import * as Yup from 'yup'
 import { useHistory } from 'react-router-dom'
+
+import api from '../../services/API'
 
 import ParticlesEffect from '../../components/particles'
 import Input01 from '../../components/inputs/input01'
@@ -14,6 +17,22 @@ const Login = () => {
   const formRef = useRef(null)
   const history = useHistory()
 
+  useEffect(() => {
+    handleVerify()
+  }, [])
+
+  async function handleVerify() {
+    const Token = localStorage.getItem('Access-token')
+
+    if (Token) {
+      api.post('/auth/verify-token', Token).then(res => {
+        if (res.status === 200) {
+          history.push('/dashboard')
+        }
+      })
+    }
+  }
+
   async function handleLogin(data, { reset }) {
     try {
       const schema = Yup.object().shape({
@@ -21,15 +40,50 @@ const Login = () => {
         senha: Yup.string().required('Disgite sua senha')
       })
 
+      data.nome = data.nome.toLowerCase()
+      data.senha = data.senha.toLowerCase()
+
+      console.log(data)
+
       await schema.validate(data, {
         abortEarly: false
       })
-      // api.put(`/events/client/update/${eventID}`, data)
-      history.push('dashboard')
 
-      formRef.current.setErrors({})
+      api
+        .post('/auth/authenticate', data)
+        .then(response => {
+          const sig = response.data.payload.userName.substr(0, 1).toUpperCase()
 
-      reset()
+          localStorage.setItem('user-name', response.data.payload.userName)
+          localStorage.setItem('user-id', response.data.payload.userID)
+          localStorage.setItem('user-sig', sig)
+          localStorage.setItem(
+            'user-sector-name',
+            response.data.payload.sectorName
+          )
+          localStorage.setItem('user-sector-id', response.data.payload.sectorID)
+          localStorage.setItem('Access-token', response.data.token)
+          localStorage.setItem('support-id', response.data.payload.supportID)
+
+          response.data.payload.sectorID === 2
+            ? history.push('clientes')
+            : history.push('dashboard')
+
+          reset()
+        })
+        .catch(err => {
+          if (err) {
+            if (err.response && err.response.status === 404) {
+              formRef.current.setErrors({
+                nome: 'Erro'
+              })
+            } else if (err.response && err.response.status === 401) {
+              formRef.current.setErrors({
+                senha: 'Erro'
+              })
+            }
+          }
+        })
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessages = {}

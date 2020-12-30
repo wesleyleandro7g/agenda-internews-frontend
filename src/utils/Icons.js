@@ -12,7 +12,24 @@ import {
   RiSpam2Line,
   RiFilter2Line,
   RiSearchLine,
-  RiCloseLine
+  RiCloseLine,
+  RiToolsLine,
+  RiBookReadLine,
+  RiBookMarkLine,
+  RiMapPinLine,
+  RiStore3Line,
+  RiUserLine,
+  RiCustomerService2Line,
+  RiMacLine,
+  RiStore2Line,
+  RiEditBoxLine,
+  RiCheckboxCircleLine,
+  RiRefreshLine,
+  RiFileTextLine,
+  RiArrowLeftLine,
+  RiArrowLeftSLine,
+  RiMore2Line,
+  RiAddLine
 } from 'react-icons/ri'
 
 const Icons = {
@@ -29,7 +46,24 @@ const Icons = {
   RiSpam2Line,
   RiFilter2Line,
   RiSearchLine,
-  RiCloseLine
+  RiCloseLine,
+  RiToolsLine,
+  RiBookReadLine,
+  RiBookMarkLine,
+  RiMapPinLine,
+  RiStore3Line,
+  RiUserLine,
+  RiCustomerService2Line,
+  RiMacLine,
+  RiStore2Line,
+  RiEditBoxLine,
+  RiCheckboxCircleLine,
+  RiRefreshLine,
+  RiFileTextLine,
+  RiArrowLeftLine,
+  RiArrowLeftSLine,
+  RiMore2Line,
+  RiAddLine
 }
 
 export default Icons

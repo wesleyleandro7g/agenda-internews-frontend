@@ -1,332 +1,189 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import Lottie from 'react-lottie'
+
+import api from '../../services/API'
+
+import { useClientContext } from '../../context/ClientContext'
 
 import Layout from '../../components/layout'
 import Search from '../../components/search'
-import Modal from '../../components/modal'
-import Button01 from '../../components/buttons/button01'
 import Button02 from '../../components/buttons/button02'
-import CheckBox from '../../components/inputs/checkbox'
+import Fab from '../../components/buttons/fab'
+import SelectOptions from '../../components/select-options'
+
+import LoadingAnimation from '../../assets/loader.json'
+
+import OpenNewAttendence from './OpenNewAttendence'
+import RepassAttendence from './RepassAttendence'
+import DetailsAttendence from './DetailsAttendence'
+import ScheduleAttendence from './ScheduleAttendence'
+import CloseAttendence from './CloseAttendence'
 
 import I from '../../utils/Icons'
 
-import { DataTemp } from './dataTemp'
-import { DataInfoOptions, CheckBoxData, CheckBoxUsersData } from './data'
+import { DataInfoOptions, StatusAttendence } from './data'
 
 import * as S from './styles'
 
-const ModalDetailsAttendence = ({
-  attendenceDataTemp,
-  modalDetailsVisible,
-  closeModal,
-  openAttendence,
-  closeAttendence,
-  scheduleAttendence,
-  repassAttendence
-}) => {
-  return (
-    <Modal visible={modalDetailsVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
-          <h4> {attendenceDataTemp.empresa} </h4>
-          <S.StatusContent status={attendenceDataTemp.status}>
-            <S.TextStatus>{attendenceDataTemp.status}</S.TextStatus>
-          </S.StatusContent>
-        </S.ModalHeader>
-        <S.ModalMain>
-          <S.TextDetailsModal>
-            Tipo de solicitação: {attendenceDataTemp.id_abertura}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            Solicitante: {attendenceDataTemp.nome_solicitante}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            Contato: {attendenceDataTemp.contato_solicitante}
-          </S.TextDetailsModal>
-        </S.ModalMain>
-        <S.ModalFooter>
-          {attendenceDataTemp.status === 'Aberto' ? (
-            <Button01
-              label="Finalizar"
-              bgColor="#79D279"
-              onClick={closeAttendence}
-            />
-          ) : (
-            <Button01
-              label="Iniciar"
-              bgColor="#79D279"
-              onClick={openAttendence}
-            />
-          )}
-          <Button01
-            label="Agendar"
-            bgColor="#8CB3D9"
-            onClick={scheduleAttendence}
-          />
-          <Button01
-            label="Repassar"
-            bgColor="#FFB84D"
-            onClick={repassAttendence}
-          />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
-        </S.ModalFooter>
-      </S.ModalContent>
-    </Modal>
-  )
-}
-
-const ModalCloseAttendence = ({
-  modalCloseVisible,
-  clientName,
-  closeModal
-}) => {
-  const [Checks] = useState(CheckBoxData)
-  const [itemChecked, setItemChecked] = useState('')
-
-  function handleCheckBox(props) {
-    Checks.map(item => {
-      if (item.id === props.id) {
-        item.checked = true
-        setItemChecked(item.label)
-      } else {
-        item.checked = false
-      }
-    })
-  }
-
-  console.log(itemChecked)
-
-  return (
-    <Modal visible={modalCloseVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
-          <h4> {clientName} </h4>
-        </S.ModalHeader>
-        <S.ModalMain>
-          <h6>Opções de fechamento</h6>
-          <S.ModalMainGrid>
-            {Checks.map(item => (
-              <CheckBox
-                key={item.id}
-                label={item.label}
-                checked={item.checked}
-                onChange={() => handleCheckBox(item)}
-              />
-            ))}
-          </S.ModalMainGrid>
-        </S.ModalMain>
-        <S.ModalFooterDual>
-          <Button01 label="Confirmar" bgColor="#79D279" />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
-        </S.ModalFooterDual>
-      </S.ModalContent>
-    </Modal>
-  )
-}
-
-const ModalScheduledAttendence = ({
-  modalScheduledVisible,
-  clientName,
-  closeModal
-}) => {
-  return (
-    <Modal visible={modalScheduledVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
-          <h4> {clientName} </h4>
-        </S.ModalHeader>
-        <S.ModalMain>
-          <S.InputSchedule placeholder="Data" type="date" />
-          <S.InputSchedule placeholder="Horário" type="time" />
-        </S.ModalMain>
-        <S.ModalFooterDual>
-          <Button01 label="Confirmar" bgColor="#79D279" />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
-        </S.ModalFooterDual>
-      </S.ModalContent>
-    </Modal>
-  )
-}
-
-const ModalRepassAttendence = ({
-  modalRepassVisible,
-  clientName,
-  closeModal
-}) => {
-  const [Checks] = useState(CheckBoxUsersData)
-  const [itemChecked, setItemChecked] = useState('Alcélio')
-
-  function handleCheckBox(props) {
-    Checks.map(item => {
-      if (item.id === props.id) {
-        item.checked = true
-        setItemChecked(item.label)
-      } else {
-        item.checked = false
-      }
-    })
-  }
-
-  console.log(itemChecked)
-
-  return (
-    <Modal visible={modalRepassVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
-          <h4> {clientName} </h4>
-        </S.ModalHeader>
-        <S.ModalMain>
-          <h6>Selecione o suporte</h6>
-          <S.ModalMainGrid>
-            {Checks.map(item => (
-              <CheckBox
-                key={item.id}
-                label={item.label}
-                checked={item.checked}
-                onChange={() => handleCheckBox(item)}
-              />
-            ))}
-          </S.ModalMainGrid>
-        </S.ModalMain>
-        <S.ModalFooterDual>
-          <Button01 label="Confirmar" bgColor="#79D279" />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
-        </S.ModalFooterDual>
-      </S.ModalContent>
-    </Modal>
-  )
-}
-
-const OpenNewAttendence = ({ newAttendenceVisible, cancelable }) => {
-  const [searchInput, setSearchInput] = useState(false)
-  const [filtered, setFiltered] = useState([])
-  const [clientSelected, setClientSelected] = useState(false)
-  const [selected, setSelected] = useState(false)
-  const [Checks] = useState(CheckBoxData)
-  const [itemChecked, setItemChecked] = useState('')
-
-  useEffect(() => {
-    handleFilterData()
-  }, [searchInput])
-
-  function handleFilterData() {
-    const dataFiltered = DataTemp.filter(item =>
-      item.empresa.toLowerCase().includes(searchInput)
-    )
-
-    setFiltered(dataFiltered)
-  }
-
-  function handleSelectClient(item) {
-    setSelected(!selected)
-    setClientSelected(item)
-  }
-
-  function handleCheckBox(props) {
-    Checks.map(item => {
-      if (item.id === props.id) {
-        item.checked = true
-        setItemChecked(item.label)
-      } else {
-        item.checked = false
-      }
-    })
-  }
-
-  console.log(itemChecked)
-
-  return (
-    <Modal visible={newAttendenceVisible}>
-      <S.ModalContentBig>
-        <S.ModalHeaderBig>
-          <h6>Novo atendimento</h6>
-        </S.ModalHeaderBig>
-        <S.ModalMainBig>
-          {selected ? (
-            <S.ModalBigContent>
-              <S.ClientSelected>
-                <S.TextClientSelected>
-                  {clientSelected.empresa}
-                </S.TextClientSelected>
-                <I.RiCloseLine
-                  cursor="pointer"
-                  onClick={() => setSelected(!selected)}
-                />
-              </S.ClientSelected>
-              <S.ScrollClients>
-                <S.TextClientSelected>
-                  Outros atendimentos abertos
-                </S.TextClientSelected>
-              </S.ScrollClients>
-            </S.ModalBigContent>
-          ) : (
-            <S.ModalBigContent>
-              <S.InputNewAttendence
-                placeholder="Cliente"
-                onChange={e => setSearchInput(e.target.value)}
-              />
-              <S.ScrollClients>
-                {filtered.map(item => (
-                  <S.ClientWrapper
-                    key={item.id}
-                    onClick={() => handleSelectClient(item)}
-                  >
-                    <S.ClientText>00000</S.ClientText>
-                    <S.ClientText> {item.empresa} </S.ClientText>
-                  </S.ClientWrapper>
-                ))}
-              </S.ScrollClients>
-            </S.ModalBigContent>
-          )}
-          <S.ModalBigContent>
-            <S.ItemsRightTop>
-              <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
-              <S.ModalMainGridDuo>
-                {Checks.map(item => (
-                  <CheckBox
-                    key={item.id}
-                    label={item.label}
-                    checked={item.checked}
-                    onChange={() => handleCheckBox(item)}
-                  />
-                ))}
-              </S.ModalMainGridDuo>
-            </S.ItemsRightTop>
-
-            <S.ModalFooterBig>
-              <Button01 label="Confirmar" bgColor="#79D279" />
-              <Button01
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={cancelable}
-              />
-            </S.ModalFooterBig>
-          </S.ModalBigContent>
-        </S.ModalMainBig>
-      </S.ModalContentBig>
-    </Modal>
-  )
-}
-
 const Attendences = () => {
+  const [attendenceData, setAttendenceData] = useState([])
+  const [totalAttendences, setTotalAttendeces] = useState('')
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [modalDetailsVisible, setModalDetailsVisible] = useState(false)
   const [modalCloseVisible, setModalCloseVisible] = useState(false)
   const [modalScheduledVisible, setModalScheduledVisible] = useState(false)
   const [modalRepassVisible, setModalRepassVisible] = useState(false)
   const [attendenceDataTemp, setAttendenceDataTemp] = useState({})
   const [newAttendenceVisible, setNewAttendenceVisible] = useState(false)
+  const { dataClientContext, setDataClientContext } = useClientContext()
+  const history = useHistory()
+
+  const dateNow = new Date().toISOString()
+  const fullDate = new Date(dateNow).toLocaleDateString()
+
+  const userID = localStorage.getItem('user-id')
+  const sectorID = localStorage.getItem('user-sector-id')
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: LoadingAnimation
+  }
+
+  useEffect(() => {
+    if (sectorID == 1) {
+      handleCallApiManager()
+    } else {
+      handleCallApi()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (sectorID == 1) {
+      handleCallApiManager()
+    } else {
+      handleCallApi()
+    }
+  }, [newAttendenceVisible, modalRepassVisible, modalCloseVisible])
 
   useEffect(() => {
     handleFilterData()
   }, [searchInput])
 
+  useEffect(() => {
+    setInterval(() => {
+      if (sectorID == 1) {
+        handleCallApiManager()
+      } else {
+        handleCallApi()
+      }
+    }, 100000)
+  }, [])
+
+  function handleRefresh() {
+    if (sectorID == 1) {
+      handleCallApiManager()
+    } else {
+      handleCallApi()
+    }
+  }
+
+  async function handleCallApi() {
+    setLoading(false)
+
+    api
+      .get('/attendence/index/support', {
+        headers: { id_usuario: userID }
+      })
+      .then(res => {
+        setAttendenceData(res.data.attendences)
+        setFiltered(res.data.attendences)
+        setTotalAttendeces(res.data.count)
+      })
+
+    api.get('/clients/index').then(res => {
+      setDataClientContext(res.data.clients)
+    })
+
+    setLoading(true)
+  }
+
+  function handleAttendences() {
+    if (sectorID == 1) {
+      api.get('/attendence/index/index').then(res => {
+        setAttendenceData(res.data.attendences)
+        setFiltered(res.data.attendences)
+        setTotalAttendeces(res.data.count)
+      })
+    } else {
+      api
+        .get('/attendence/index/support', {
+          headers: { id_usuario: userID }
+        })
+        .then(res => {
+          setAttendenceData(res.data.attendences)
+          setFiltered(res.data.attendences)
+          setTotalAttendeces(res.data.count)
+        })
+    }
+  }
+
+  function handleClosedAttendences() {
+    if (sectorID == 1) {
+      api.get('/attendence/index/closed').then(res => {
+        setAttendenceData(res.data.attendences)
+        setFiltered(res.data.attendences)
+        setTotalAttendeces(res.data.count)
+      })
+    } else {
+      api
+        .get('/attendence/index/support-closed', {
+          headers: { id_usuario: userID }
+        })
+        .then(res => {
+          setAttendenceData(res.data.attendences)
+          setFiltered(res.data.attendences)
+          setTotalAttendeces(res.data.count)
+        })
+    }
+  }
+
+  // Manager Call API
+  async function handleCallApiManager() {
+    setLoading(false)
+
+    api.get('/attendence/index/index').then(res => {
+      setAttendenceData(res.data.attendences)
+      setFiltered(res.data.attendences)
+      setTotalAttendeces(res.data.count)
+    })
+
+    api.get('/clients/index').then(res => {
+      setDataClientContext(res.data.clients)
+    })
+
+    setLoading(true)
+  }
+
   function handleFilterData() {
-    const dataFiltered = DataTemp.filter(item =>
-      item.empresa.toLowerCase().includes(searchInput)
+    const dataFiltered = attendenceData.filter(item =>
+      item.cliente.razao_social
+        .toLowerCase()
+        .includes(searchInput.toLowerCase())
     )
+
+    setFiltered(dataFiltered)
+  }
+
+  function handleToggleStatusAttendences(type) {
+    const dataFiltered = attendenceData.filter(item => item.status.id === type)
 
     setFiltered(dataFiltered)
   }
@@ -351,87 +208,192 @@ const Attendences = () => {
     setModalDetailsVisible(!modalDetailsVisible)
   }
 
+  function toggleModalOnRepassedAttendence() {
+    setModalRepassVisible(!modalRepassVisible)
+  }
+
+  function openAttendence(id) {
+    api
+      .put('/attendence/update/open', { id })
+      .then(res => {
+        alert(res.data.mensage)
+      })
+      .catch(err => alert(err))
+
+    handleCallApi()
+
+    setModalDetailsVisible(!modalDetailsVisible)
+  }
+
+  function convertDate(date) {
+    const converted = new Date(date)
+
+    const days = converted.toLocaleDateString()
+    const hours = converted.toLocaleTimeString()
+
+    const today = new Date()
+
+    const AUX_01 = new Date(today.getTime())
+    AUX_01.setDate(today.getDate() - 1)
+    const yesterday = AUX_01.toLocaleDateString()
+
+    if (days === fullDate) {
+      return `Hoje as ${hours}`
+    } else if (days === yesterday) {
+      return `Ontem as ${hours}`
+    } else {
+      return `${days} as ${hours}`
+    }
+  }
+
   return (
-    <Layout page="Atendimentos">
+    <Layout page="Atendimentos" search={e => setSearchInput(e.target.value)}>
       <S.Container>
         <S.SubHeader>
+          <S.TextTotalAttendences>
+            Total de solicitações: {totalAttendences}
+          </S.TextTotalAttendences>
           <S.ItemsLeftSubHeader>
             <Button02
               label="Abrir atendimento"
               icon={I.RiAddCircleLine}
               onClick={() => setNewAttendenceVisible(!newAttendenceVisible)}
             />
-            <h5>Total de atendimentos: 5</h5>
+
+            <Button02
+              label="Relatório"
+              icon={I.RiFileTextLine}
+              onClick={() => history.push('atendimentos/relatório')}
+            />
+            <h5>Total de atendimentos: {totalAttendences} </h5>
           </S.ItemsLeftSubHeader>
 
           <S.ItemsRigthSubHeader>
             <Search onChange={e => setSearchInput(e.target.value)} />
+            <I.RiRefreshLine
+              onClick={() => handleRefresh()}
+              cursor="pointer"
+              style={{ marginLeft: 5 }}
+            />
           </S.ItemsRigthSubHeader>
         </S.SubHeader>
+        <S.OptionsWraper>
+          <S.Button onClick={() => handleAttendences()}>
+            <S.Text>Todos</S.Text>
+          </S.Button>
+          {StatusAttendence.map(item => (
+            <SelectOptions
+              key={item.id}
+              title={item.label}
+              handle={() => handleToggleStatusAttendences(item.id)}
+            />
+          ))}
+          <S.Button onClick={() => handleClosedAttendences()}>
+            <S.Text>Finalizados</S.Text>
+          </S.Button>
+        </S.OptionsWraper>
       </S.Container>
 
-      <S.MainWrapper>
-        <S.DataWrapper>
-          <S.ProvidersInfo>
-            {DataInfoOptions.map(item => (
-              <S.ProvidersInfoText key={item.id}>
-                {item.title}
-              </S.ProvidersInfoText>
-            ))}
-          </S.ProvidersInfo>
+      {loading ? (
+        attendenceData.length <= 0 ? (
+          <S.MainWrapper>
+            <h3>Sem registros</h3>
+          </S.MainWrapper>
+        ) : (
+          <S.MainWrapper>
+            <S.DataWrapper>
+              <S.ProvidersInfo>
+                {DataInfoOptions.map(item => (
+                  <S.ProvidersInfoText key={item.id}>
+                    {item.title}
+                  </S.ProvidersInfoText>
+                ))}
+              </S.ProvidersInfo>
+              <S.ScrollArea speed={0.6}>
+                {filtered.map(item => (
+                  <S.ProvidersListWrapper
+                    key={item.id}
+                    onClick={() => handlePreviewAttendence(item)}
+                    statusBorder={item.status.id}
+                  >
+                    <S.ProvidersInfoTextMobile>
+                      {item.cliente.razao_social}
+                    </S.ProvidersInfoTextMobile>
+                    <S.ProvidersInfoTextMobileDetails>
+                      {item.nome_solicitante}
+                    </S.ProvidersInfoTextMobileDetails>
+                    <S.ProvidersInfoTextMobileDetails>
+                      {item.contato_solicitante}
+                    </S.ProvidersInfoTextMobileDetails>
+                    <S.ProvidersInfoTextMobileDetails>
+                      {item.abertura.descricao}
+                    </S.ProvidersInfoTextMobileDetails>
+                    <S.ProvidersInfoText>
+                      {item.status.descricao}
+                    </S.ProvidersInfoText>
+                    <S.ProvidersInfoTextMobileDetails>
+                      {convertDate(item.createdAt)}
+                    </S.ProvidersInfoTextMobileDetails>
+                  </S.ProvidersListWrapper>
+                ))}
+              </S.ScrollArea>
+            </S.DataWrapper>
+          </S.MainWrapper>
+        )
+      ) : (
+        <S.AnimationWrapper>
+          <Lottie options={defaultOptions} width="10%" height="10%" />
+        </S.AnimationWrapper>
+      )}
 
-          <S.ScrollArea speed={0.6}>
-            {filtered.map(item => (
-              <S.ProvidersListWrapper
-                key={item.id}
-                onClick={() => handlePreviewAttendence(item)}
-              >
-                <S.ProvidersInfoText> {item.empresa} </S.ProvidersInfoText>
-                <S.ProvidersInfoText>
-                  {item.nome_solicitante}
-                </S.ProvidersInfoText>
-                <S.ProvidersInfoText>
-                  {item.contato_solicitante}
-                </S.ProvidersInfoText>
-                <S.ProvidersInfoText> {item.id_abertura} </S.ProvidersInfoText>
-                <S.ProvidersInfoText>{item.status}</S.ProvidersInfoText>
-              </S.ProvidersListWrapper>
-            ))}
-          </S.ScrollArea>
-        </S.DataWrapper>
-      </S.MainWrapper>
-
-      <ModalDetailsAttendence
+      <DetailsAttendence
         attendenceDataTemp={attendenceDataTemp}
         modalDetailsVisible={modalDetailsVisible}
         closeModal={() => setModalDetailsVisible(!modalDetailsVisible)}
-        openAttendence={() => setModalDetailsVisible(!modalDetailsVisible)}
+        openAttendence={() => openAttendence(attendenceDataTemp.id)}
         closeAttendence={() => toggleModalCloseAndDetailsAttendence()}
         scheduleAttendence={() => toggleModalSchuledAndDetailsAttendence()}
         repassAttendence={() => toggleModalRepassAndDetailsAttedence()}
       />
 
-      <ModalCloseAttendence
+      <CloseAttendence
         modalCloseVisible={modalCloseVisible}
-        clientName={attendenceDataTemp.empresa}
+        attendenceID={attendenceDataTemp.id}
+        clientName={
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+        }
         closeModal={() => toggleModalCloseAndDetailsAttendence()}
+        finish={() => setModalCloseVisible(!modalCloseVisible)}
       />
 
-      <ModalScheduledAttendence
+      <ScheduleAttendence
         modalScheduledVisible={modalScheduledVisible}
-        clientName={attendenceDataTemp.empresa}
+        clientName={
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+        }
         closeModal={() => toggleModalSchuledAndDetailsAttendence()}
       />
 
-      <ModalRepassAttendence
+      <RepassAttendence
         modalRepassVisible={modalRepassVisible}
-        clientName={attendenceDataTemp.empresa}
+        clientName={
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+        }
+        attendenceID={attendenceDataTemp.id}
         closeModal={() => toggleModalRepassAndDetailsAttedence()}
+        repassed={() => toggleModalOnRepassedAttendence()}
       />
 
       <OpenNewAttendence
         newAttendenceVisible={newAttendenceVisible}
         cancelable={() => setNewAttendenceVisible(!newAttendenceVisible)}
+        dataClient={dataClientContext}
+        finish={() => setNewAttendenceVisible(!newAttendenceVisible)}
+      />
+
+      <Fab
+        icon={I.RiAddLine}
+        onClick={() => setNewAttendenceVisible(!newAttendenceVisible)}
       />
     </Layout>
   )

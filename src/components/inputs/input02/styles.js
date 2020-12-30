@@ -17,4 +17,5 @@ export const Input = styled.input`
   border-radius: 0;
   background-color: #eeeeee;
   padding-left: 5px;
+  text-transform: uppercase;
 `

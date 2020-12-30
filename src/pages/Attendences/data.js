@@ -3,6 +3,7 @@ export const DataInfoOptions = [
     id: 0,
     title: 'Empresa'
   },
+
   {
     id: 1,
     title: 'Solicitante'
@@ -13,11 +14,15 @@ export const DataInfoOptions = [
   },
   {
     id: 3,
-    title: 'Motivo de abertura'
+    title: 'Solicitação'
   },
   {
     id: 4,
     title: 'Status'
+  },
+  {
+    id: 5,
+    title: 'Abertura'
   }
 ]
 
@@ -104,5 +109,20 @@ export const CheckBoxUsersData = [
     id: 7,
     label: 'Cláudio',
     checked: false
+  }
+]
+
+export const StatusAttendence = [
+  {
+    id: 1,
+    label: 'Abertos'
+  },
+  {
+    id: 2,
+    label: 'Aguardando'
+  },
+  {
+    id: 3,
+    label: 'Agendados'
   }
 ]

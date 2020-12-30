@@ -15,6 +15,7 @@ export const Input = styled.input`
   border: none;
   font-size: 0.6rem;
   display: ${props => (props.display ? 'block' : 'none')};
+  text-transform: uppercase;
 `
 export const RiSearchLine = styled(I.RiSearchLine)`
   cursor: pointer;

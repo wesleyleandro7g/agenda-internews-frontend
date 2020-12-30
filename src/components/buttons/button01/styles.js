@@ -10,8 +10,9 @@ export const Container = styled.button`
   height: 35px;
   color: #fff;
   transition: opacity 200ms;
+  opacity: ${props => (props.disabled ? '40%' : '100%')};
   :hover {
-    opacity: 80%;
+    opacity: ${props => (props.disabled ? '40%' : '80%')};
   }
 `
 export const Text = styled.h5`
