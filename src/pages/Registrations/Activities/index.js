@@ -9,15 +9,22 @@ import Input03 from '../../../components/inputs/input03'
 import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
+import List from '../../../components/list-items'
+import Alert from '../../../components/alert'
 
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
+import Confirmation from '../../../components/confirmation'
 
 const RegisterActivities = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
+  const [confirmationVisible, setConfirmationVisible] = useState(false)
+  const [alertVisible, setAlertVisible] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
+  const [identifier, setIdentifier] = useState()
 
   useEffect(() => {
     handleCallApi()
@@ -75,6 +82,28 @@ const RegisterActivities = () => {
     }
   }
 
+  function handleUpdate(id) {
+    setAlertVisible(true)
+    setAlertMessage('Teste')
+  }
+
+  async function handleDelete(id) {
+    setConfirmationVisible(!confirmationVisible)
+
+    api
+      .delete(`/industry/delete/${id}`)
+      .then(response => {
+        setAlertMessage(response.data.response)
+        setAlertVisible(true)
+      })
+      .catch(err => console.log(err))
+  }
+
+  function handleConfirmation(id) {
+    setConfirmationVisible(!confirmationVisible)
+    setIdentifier(id)
+  }
+
   return (
     <Layout page="Ramos de Atividade">
       <S.Container>
@@ -93,9 +122,12 @@ const RegisterActivities = () => {
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.descricao}
+                onUpdate={() => handleUpdate(item.id)}
+                onDelete={() => handleConfirmation(item.id)}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
@@ -122,6 +154,18 @@ const RegisterActivities = () => {
           </S.ModalWrapper>
         </Modal>
       </Form>
+
+      <Alert
+        visible={alertVisible}
+        message={alertMessage}
+        closeAlert={() => setAlertVisible(!alertVisible)}
+      />
+
+      <Confirmation
+        visible={confirmationVisible}
+        confirmated={() => handleDelete(identifier)}
+        closeConfirmation={() => setConfirmationVisible(!confirmationVisible)}
+      />
     </Layout>
   )
 }
