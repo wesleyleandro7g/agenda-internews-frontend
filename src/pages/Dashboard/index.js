@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
@@ -18,29 +19,28 @@ const HandleDoughnutChart = ({ title, onChange, data, percentage }) => {
       <S.ChartHeader>
         <S.ChartTitle> {title} </S.ChartTitle>
       </S.ChartHeader>
-      <Doughnut data={data} percentage={percentage} />
+      <S.ChartMain>
+        <Doughnut data={data} percentage={percentage} />
+      </S.ChartMain>
     </S.ChartWrapper2>
   )
 }
 
 const HandlePieChartCards = ({ title, data, onChange }) => {
   const COLORS = [
-    '#0088FE',
-    '#00C49F',
-    '#FFBB28',
-    '#FF8042',
-    '#cc33ff',
-    '#666600',
-    '#6600cc',
+    '#006699',
     '#006666',
-    '#009900',
-    '#ff6600',
-    '#333333',
-    '#ffff66',
-    '#ff99cc',
-    '#ff3333',
+    '#669999',
+    '#339966',
+    '#33cccc',
+    '#0099cc',
+    '#12406d',
+    '#80ffff',
     '#009933',
-    '#660033'
+    '#66a6e5',
+    '#00C49F',
+    '#1affd5',
+    '#1a5999'
   ]
 
   return (
@@ -74,14 +74,14 @@ const HandlePieChartCards = ({ title, data, onChange }) => {
 
 const HandleBarVerticalChart = ({ data }) => {
   return (
-    <S.ChartWrapper>
+    <S.ChartWrapperBarHorizontal>
       <S.ChartHeader>
-        <S.ChartTitle> Clientes por atividade </S.ChartTitle>
+        <S.ChartTitle> Clientes por cidade </S.ChartTitle>
       </S.ChartHeader>
       <S.MainBarChart>
         <BarVertical data={data} />
       </S.MainBarChart>
-    </S.ChartWrapper>
+    </S.ChartWrapperBarHorizontal>
   )
 }
 
@@ -106,6 +106,7 @@ const Dashboard = () => {
   const [clientsForIndustries, setClientsForIndustries] = useState([])
   const [attendencesForType, setAttendencesForType] = useState([])
   const [attendencesRealized, setAttendencesRealized] = useState([])
+
   const user = localStorage.getItem('user-name')
   const sectorID = localStorage.getItem('user-sector-id')
   const supportID = localStorage.getItem('support-id')
@@ -133,6 +134,7 @@ const Dashboard = () => {
 
     api.get(`/dashboard/attendences-month/${supportID}`).then(res => {
       setAttendencesRealized(res.data.Data)
+      console.log(res.data.Data)
     })
   }
 
@@ -151,6 +153,7 @@ const Dashboard = () => {
 
     api.get('/dashboard/manager/attendences-month').then(res => {
       setAttendencesRealized(res.data.Data)
+      console.log(res.data.Data)
     })
   }
 
@@ -165,17 +168,24 @@ const Dashboard = () => {
           <h6>Você possui 5 novas solicitações de atendimento</h6>
           <S.ItemsRigthSubHeader></S.ItemsRigthSubHeader>
         </S.SubHeader> */}
-        <S.ContentCharts>
+        <S.ContentOtherCharts>
           <HandleDoughnutChart
             title="Clientes atendindos este mês"
             data={attendencesRealized}
           />
+          <HandleBarVerticalChart data={clientsForInternalActivities} />
+        </S.ContentOtherCharts>
+
+        <S.ContentPieCharts>
           <HandlePieChartCards
             title="Clientes por ramo de atividade"
             data={clientsForIndustries}
           />
-          <HandleBarVerticalChart data={clientsForInternalActivities} />
-        </S.ContentCharts>
+          <HandlePieChartCards
+            title="Clientes por atividade interna"
+            data={clientsForInternalActivities}
+          />
+        </S.ContentPieCharts>
 
         <S.ContentBarCharts>
           <HandleBarChartCard data={attendencesForType} />

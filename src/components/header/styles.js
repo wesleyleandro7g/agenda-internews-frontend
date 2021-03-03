@@ -30,8 +30,8 @@ export const WrapperItems = styled.div`
   align-items: center;
 `
 export const Avatar = styled.button`
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -46,12 +46,13 @@ export const Avatar = styled.button`
   }
 `
 export const AvatarText = styled.h6`
-  font-size: 10px;
+  font-size: 12px;
   color: #fff;
 `
 export const MenuIcon = styled(I.RiMenuLine)`
   color: #000;
   cursor: pointer;
+  font-size: 20px;
 
   @media (max-width: 800px) {
     color: #fff;
@@ -65,7 +66,7 @@ export const AlertIcon = styled(I.RiAlertLine)`
   margin-right: 15px;
 `
 export const Title = styled.h3`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   margin-left: 10px;
   color: #000;
