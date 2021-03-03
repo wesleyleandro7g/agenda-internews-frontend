@@ -168,13 +168,6 @@ const Dashboard = () => {
           <h6>Você possui 5 novas solicitações de atendimento</h6>
           <S.ItemsRigthSubHeader></S.ItemsRigthSubHeader>
         </S.SubHeader> */}
-        <S.ContentOtherCharts>
-          <HandleDoughnutChart
-            title="Clientes atendindos este mês"
-            data={attendencesRealized}
-          />
-          <HandleBarVerticalChart data={clientsForInternalActivities} />
-        </S.ContentOtherCharts>
 
         <S.ContentPieCharts>
           <HandlePieChartCards
@@ -190,6 +183,14 @@ const Dashboard = () => {
         <S.ContentBarCharts>
           <HandleBarChartCard data={attendencesForType} />
         </S.ContentBarCharts>
+
+        <S.ContentOtherCharts>
+          <HandleDoughnutChart
+            title="Clientes atendindos este mês"
+            data={attendencesRealized}
+          />
+          <HandleBarVerticalChart data={clientsForInternalActivities} />
+        </S.ContentOtherCharts>
       </S.Container>
     </Layout>
   )
