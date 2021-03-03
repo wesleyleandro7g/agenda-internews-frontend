@@ -18,16 +18,16 @@ const Confirmation = ({ visible, message, closeConfirmation, confirmated }) => {
         </S.Content>
         <S.Footer>
           <Button02
-            label="Cancelar"
-            icon={I.RiCloseLine}
-            bgColor="#FF6666"
-            onClick={closeConfirmation}
-          />
-          <Button02
             label="Confirmar"
             icon={I.RiCheckboxCircleLine}
             bgColor="#79D279"
             onClick={confirmated}
+          />
+          <Button02
+            label="Cancelar"
+            icon={I.RiCloseLine}
+            bgColor="#FF6666"
+            onClick={closeConfirmation}
           />
         </S.Footer>
       </S.Container>

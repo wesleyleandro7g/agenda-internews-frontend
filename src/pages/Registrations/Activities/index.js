@@ -33,7 +33,7 @@ const RegisterActivities = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible])
+  }, [registerVisible, alertVisible])
 
   function handleCallApi() {
     api.get('/industry/index').then(response => setIndustries(response.data))
