@@ -12,10 +12,12 @@ const List = ({ description, onDelete, onUpdate }) => {
           style={{ marginRight: 5, cursor: 'pointer' }}
           onClick={onUpdate}
         />
-        <I.RiDeleteBin7Line
-          style={{ marginLeft: 5, cursor: 'pointer' }}
-          onClick={onDelete}
-        />
+        {onDelete && (
+          <I.RiDeleteBin7Line
+            style={{ marginLeft: 5, cursor: 'pointer' }}
+            onClick={onDelete}
+          />
+        )}
       </S.Content>
     </S.Container>
   )

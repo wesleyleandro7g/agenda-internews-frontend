@@ -9,13 +9,12 @@ import Input03 from '../../../components/inputs/input03'
 import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
+import List from '../../../components/list-items'
+import Alert from '../../../components/alert'
 
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
-import List from '../../../components/list-items'
-import Alert from '../../../components/alert'
-
 const RegisterOpenig = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
@@ -96,8 +95,9 @@ const RegisterOpenig = () => {
     api.put(`/reasons/opening/update/${identifier}`, data).then(response => {
       setAlertMessage(response.data.message)
       setAlertVisible(true)
-      toggleUpdateVisible()
     })
+
+    toggleUpdateVisible()
   }
 
   function toggleUpdateVisible() {
@@ -126,7 +126,6 @@ const RegisterOpenig = () => {
                 key={item.id}
                 description={item.descricao}
                 onUpdate={() => handleFill(item)}
-                onDelete={() => {}}
               />
             ))}
         </S.ScrollArea>
