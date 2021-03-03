@@ -45,13 +45,13 @@ export const DataInternal = [
         icon: I.RiStore3Line,
         select: false
       },
-      {
-        id: 3,
-        pageName: 'Ferramentas',
-        handlePage: 'cadastros/ferramentas',
-        icon: I.RiToolsLine,
-        select: false
-      },
+      // {
+      //   id: 3,
+      //   pageName: 'Ferramentas',
+      //   handlePage: 'cadastros/ferramentas',
+      //   icon: I.RiToolsLine,
+      //   select: false
+      // },
       {
         id: 4,
         pageName: 'Cidades',
@@ -240,13 +240,13 @@ export const DataAdmin = [
         icon: I.RiStore3Line,
         select: false
       },
-      {
-        id: 3,
-        pageName: 'Ferramentas',
-        handlePage: 'cadastros/ferramentas',
-        icon: I.RiToolsLine,
-        select: false
-      },
+      // {
+      //   id: 3,
+      //   pageName: 'Ferramentas',
+      //   handlePage: 'cadastros/ferramentas',
+      //   icon: I.RiToolsLine,
+      //   select: false
+      // },
       {
         id: 4,
         pageName: 'Cidades',
