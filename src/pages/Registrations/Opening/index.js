@@ -13,11 +13,17 @@ import Modal from '../../../components/modal'
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
+import List from '../../../components/list-items'
+import Alert from '../../../components/alert'
 
 const RegisterOpenig = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
+  const [updateVisible, setUpdateVisible] = useState(false)
+  const [identifier, setIdentifier] = useState()
+  const [alertVisible, setAlertVisible] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
 
   useEffect(() => {
     handleCallApi()
@@ -25,7 +31,7 @@ const RegisterOpenig = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible])
+  }, [registerVisible, updateVisible])
 
   function handleCallApi() {
     api
@@ -77,6 +83,27 @@ const RegisterOpenig = () => {
     }
   }
 
+  function handleFill(item) {
+    formRef.current.setData({
+      descricao: item.descricao
+    })
+
+    setIdentifier(item.id)
+    toggleUpdateVisible()
+  }
+
+  async function handleUpdate(data) {
+    api.put(`/reasons/opening/update/${identifier}`, data).then(response => {
+      setAlertMessage(response.data.message)
+      setAlertVisible(true)
+      toggleUpdateVisible()
+    })
+  }
+
+  function toggleUpdateVisible() {
+    setUpdateVisible(!updateVisible)
+  }
+
   return (
     <Layout page="Motivos de abertura de OS">
       <S.Container>
@@ -95,13 +122,17 @@ const RegisterOpenig = () => {
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.descricao}
+                onUpdate={() => handleFill(item)}
+                onDelete={() => {}}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
 
+      {/* Modal para cadastrar um novo motivo */}
       <Form ref={formRef} onSubmit={handleRegisterTool}>
         <Modal visible={registerVisible}>
           <S.ModalWrapper>
@@ -124,6 +155,37 @@ const RegisterOpenig = () => {
           </S.ModalWrapper>
         </Modal>
       </Form>
+
+      {/* Modal para editar um motivo */}
+      <Form ref={formRef} onSubmit={handleUpdate}>
+        <Modal visible={updateVisible}>
+          <S.ModalWrapper>
+            <S.ContentHeader>
+              <h6>Edição de motivo</h6>
+            </S.ContentHeader>
+
+            <S.ContentMain>
+              <Input03 label="Descrição" name="descricao" type="text" />
+            </S.ContentMain>
+
+            <S.ContentFooter>
+              <Button01 label="Confirmar" bgColor="#79D279" type="submit" />
+              <Button01
+                label="Cancelar"
+                bgColor="#FF6666"
+                onClick={() => toggleUpdateVisible()}
+              />
+            </S.ContentFooter>
+          </S.ModalWrapper>
+        </Modal>
+      </Form>
+
+      {/* Modal de alerta */}
+      <Alert
+        visible={alertVisible}
+        message={alertMessage}
+        closeAlert={() => setAlertVisible(!alertVisible)}
+      />
     </Layout>
   )
 }

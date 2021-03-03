@@ -11,12 +11,11 @@ import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
 import List from '../../../components/list-items'
 import Alert from '../../../components/alert'
+import Confirmation from '../../../components/confirmation'
 
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
-import Confirmation from '../../../components/confirmation'
-
 const RegisterActivities = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
@@ -56,12 +55,13 @@ const RegisterActivities = () => {
       api
         .post('/industry/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Ramo já cadastrado!')
+          setAlertMessage(res.data.message)
+          setAlertVisible(true)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            setAlertMessage(err.message)
+            setAlertVisible(true)
           }
         })
 
@@ -87,12 +87,15 @@ const RegisterActivities = () => {
     api
       .put(`/industry/update/${identifier}`, data)
       .then(response => {
-        setAlertMessage(response.data.response)
+        setAlertMessage(response.data.message)
         setAlertVisible(true)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setAlertMessage(err.message)
+        setAlertVisible(true)
+      })
 
-    setUpdateVisible(!updateVisible)
+    // toggleUpdateVisible()
   }
 
   function handleFill(item) {
@@ -101,6 +104,10 @@ const RegisterActivities = () => {
     })
 
     setIdentifier(item.id)
+    toggleUpdateVisible()
+  }
+
+  function toggleUpdateVisible() {
     setUpdateVisible(!updateVisible)
   }
 
@@ -110,10 +117,13 @@ const RegisterActivities = () => {
     api
       .delete(`/industry/delete/${id}`)
       .then(response => {
-        setAlertMessage(response.data.response)
+        setAlertMessage(response.data.message)
         setAlertVisible(true)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setAlertMessage(err.message)
+        setAlertVisible(true)
+      })
   }
 
   function handleConfirmation(id) {
@@ -190,7 +200,7 @@ const RegisterActivities = () => {
               <Button01
                 label="Cancelar"
                 bgColor="#FF6666"
-                onClick={() => setUpdateVisible(!updateVisible)}
+                onClick={() => toggleUpdateVisible()}
               />
             </S.ContentFooter>
           </S.ModalWrapper>
