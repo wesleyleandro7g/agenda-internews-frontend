@@ -119,7 +119,7 @@ const HandleUserType = ({ open, state }) => {
                 select={item.select}
                 onClick={() => handleInternalNavigation(item)}
               >
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -133,7 +133,7 @@ const HandleUserType = ({ open, state }) => {
                       select={option.select}
                       state={state}
                     >
-                      <option.icon size={18} />
+                      <option.icon size={18} color="#d9d9d9" />
                       {open && (
                         <S.TextOptions> {option.pageName} </S.TextOptions>
                       )}
@@ -155,7 +155,7 @@ const HandleUserType = ({ open, state }) => {
               onClick={() => handleExternalNavigation(item)}
             >
               <S.PrimaryOptionWrapper select={item.select}>
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -172,7 +172,7 @@ const HandleUserType = ({ open, state }) => {
               onClick={() => handleOnlineNavigation(item)}
             >
               <S.PrimaryOptionWrapper select={item.select}>
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -189,7 +189,7 @@ const HandleUserType = ({ open, state }) => {
                 select={item.select}
                 onClick={() => handleManagerNavigation(item)}
               >
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -203,7 +203,7 @@ const HandleUserType = ({ open, state }) => {
                       select={option.select}
                       state={state}
                     >
-                      <option.icon size={18} />
+                      <option.icon size={18} color="#d9d9d9" />
                       {open && (
                         <S.TextOptions> {option.pageName} </S.TextOptions>
                       )}

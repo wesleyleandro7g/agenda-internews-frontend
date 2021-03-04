@@ -40,7 +40,12 @@ const HandlePieChartCards = ({ title, data, onChange }) => {
     '#66a6e5',
     '#00C49F',
     '#1affd5',
-    '#1a5999'
+    '#1a5999',
+    '#33ff77',
+    '#cc00cc',
+    '#ff4dff',
+    '#ffff66',
+    '#e6e600'
   ]
 
   return (
@@ -104,6 +109,7 @@ const Dashboard = () => {
     setClientsForInternalActivities
   ] = useState([])
   const [clientsForIndustries, setClientsForIndustries] = useState([])
+  const [clientsForCity, setClientsForCity] = useState([])
   const [attendencesForType, setAttendencesForType] = useState([])
   const [attendencesRealized, setAttendencesRealized] = useState([])
 
@@ -134,7 +140,10 @@ const Dashboard = () => {
 
     api.get(`/dashboard/attendences-month/${supportID}`).then(res => {
       setAttendencesRealized(res.data.Data)
-      console.log(res.data.Data)
+    })
+
+    api.get(`/dashboard/cities/${supportID}`).then(res => {
+      setClientsForCity(res.data.Data)
     })
   }
 
@@ -189,7 +198,7 @@ const Dashboard = () => {
             title="Clientes atendindos este mês"
             data={attendencesRealized}
           />
-          <HandleBarVerticalChart data={clientsForInternalActivities} />
+          <HandleBarVerticalChart data={clientsForCity} />
         </S.ContentOtherCharts>
       </S.Container>
     </Layout>

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import I from '../../utils/Icons'
 
 export const Container = styled.aside`
-  width: ${props => (props.state ? '180px' : '50px')};
+  width: ${props => (props.state ? '240px' : '65px')};
   height: 100vh;
   background-color: #040e18;
   position: fixed;
@@ -59,12 +59,15 @@ export const IconsWrapper = styled.button`
   background-color: transparent;
 `
 export const Text = styled.h6`
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 13px;
+  font-family: 'Roboto';
   margin-left: 15px;
+
+  color: #d9d9d9;
 `
 export const Text2 = styled(Text)`
-  font-size: 14px;
+  font-size: 13px;
   margin-left: 20px;
 
   @media (min-width: 800px) {
@@ -73,8 +76,9 @@ export const Text2 = styled(Text)`
 `
 export const TextOptions = styled.h6`
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
   margin-left: 15px;
+  color: #d9d9d9;
 `
 export const Img = styled.img`
   width: 110px;

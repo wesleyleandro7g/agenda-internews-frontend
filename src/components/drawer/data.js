@@ -40,7 +40,7 @@ export const DataInternal = [
       },
       {
         id: 2,
-        pageName: 'Ramo',
+        pageName: 'Ramos de atividade',
         handlePage: 'cadastros/atividades',
         icon: I.RiStore3Line,
         select: false
@@ -61,21 +61,21 @@ export const DataInternal = [
       },
       {
         id: 5,
-        pageName: 'Abertura',
+        pageName: 'Motivos de abertura',
         handlePage: 'cadastros/abertura',
         icon: I.RiBookReadLine,
         select: false
       },
       {
         id: 6,
-        pageName: 'Fechamento',
+        pageName: 'Motivos de fechamento',
         handlePage: 'cadastros/fechamento',
         icon: I.RiBookMarkLine,
         select: false
       },
       {
         id: 7,
-        pageName: 'A. Interna',
+        pageName: 'Atividade interna',
         handlePage: 'cadastros/atividade-interna',
         icon: I.RiStore2Line,
         select: false
@@ -235,7 +235,7 @@ export const DataAdmin = [
       },
       {
         id: 2,
-        pageName: 'Ramo',
+        pageName: 'Ramos de atividade',
         handlePage: 'cadastros/atividades',
         icon: I.RiStore3Line,
         select: false
@@ -256,21 +256,21 @@ export const DataAdmin = [
       },
       {
         id: 5,
-        pageName: 'Abertura',
+        pageName: 'Motivos de abertura',
         handlePage: 'cadastros/abertura',
         icon: I.RiBookReadLine,
         select: false
       },
       {
         id: 6,
-        pageName: 'Fechamento',
+        pageName: 'Motivos de fechamento',
         handlePage: 'cadastros/fechamento',
         icon: I.RiBookMarkLine,
         select: false
       },
       {
         id: 7,
-        pageName: 'A. Interna',
+        pageName: 'Atividade interna',
         handlePage: 'cadastros/atividade-interna',
         icon: I.RiStore2Line,
         select: false

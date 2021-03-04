@@ -9,7 +9,7 @@ export const Contain = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: ${props => (props.state ? '180px' : '50px')};
+  margin-left: ${props => (props.state ? '240px' : '65px')};
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
 
   @media (max-width: 800px) {
