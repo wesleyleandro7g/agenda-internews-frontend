@@ -2,10 +2,15 @@ import styled from 'styled-components'
 
 export const Content = styled.section`
   width: 100%;
+
   padding: 10px;
   padding-bottom: 70px;
   margin-bottom: 3px;
+  border: 1px solid #dadada;
+  border-radius: 3px;
+
   background-color: #ffffff;
+
   position: relative;
 `
 export const ContentSimple = styled(Content)`

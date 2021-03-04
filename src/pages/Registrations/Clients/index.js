@@ -7,7 +7,9 @@ import api from '../../../services/API'
 import Layout from '../../../components/layout'
 import Input03 from '../../../components/inputs/input03'
 import Input04 from '../../../components/inputs/input04'
-import Button01 from '../../../components/buttons/button01'
+import Button02 from '../../../components/buttons/button02'
+
+import I from '../../../utils/Icons'
 
 import { InputsClientData, ModuleOptions } from './data'
 import * as S from './styles'
@@ -114,7 +116,12 @@ const RegisterClient = () => {
           </S.ScopeWrapper>
 
           <S.RegisterButtonWrapper>
-            <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
+            <Button02
+              label="Cadastrar"
+              bgColor="#79D279"
+              type="submit"
+              icon={I.RiCheckboxCircleLine}
+            />
           </S.RegisterButtonWrapper>
         </S.Content>
       </Form>
