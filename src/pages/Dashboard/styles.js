@@ -64,17 +64,63 @@ export const ChartMain = styled.div`
   flex-direction: column;
   align-items: center;
 `
+
+// Gráfico com percentual de atendimento
 export const ContentAttendence = styled(ChartMain)`
   flex-direction: row;
 `
 export const ContentChartAttendence = styled.div`
-  width: 30%;
+  display: flex;
+  flex-direction: column;
+
+  width: 40%;
   height: 100%;
+
+  border-right: 0.5px solid #d9d9d9;
 `
 export const ContentMainAttendence = styled.div`
-  width: 100%;
-  height: 70%;
+  width: 60%;
+  height: 100%;
 `
+export const ChartWrapperPercentage = styled.div`
+  width: 100%;
+  height: 80%;
+`
+export const InfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 100%;
+  height: 20%;
+
+  border-top: 0.5px solid #d9d9d9;
+`
+export const InfoWrapperDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  text-align: center;
+
+  border-left: 0.5px solid #d9d9d9;
+`
+export const InfoText = styled.h6`
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+
+  margin: 5px 0;
+`
+export const InfoTextBold = styled(InfoText)`
+  font-size: 22px;
+  font-weight: 500;
+`
+
+// Gráfico de barras vertical
 export const ChartWrapperBarHorizontal = styled(ChartWrapper)`
   height: 80vh;
 `

@@ -11,9 +11,10 @@ import BarChart from '../../components/charts/barchart'
 import BarVertical from '../../components/charts/barverticalchart'
 import Doughnut from '../../components/charts/doughnut'
 
+import { Months } from './data'
 import * as S from './styles'
 
-const HandleDoughnutChart = ({ title, onChange, data, percentage }) => {
+const HandleDoughnutChart = ({ title, onChange, data }) => {
   return (
     <S.ChartWrapper2>
       <S.ChartHeader>
@@ -21,7 +22,23 @@ const HandleDoughnutChart = ({ title, onChange, data, percentage }) => {
       </S.ChartHeader>
       <S.ContentAttendence>
         <S.ContentChartAttendence>
-          <Doughnut data={data} percentage={percentage} />
+          <S.ChartWrapperPercentage>
+            <Doughnut data={data} />
+          </S.ChartWrapperPercentage>
+          <S.InfoWrapper>
+            <S.InfoWrapperDetail>
+              <S.InfoTextBold>
+                {data.length > 0 && data[0].value}
+              </S.InfoTextBold>
+              <S.InfoText>Atendidos</S.InfoText>
+            </S.InfoWrapperDetail>
+            <S.InfoWrapperDetail>
+              <S.InfoTextBold>
+                {data.length > 0 && data[1].value}
+              </S.InfoTextBold>
+              <S.InfoText>Sem atendimento</S.InfoText>
+            </S.InfoWrapperDetail>
+          </S.InfoWrapper>
         </S.ContentChartAttendence>
         <S.ContentMainAttendence>
           <h6>Main</h6>
@@ -175,6 +192,17 @@ const Dashboard = () => {
   //   console.log(e.target.value)
   // }
 
+  function handleDate() {
+    const date = new Date()
+
+    const month = date.getMonth()
+    const year = date.getFullYear()
+
+    const correntDate = `${Months[month]} de ${year}`
+
+    return correntDate
+  }
+
   return (
     <Layout page={`Bem vindo(a), ${user}.`}>
       <S.Container>
@@ -204,7 +232,7 @@ const Dashboard = () => {
 
         <S.ContentAttendenceChart>
           <HandleDoughnutChart
-            title="Clientes atendindos este mês"
+            title={`Atendimentos mês de ${handleDate()}`}
             data={attendencesRealized}
           />
         </S.ContentAttendenceChart>
