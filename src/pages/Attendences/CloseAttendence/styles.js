@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Scroll from 'react-scrollbar'
 
 export const ModalContent = styled.div`
   width: 40%;
@@ -31,9 +32,14 @@ export const ModalMain = styled.div`
     height: 80%;
   }
 `
+export const ScrollReasons = styled(Scroll)`
+  width: 90%;
+  height: 85%;
+  margin-top: 10px;
+`
 export const ModalMainGrid = styled(ModalMain)`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   padding: 10px 5px;
 
   @media (max-width: 800px) {

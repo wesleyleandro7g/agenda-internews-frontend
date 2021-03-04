@@ -60,16 +60,20 @@ const CloseAttendence = ({
         </S.ModalHeader>
         <S.ModalMain>
           <h6>Opções de fechamento</h6>
-          <S.ModalMainGrid>
-            {reasonsClosing.map(item => (
-              <CheckBox
-                key={item.id}
-                label={item.descricao}
-                value={item.id}
-                onChange={e => handleReasonsSelected(e.target.checked, item.id)}
-              />
-            ))}
-          </S.ModalMainGrid>
+          <S.ScrollReasons>
+            <S.ModalMainGrid>
+              {reasonsClosing.map(item => (
+                <CheckBox
+                  key={item.id}
+                  label={item.descricao}
+                  value={item.id}
+                  onChange={e =>
+                    handleReasonsSelected(e.target.checked, item.id)
+                  }
+                />
+              ))}
+            </S.ModalMainGrid>
+          </S.ScrollReasons>
         </S.ModalMain>
         <S.ModalFooter>
           <Button01
