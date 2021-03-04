@@ -24,6 +24,11 @@ import DetailsAttendence from './DetailsAttendence'
 import ScheduleAttendence from './ScheduleAttendence'
 import CloseAttendence from './CloseAttendence'
 
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../components/toastify'
+
 import I from '../../utils/Icons'
 
 import { DataInfoOptions, StatusAttendence } from './data'
@@ -216,9 +221,9 @@ const Attendences = () => {
     api
       .put('/attendence/update/open', { id })
       .then(res => {
-        alert(res.data.mensage)
+        notifySuccess(res.data.mensage)
       })
-      .catch(err => alert(err))
+      .catch(err => notifyError(err))
 
     handleCallApi()
 
@@ -395,6 +400,8 @@ const Attendences = () => {
         icon={I.RiAddLine}
         onClick={() => setNewAttendenceVisible(!newAttendenceVisible)}
       />
+
+      <ToastContainer />
     </Layout>
   )
 }

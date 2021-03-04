@@ -9,6 +9,8 @@ import Modal from '../../../components/modal'
 import Button01 from '../../../components/buttons/button01'
 import Radio from '../../../components/inputs/radio'
 
+import { notifySuccess } from '../../../components/toastify'
+
 // import I from '../../../utils/Icons'
 
 import * as S from './styles'
@@ -36,10 +38,12 @@ const RepassAttendence = ({
   }
 
   function handleRepassAttendence() {
-    api.put('/attendence/update/repass', {
-      id: attendenceID,
-      id_suporte: supportSelected
-    })
+    api
+      .put('/attendence/update/repass', {
+        id: attendenceID,
+        id_suporte: supportSelected
+      })
+      .then(response => notifySuccess('Atendimento repassado!'))
     repassed()
   }
 

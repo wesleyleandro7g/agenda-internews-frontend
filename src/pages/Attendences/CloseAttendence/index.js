@@ -7,6 +7,8 @@ import Modal from '../../../components/modal'
 import Button01 from '../../../components/buttons/button01'
 import CheckBox from '../../../components/inputs/checkbox'
 
+import { notifySuccess } from '../../../components/toastify'
+
 import * as S from './styles'
 
 const CloseAttendence = ({
@@ -40,10 +42,12 @@ const CloseAttendence = ({
   }
 
   function handleCosingAttendence() {
-    api.put('/attendence/update/close', {
-      id_atendimento: attendenceID,
-      fech_motivos: reasonSelected
-    })
+    api
+      .put('/attendence/update/close', {
+        id_atendimento: attendenceID,
+        fech_motivos: reasonSelected
+      })
+      .then(response => notifySuccess('Atendimento finalizado!'))
 
     finish()
   }

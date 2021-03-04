@@ -10,6 +10,8 @@ import Button01 from '../../../components/buttons/button01'
 import CheckBox from '../../../components/inputs/checkbox'
 import Radio from '../../../components/inputs/radio'
 
+import { notifySuccess, notifyError } from '../../../components/toastify'
+
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
@@ -80,12 +82,12 @@ const OpenNewAttendence = ({
   }
 
   function handleNewAttendence() {
-    if (!selected) return alert('Selecione um cliente!')
+    if (!selected) return notifyError('Selecione um cliente!')
 
-    if (!idAbertura) return alert('Selecione um motivo!')
+    if (!idAbertura) return notifyError('Selecione um motivo!')
 
     if (clientNotRequested && requestedName.length <= 2) {
-      return alert('Informe o nome do solicitante!')
+      return notifyError('Informe o nome do solicitante!')
     } else {
       api
         .post('/attendence/update/create', {
@@ -109,11 +111,11 @@ const OpenNewAttendence = ({
           id_setor: sectorID
         })
         .then(res => {
-          alert(res.data.mensage)
+          notifySuccess(res.data.mensage)
           finish()
         })
         .catch(err => {
-          alert(err)
+          notifyError(err)
           return console.log(err)
         })
 
@@ -231,6 +233,8 @@ const OpenNewAttendence = ({
           </S.RightWrapper>
         </S.MainWrapper>
       </S.ModalWrapper>
+
+      {/* <ToastContainer /> */}
     </Modal>
   )
 }
