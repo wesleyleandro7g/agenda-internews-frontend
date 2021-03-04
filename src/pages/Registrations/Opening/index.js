@@ -10,7 +10,11 @@ import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
 import List from '../../../components/list-items'
-import Alert from '../../../components/alert'
+
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../../components/toastify'
 
 import I from '../../../utils/Icons'
 
@@ -21,8 +25,7 @@ const RegisterOpenig = () => {
   const [registerVisible, setRegisterVisible] = useState(false)
   const [updateVisible, setUpdateVisible] = useState(false)
   const [identifier, setIdentifier] = useState()
-  const [alertVisible, setAlertVisible] = useState(false)
-  const [alertMessage, setAlertMessage] = useState('')
+  const [alertExecuted, setAlertExecuted] = useState(false)
 
   useEffect(() => {
     handleCallApi()
@@ -30,7 +33,7 @@ const RegisterOpenig = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible, updateVisible])
+  }, [registerVisible, updateVisible, alertExecuted])
 
   function handleCallApi() {
     api
@@ -55,12 +58,12 @@ const RegisterOpenig = () => {
       api
         .post('/reasons/opening/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Motivo já cadastrado!')
+          notifySuccess(res.data.message)
+          setAlertExecuted(!alertExecuted)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError(err.data.message)
           }
         })
 
@@ -93,8 +96,8 @@ const RegisterOpenig = () => {
 
   async function handleUpdate(data) {
     api.put(`/reasons/opening/update/${identifier}`, data).then(response => {
-      setAlertMessage(response.data.message)
-      setAlertVisible(true)
+      notifySuccess(response.data.message)
+      setAlertExecuted(!alertExecuted)
     })
 
     toggleUpdateVisible()
@@ -179,12 +182,7 @@ const RegisterOpenig = () => {
         </Modal>
       </Form>
 
-      {/* Modal de alerta */}
-      <Alert
-        visible={alertVisible}
-        message={alertMessage}
-        closeAlert={() => setAlertVisible(!alertVisible)}
-      />
+      <ToastContainer />
     </Layout>
   )
 }

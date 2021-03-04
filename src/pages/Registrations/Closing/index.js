@@ -9,15 +9,22 @@ import Input03 from '../../../components/inputs/input03'
 import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
+import List from '../../../components/list-items'
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../../components/toastify'
 
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
-
 const RegisterClosing = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
+  const [updateVisible, setUpdateVisible] = useState(false)
+  const [alertExecuted, setAlertExecuted] = useState(false)
+  const [identifier, setIdentifier] = useState()
 
   useEffect(() => {
     handleCallApi()
@@ -25,7 +32,7 @@ const RegisterClosing = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible])
+  }, [registerVisible, alertExecuted])
 
   function handleCallApi() {
     api
@@ -50,12 +57,12 @@ const RegisterClosing = () => {
       api
         .post('/reasons/closing/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Motivo já cadastrado!')
+          notifySuccess(res.data.message)
+          setAlertExecuted(!alertExecuted)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError(err.data.message)
           }
         })
 
@@ -77,6 +84,28 @@ const RegisterClosing = () => {
     }
   }
 
+  function handleFill(item) {
+    formRef.current.setData({
+      descricao: item.descricao
+    })
+
+    setIdentifier(item.id)
+    toggleUpdateVisible()
+  }
+
+  async function handleUpdate(data) {
+    api.put(`/reasons/closing/update/${identifier}`, data).then(response => {
+      notifySuccess(response.data.message)
+      setAlertExecuted(!alertExecuted)
+    })
+
+    toggleUpdateVisible()
+  }
+
+  function toggleUpdateVisible() {
+    setUpdateVisible(!updateVisible)
+  }
+
   return (
     <Layout page="Motivos de fechamento de OS">
       <S.Container>
@@ -95,9 +124,11 @@ const RegisterClosing = () => {
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.descricao}
+                onUpdate={() => handleFill(item)}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
@@ -106,7 +137,7 @@ const RegisterClosing = () => {
         <Modal visible={registerVisible}>
           <S.ModalWrapper>
             <S.ContentHeader>
-              <h6>Novo Motivo</h6>
+              <h6>Novo motivo</h6>
             </S.ContentHeader>
 
             <S.ContentMain>
@@ -124,6 +155,32 @@ const RegisterClosing = () => {
           </S.ModalWrapper>
         </Modal>
       </Form>
+
+      {/* Modal de edição de motivo de fechamento */}
+      <Form ref={formRef} onSubmit={handleUpdate}>
+        <Modal visible={updateVisible}>
+          <S.ModalWrapper>
+            <S.ContentHeader>
+              <h6>Edite o motivo</h6>
+            </S.ContentHeader>
+
+            <S.ContentMain>
+              <Input03 label="Descrição" name="descricao" type="text" />
+            </S.ContentMain>
+
+            <S.ContentFooter>
+              <Button01 label="Confirmar" bgColor="#79D279" type="submit" />
+              <Button01
+                label="Cancelar"
+                bgColor="#FF6666"
+                onClick={() => toggleUpdateVisible()}
+              />
+            </S.ContentFooter>
+          </S.ModalWrapper>
+        </Modal>
+      </Form>
+
+      <ToastContainer />
     </Layout>
   )
 }
