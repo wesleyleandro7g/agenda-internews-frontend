@@ -131,7 +131,7 @@ const OpenNewAttendence = ({
       <S.ModalWrapper>
         <S.ModalHeaderBig>
           <S.TitleCard>Novo atendimento</S.TitleCard>
-          <I.RiCloseLine cursor="pointer" size={24} onClick={cancelable} />
+          <I.RiCloseLine cursor="pointer" size={28} onClick={cancelable} />
         </S.ModalHeaderBig>
         <S.MainWrapper>
           {selected ? (
@@ -161,7 +161,7 @@ const OpenNewAttendence = ({
           ) : (
             <S.LeftWrapper>
               <S.InputNewAttendence
-                placeholder="Cliente"
+                placeholder="Nome da empresa"
                 onChange={e => setSearchInput(e.target.value)}
               />
               <S.ScrollClients>
@@ -189,18 +189,20 @@ const OpenNewAttendence = ({
               {clientNotRequested && (
                 <S.RequestWrapper>
                   <S.InputRequesterName
-                    placeholder="Nome*"
+                    placeholder="*Nome do solicitante"
                     onChange={e => setRequestedName(e.target.value)}
                   />
                   <S.InputRequesterName
-                    placeholder="Contato"
-                    type="number"
+                    placeholder="Contato do solicitante"
+                    type="text"
                     onChange={e => setRequestedContact(e.target.value)}
                   />
                 </S.RequestWrapper>
               )}
 
-              <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
+              <S.TextClientSelected>
+                Motivo da abertura do atendimento
+              </S.TextClientSelected>
               <S.ScrollReasons>
                 <form onChange={handleInputRadio}>
                   <S.MainGrid>

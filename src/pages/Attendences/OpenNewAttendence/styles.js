@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import Scroll from 'react-scrollbar'
 
 export const ModalWrapper = styled.div`
-  width: 60%;
-  height: 70%;
+  width: 70%;
+  height: 80%;
+
   padding: 0 10px;
+
   background-color: #fff;
 
   @media (max-width: 800px) {
@@ -15,6 +16,7 @@ export const ModalWrapper = styled.div`
 export const ModalHeader = styled.div`
   width: 100%;
   height: 20%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,14 +27,18 @@ export const ModalHeaderBig = styled(ModalHeader)`
 export const MainGrid = styled.div`
   width: 100%;
   height: 60%;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+
   padding: 10px 5px;
 `
 export const MainWrapper = styled.div`
   width: 100%;
   height: 90%;
+
   display: flex;
+
   margin-left: 0;
   padding: 0 10px;
 
@@ -54,14 +60,18 @@ export const RightWrapper = styled.div`
 `
 export const ClientSelected = styled.div`
   width: 90%;
-  height: 40px;
+  height: 50px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 0 5px;
   border-radius: 5px;
+
   color: #fff;
   text-transform: uppercase;
+
   background-color: #040e18;
 
   @media (max-width: 800px) {
@@ -69,31 +79,42 @@ export const ClientSelected = styled.div`
   }
 `
 export const TextClientSelected = styled.h6`
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
 `
-export const ScrollClients = styled(Scroll)`
+export const ScrollClients = styled.div`
   width: 90%;
   height: 90%;
+
   margin-top: 10px;
+
+  overflow: auto;
 
   @media (max-width: 800px) {
     width: 100%;
   }
 `
-export const ScrollReasons = styled(Scroll)`
+export const ScrollReasons = styled.div`
   width: 90%;
   height: 60%;
+
   margin-top: 10px;
+  overflow: auto;
 `
 export const InputNewAttendence = styled.input`
   width: 90%;
+  height: 40px;
+
   border: 0;
   outline: none;
-  font-size: 12px;
-  background-color: #eeeeee;
+
+  font-size: 14px;
+  text-transform: uppercase;
+
   padding-left: 5px;
   margin: 0;
+
+  background-color: #eeeeee;
 
   @media (max-width: 800px) {
     width: 100%;
@@ -103,20 +124,24 @@ export const InputNewAttendence = styled.input`
 `
 export const ClientWrapper = styled.button`
   width: 100%;
-  height: 30px;
+  height: 40px;
+
   display: grid;
   grid-template-columns: 0.5fr 3fr;
   align-items: center;
-  margin-top: 5px;
-  padding: 0 5px;
-  background-color: #f1f1f1;
   text-align: start;
+
+  margin-top: 2px;
+  padding: 0 5px;
+  border-radius: 5px;
+
+  background-color: #383c48;
 `
 export const ClientText = styled.h6`
   font-size: 12px;
-  font-weight: 400;
-  color: #333;
+  font-weight: 500;
   text-transform: uppercase;
+  color: #fff;
 `
 export const ItemsRightTop = styled.div`
   height: 90%;
@@ -143,6 +168,10 @@ export const RequestWrapper = styled.div`
   margin-bottom: 10px;
 `
 export const TitleCard = styled.h6`
+  font-size: 18px;
+
+  color: #333;
+
   @media (max-width: 800px) {
     font-size: 16px;
   }
