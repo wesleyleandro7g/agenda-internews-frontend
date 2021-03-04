@@ -33,7 +33,7 @@ export const SectionTitle = styled.section`
   -moz-box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
 
-  background-color: '#383C48';
+  background-color: #383c48;
 
   @media (max-width: 800px) {
     height: 110px;

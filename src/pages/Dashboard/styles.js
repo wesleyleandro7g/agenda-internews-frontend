@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import Scroll from 'react-scrollbar'
 
-export const Container = styled(Scroll)`
+export const Container = styled.div`
   width: 100%;
   height: 90vh;
+  overflow: auto;
 `
 export const SubHeader = styled.div`
   width: 100%;
@@ -29,30 +29,26 @@ export const ContentPieCharts = styled.div`
     grid-template-columns: 1fr;
   }
 `
-export const ContentOtherCharts = styled.div`
+export const ContentAttendenceChart = styled.div`
   width: 100%;
   display: flex;
   margin-bottom: 10px;
 `
 export const ChartWrapper = styled.div`
   width: 100%;
-  height: 50vh;
-  border-radius: 2px;
-  background-color: #fff;
+  height: 80vh;
 
-  :hover {
-    -webkit-box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
-    box-shadow: 2px 2px 13px -6px rgba(0, 0, 0, 0.75);
-  }
+  border: 1.5px solid #d9d9d9;
+  border-radius: 3px;
+
+  background-color: #fff;
 
   @media (max-width: 800px) {
     margin: 5px 0;
   }
 `
 export const ChartWrapper2 = styled(ChartWrapper)`
-  width: 30%;
-  margin-right: 10px;
+  width: 100%;
 
   @media (max-width: 800px) {
     display: flex;
@@ -61,31 +57,50 @@ export const ChartWrapper2 = styled(ChartWrapper)`
     margin: 5px 0;
   }
 `
-export const ChartWrapperBarHorizontal = styled(ChartWrapper)`
-  width: 70%;
-`
-export const ChartHeader = styled.div`
-  height: 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5px;
-`
-export const ChartHeader2 = styled(ChartHeader)`
-  height: 10%;
-`
 export const ChartMain = styled.div`
-  height: 90%;
+  height: 85%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 `
-export const ChartContent = styled.div`
+export const ContentAttendence = styled(ChartMain)`
+  flex-direction: row;
+`
+export const ContentChartAttendence = styled.div`
+  width: 30%;
+  height: 100%;
+`
+export const ContentMainAttendence = styled.div`
   width: 100%;
-  height: 80%;
+  height: 70%;
+`
+export const ChartWrapperBarHorizontal = styled(ChartWrapper)`
+  height: 80vh;
+`
+export const ChartHeader = styled.div`
+  height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  padding: 0 5px;
+
+  border-bottom: 1px solid #d9d9d9;
+`
+export const ChartHeader2 = styled(ChartHeader)`
+  height: 10%;
+`
+
+export const ChartContent = styled.div`
+  width: 100%;
+  height: 80%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 5% 0;
 `
 export const ChartInfo = styled.div`
   width: 100%;
@@ -114,7 +129,7 @@ export const ChartInfoColor = styled.div`
   background-color: ${props => props.color};
 `
 export const ChartTitle = styled.h6`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
 `
 export const ChartInput = styled.input`
@@ -135,7 +150,7 @@ export const RigthItemsWrapper = styled(LeftItemsWrapper)``
 
 export const ContentBarCharts = styled.div`
   width: 100%;
-  height: 40vh;
+  height: 80vh;
   margin: 10px 0;
 `
 export const BarChartContainer = styled(ChartWrapper)`

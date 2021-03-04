@@ -19,11 +19,11 @@ const renderCustomizedLabel = ({
     <text
       x={x}
       y={y}
-      fill="white"
+      fill="dark"
       textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
       fontSize="14"
-      fontWeight="bold"
+      fontWeight="600"
     >
       {percent > 0 && `${(percent * 100).toFixed(0)}%`}
     </text>
@@ -40,7 +40,7 @@ const PieChartComponent = ({ data, COLORS }) => {
           cy={'50%'}
           labelLine={false}
           label={renderCustomizedLabel}
-          innerRadius={'65%'}
+          innerRadius={'60%'}
           outerRadius={'100%'}
           fill="#8884d8"
           dataKey="quantidade"

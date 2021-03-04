@@ -19,20 +19,25 @@ const HandleDoughnutChart = ({ title, onChange, data, percentage }) => {
       <S.ChartHeader>
         <S.ChartTitle> {title} </S.ChartTitle>
       </S.ChartHeader>
-      <S.ChartMain>
-        <Doughnut data={data} percentage={percentage} />
-      </S.ChartMain>
+      <S.ContentAttendence>
+        <S.ContentChartAttendence>
+          <Doughnut data={data} percentage={percentage} />
+        </S.ContentChartAttendence>
+        <S.ContentMainAttendence>
+          <h6>Main</h6>
+        </S.ContentMainAttendence>
+      </S.ContentAttendence>
     </S.ChartWrapper2>
   )
 }
 
 const HandlePieChartCards = ({ title, data, onChange }) => {
   const COLORS = [
-    '#006699',
-    '#006666',
+    '#8774f1',
+    '#83d3fb',
     '#669999',
     '#339966',
-    '#33cccc',
+    '#c758da',
     '#0099cc',
     '#12406d',
     '#80ffff',
@@ -94,7 +99,7 @@ const HandleBarChartCard = ({ data }) => {
   return (
     <S.BarChartContainer>
       <S.ChartHeader2>
-        <S.ChartTitle> OS por tipo de atendimento </S.ChartTitle>
+        <S.ChartTitle> Tipos de atendimento realizados </S.ChartTitle>
       </S.ChartHeader2>
       <S.MainBarChart>
         <BarChart data={data} />
@@ -193,13 +198,16 @@ const Dashboard = () => {
           <HandleBarChartCard data={attendencesForType} />
         </S.ContentBarCharts>
 
-        <S.ContentOtherCharts>
+        <S.ContentBarCharts>
+          <HandleBarVerticalChart data={clientsForCity} />
+        </S.ContentBarCharts>
+
+        <S.ContentAttendenceChart>
           <HandleDoughnutChart
             title="Clientes atendindos este mês"
             data={attendencesRealized}
           />
-          <HandleBarVerticalChart data={clientsForCity} />
-        </S.ContentOtherCharts>
+        </S.ContentAttendenceChart>
       </S.Container>
     </Layout>
   )
