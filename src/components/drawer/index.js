@@ -3,6 +3,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 import logo from '../../assets/TPLogo.png'
+import logoLarge from '../../assets/LogomarcaLoja.png'
 
 import { useDrawer } from '../../context/DrawerContext'
 
@@ -231,8 +232,7 @@ const Drawer = () => {
   return (
     <S.Container state={open}>
       <S.SectionTitle state={open}>
-        {open ? <S.Img src={logo} /> : <S.Img2 src={logo} />}
-
+        {open ? <S.ImgLarge src={logoLarge} /> : <S.Img src={logo} />}
         <S.UserDatailsMobileWrapper>
           <S.UserDatailsMobileTitle> {user} </S.UserDatailsMobileTitle>
           <S.UserDatailsMobileDescription>

@@ -4,7 +4,7 @@ import I from '../../utils/Icons'
 export const Container = styled.aside`
   width: ${props => (props.state ? '240px' : '65px')};
   height: 100vh;
-  background-color: #040e18;
+  background-color: #2d323e;
   position: fixed;
   z-index: 1;
   top: 0%;
@@ -21,9 +21,19 @@ export const SectionTitle = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${props => (props.state ? '90px' : '50px')};
+
+  height: 60px;
+
+  margin-bottom: 10px;
+
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
-  border-bottom: 1px solid #071a2c;
+  /* border-bottom: 1px solid #039be5; */
+
+  -webkit-box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
+
+  background-color: '#383C48';
 
   @media (max-width: 800px) {
     height: 110px;
@@ -63,8 +73,6 @@ export const Text = styled.h6`
   font-size: 13px;
   font-family: 'Roboto';
   margin-left: 15px;
-
-  color: #d9d9d9;
 `
 export const Text2 = styled(Text)`
   font-size: 13px;
@@ -78,24 +86,18 @@ export const TextOptions = styled.h6`
   font-weight: 400;
   font-size: 13px;
   margin-left: 15px;
-  color: #d9d9d9;
 `
 export const Img = styled.img`
-  width: 110px;
-  height: 110px;
+  width: 98%;
+  height: 98%;
   margin: 0;
   padding: 0;
 `
-export const Img2 = styled.img`
-  width: 50px;
-  height: 50px;
+export const ImgLarge = styled.img`
+  width: 80%;
+  height: 80%;
   margin: 0;
   padding: 0;
-
-  @media (max-width: 800px) {
-    width: 110px;
-    height: 110px;
-  }
 `
 export const PrimaryOptionWrapper = styled.button`
   width: 100%;
@@ -103,15 +105,15 @@ export const PrimaryOptionWrapper = styled.button`
   align-items: center;
   flex-direction: row;
   padding: 12px 15px;
-  color: #fff;
-  background-color: ${props => (props.select ? '#071a2c' : 'transparent')};
+  color: ${props => (props.select ? '#fff' : '#d9d9d9')};
+  background-color: ${props => (props.select ? '#039BE5' : 'transparent')};
   outline: none;
   border: 0;
-  border-left: 3px solid ${props => (props.select ? '#fff' : '#040e18')};
+  border-left: 3px solid ${props => (props.select ? '#fff' : '#2d323e')};
   cursor: pointer;
 
   :hover {
-    background-color: #071a2c;
+    background-color: ${props => (props.select ? '#039BE5' : '#282d38')};
   }
 
   @media (max-width: 800px) {
@@ -134,12 +136,13 @@ export const SecondaryOptionsItemsWrapper = styled.button`
   padding: 10px ${props => (props.state ? '10px' : '0')};
   background-color: transparent;
   color: #fff;
-  background-color: ${props => (props.select ? '#071a2c' : 'transparent')};
+  background-color: ${props =>
+    props.select && props.state ? '#039BE5' : 'transparent'};
   border-left: ${props => (props.state ? '3px' : '0')} solid
-    ${props => (props.select ? '#fff' : '#040e18')};
+    ${props => (props.select ? '#fff' : '#2d323e')};
 
   :hover {
-    background-color: #071a2c;
+    background-color: ${props => (props.select ? '#039BE5' : '#282d38')};
   }
 `
 export const CloseButtonWrapper = styled.div`
