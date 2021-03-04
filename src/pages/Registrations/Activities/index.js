@@ -10,8 +10,12 @@ import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
 import List from '../../../components/list-items'
-import Alert from '../../../components/alert'
 import Confirmation from '../../../components/confirmation'
+
+import ToastContainer, {
+  notifyError,
+  notifySuccess
+} from '../../../components/toastify'
 
 import I from '../../../utils/Icons'
 
@@ -22,8 +26,7 @@ const RegisterActivities = () => {
   const [registerVisible, setRegisterVisible] = useState(false)
   const [updateVisible, setUpdateVisible] = useState(false)
   const [confirmationVisible, setConfirmationVisible] = useState(false)
-  const [alertVisible, setAlertVisible] = useState(false)
-  const [alertMessage, setAlertMessage] = useState('')
+  const [alertExecuted, setAlertExecuted] = useState(false)
   const [identifier, setIdentifier] = useState()
 
   useEffect(() => {
@@ -32,7 +35,7 @@ const RegisterActivities = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible, alertVisible])
+  }, [registerVisible, alertExecuted])
 
   function handleCallApi() {
     api.get('/industry/index').then(response => setIndustries(response.data))
@@ -55,13 +58,13 @@ const RegisterActivities = () => {
       api
         .post('/industry/create', data)
         .then(res => {
-          setAlertMessage(res.data.message)
-          setAlertVisible(true)
+          notifySuccess(res.data.message)
+          setAlertExecuted(!alertExecuted)
         })
         .catch(err => {
           if (err) {
-            setAlertMessage(err.message)
-            setAlertVisible(true)
+            notifyError(err.message)
+            setAlertExecuted(!alertExecuted)
           }
         })
 
@@ -87,15 +90,13 @@ const RegisterActivities = () => {
     api
       .put(`/industry/update/${identifier}`, data)
       .then(response => {
-        setAlertMessage(response.data.message)
-        setAlertVisible(true)
+        notifySuccess(response.data.message)
+        setAlertExecuted(!alertExecuted)
       })
       .catch(err => {
-        setAlertMessage(err.message)
-        setAlertVisible(true)
+        notifyError(err.message)
+        setAlertExecuted(!alertExecuted)
       })
-
-    // toggleUpdateVisible()
   }
 
   function handleFill(item) {
@@ -117,12 +118,12 @@ const RegisterActivities = () => {
     api
       .delete(`/industry/delete/${id}`)
       .then(response => {
-        setAlertMessage(response.data.message)
-        setAlertVisible(true)
+        notifyError(response.data.message)
+        setAlertExecuted(!alertExecuted)
       })
       .catch(err => {
-        setAlertMessage(err.message)
-        setAlertVisible(true)
+        notifyError(err.message)
+        setAlertExecuted(!alertExecuted)
       })
   }
 
@@ -200,19 +201,12 @@ const RegisterActivities = () => {
               <Button01
                 label="Cancelar"
                 bgColor="#FF6666"
-                onClick={() => toggleUpdateVisible()}
+                onClick={() => setUpdateVisible(!updateVisible)}
               />
             </S.ContentFooter>
           </S.ModalWrapper>
         </Modal>
       </Form>
-
-      {/* Modal de alerta */}
-      <Alert
-        visible={alertVisible}
-        message={alertMessage}
-        closeAlert={() => setAlertVisible(!alertVisible)}
-      />
 
       {/* Modal de confirmação */}
       <Confirmation
@@ -220,6 +214,8 @@ const RegisterActivities = () => {
         confirmated={() => handleDelete(identifier)}
         closeConfirmation={() => setConfirmationVisible(!confirmationVisible)}
       />
+
+      <ToastContainer />
     </Layout>
   )
 }
