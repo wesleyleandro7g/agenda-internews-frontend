@@ -6,7 +6,13 @@ export const ModalContent = styled.div`
 
   padding: 0 10px;
 
-  background-color: #fff;
+  border-radius: 3px;
+
+  background-color: #e6e6e6;
+
+  -webkit-box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.75);
 
   @media (max-width: 800px) {
     width: 100%;

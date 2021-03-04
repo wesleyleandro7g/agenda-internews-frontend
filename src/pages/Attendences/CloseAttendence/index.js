@@ -4,8 +4,10 @@ import React, { useState, useEffect } from 'react'
 import api from '../../../services/API'
 
 import Modal from '../../../components/modal'
-import Button01 from '../../../components/buttons/button01'
 import CheckBox from '../../../components/inputs/checkbox'
+import Button02 from '../../../components/buttons/button02'
+
+import I from '../../../utils/Icons'
 
 import { notifySuccess } from '../../../components/toastify'
 
@@ -59,7 +61,7 @@ const CloseAttendence = ({
           <S.Title> {clientName} </S.Title>
         </S.ModalHeader>
         <S.ModalMain>
-          <h6>Opções de fechamento</h6>
+          <S.SubTitle>Informe o que foi feito neste atendimento</S.SubTitle>
           <S.ScrollReasons>
             <S.ModalMainGrid>
               {reasonsClosing.map(item => (
@@ -76,12 +78,18 @@ const CloseAttendence = ({
           </S.ScrollReasons>
         </S.ModalMain>
         <S.ModalFooter>
-          <Button01
+          <Button02
             label="Confirmar"
             bgColor="#79D279"
             onClick={() => handleCosingAttendence()}
+            icon={I.RiCheckboxCircleLine}
           />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
+          <Button02
+            label="Cancelar"
+            bgColor="#FF6666"
+            onClick={closeModal}
+            icon={I.RiCloseLine}
+          />
         </S.ModalFooter>
       </S.ModalContent>
     </Modal>

@@ -1,11 +1,17 @@
 import styled from 'styled-components'
-import Scroll from 'react-scrollbar'
 
 export const ModalContent = styled.div`
-  width: 40%;
-  height: 50%;
+  width: 60%;
+  height: 70%;
+
   padding: 0 10px;
-  background-color: #fff;
+  border-radius: 3px;
+
+  background-color: #e6e6e6;
+
+  -webkit-box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.75);
 
   @media (max-width: 800px) {
     width: 100%;
@@ -14,7 +20,7 @@ export const ModalContent = styled.div`
 `
 export const ModalHeader = styled.div`
   width: 100%;
-  height: 20%;
+  height: 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,17 +31,19 @@ export const ModalHeader = styled.div`
 `
 export const ModalMain = styled.div`
   width: 100%;
-  height: 60%;
+  height: 70%;
   padding: 0 10px;
 
   @media (max-width: 800px) {
     height: 80%;
   }
 `
-export const ScrollReasons = styled(Scroll)`
+export const ScrollReasons = styled.div`
   width: 90%;
-  height: 85%;
+  height: 100%;
+
   margin-top: 10px;
+  overflow: auto;
 `
 export const ModalMainGrid = styled(ModalMain)`
   display: grid;
@@ -49,10 +57,11 @@ export const ModalMainGrid = styled(ModalMain)`
 export const ModalFooter = styled.div`
   width: 100%;
   height: 20%;
-  display: grid;
+
+  display: flex;
+  justify-content: flex-end;
   align-items: flex-end;
   padding-bottom: 15px;
-  grid-template-columns: repeat(2, 1fr);
 
   @media (max-width: 800px) {
     height: 10%;
@@ -60,4 +69,9 @@ export const ModalFooter = styled.div`
 `
 export const Title = styled.h4`
   text-transform: uppercase;
+`
+export const SubTitle = styled.h5`
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
 `

@@ -6,8 +6,10 @@ import api from '../../../services/API'
 // import { useClientContext } from '../../../context/ClientContext'
 
 import Modal from '../../../components/modal'
-import Button01 from '../../../components/buttons/button01'
 import Radio from '../../../components/inputs/radio'
+import Button02 from '../../../components/buttons/button02'
+
+import I from '../../../utils/Icons'
 
 import { notifySuccess } from '../../../components/toastify'
 
@@ -54,7 +56,9 @@ const RepassAttendence = ({
           <S.Title> {clientName} </S.Title>
         </S.ModalHeader>
         <S.ModalMain>
-          <h6>Selecione o suporte</h6>
+          <S.SubTitle>
+            Selecione o suporte para qual deseja transferir o atendimento
+          </S.SubTitle>
 
           <form onChange={handleInputRadio}>
             <S.ModalMainGrid>
@@ -71,12 +75,18 @@ const RepassAttendence = ({
           </form>
         </S.ModalMain>
         <S.ModalFooter>
-          <Button01
+          <Button02
             label="Confirmar"
             bgColor="#79D279"
             onClick={() => handleRepassAttendence()}
+            icon={I.RiCheckboxCircleLine}
           />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
+          <Button02
+            label="Cancelar"
+            bgColor="#FF6666"
+            onClick={closeModal}
+            icon={I.RiCloseLine}
+          />
         </S.ModalFooter>
       </S.ModalContent>
     </Modal>
