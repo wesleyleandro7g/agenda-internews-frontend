@@ -6,7 +6,6 @@ import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
 import Input03 from '../../../components/inputs/input03'
-import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
 import List from '../../../components/list-items'
@@ -173,11 +172,17 @@ const RegisterActivities = () => {
             </S.ContentMain>
 
             <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
+              <Button02
+                label="Cadastrar"
+                bgColor="#79D279"
+                type="submit"
+                icon={I.RiCheckboxCircleLine}
+              />
+              <Button02
                 label="Cancelar"
                 bgColor="#FF6666"
                 onClick={() => toggleRegisterVisible()}
+                icon={I.RiCloseLine}
               />
             </S.ContentFooter>
           </S.ModalWrapper>
@@ -197,11 +202,17 @@ const RegisterActivities = () => {
             </S.ContentMain>
 
             <S.ContentFooter>
-              <Button01 label="Confirmar" bgColor="#79D279" type="submit" />
-              <Button01
+              <Button02
+                label="Confirmar"
+                bgColor="#79D279"
+                type="submit"
+                icon={I.RiCheckboxCircleLine}
+              />
+              <Button02
                 label="Cancelar"
                 bgColor="#FF6666"
                 onClick={() => setUpdateVisible(!updateVisible)}
+                icon={I.RiCloseLine}
               />
             </S.ContentFooter>
           </S.ModalWrapper>

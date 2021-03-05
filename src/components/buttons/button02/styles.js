@@ -24,6 +24,10 @@ export const Container = styled.button`
 
   opacity: ${props => (props.disabled ? '0.4' : '1')};
 
+  -webkit-box-shadow: 1px 1px 3px 0px rgba(179, 179, 179, 1);
+  -moz-box-shadow: 1px 1px 3px 0px rgba(179, 179, 179, 1);
+  box-shadow: 1px 1px 3px 0px rgba(179, 179, 179, 1);
+
   :hover {
     opacity: ${props => (props.disabled ? '0.4' : '0.7')};
   }

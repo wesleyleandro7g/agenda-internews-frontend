@@ -30,16 +30,34 @@ const Header = ({ page, alert, search }) => {
   return (
     <>
       <S.Container>
-        <S.WrapperItems>
-          <S.MenuIcon onClick={() => setOpen(!open)} />
-          <S.Title> {page} </S.Title>
-        </S.WrapperItems>
-        <S.WrapperItems>
-          {alert && <S.AlertIcon onClick={handleModalAlertVisible} />}
-          <S.Avatar onClick={handleModalUserVisible}>
-            <S.AvatarText> {sig} </S.AvatarText>
-          </S.Avatar>
-        </S.WrapperItems>
+        <S.ContainItems>
+          <S.WrapperItems>
+            <S.MenuIcon onClick={() => setOpen(!open)} />
+          </S.WrapperItems>
+
+          <S.WrapperItems>
+            <S.Title> {page} </S.Title>
+          </S.WrapperItems>
+        </S.ContainItems>
+
+        <S.ContainItems>
+          {alert && (
+            <S.WrapperItems>
+              <S.AlertIcon onClick={handleModalAlertVisible} />
+            </S.WrapperItems>
+          )}
+
+          <S.WrapperItems>
+            <Search onChange={search} />
+          </S.WrapperItems>
+
+          <S.WrapperItems>
+            <S.Avatar onClick={handleModalUserVisible}>
+              <S.AvatarText> {sig} </S.AvatarText>
+            </S.Avatar>
+            <h6>JANYELLE NAYARA PEREIRA SANTOS</h6>
+          </S.WrapperItems>
+        </S.ContainItems>
       </S.Container>
 
       <S.ContainerMobile>

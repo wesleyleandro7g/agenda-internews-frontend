@@ -19,6 +19,6 @@ export const Contain = styled.div`
 export const Content = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 0;
   background-color: #f5f5f5;
 `

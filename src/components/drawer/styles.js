@@ -22,7 +22,7 @@ export const SectionTitle = styled.section`
   justify-content: center;
   align-items: center;
 
-  height: 60px;
+  height: 65px;
 
   margin-bottom: 10px;
 

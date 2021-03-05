@@ -37,6 +37,7 @@ export const ContentMain = styled.div`
 `
 export const ContentFooter = styled.div`
   display: flex;
+  justify-content: flex-end;
   align-items: flex-end;
 
   width: 100%;

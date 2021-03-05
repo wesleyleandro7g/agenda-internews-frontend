@@ -5,9 +5,12 @@ export const Container = styled.div``
 export const SubHeader = styled.div`
   width: 100%;
   height: 10vh;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  padding: 0 10px;
 
   @media (max-width: 800px) {
     height: 5vh;
@@ -51,14 +54,26 @@ export const ScrollArea = styled.div`
 `
 export const ProvidersListWrapper = styled.button`
   width: 100%;
-  height: 40px;
+  height: 55px;
+
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 15px;
   align-items: center;
-  background-color: #fff;
-  padding: 5px;
-  margin-bottom: 1px;
   text-align: start;
+
+  padding: 5px;
+  border-bottom: 1px solid #e6e6e6;
+
+  background-color: #fff;
+
+  :first-child {
+    border-top: 1px solid #e6e6e6;
+  }
+
+  :hover {
+    background-color: #f5f5f5;
+  }
 
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
@@ -69,7 +84,7 @@ export const ProvidersInfo = styled.div`
   width: 100%;
   height: 40px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(8, 1fr);
   align-items: center;
 
   @media (max-width: 800px) {
@@ -77,7 +92,7 @@ export const ProvidersInfo = styled.div`
   }
 `
 export const ProvidersInfoText = styled.h6`
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   text-transform: uppercase;
 
