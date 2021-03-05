@@ -51,7 +51,7 @@ export const InputsClientData = [
     id: 8,
     name: 'mensalidade',
     label: 'Mensalidade (R$)',
-    type: 'number'
+    type: 'text'
   }
 ]
 

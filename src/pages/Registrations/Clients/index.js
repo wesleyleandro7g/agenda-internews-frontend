@@ -9,6 +9,11 @@ import Input03 from '../../../components/inputs/input03'
 import Input04 from '../../../components/inputs/input04'
 import Button02 from '../../../components/buttons/button02'
 
+import ToastContainer, {
+  notifyError,
+  notifySuccess
+} from '../../../components/toastify'
+
 import I from '../../../utils/Icons'
 
 import { InputsClientData, ModuleOptions } from './data'
@@ -44,17 +49,17 @@ const RegisterClient = () => {
         .post('/clients/create', data)
         .then(res => {
           if (res.status === 200) {
-            alert('Cliente cadastrado!')
+            notifySuccess('Cliente cadastrado!')
             formRef.current.setErrors({})
 
             reset()
           } else if (res.status === 400) {
-            alert('Erro! Cliente já cadastrado!')
+            notifyError('Erro! Cliente já cadastrado!')
           }
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
+            notifyError('Houve um erro inexperado! Tente novamente.')
             console.log(err)
           }
         })
@@ -125,6 +130,8 @@ const RegisterClient = () => {
           </S.RegisterButtonWrapper>
         </S.Content>
       </Form>
+
+      <ToastContainer />
     </Layout>
   )
 }

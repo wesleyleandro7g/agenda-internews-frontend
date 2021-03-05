@@ -33,13 +33,18 @@ export const DataWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
+export const ContainScrollArea = styled.div`
+  width: 100%;
+  overflow: auto;
+`
 export const ScrollArea = styled(Scroll)`
   width: 100%;
   height: 70vh;
+
   margin-top: 10px;
 
   @media (max-width: 800px) {
-    height: 75vh;
+    height: 100%;
   }
 `
 export const ProvidersListWrapper = styled.button`

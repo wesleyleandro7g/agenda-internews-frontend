@@ -173,36 +173,38 @@ const Clients = () => {
                 ))}
               </S.ProvidersInfo>
 
-              <S.ScrollArea speed={0.6}>
-                {filtered.map(item => (
-                  <S.ProvidersListWrapper
-                    key={item.id}
-                    onClick={() => handleDetails(item)}
-                  >
-                    <S.ProvidersInfoTextMobile>
-                      {item.razao_social}
-                    </S.ProvidersInfoTextMobile>
-                    <S.ProvidersInfoText>
-                      {item.cidade.descricao}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>
-                      {item.atividade.descricao}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoTextMobileDetails>
-                      {item.cnpj}
-                    </S.ProvidersInfoTextMobileDetails>
-                    <S.ProvidersInfoText>
-                      {item.identificador_internews}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoText>
-                      {item.identificador_servidor}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoTextMobileDetails>
-                      {item.suporte.nome}
-                    </S.ProvidersInfoTextMobileDetails>
-                  </S.ProvidersListWrapper>
-                ))}
-              </S.ScrollArea>
+              <S.ContainScrollArea>
+                <S.ScrollArea>
+                  {filtered.map(item => (
+                    <S.ProvidersListWrapper
+                      key={item.id}
+                      onClick={() => handleDetails(item)}
+                    >
+                      <S.ProvidersInfoTextMobile>
+                        {item.razao_social}
+                      </S.ProvidersInfoTextMobile>
+                      <S.ProvidersInfoText>
+                        {item.cidade.descricao}
+                      </S.ProvidersInfoText>
+                      <S.ProvidersInfoText>
+                        {item.atividade.descricao}
+                      </S.ProvidersInfoText>
+                      <S.ProvidersInfoTextMobileDetails>
+                        {item.cnpj}
+                      </S.ProvidersInfoTextMobileDetails>
+                      <S.ProvidersInfoText>
+                        {item.identificador_internews}
+                      </S.ProvidersInfoText>
+                      <S.ProvidersInfoText>
+                        {item.identificador_servidor}
+                      </S.ProvidersInfoText>
+                      <S.ProvidersInfoTextMobileDetails>
+                        {item.suporte.nome}
+                      </S.ProvidersInfoTextMobileDetails>
+                    </S.ProvidersListWrapper>
+                  ))}
+                </S.ScrollArea>
+              </S.ContainScrollArea>
             </S.DataWrapper>
             <Filter
               toggle={activeFilters}

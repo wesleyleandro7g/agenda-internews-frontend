@@ -2,14 +2,19 @@ import styled from 'styled-components'
 import I from '../../utils/Icons'
 
 export const Container = styled.header`
+  width: 100%;
+  height: 56px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  height: 56px;
+
   top: 0%;
   padding: 0 10px;
-  background-color: #e6e6e6;
+
+  background-color: #fff;
+
+  border-bottom: 1px solid #dadada;
 
   @media (max-width: 800px) {
     display: none;

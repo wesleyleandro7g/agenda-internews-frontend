@@ -33,11 +33,12 @@ const BarChartComponent = ({ data }) => {
             textTransform: 'uppercase'
           }}
         />
-        <CartesianGrid strokeDasharray="2 2" />
+        <CartesianGrid strokeDasharray="2 2" vertical={false} />
         <Bar
           dataKey="quantidade"
           fill="#006699" // 8884d8
-          background={{ fill: '#eee' }}
+          background={{ fill: 'transparent' }}
+          barSize={100}
         />
       </BarChart>
     </ResponsiveContainer>
