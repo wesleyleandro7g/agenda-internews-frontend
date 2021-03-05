@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Scroll from 'react-scrollbar'
+// import Scroll from 'react-scrollbar'
 
 export const Container = styled.div``
 export const SubHeader = styled.div`
@@ -37,14 +37,16 @@ export const ContainScrollArea = styled.div`
   width: 100%;
   overflow: auto;
 `
-export const ScrollArea = styled(Scroll)`
+export const ScrollArea = styled.div`
   width: 100%;
   height: 70vh;
+
+  overflow: auto;
 
   margin-top: 10px;
 
   @media (max-width: 800px) {
-    height: 100%;
+    height: 80vh;
   }
 `
 export const ProvidersListWrapper = styled.button`

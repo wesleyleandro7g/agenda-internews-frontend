@@ -88,8 +88,8 @@ export const TextOptions = styled.h6`
   margin-left: 15px;
 `
 export const Img = styled.img`
-  width: 98%;
-  height: 98%;
+  width: 60px;
+  height: 60px;
   margin: 0;
   padding: 0;
 `
