@@ -56,12 +56,12 @@ const CloseAttendence = ({
 
   return (
     <Modal visible={modalCloseVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
+      <S.Container>
+        <S.Header>
           <S.Title> {clientName} </S.Title>
-        </S.ModalHeader>
-        <S.ModalMain>
-          <S.SubTitle>Informe o que foi feito neste atendimento</S.SubTitle>
+        </S.Header>
+        <S.Main>
+          <S.SubTitle>Selecione o que foi feito no atendimento:</S.SubTitle>
           <S.ScrollReasons>
             <S.ModalMainGrid>
               {reasonsClosing.map(item => (
@@ -76,7 +76,7 @@ const CloseAttendence = ({
               ))}
             </S.ModalMainGrid>
           </S.ScrollReasons>
-        </S.ModalMain>
+        </S.Main>
         <S.ModalFooter>
           <Button02
             label="Confirmar"
@@ -91,7 +91,7 @@ const CloseAttendence = ({
             icon={I.RiCloseLine}
           />
         </S.ModalFooter>
-      </S.ModalContent>
+      </S.Container>
     </Modal>
   )
 }
