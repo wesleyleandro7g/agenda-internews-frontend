@@ -14,7 +14,7 @@ const Header = ({
   page,
   alert,
   search,
-  newAttendence,
+  register,
   attendenceRepports,
   attendenceRefresh
 }) => {
@@ -55,13 +55,13 @@ const Header = ({
             </S.WrapperItems>
           )}
 
-          {newAttendence && (
+          {register && (
             <S.WrapperItems>
               <I.RiAddCircleLine
                 size={22}
                 cursor="pointer"
                 color="#333"
-                onClick={newAttendence}
+                onClick={register}
               />
             </S.WrapperItems>
           )}

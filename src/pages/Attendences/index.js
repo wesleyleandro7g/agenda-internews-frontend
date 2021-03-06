@@ -246,7 +246,7 @@ const Attendences = () => {
     <Layout
       page="Atendimentos"
       search={e => setSearchInput(e.target.value)}
-      newAttendence={() => setNewAttendenceVisible(!newAttendenceVisible)}
+      register={() => setNewAttendenceVisible(!newAttendenceVisible)}
       attendenceRepports={() => history.push('atendimentos/relatório')}
       attendenceRefresh={() => handleRefresh()}
     >

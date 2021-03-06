@@ -12,7 +12,7 @@ const Layout = ({
   page,
   alert = false,
   search,
-  newAttendence,
+  register,
   attendenceRepports,
   attendenceRefresh
 }) => {
@@ -26,7 +26,7 @@ const Layout = ({
           page={page}
           alert={alert}
           search={search}
-          newAttendence={newAttendence}
+          register={register}
           attendenceRepports={attendenceRepports}
           attendenceRefresh={attendenceRefresh}
         />
