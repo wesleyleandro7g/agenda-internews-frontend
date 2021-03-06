@@ -51,11 +51,11 @@ const RepassAttendence = ({
 
   return (
     <Modal visible={modalRepassVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
+      <S.Container>
+        <S.Header>
           <S.Title> {clientName} </S.Title>
-        </S.ModalHeader>
-        <S.ModalMain>
+        </S.Header>
+        <S.Main>
           <S.SubTitle>
             Selecione o suporte para qual deseja transferir o atendimento
           </S.SubTitle>
@@ -73,7 +73,7 @@ const RepassAttendence = ({
               ))}
             </S.ModalMainGrid>
           </form>
-        </S.ModalMain>
+        </S.Main>
         <S.ModalFooter>
           <Button02
             label="Confirmar"
@@ -88,7 +88,7 @@ const RepassAttendence = ({
             icon={I.RiCloseLine}
           />
         </S.ModalFooter>
-      </S.ModalContent>
+      </S.Container>
     </Modal>
   )
 }
