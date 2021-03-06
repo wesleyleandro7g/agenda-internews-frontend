@@ -132,21 +132,13 @@ const RegisterActivities = () => {
   }
 
   return (
-    <Layout page="Ramos de Atividade">
+    <Layout page="Ramos de Atividade" register={() => toggleRegisterVisible()}>
       <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
+        <S.InfoContainer>
+          <S.Text> Descrição </S.Text>
+        </S.InfoContainer>
 
-        <S.Info>
-          <S.Text> descrição </S.Text>
-        </S.Info>
-
-        <S.ScrollArea speed={0.6}>
+        <S.ScrollArea>
           {industries &&
             industries.map(item => (
               <List
@@ -163,15 +155,15 @@ const RegisterActivities = () => {
       <Form ref={formRef} onSubmit={handleRegisterActivite}>
         <Modal visible={registerVisible}>
           <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Novo ramo de atividade</h6>
-            </S.ContentHeader>
+            <S.Header>
+              <S.Title>Novo ramo de atividade</S.Title>
+            </S.Header>
 
-            <S.ContentMain>
+            <S.Main>
               <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
+            </S.Main>
 
-            <S.ContentFooter>
+            <S.Footer>
               <Button02
                 label="Cadastrar"
                 bgColor="#79D279"
@@ -184,7 +176,7 @@ const RegisterActivities = () => {
                 onClick={() => toggleRegisterVisible()}
                 icon={I.RiCloseLine}
               />
-            </S.ContentFooter>
+            </S.Footer>
           </S.ModalWrapper>
         </Modal>
       </Form>
@@ -193,15 +185,15 @@ const RegisterActivities = () => {
       <Form ref={formRef} onSubmit={handleUpdate}>
         <Modal visible={updateVisible}>
           <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Edição de ramo de atividade</h6>
-            </S.ContentHeader>
+            <S.Header>
+              <S.Title>Edição de ramo de atividade</S.Title>
+            </S.Header>
 
-            <S.ContentMain>
+            <S.Main>
               <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
+            </S.Main>
 
-            <S.ContentFooter>
+            <S.Footer>
               <Button02
                 label="Confirmar"
                 bgColor="#79D279"
@@ -214,7 +206,7 @@ const RegisterActivities = () => {
                 onClick={() => setUpdateVisible(!updateVisible)}
                 icon={I.RiCloseLine}
               />
-            </S.ContentFooter>
+            </S.Footer>
           </S.ModalWrapper>
         </Modal>
       </Form>

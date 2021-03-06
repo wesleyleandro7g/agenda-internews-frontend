@@ -165,7 +165,7 @@ const Clients = () => {
               </S.ProvidersInfo>
 
               <S.ContainScrollArea>
-                <S.ScrollArea speed={0.8}>
+                <S.ScrollArea>
                   {filtered.map(item => (
                     <S.ProvidersListWrapper
                       key={item.id}

@@ -21,38 +21,6 @@ export const OptionsWraper = styled.div`
     display: none;
   }
 `
-// export const SubHeader = styled.div`
-//   width: 100%;
-//   height: 10vh;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-
-//   @media (max-width: 800px) {
-//     height: 5vh;
-//   }
-// `
-// export const ItemsLeftSubHeader = styled.div`
-//   width: 50%;
-//   display: flex;
-//   align-items: center;
-
-//   @media (max-width: 800px) {
-//     display: none;
-//   }
-// `
-// export const ItemsRigthSubHeader = styled.div`
-//   width: 50%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: flex-end;
-//   align-items: center;
-
-//   @media (max-width: 800px) {
-//     width: 100%;
-//     display: none;
-//   }
-// `
 export const MainWrapper = styled.div`
   display: flex;
   flex-direction: row;

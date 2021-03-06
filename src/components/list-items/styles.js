@@ -9,16 +9,17 @@ export const Container = styled.div`
   align-items: center;
   text-align: start;
 
-  padding: 5px;
-  margin-bottom: 1px;
-  border-bottom: 1px solid #dadada;
-  border-right: 1px solid #dadada;
-  border-radius: 3px;
+  padding: 0 10px;
+  border-bottom: 1px solid #e6e6e6;
 
   background-color: #fff;
 
+  :first-child {
+    border-top: 1px solid #e6e6e6;
+  }
+
   :hover {
-    background-color: #ffe;
+    background-color: #f5f5f5;
   }
 `
 
@@ -27,6 +28,6 @@ export const Content = styled.div`
 `
 export const Text = styled.h6`
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
 `
