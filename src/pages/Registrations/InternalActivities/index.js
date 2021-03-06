@@ -5,10 +5,8 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
+import RegisterAndUpdate from '../../../components/register-and-update'
 
 import I from '../../../utils/Icons'
 
@@ -101,26 +99,11 @@ const RegisterInternalActivities = () => {
       </S.Container>
 
       <Form ref={formRef} onSubmit={handleRegisterActivite}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Nova Atividade</h6>
-            </S.ContentHeader>
-
-            <S.ContentMain>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
-
-            <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-              />
-            </S.ContentFooter>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleRegisterVisible={() => toggleRegisterVisible()}
+          title="Cadastrar atividade interna"
+          visible={registerVisible}
+        />
       </Form>
     </Layout>
   )
