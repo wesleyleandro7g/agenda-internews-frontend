@@ -9,7 +9,7 @@ import api from '../../services/API'
 import { useClientContext } from '../../context/ClientContext'
 
 import Layout from '../../components/layout'
-import Search from '../../components/search'
+// import Search from '../../components/search'
 import Filter from '../../components/filter'
 import SelectOptions from '../../components/select-options'
 
@@ -28,7 +28,7 @@ const Clients = () => {
   const history = useHistory()
   const [data, setData] = useState([])
   const [supports, setSupports] = useState([])
-  const [totalClients, setTotalClients] = useState('')
+  // const [totalClients, setTotalClients] = useState('')
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
@@ -73,7 +73,7 @@ const Clients = () => {
     setLoading(false)
     api.get('/clients/index').then(res => {
       setData(res.data.clients)
-      setTotalClients(res.data.count)
+      // setTotalClients(res.data.count)
       setFiltered(res.data.clients)
       setDataClientContext(res.data.clients)
     })
@@ -88,7 +88,7 @@ const Clients = () => {
     setLoading(false)
     api.get('/clients/index').then(res => {
       setData(res.data.clients)
-      setTotalClients(res.data.count)
+      // setTotalClients(res.data.count)
       setFiltered(res.data.clients)
       setDataClientContext(res.data.clients)
     })
@@ -134,14 +134,14 @@ const Clients = () => {
   return (
     <Layout page="Clientes" search={e => setSearchInput(e.target.value)}>
       <S.Container>
-        <S.SubHeader>
+        {/* <S.SubHeader>
           <S.TextTotalClients>
             Total de clientes: {totalClients}
           </S.TextTotalClients>
           <S.ItemsRigthSubHeader>
             <Search onChange={e => setSearchInput(e.target.value)} />
           </S.ItemsRigthSubHeader>
-        </S.SubHeader>
+        </S.SubHeader> */}
 
         <S.OptionsWraper>
           <S.Button onClick={() => handleClients()}>

@@ -57,12 +57,12 @@ export const ProvidersListWrapper = styled.button`
   height: 55px;
 
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 15px;
   align-items: center;
   text-align: start;
 
-  padding: 5px;
+  padding: 0 10px;
   border-bottom: 1px solid #e6e6e6;
 
   background-color: #fff;
@@ -83,9 +83,12 @@ export const ProvidersListWrapper = styled.button`
 export const ProvidersInfo = styled.div`
   width: 100%;
   height: 40px;
+
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
+
+  padding: 0 10px;
 
   @media (max-width: 800px) {
     display: none;
@@ -108,7 +111,7 @@ export const ProvidersInfoTextMobile = styled(ProvidersInfoText)`
   }
 `
 export const ProvidersInfoTextMobileDetails = styled(ProvidersInfoTextMobile)`
-  margin-left: 5px;
+  /* margin-left: 5px; */
   font-size: 12px;
   font-weight: 400;
 `
@@ -120,9 +123,19 @@ export const AnimationWrapper = styled.div`
   align-items: center;
 `
 export const OptionsWraper = styled.div`
+  height: 50px;
+
   display: flex;
   justify-content: flex-end;
+
   border-bottom: 1px solid #d9d9d9;
+
+  background: rgb(99, 176, 194);
+  background: linear-gradient(
+    90deg,
+    rgba(99, 176, 194, 1) 0%,
+    rgba(3, 76, 111, 1) 100%
+  );
 
   @media (max-width: 800px) {
     display: none;
@@ -139,10 +152,11 @@ export const Button = styled.button`
   }
 `
 export const Text = styled.h6`
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
   font-style: italic;
+  color: #fff;
 `
 export const TextTotalClients = styled.h5`
   @media (max-width: 800px) {

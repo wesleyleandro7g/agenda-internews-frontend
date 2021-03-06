@@ -11,8 +11,9 @@ export const Button = styled.button`
   }
 `
 export const Text = styled.h6`
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
   font-style: italic;
+  color: #fff;
 `
