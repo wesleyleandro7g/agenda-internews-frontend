@@ -8,7 +8,7 @@ import I from '../../utils/Icons'
 
 import * as S from './styles'
 
-const RegisterAndUpdate = ({ visible, title, toggleRegisterVisible }) => {
+const RegisterAndUpdate = ({ visible, title, toggleVisible }) => {
   return (
     <Modal visible={visible}>
       <S.Container>
@@ -30,7 +30,7 @@ const RegisterAndUpdate = ({ visible, title, toggleRegisterVisible }) => {
           <Button02
             label="Cancelar"
             bgColor="#FF6666"
-            onClick={toggleRegisterVisible}
+            onClick={toggleVisible}
             icon={I.RiCloseLine}
           />
         </S.Footer>

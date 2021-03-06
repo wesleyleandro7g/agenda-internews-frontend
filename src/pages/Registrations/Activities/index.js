@@ -5,20 +5,17 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
 import List from '../../../components/list-items'
 import Confirmation from '../../../components/confirmation'
+import RegisterAndUpdate from '../../../components/register-and-update'
 
 import ToastContainer, {
   notifyError,
   notifySuccess
 } from '../../../components/toastify'
 
-import I from '../../../utils/Icons'
-
 import * as S from './styles'
+
 const RegisterActivities = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
@@ -153,62 +150,20 @@ const RegisterActivities = () => {
 
       {/* Modal com formulário de cadastro de um novo ramo de atividade */}
       <Form ref={formRef} onSubmit={handleRegisterActivite}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.Header>
-              <S.Title>Novo ramo de atividade</S.Title>
-            </S.Header>
-
-            <S.Main>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.Main>
-
-            <S.Footer>
-              <Button02
-                label="Cadastrar"
-                bgColor="#79D279"
-                type="submit"
-                icon={I.RiCheckboxCircleLine}
-              />
-              <Button02
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-                icon={I.RiCloseLine}
-              />
-            </S.Footer>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleRegisterVisible()}
+          title="Novo ramo de atividade"
+          visible={registerVisible}
+        />
       </Form>
 
       {/* Modal com formulário de edição de um ramo de atividade */}
       <Form ref={formRef} onSubmit={handleUpdate}>
-        <Modal visible={updateVisible}>
-          <S.ModalWrapper>
-            <S.Header>
-              <S.Title>Edição de ramo de atividade</S.Title>
-            </S.Header>
-
-            <S.Main>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.Main>
-
-            <S.Footer>
-              <Button02
-                label="Confirmar"
-                bgColor="#79D279"
-                type="submit"
-                icon={I.RiCheckboxCircleLine}
-              />
-              <Button02
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => setUpdateVisible(!updateVisible)}
-                icon={I.RiCloseLine}
-              />
-            </S.Footer>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleUpdateVisible()}
+          title="Edição de ramo de atividade"
+          visible={updateVisible}
+        />
       </Form>
 
       {/* Modal de confirmação */}

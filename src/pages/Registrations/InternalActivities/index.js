@@ -100,7 +100,7 @@ const RegisterInternalActivities = () => {
 
       <Form ref={formRef} onSubmit={handleRegisterActivite}>
         <RegisterAndUpdate
-          toggleRegisterVisible={() => toggleRegisterVisible()}
+          toggleVisible={() => toggleRegisterVisible()}
           title="Cadastrar atividade interna"
           visible={registerVisible}
         />
