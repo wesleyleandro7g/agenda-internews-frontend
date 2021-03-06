@@ -117,3 +117,6 @@ export const Title = styled.h3`
     font-size: 16px;
   }
 `
+export const UserName = styled.h6`
+  text-transform: uppercase;
+`

@@ -16,6 +16,7 @@ const Header = ({ page, alert, search }) => {
   const { open, setOpen } = useDrawer()
 
   const sig = localStorage.getItem('user-sig')
+  const userName = localStorage.getItem('user-name')
 
   function handleModalAlertVisible() {
     setModalAlertVisible(!modalAlertVisible)
@@ -57,7 +58,7 @@ const Header = ({ page, alert, search }) => {
             <S.Avatar onClick={handleModalUserVisible}>
               <S.AvatarText> {sig} </S.AvatarText>
             </S.Avatar>
-            <h6>JANYELLE NAYARA PEREIRA SANTOS</h6>
+            <S.UserName> {userName} </S.UserName>
           </S.WrapperItems>
         </S.ContainItems>
       </S.Container>
