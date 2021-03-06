@@ -6,9 +6,10 @@ import React, { useState, useEffect } from 'react'
 import api from '../../../services/API'
 
 import Modal from '../../../components/modal'
-import Button01 from '../../../components/buttons/button01'
+import Button02 from '../../../components/buttons/button02'
 import CheckBox from '../../../components/inputs/checkbox'
 import Radio from '../../../components/inputs/radio'
+import CircleBtn from '../../../components/buttons/circle-button'
 
 import { notifySuccess, notifyError } from '../../../components/toastify'
 
@@ -128,12 +129,13 @@ const OpenNewAttendence = ({
 
   return (
     <Modal visible={newAttendenceVisible}>
-      <S.ModalWrapper>
-        <S.ModalHeaderBig>
-          <S.TitleCard>Novo atendimento</S.TitleCard>
-          <I.RiCloseLine cursor="pointer" size={28} onClick={cancelable} />
-        </S.ModalHeaderBig>
-        <S.MainWrapper>
+      <S.Container>
+        <S.Header>
+          <S.Title>Novo atendimento</S.Title>
+
+          <CircleBtn icon={I.RiCloseLine} onClick={cancelable} />
+        </S.Header>
+        <S.Main>
           {selected ? (
             <S.LeftWrapper>
               <S.ClientSelected>
@@ -221,20 +223,22 @@ const OpenNewAttendence = ({
             </S.ItemsRightTop>
 
             <S.ModalFooter>
-              <Button01
+              <Button02
                 label="Confirmar"
                 bgColor="#79D279"
+                icon={I.RiCheckboxCircleLine}
                 onClick={() => handleNewAttendence()}
               />
-              <Button01
+              <Button02
                 label="Cancelar"
                 bgColor="#FF6666"
+                icon={I.RiCloseLine}
                 onClick={cancelable}
               />
             </S.ModalFooter>
           </S.RightWrapper>
-        </S.MainWrapper>
-      </S.ModalWrapper>
+        </S.Main>
+      </S.Container>
 
       {/* <ToastContainer /> */}
     </Modal>
