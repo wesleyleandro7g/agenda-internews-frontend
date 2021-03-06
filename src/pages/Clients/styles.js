@@ -46,8 +46,6 @@ export const ScrollArea = styled.div`
 
   overflow: auto;
 
-  margin-top: 10px;
-
   @media (max-width: 800px) {
     height: 80vh;
   }
@@ -58,7 +56,7 @@ export const ProvidersListWrapper = styled.button`
 
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 15px;
+  grid-gap: 30px;
   align-items: center;
   text-align: start;
 
@@ -86,9 +84,12 @@ export const ProvidersInfo = styled.div`
 
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 30px;
   align-items: center;
 
   padding: 0 10px;
+
+  background-color: #c3c9d5;
 
   @media (max-width: 800px) {
     display: none;
