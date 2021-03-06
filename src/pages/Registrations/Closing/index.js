@@ -5,18 +5,16 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
 import List from '../../../components/list-items'
+import RegisterAndUpdate from '../../../components/register-and-update'
+
 import ToastContainer, {
   notifySuccess,
   notifyError
 } from '../../../components/toastify'
 
-import I from '../../../utils/Icons'
-
 import * as S from './styles'
+
 const RegisterClosing = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
@@ -127,63 +125,22 @@ const RegisterClosing = () => {
         </S.ScrollArea>
       </S.Container>
 
+      {/* Modal para cadastro de um motivo de fechamento */}
       <Form ref={formRef} onSubmit={handleRegisterTool}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.Header>
-              <S.Title>Novo motivo</S.Title>
-            </S.Header>
-
-            <S.Main>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.Main>
-
-            <S.Footer>
-              <Button02
-                label="Cadastrar"
-                bgColor="#79D279"
-                type="submit"
-                icon={I.RiCheckboxCircleLine}
-              />
-              <Button02
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-                icon={I.RiCloseLine}
-              />
-            </S.Footer>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleRegisterVisible()}
+          title="Novo motivo"
+          visible={registerVisible}
+        />
       </Form>
 
       {/* Modal de edição de motivo de fechamento */}
       <Form ref={formRef} onSubmit={handleUpdate}>
-        <Modal visible={updateVisible}>
-          <S.ModalWrapper>
-            <S.Header>
-              <S.Title>Edite o motivo</S.Title>
-            </S.Header>
-
-            <S.Main>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.Main>
-
-            <S.Footer>
-              <Button02
-                label="Confirmar"
-                bgColor="#79D279"
-                type="submit"
-                icon={I.RiCheckboxCircleLine}
-              />
-              <Button02
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleUpdateVisible()}
-                icon={I.RiCloseLine}
-              />
-            </S.Footer>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleUpdateVisible()}
+          title="Edite o motivo"
+          visible={updateVisible}
+        />
       </Form>
 
       <ToastContainer />
