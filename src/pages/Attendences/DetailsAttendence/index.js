@@ -31,12 +31,13 @@ const DetailsAttendence = ({
 
   return (
     <Modal visible={modalDetailsVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
+      <S.Container>
+        <S.Header>
           <S.Title>
             {attendenceDataTemp.cliente &&
               attendenceDataTemp.cliente.razao_social}
           </S.Title>
+
           <S.StatusContent
             status={attendenceDataTemp.status && attendenceDataTemp.status.id}
           >
@@ -44,8 +45,8 @@ const DetailsAttendence = ({
               {attendenceDataTemp.status && attendenceDataTemp.status.descricao}
             </S.TextStatus>
           </S.StatusContent>
-        </S.ModalHeader>
-        <S.ModalMain>
+        </S.Header>
+        <S.Main>
           <S.TextDetailsModal>
             <S.Span>Tipo de solicitação: </S.Span>
             {attendenceDataTemp.abertura &&
@@ -75,7 +76,7 @@ const DetailsAttendence = ({
               {convertDate(attendenceDataTemp.updatedAt)}
             </S.TextDetailsModal>
           )}
-        </S.ModalMain>
+        </S.Main>
         {attendenceDataTemp.status && attendenceDataTemp.status.id !== 4 ? (
           <S.ModalFooter>
             {attendenceDataTemp.status && attendenceDataTemp.status.id === 1 ? (
@@ -125,7 +126,7 @@ const DetailsAttendence = ({
             />
           </S.ModalFooter>
         )}
-      </S.ModalContent>
+      </S.Container>
     </Modal>
   )
 }
