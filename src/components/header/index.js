@@ -10,7 +10,14 @@ import Search from '../search-header'
 
 import * as S from './styles'
 
-const Header = ({ page, alert, search }) => {
+const Header = ({
+  page,
+  alert,
+  search,
+  newAttendence,
+  attendenceRepports,
+  attendenceRefresh
+}) => {
   const [modalUserVisible, setModalUserVisible] = useState(false)
   const [modalAlertVisible, setModalAlertVisible] = useState(false)
   const { open, setOpen } = useDrawer()
@@ -45,6 +52,39 @@ const Header = ({ page, alert, search }) => {
           {alert && (
             <S.WrapperItems>
               <S.AlertIcon onClick={handleModalAlertVisible} />
+            </S.WrapperItems>
+          )}
+
+          {newAttendence && (
+            <S.WrapperItems>
+              <I.RiAddCircleLine
+                size={22}
+                cursor="pointer"
+                color="#333"
+                onClick={newAttendence}
+              />
+            </S.WrapperItems>
+          )}
+
+          {attendenceRepports && (
+            <S.WrapperItems>
+              <I.RiFileTextLine
+                size={22}
+                cursor="pointer"
+                color="#333"
+                onClick={attendenceRepports}
+              />
+            </S.WrapperItems>
+          )}
+
+          {attendenceRefresh && (
+            <S.WrapperItems>
+              <I.RiRefreshLine
+                size={22}
+                cursor="pointer"
+                color="#333"
+                onClick={attendenceRefresh}
+              />
             </S.WrapperItems>
           )}
 

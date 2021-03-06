@@ -11,8 +11,6 @@ import api from '../../services/API'
 import { useClientContext } from '../../context/ClientContext'
 
 import Layout from '../../components/layout'
-import Search from '../../components/search'
-import Button02 from '../../components/buttons/button02'
 import Fab from '../../components/buttons/fab'
 import SelectOptions from '../../components/select-options'
 
@@ -37,7 +35,6 @@ import * as S from './styles'
 
 const Attendences = () => {
   const [attendenceData, setAttendenceData] = useState([])
-  const [totalAttendences, setTotalAttendeces] = useState('')
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -110,7 +107,6 @@ const Attendences = () => {
       .then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
-        setTotalAttendeces(res.data.count)
       })
 
     api.get('/clients/index').then(res => {
@@ -125,7 +121,6 @@ const Attendences = () => {
       api.get('/attendence/index/index').then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
-        setTotalAttendeces(res.data.count)
       })
     } else {
       api
@@ -135,7 +130,6 @@ const Attendences = () => {
         .then(res => {
           setAttendenceData(res.data.attendences)
           setFiltered(res.data.attendences)
-          setTotalAttendeces(res.data.count)
         })
     }
   }
@@ -145,7 +139,6 @@ const Attendences = () => {
       api.get('/attendence/index/closed').then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
-        setTotalAttendeces(res.data.count)
       })
     } else {
       api
@@ -155,7 +148,6 @@ const Attendences = () => {
         .then(res => {
           setAttendenceData(res.data.attendences)
           setFiltered(res.data.attendences)
-          setTotalAttendeces(res.data.count)
         })
     }
   }
@@ -167,7 +159,6 @@ const Attendences = () => {
     api.get('/attendence/index/index').then(res => {
       setAttendenceData(res.data.attendences)
       setFiltered(res.data.attendences)
-      setTotalAttendeces(res.data.count)
     })
 
     api.get('/clients/index').then(res => {
@@ -252,36 +243,14 @@ const Attendences = () => {
   }
 
   return (
-    <Layout page="Atendimentos" search={e => setSearchInput(e.target.value)}>
+    <Layout
+      page="Atendimentos"
+      search={e => setSearchInput(e.target.value)}
+      newAttendence={() => setNewAttendenceVisible(!newAttendenceVisible)}
+      attendenceRepports={() => history.push('atendimentos/relatório')}
+      attendenceRefresh={() => handleRefresh()}
+    >
       <S.Container>
-        <S.SubHeader>
-          <S.TextTotalAttendences>
-            Total de solicitações: {totalAttendences}
-          </S.TextTotalAttendences>
-          <S.ItemsLeftSubHeader>
-            <Button02
-              label="Abrir atendimento"
-              icon={I.RiAddCircleLine}
-              onClick={() => setNewAttendenceVisible(!newAttendenceVisible)}
-            />
-
-            <Button02
-              label="Relatório"
-              icon={I.RiFileTextLine}
-              onClick={() => history.push('atendimentos/relatório')}
-            />
-            <h5>Total de atendimentos: {totalAttendences} </h5>
-          </S.ItemsLeftSubHeader>
-
-          <S.ItemsRigthSubHeader>
-            <Search onChange={e => setSearchInput(e.target.value)} />
-            <I.RiRefreshLine
-              onClick={() => handleRefresh()}
-              cursor="pointer"
-              style={{ marginLeft: 5 }}
-            />
-          </S.ItemsRigthSubHeader>
-        </S.SubHeader>
         <S.OptionsWraper>
           <S.Button onClick={() => handleAttendences()}>
             <S.Text>Todos</S.Text>
@@ -309,39 +278,39 @@ const Attendences = () => {
             <S.DataWrapper>
               <S.ProvidersInfo>
                 {DataInfoOptions.map(item => (
-                  <S.ProvidersInfoText key={item.id}>
-                    {item.title}
-                  </S.ProvidersInfoText>
+                  <S.InfoTextTitle key={item.id}>{item.title}</S.InfoTextTitle>
                 ))}
               </S.ProvidersInfo>
-              <S.ScrollArea speed={0.6}>
-                {filtered.map(item => (
-                  <S.ProvidersListWrapper
-                    key={item.id}
-                    onClick={() => handlePreviewAttendence(item)}
-                    statusBorder={item.status.id}
-                  >
-                    <S.ProvidersInfoTextMobile>
-                      {item.cliente.razao_social}
-                    </S.ProvidersInfoTextMobile>
-                    <S.ProvidersInfoTextMobileDetails>
-                      {item.nome_solicitante}
-                    </S.ProvidersInfoTextMobileDetails>
-                    <S.ProvidersInfoTextMobileDetails>
-                      {item.contato_solicitante}
-                    </S.ProvidersInfoTextMobileDetails>
-                    <S.ProvidersInfoTextMobileDetails>
-                      {item.abertura.descricao}
-                    </S.ProvidersInfoTextMobileDetails>
-                    <S.ProvidersInfoText>
-                      {item.status.descricao}
-                    </S.ProvidersInfoText>
-                    <S.ProvidersInfoTextMobileDetails>
-                      {convertDate(item.createdAt)}
-                    </S.ProvidersInfoTextMobileDetails>
-                  </S.ProvidersListWrapper>
-                ))}
-              </S.ScrollArea>
+              <S.ContainScrollArea>
+                <S.ScrollArea>
+                  {filtered.map(item => (
+                    <S.ProvidersListWrapper
+                      key={item.id}
+                      onClick={() => handlePreviewAttendence(item)}
+                      statusBorder={item.status.id}
+                    >
+                      <S.ProvidersInfoTextMobile>
+                        {item.cliente.razao_social}
+                      </S.ProvidersInfoTextMobile>
+                      <S.ProvidersInfoTextMobileDetails>
+                        {item.nome_solicitante}
+                      </S.ProvidersInfoTextMobileDetails>
+                      <S.ProvidersInfoTextMobileDetails>
+                        {item.contato_solicitante}
+                      </S.ProvidersInfoTextMobileDetails>
+                      <S.ProvidersInfoTextMobileDetails>
+                        {item.abertura.descricao}
+                      </S.ProvidersInfoTextMobileDetails>
+                      <S.ProvidersInfoText>
+                        {item.status.descricao}
+                      </S.ProvidersInfoText>
+                      <S.ProvidersInfoTextMobileDetails>
+                        {convertDate(item.createdAt)}
+                      </S.ProvidersInfoTextMobileDetails>
+                    </S.ProvidersListWrapper>
+                  ))}
+                </S.ScrollArea>
+              </S.ContainScrollArea>
             </S.DataWrapper>
           </S.MainWrapper>
         )

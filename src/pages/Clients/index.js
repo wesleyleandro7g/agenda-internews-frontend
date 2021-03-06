@@ -134,15 +134,6 @@ const Clients = () => {
   return (
     <Layout page="Clientes" search={e => setSearchInput(e.target.value)}>
       <S.Container>
-        {/* <S.SubHeader>
-          <S.TextTotalClients>
-            Total de clientes: {totalClients}
-          </S.TextTotalClients>
-          <S.ItemsRigthSubHeader>
-            <Search onChange={e => setSearchInput(e.target.value)} />
-          </S.ItemsRigthSubHeader>
-        </S.SubHeader> */}
-
         <S.OptionsWraper>
           <S.Button onClick={() => handleClients()}>
             <S.Text>Todos</S.Text>
