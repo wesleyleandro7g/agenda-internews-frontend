@@ -47,9 +47,11 @@ const Header = ({ page, alert, search }) => {
             </S.WrapperItems>
           )}
 
-          <S.WrapperItems>
-            <Search onChange={search} />
-          </S.WrapperItems>
+          {search && (
+            <S.WrapperItems>
+              <Search onChange={search} />
+            </S.WrapperItems>
+          )}
 
           <S.WrapperItems>
             <S.Avatar onClick={handleModalUserVisible}>
