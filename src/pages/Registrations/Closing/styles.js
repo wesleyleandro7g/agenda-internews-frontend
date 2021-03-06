@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import Scroll from 'react-scrollbar'
 
 export const Container = styled.div``
-export const ScrollArea = styled(Scroll)`
-  height: 70vh;
+export const ScrollArea = styled.div`
+  height: 80vh;
+  overflow: auto;
 `
 export const HeaderWrapper = styled.div`
   padding: 10px 0;
@@ -19,37 +19,76 @@ export const ListWrapper = styled.div`
   margin-bottom: 1px;
   text-align: start;
 `
-export const Info = styled.div`
+export const InfoContainer = styled.div`
   width: 100%;
   height: 40px;
+
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
+
+  padding: 0 10px;
+
+  background-color: #eeeeee;
 `
 export const ModalWrapper = styled.div`
+  width: 50%;
+  height: 50%;
+
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: 30%;
-  padding: 10px;
+
+  border-radius: 3px;
+
   background-color: #fff;
 `
-export const ContentHeader = styled.div`
+export const Header = styled.div`
   width: 100%;
   height: 20%;
-`
-export const ContentMain = styled.div`
-  width: 100%;
-  height: 40%;
-`
-export const ContentFooter = styled.div`
+
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 10px;
+
+  border-radius: 3px 3px 0 0;
+
+  background: rgb(99, 176, 194);
+  background: linear-gradient(
+    90deg,
+    rgba(99, 176, 194, 1) 0%,
+    rgba(3, 76, 111, 1) 100%
+  );
+`
+export const Main = styled.div`
   width: 100%;
-  height: 40%;
+  height: 30%;
+
+  padding: 20px;
+`
+export const Footer = styled.div`
+  width: 100%;
+  height: 50%;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  padding: 20px;
 `
 export const Text = styled.h6`
+  font-weight: bold;
   font-size: 12px;
+`
+export const Title = styled.h4`
+  font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
+
+  color: #fff;
+
+  @media (max-width: 800px) {
+    font-size: 14px;
+  }
 `
