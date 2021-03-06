@@ -6,7 +6,6 @@ import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
 import Input03 from '../../../components/inputs/input03'
-import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
 import List from '../../../components/list-items'
@@ -19,6 +18,7 @@ import ToastContainer, {
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
+
 const RegisterOpenig = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
@@ -108,21 +108,16 @@ const RegisterOpenig = () => {
   }
 
   return (
-    <Layout page="Motivos de abertura de OS">
+    <Layout
+      page="Motivos de abertura de OS"
+      register={() => toggleRegisterVisible()}
+    >
       <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
+        <S.InfoContainer>
+          <S.Text> Descrição </S.Text>
+        </S.InfoContainer>
 
-        <S.Info>
-          <S.Text> descrição </S.Text>
-        </S.Info>
-
-        <S.ScrollArea speed={0.6}>
+        <S.ScrollArea>
           {industries &&
             industries.map(item => (
               <List
@@ -138,22 +133,28 @@ const RegisterOpenig = () => {
       <Form ref={formRef} onSubmit={handleRegisterTool}>
         <Modal visible={registerVisible}>
           <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Novo Motivo</h6>
-            </S.ContentHeader>
+            <S.Header>
+              <S.Title>Novo Motivo</S.Title>
+            </S.Header>
 
-            <S.ContentMain>
+            <S.Main>
               <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
+            </S.Main>
 
-            <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
+            <S.Footer>
+              <Button02
+                label="Cadastrar"
+                bgColor="#79D279"
+                type="submit"
+                icon={I.RiCheckboxCircleLine}
+              />
+              <Button02
                 label="Cancelar"
                 bgColor="#FF6666"
                 onClick={() => toggleRegisterVisible()}
+                icon={I.RiCloseLine}
               />
-            </S.ContentFooter>
+            </S.Footer>
           </S.ModalWrapper>
         </Modal>
       </Form>
@@ -162,22 +163,28 @@ const RegisterOpenig = () => {
       <Form ref={formRef} onSubmit={handleUpdate}>
         <Modal visible={updateVisible}>
           <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Edição de motivo</h6>
-            </S.ContentHeader>
+            <S.Header>
+              <S.Title>Edição de motivo</S.Title>
+            </S.Header>
 
-            <S.ContentMain>
+            <S.Main>
               <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
+            </S.Main>
 
-            <S.ContentFooter>
-              <Button01 label="Confirmar" bgColor="#79D279" type="submit" />
-              <Button01
+            <S.Footer>
+              <Button02
+                label="Confirmar"
+                bgColor="#79D279"
+                type="submit"
+                icon={I.RiCheckboxCircleLine}
+              />
+              <Button02
                 label="Cancelar"
                 bgColor="#FF6666"
                 onClick={() => toggleUpdateVisible()}
+                icon={I.RiCloseLine}
               />
-            </S.ContentFooter>
+            </S.Footer>
           </S.ModalWrapper>
         </Modal>
       </Form>
