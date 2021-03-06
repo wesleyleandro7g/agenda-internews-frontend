@@ -167,9 +167,9 @@ const Clients = () => {
             <S.DataWrapper>
               <S.ProvidersInfo>
                 {DataInfoOptions.map(item => (
-                  <S.ProvidersInfoText key={item.id}>
+                  <S.ProvidersInfoTextTitle key={item.id}>
                     {item.title}
-                  </S.ProvidersInfoText>
+                  </S.ProvidersInfoTextTitle>
                 ))}
               </S.ProvidersInfo>
 

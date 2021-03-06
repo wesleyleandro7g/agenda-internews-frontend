@@ -89,7 +89,7 @@ export const ProvidersInfo = styled.div`
 
   padding: 0 10px;
 
-  background-color: #c3c9d5;
+  background-color: #eeeeee;
 
   @media (max-width: 800px) {
     display: none;
@@ -103,6 +103,10 @@ export const ProvidersInfoText = styled.h6`
   @media (max-width: 800px) {
     display: none;
   }
+`
+export const ProvidersInfoTextTitle = styled.h6`
+  font-weight: bold;
+  font-size: 12px;
 `
 export const ProvidersInfoTextMobile = styled(ProvidersInfoText)`
   @media (max-width: 800px) {
