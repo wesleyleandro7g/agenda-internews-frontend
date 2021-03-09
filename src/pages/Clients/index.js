@@ -9,16 +9,14 @@ import api from '../../services/API'
 import { useClientContext } from '../../context/ClientContext'
 
 import Layout from '../../components/layout'
-// import Search from '../../components/search'
 import Filter from '../../components/filter'
 import SelectOptions from '../../components/select-options'
 
 import ClientDatails from './client-details'
 import ClientTools from './client-tools'
+import ClientRegister from './client-register'
 
 import LoadingAnimation from '../../assets/loader.json'
-
-// import I from '../../utils/Icons'
 
 import { DataInfoOptions } from './data'
 
@@ -28,13 +26,13 @@ const Clients = () => {
   const history = useHistory()
   const [data, setData] = useState([])
   const [supports, setSupports] = useState([])
-  // const [totalClients, setTotalClients] = useState('')
   const [filtered, setFiltered] = useState([])
   const [searchInput, setSearchInput] = useState(false)
   const [activeFilters, setActiveFilters] = useState(false)
   const [loading, setLoading] = useState(true)
   const [modalTools, setModalTools] = useState(false)
   const [modalDetailVisible, setModalDetailsVisible] = useState(false)
+  const [modalRegisterVisible, setModalRegisterVisible] = useState(false)
   const [clientViewData, setClientViewData] = useState({
     razao_social: '',
     cnpj: '',
@@ -63,7 +61,7 @@ const Clients = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [])
+  }, [modalRegisterVisible])
 
   useEffect(() => {
     handleFilterData()
@@ -131,8 +129,16 @@ const Clients = () => {
     })
   }
 
+  function toggleRegisterVisible() {
+    setModalRegisterVisible(!modalRegisterVisible)
+  }
+
   return (
-    <Layout page="Clientes" search={e => setSearchInput(e.target.value)}>
+    <Layout
+      page="Clientes"
+      search={e => setSearchInput(e.target.value)}
+      register={() => toggleRegisterVisible()}
+    >
       <S.Container>
         <S.OptionsWraper>
           <S.Button onClick={() => handleClients()}>
@@ -221,6 +227,11 @@ const Clients = () => {
         visible={modalTools}
         data={clientViewData}
         onClose={() => toggleTools()}
+      />
+
+      <ClientRegister
+        visible={modalRegisterVisible}
+        onClose={() => toggleRegisterVisible()}
       />
     </Layout>
   )

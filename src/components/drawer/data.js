@@ -31,13 +31,13 @@ export const DataInternal = [
     icon: I.RiAddCircleLine,
     select: false,
     options: [
-      {
-        id: 0,
-        pageName: 'Clientes',
-        handlePage: 'cadastros/clientes',
-        icon: I.RiGroupLine,
-        select: false
-      },
+      // {
+      //   id: 0,
+      //   pageName: 'Clientes',
+      //   handlePage: 'cadastros/clientes',
+      //   icon: I.RiGroupLine,
+      //   select: false
+      // },
       {
         id: 2,
         pageName: 'Ramos de atividade',
@@ -226,13 +226,13 @@ export const DataAdmin = [
     icon: I.RiAddCircleLine,
     select: false,
     options: [
-      {
-        id: 0,
-        pageName: 'Clientes',
-        handlePage: 'cadastros/clientes',
-        icon: I.RiGroupLine,
-        select: false
-      },
+      // {
+      //   id: 0,
+      //   pageName: 'Clientes',
+      //   handlePage: 'cadastros/clientes',
+      //   icon: I.RiGroupLine,
+      //   select: false
+      // },
       {
         id: 2,
         pageName: 'Ramos de atividade',
