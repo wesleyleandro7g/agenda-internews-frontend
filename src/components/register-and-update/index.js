@@ -2,13 +2,14 @@ import React from 'react'
 
 import Modal from '../modal'
 import Input03 from '../inputs/input03'
+import Input04 from '../inputs/input04'
 import Button02 from '../buttons/button02'
 
 import I from '../../utils/Icons'
 
 import * as S from './styles'
 
-const RegisterAndUpdate = ({ visible, title, toggleVisible }) => {
+const RegisterAndUpdate = ({ visible, title, toggleVisible, state }) => {
   return (
     <Modal visible={visible}>
       <S.Container>
@@ -18,6 +19,7 @@ const RegisterAndUpdate = ({ visible, title, toggleVisible }) => {
 
         <S.Main>
           <Input03 label="Descrição" name="descricao" type="text" />
+          {state && <Input04 name="id_estado" Options={state} />}
         </S.Main>
 
         <S.Footer>

@@ -11,10 +11,12 @@ const List = ({ description, onDelete, onUpdate, description2 }) => {
         <S.Text> {description2} </S.Text>
       </S.ContentInfo>
       <S.Content>
-        <I.RiEditBoxLine
-          style={{ marginRight: 5, cursor: 'pointer' }}
-          onClick={onUpdate}
-        />
+        {onUpdate && (
+          <I.RiEditBoxLine
+            style={{ marginRight: 5, cursor: 'pointer' }}
+            onClick={onUpdate}
+          />
+        )}
         {onDelete && (
           <I.RiDeleteBin7Line
             style={{ marginLeft: 5, cursor: 'pointer' }}
