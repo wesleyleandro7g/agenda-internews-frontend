@@ -10,6 +10,7 @@ import Input04 from '../../../components/inputs/input04'
 import Button01 from '../../../components/buttons/button01'
 import Button02 from '../../../components/buttons/button02'
 import Modal from '../../../components/modal'
+import List from '../../../components/list-items'
 
 import I from '../../../utils/Icons'
 
@@ -98,10 +99,11 @@ const RegisterCities = () => {
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-                <S.Text> {item.estado && item.estado.descricao} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.descricao}
+                description2={item.estado && item.estado.descricao}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>

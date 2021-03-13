@@ -43,25 +43,18 @@ const RegisterClient = ({ visible, onClose }) => {
         abortEarly: false
       })
 
-      console.log(data)
-
       api
         .post('/clients/create', data)
         .then(res => {
-          if (res.status === 200) {
-            notifySuccess('Cliente cadastrado!')
-            formRef.current.setErrors({})
-            onClose()
+          notifySuccess(res.data.message)
+          formRef.current.setErrors({})
+          onClose()
 
-            reset()
-          } else if (res.status === 400) {
-            notifyError('Erro! Cliente já cadastrado!')
-          }
+          reset()
         })
         .catch(err => {
           if (err) {
-            notifyError('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError(err.message)
           }
         })
     } catch (error) {

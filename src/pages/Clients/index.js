@@ -18,6 +18,8 @@ import ClientRegister from './client-register'
 
 import LoadingAnimation from '../../assets/loader.json'
 
+import ToastContainer from '../../components/toastify'
+
 import { DataInfoOptions } from './data'
 
 import * as S from './styles'
@@ -233,6 +235,8 @@ const Clients = () => {
         visible={modalRegisterVisible}
         onClose={() => toggleRegisterVisible()}
       />
+
+      <ToastContainer />
     </Layout>
   )
 }

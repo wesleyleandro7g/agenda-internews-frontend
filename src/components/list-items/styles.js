@@ -22,7 +22,12 @@ export const Container = styled.div`
     background-color: #f5f5f5;
   }
 `
+export const ContentInfo = styled.div`
+  width: 100%;
 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`
 export const Content = styled.div`
   display: flex;
 `
