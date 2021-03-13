@@ -9,7 +9,7 @@ import I from '../../utils/Icons'
 
 import * as S from './styles'
 
-const RegisterAndUpdate = ({ visible, title, toggleVisible, state }) => {
+const RegisterAndUpdate = ({ visible, title, toggleVisible, state, users }) => {
   return (
     <Modal visible={visible}>
       <S.Container>
@@ -20,6 +20,7 @@ const RegisterAndUpdate = ({ visible, title, toggleVisible, state }) => {
         <S.Main>
           <Input03 label="Descrição" name="descricao" type="text" />
           {state && <Input04 name="id_estado" Options={state} />}
+          {users && <Input04 name="id_usuario" Options={users} />}
         </S.Main>
 
         <S.Footer>
