@@ -9,18 +9,31 @@ import I from '../../utils/Icons'
 
 import * as S from './styles'
 
-const RegisterAndUpdate = ({ visible, title, toggleVisible, state, users }) => {
+const RegisterAndUpdate = ({
+  visible,
+  title,
+  toggleVisible,
+  state,
+  users,
+  contact,
+  password,
+  sector,
+  large
+}) => {
   return (
     <Modal visible={visible}>
-      <S.Container>
+      <S.Container large={large}>
         <S.Header>
           <S.Title> {title} </S.Title>
         </S.Header>
 
         <S.Main>
           <Input03 label="Descrição" name="descricao" type="text" />
+          {contact && <Input03 label="Contato" name="contato" type="text" />}
+          {password && <Input03 label="Senha" name="senha" type="text" />}
           {state && <Input04 name="id_estado" Options={state} />}
           {users && <Input04 name="id_usuario" Options={users} />}
+          {sector && <Input04 name="id_setor" Options={sector} />}
         </S.Main>
 
         <S.Footer>

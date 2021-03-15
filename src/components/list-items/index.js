@@ -3,12 +3,19 @@ import I from '../../utils/Icons'
 
 import * as S from './styles'
 
-const List = ({ description, onDelete, onUpdate, description2 }) => {
+const List = ({
+  description,
+  onDelete,
+  onUpdate,
+  description2,
+  description3
+}) => {
   return (
     <S.Container>
       <S.ContentInfo>
         <S.Text> {description} </S.Text>
         <S.Text> {description2} </S.Text>
+        <S.Text> {description3} </S.Text>
       </S.ContentInfo>
       <S.Content>
         {onUpdate && (

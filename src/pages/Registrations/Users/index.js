@@ -5,13 +5,8 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Input04 from '../../../components/inputs/input04'
-import Button01 from '../../../components/buttons/button01'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
-
-import I from '../../../utils/Icons'
+import List from '../../../components/list-items'
+import RegisterAndUpdate from '../../../components/register-and-update'
 
 import { SectorOptions, DataInfoOptions } from './data'
 
@@ -79,36 +74,37 @@ const RegisterUser = () => {
   }
 
   return (
-    <Layout page="Usuários">
+    <Layout page="Usuários" register={() => toggleRegisterVisible()}>
       <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
-
-        <S.Info>
+        <S.InfoContainer>
           {DataInfoOptions.map(item => (
             <S.Text key={item.id}>{item.descricao}</S.Text>
           ))}
-        </S.Info>
+        </S.InfoContainer>
 
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.nome} </S.Text>
-                <S.Text> {item.setor.nome} </S.Text>
-                <S.Text> {item.contato} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.nome}
+                description2={item.setor.nome}
+                description3={item.contato}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
 
       <Form ref={formRef} onSubmit={handleRegisterUser}>
-        <Modal visible={registerVisible}>
+        <RegisterAndUpdate
+          title="Cadastrar usuário"
+          visible={registerVisible}
+          toggleVisible={() => toggleRegisterVisible()}
+          contact
+          password
+          sector={SectorOptions}
+        />
+        {/* <Modal visible={registerVisible}>
           <S.ModalWrapper>
             <S.ContentHeader>
               <h6>Novo Usuário</h6>
@@ -133,7 +129,7 @@ const RegisterUser = () => {
               />
             </S.ContentFooter>
           </S.ModalWrapper>
-        </Modal>
+        </Modal> */}
       </Form>
     </Layout>
   )

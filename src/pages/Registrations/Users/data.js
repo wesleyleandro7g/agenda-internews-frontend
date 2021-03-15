@@ -20,14 +20,14 @@ export const SectorOptions = [
 export const DataInfoOptions = [
   {
     id: 0,
-    descricao: 'nome'
+    descricao: 'Nome'
   },
   {
     id: 1,
-    descricao: 'setor'
+    descricao: 'Setor'
   },
   {
     id: 2,
-    descricao: 'contato'
+    descricao: 'Contato'
   }
 ]
