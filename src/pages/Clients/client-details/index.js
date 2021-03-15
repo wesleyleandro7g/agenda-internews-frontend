@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Modal from '../../../components/modal'
-import Button02 from '../../../components/buttons/button02'
+import CircleBtn from '../../../components/buttons/circle-button'
 
 import I from '../../../utils/Icons'
 
@@ -13,7 +13,11 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
       <S.Container>
         <S.Header>
           <S.Title>{data.razao_social}</S.Title>
-          <I.RiCloseLine size={24} onClick={onClose} cursor="pointer" />
+
+          <S.HeaderItemsWrapper>
+            <CircleBtn icon={I.RiEditBoxLine} onClick={openEdit} />
+            <CircleBtn icon={I.RiCloseLine} onClick={onClose} />
+          </S.HeaderItemsWrapper>
         </S.Header>
         <S.Main>
           <S.SectionOne>
@@ -67,20 +71,6 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
             </S.SectionToolsMain>
           </S.SectionTwo>
         </S.Main>
-        <S.Footer>
-          <Button02
-            label="Editar Cadastro"
-            icon={I.RiEditBoxLine}
-            bgColor="#bfbfbf"
-            onClick={openEdit}
-          />
-          <Button02
-            label="Editar Ferramentas"
-            icon={I.RiEditBoxLine}
-            bgColor="#bfbfbf"
-            onClick={openTools}
-          />
-        </S.Footer>
       </S.Container>
     </Modal>
   )

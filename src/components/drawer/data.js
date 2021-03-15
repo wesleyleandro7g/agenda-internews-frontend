@@ -31,27 +31,27 @@ export const DataInternal = [
     icon: I.RiAddCircleLine,
     select: false,
     options: [
-      {
-        id: 0,
-        pageName: 'Clientes',
-        handlePage: 'cadastros/clientes',
-        icon: I.RiGroupLine,
-        select: false
-      },
+      // {
+      //   id: 0,
+      //   pageName: 'Clientes',
+      //   handlePage: 'cadastros/clientes',
+      //   icon: I.RiGroupLine,
+      //   select: false
+      // },
       {
         id: 2,
-        pageName: 'Ramo',
+        pageName: 'Ramos de atividade',
         handlePage: 'cadastros/atividades',
         icon: I.RiStore3Line,
         select: false
       },
-      {
-        id: 3,
-        pageName: 'Ferramentas',
-        handlePage: 'cadastros/ferramentas',
-        icon: I.RiToolsLine,
-        select: false
-      },
+      // {
+      //   id: 3,
+      //   pageName: 'Ferramentas',
+      //   handlePage: 'cadastros/ferramentas',
+      //   icon: I.RiToolsLine,
+      //   select: false
+      // },
       {
         id: 4,
         pageName: 'Cidades',
@@ -61,21 +61,21 @@ export const DataInternal = [
       },
       {
         id: 5,
-        pageName: 'Abertura',
+        pageName: 'Motivos de abertura',
         handlePage: 'cadastros/abertura',
         icon: I.RiBookReadLine,
         select: false
       },
       {
         id: 6,
-        pageName: 'Fechamento',
+        pageName: 'Motivos de fechamento',
         handlePage: 'cadastros/fechamento',
         icon: I.RiBookMarkLine,
         select: false
       },
       {
         id: 7,
-        pageName: 'A. Interna',
+        pageName: 'Atividade interna',
         handlePage: 'cadastros/atividade-interna',
         icon: I.RiStore2Line,
         select: false
@@ -226,27 +226,27 @@ export const DataAdmin = [
     icon: I.RiAddCircleLine,
     select: false,
     options: [
-      {
-        id: 0,
-        pageName: 'Clientes',
-        handlePage: 'cadastros/clientes',
-        icon: I.RiGroupLine,
-        select: false
-      },
+      // {
+      //   id: 0,
+      //   pageName: 'Clientes',
+      //   handlePage: 'cadastros/clientes',
+      //   icon: I.RiGroupLine,
+      //   select: false
+      // },
       {
         id: 2,
-        pageName: 'Ramo',
+        pageName: 'Ramos de atividade',
         handlePage: 'cadastros/atividades',
         icon: I.RiStore3Line,
         select: false
       },
-      {
-        id: 3,
-        pageName: 'Ferramentas',
-        handlePage: 'cadastros/ferramentas',
-        icon: I.RiToolsLine,
-        select: false
-      },
+      // {
+      //   id: 3,
+      //   pageName: 'Ferramentas',
+      //   handlePage: 'cadastros/ferramentas',
+      //   icon: I.RiToolsLine,
+      //   select: false
+      // },
       {
         id: 4,
         pageName: 'Cidades',
@@ -256,21 +256,21 @@ export const DataAdmin = [
       },
       {
         id: 5,
-        pageName: 'Abertura',
+        pageName: 'Motivos de abertura',
         handlePage: 'cadastros/abertura',
         icon: I.RiBookReadLine,
         select: false
       },
       {
         id: 6,
-        pageName: 'Fechamento',
+        pageName: 'Motivos de fechamento',
         handlePage: 'cadastros/fechamento',
         icon: I.RiBookMarkLine,
         select: false
       },
       {
         id: 7,
-        pageName: 'A. Interna',
+        pageName: 'Atividade interna',
         handlePage: 'cadastros/atividade-interna',
         icon: I.RiStore2Line,
         select: false

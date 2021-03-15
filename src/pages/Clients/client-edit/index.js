@@ -41,7 +41,6 @@ const ClientEditable = () => {
 
   function handleHystoryData() {
     const dataOrigin = history.location.state.data
-    console.log(dataOrigin)
 
     formRef.current.setData({
       razao_social: dataOrigin.razao_social,

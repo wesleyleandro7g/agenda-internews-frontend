@@ -5,12 +5,13 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Button01 from '../../../components/buttons/button01'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
+import List from '../../../components/list-items'
+import RegisterAndUpdate from '../../../components/register-and-update'
 
-import I from '../../../utils/Icons'
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../../components/toastify'
 
 import * as S from './styles'
 
@@ -18,6 +19,9 @@ const RegisterOpenig = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
+  const [updateVisible, setUpdateVisible] = useState(false)
+  const [identifier, setIdentifier] = useState()
+  const [alertExecuted, setAlertExecuted] = useState(false)
 
   useEffect(() => {
     handleCallApi()
@@ -25,7 +29,7 @@ const RegisterOpenig = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible])
+  }, [registerVisible, updateVisible, alertExecuted])
 
   function handleCallApi() {
     api
@@ -50,12 +54,12 @@ const RegisterOpenig = () => {
       api
         .post('/reasons/opening/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Motivo já cadastrado!')
+          notifySuccess(res.data.message)
+          setAlertExecuted(!alertExecuted)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError(err.data.message)
           }
         })
 
@@ -77,53 +81,69 @@ const RegisterOpenig = () => {
     }
   }
 
+  function handleFill(item) {
+    formRef.current.setData({
+      descricao: item.descricao
+    })
+
+    setIdentifier(item.id)
+    toggleUpdateVisible()
+  }
+
+  async function handleUpdate(data) {
+    api.put(`/reasons/opening/update/${identifier}`, data).then(response => {
+      notifySuccess(response.data.message)
+      setAlertExecuted(!alertExecuted)
+    })
+
+    toggleUpdateVisible()
+  }
+
+  function toggleUpdateVisible() {
+    setUpdateVisible(!updateVisible)
+  }
+
   return (
-    <Layout page="Motivos de abertura de OS">
+    <Layout
+      page="Motivos de abertura de OS"
+      register={() => toggleRegisterVisible()}
+    >
       <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
+        <S.InfoContainer>
+          <S.Text> Descrição </S.Text>
+        </S.InfoContainer>
 
-        <S.Info>
-          <S.Text> descrição </S.Text>
-        </S.Info>
-
-        <S.ScrollArea speed={0.6}>
+        <S.ScrollArea>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.descricao}
+                onUpdate={() => handleFill(item)}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
 
+      {/* Modal para cadastrar um novo motivo */}
       <Form ref={formRef} onSubmit={handleRegisterTool}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Novo Motivo</h6>
-            </S.ContentHeader>
-
-            <S.ContentMain>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
-
-            <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-              />
-            </S.ContentFooter>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleRegisterVisible()}
+          title="Novo Motivo"
+          visible={registerVisible}
+        />
       </Form>
+
+      {/* Modal para editar um motivo */}
+      <Form ref={formRef} onSubmit={handleUpdate}>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleUpdateVisible()}
+          title="Edição de motivo"
+          visible={updateVisible}
+        />
+      </Form>
+
+      <ToastContainer />
     </Layout>
   )
 }

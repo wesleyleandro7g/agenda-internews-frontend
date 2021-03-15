@@ -10,12 +10,20 @@ import Search from '../search-header'
 
 import * as S from './styles'
 
-const Header = ({ page, alert, search }) => {
+const Header = ({
+  page,
+  alert,
+  search,
+  register,
+  attendenceRepports,
+  attendenceRefresh
+}) => {
   const [modalUserVisible, setModalUserVisible] = useState(false)
   const [modalAlertVisible, setModalAlertVisible] = useState(false)
   const { open, setOpen } = useDrawer()
 
   const sig = localStorage.getItem('user-sig')
+  const userName = localStorage.getItem('user-name')
 
   function handleModalAlertVisible() {
     setModalAlertVisible(!modalAlertVisible)
@@ -30,16 +38,69 @@ const Header = ({ page, alert, search }) => {
   return (
     <>
       <S.Container>
-        <S.WrapperItems>
-          <S.MenuIcon onClick={() => setOpen(!open)} />
-          <S.Title> {page} </S.Title>
-        </S.WrapperItems>
-        <S.WrapperItems>
-          {alert && <S.AlertIcon onClick={handleModalAlertVisible} />}
-          <S.Avatar onClick={handleModalUserVisible}>
-            <S.AvatarText> {sig} </S.AvatarText>
-          </S.Avatar>
-        </S.WrapperItems>
+        <S.ContainItems>
+          <S.WrapperItems>
+            <S.MenuIcon onClick={() => setOpen(!open)} />
+          </S.WrapperItems>
+
+          <S.WrapperItems>
+            <S.Title> {page} </S.Title>
+          </S.WrapperItems>
+        </S.ContainItems>
+
+        <S.ContainItems>
+          {alert && (
+            <S.WrapperItems>
+              <S.AlertIcon onClick={handleModalAlertVisible} />
+            </S.WrapperItems>
+          )}
+
+          {register && (
+            <S.WrapperItems>
+              <I.RiAddCircleLine
+                size={22}
+                cursor="pointer"
+                color="#333"
+                onClick={register}
+              />
+            </S.WrapperItems>
+          )}
+
+          {attendenceRepports && (
+            <S.WrapperItems>
+              <I.RiFileTextLine
+                size={22}
+                cursor="pointer"
+                color="#333"
+                onClick={attendenceRepports}
+              />
+            </S.WrapperItems>
+          )}
+
+          {attendenceRefresh && (
+            <S.WrapperItems>
+              <I.RiRefreshLine
+                size={22}
+                cursor="pointer"
+                color="#333"
+                onClick={attendenceRefresh}
+              />
+            </S.WrapperItems>
+          )}
+
+          {search && (
+            <S.WrapperItems>
+              <Search onChange={search} />
+            </S.WrapperItems>
+          )}
+
+          <S.WrapperItems>
+            <S.Avatar onClick={handleModalUserVisible}>
+              <S.AvatarText> {sig} </S.AvatarText>
+            </S.Avatar>
+            <S.UserName> {userName} </S.UserName>
+          </S.WrapperItems>
+        </S.ContainItems>
       </S.Container>
 
       <S.ContainerMobile>

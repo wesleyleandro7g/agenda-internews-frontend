@@ -20,17 +20,25 @@ const BarChartComponent = ({ data }) => {
           left: 20,
           bottom: 5
         }}
-        barSize={10}
-        fontSize={10}
+        barSize={12}
+        fontSize={12}
+        style={{ textTransform: 'uppercase' }}
       >
         <XAxis dataKey="nome" scale="auto" padding={{ left: 10, right: 10 }} />
         <YAxis />
-        <Tooltip />
-        <CartesianGrid strokeDasharray="2 2" />
+        <Tooltip
+          contentStyle={{
+            background: 'rgba(0, 0, 0, 0.85)',
+            color: '#fff',
+            textTransform: 'uppercase'
+          }}
+        />
+        <CartesianGrid strokeDasharray="2 2" vertical={false} />
         <Bar
           dataKey="quantidade"
-          fill="#8884d8"
-          background={{ fill: '#eee' }}
+          fill="#006699" // 8884d8
+          background={{ fill: 'transparent' }}
+          barSize={100}
         />
       </BarChart>
     </ResponsiveContainer>

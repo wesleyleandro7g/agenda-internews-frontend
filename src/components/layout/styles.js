@@ -9,7 +9,7 @@ export const Contain = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: ${props => (props.state ? '180px' : '50px')};
+  margin-left: ${props => (props.state ? '240px' : '65px')};
   transition: cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
 
   @media (max-width: 800px) {
@@ -19,6 +19,6 @@ export const Contain = styled.div`
 export const Content = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px;
-  background-color: #e6e6e6;
+  padding: 0;
+  background-color: #f5f5f5;
 `

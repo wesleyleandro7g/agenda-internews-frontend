@@ -3,6 +3,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 import logo from '../../assets/TPLogo.png'
+import logoLarge from '../../assets/LogomarcaLoja.png'
 
 import { useDrawer } from '../../context/DrawerContext'
 
@@ -119,7 +120,7 @@ const HandleUserType = ({ open, state }) => {
                 select={item.select}
                 onClick={() => handleInternalNavigation(item)}
               >
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -133,7 +134,7 @@ const HandleUserType = ({ open, state }) => {
                       select={option.select}
                       state={state}
                     >
-                      <option.icon size={18} />
+                      <option.icon size={18} color="#d9d9d9" />
                       {open && (
                         <S.TextOptions> {option.pageName} </S.TextOptions>
                       )}
@@ -155,7 +156,7 @@ const HandleUserType = ({ open, state }) => {
               onClick={() => handleExternalNavigation(item)}
             >
               <S.PrimaryOptionWrapper select={item.select}>
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -172,7 +173,7 @@ const HandleUserType = ({ open, state }) => {
               onClick={() => handleOnlineNavigation(item)}
             >
               <S.PrimaryOptionWrapper select={item.select}>
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -189,7 +190,7 @@ const HandleUserType = ({ open, state }) => {
                 select={item.select}
                 onClick={() => handleManagerNavigation(item)}
               >
-                <item.icon size={18} />
+                <item.icon size={18} color="#d9d9d9" />
                 {open && <S.Text> {item.handlePage} </S.Text>}
                 <S.Text2> {item.handlePage} </S.Text2>
               </S.PrimaryOptionWrapper>
@@ -203,7 +204,7 @@ const HandleUserType = ({ open, state }) => {
                       select={option.select}
                       state={state}
                     >
-                      <option.icon size={18} />
+                      <option.icon size={18} color="#d9d9d9" />
                       {open && (
                         <S.TextOptions> {option.pageName} </S.TextOptions>
                       )}
@@ -231,8 +232,7 @@ const Drawer = () => {
   return (
     <S.Container state={open}>
       <S.SectionTitle state={open}>
-        {open ? <S.Img src={logo} /> : <S.Img2 src={logo} />}
-
+        {open ? <S.ImgLarge src={logoLarge} /> : <S.Img src={logo} />}
         <S.UserDatailsMobileWrapper>
           <S.UserDatailsMobileTitle> {user} </S.UserDatailsMobileTitle>
           <S.UserDatailsMobileDescription>

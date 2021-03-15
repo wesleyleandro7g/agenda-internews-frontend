@@ -5,12 +5,14 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Button01 from '../../../components/buttons/button01'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
+import List from '../../../components/list-items'
+import Confirmation from '../../../components/confirmation'
+import RegisterAndUpdate from '../../../components/register-and-update'
 
-import I from '../../../utils/Icons'
+import ToastContainer, {
+  notifyError,
+  notifySuccess
+} from '../../../components/toastify'
 
 import * as S from './styles'
 
@@ -18,6 +20,10 @@ const RegisterActivities = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
+  const [updateVisible, setUpdateVisible] = useState(false)
+  const [confirmationVisible, setConfirmationVisible] = useState(false)
+  const [alertExecuted, setAlertExecuted] = useState(false)
+  const [identifier, setIdentifier] = useState()
 
   useEffect(() => {
     handleCallApi()
@@ -25,7 +31,7 @@ const RegisterActivities = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible])
+  }, [registerVisible, alertExecuted])
 
   function handleCallApi() {
     api.get('/industry/index').then(response => setIndustries(response.data))
@@ -48,12 +54,13 @@ const RegisterActivities = () => {
       api
         .post('/industry/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Ramo já cadastrado!')
+          notifySuccess(res.data.message)
+          setAlertExecuted(!alertExecuted)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError(err.message)
+            setAlertExecuted(!alertExecuted)
           }
         })
 
@@ -75,53 +82,98 @@ const RegisterActivities = () => {
     }
   }
 
+  async function handleUpdate(data) {
+    api
+      .put(`/industry/update/${identifier}`, data)
+      .then(response => {
+        notifySuccess(response.data.message)
+        setAlertExecuted(!alertExecuted)
+      })
+      .catch(err => {
+        notifyError(err.message)
+        setAlertExecuted(!alertExecuted)
+      })
+  }
+
+  function handleFill(item) {
+    formRef.current.setData({
+      descricao: item.descricao
+    })
+
+    setIdentifier(item.id)
+    toggleUpdateVisible()
+  }
+
+  function toggleUpdateVisible() {
+    setUpdateVisible(!updateVisible)
+  }
+
+  async function handleDelete(id) {
+    setConfirmationVisible(!confirmationVisible)
+
+    api
+      .delete(`/industry/delete/${id}`)
+      .then(response => {
+        notifyError(response.data.message)
+        setAlertExecuted(!alertExecuted)
+      })
+      .catch(err => {
+        notifyError(err.message)
+        setAlertExecuted(!alertExecuted)
+      })
+  }
+
+  function handleConfirmation(id) {
+    setConfirmationVisible(!confirmationVisible)
+    setIdentifier(id)
+  }
+
   return (
-    <Layout page="Ramos de Atividade">
+    <Layout page="Ramos de Atividade" register={() => toggleRegisterVisible()}>
       <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
+        <S.InfoContainer>
+          <S.Text> Descrição </S.Text>
+        </S.InfoContainer>
 
-        <S.Info>
-          <S.Text> descrição </S.Text>
-        </S.Info>
-
-        <S.ScrollArea speed={0.6}>
+        <S.ScrollArea>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.descricao}
+                onUpdate={() => handleFill(item)}
+                onDelete={() => handleConfirmation(item.id)}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
 
+      {/* Modal com formulário de cadastro de um novo ramo de atividade */}
       <Form ref={formRef} onSubmit={handleRegisterActivite}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Novo Ramo de atividade</h6>
-            </S.ContentHeader>
-
-            <S.ContentMain>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
-
-            <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-              />
-            </S.ContentFooter>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleRegisterVisible()}
+          title="Novo ramo de atividade"
+          visible={registerVisible}
+        />
       </Form>
+
+      {/* Modal com formulário de edição de um ramo de atividade */}
+      <Form ref={formRef} onSubmit={handleUpdate}>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleUpdateVisible()}
+          title="Edição de ramo de atividade"
+          visible={updateVisible}
+        />
+      </Form>
+
+      {/* Modal de confirmação */}
+      <Confirmation
+        visible={confirmationVisible}
+        confirmated={() => handleDelete(identifier)}
+        closeConfirmation={() => setConfirmationVisible(!confirmationVisible)}
+      />
+
+      <ToastContainer />
     </Layout>
   )
 }

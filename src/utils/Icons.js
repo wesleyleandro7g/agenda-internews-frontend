@@ -29,7 +29,10 @@ import {
   RiArrowLeftLine,
   RiArrowLeftSLine,
   RiMore2Line,
-  RiAddLine
+  RiAddLine,
+  RiDeleteBin7Line,
+  RiCalendarEventFill,
+  RiArrowLeftRightFill
 } from 'react-icons/ri'
 
 const Icons = {
@@ -63,7 +66,10 @@ const Icons = {
   RiArrowLeftLine,
   RiArrowLeftSLine,
   RiMore2Line,
-  RiAddLine
+  RiAddLine,
+  RiDeleteBin7Line,
+  RiCalendarEventFill,
+  RiArrowLeftRightFill
 }
 
 export default Icons

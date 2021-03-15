@@ -5,13 +5,12 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Input04 from '../../../components/inputs/input04'
-import Button01 from '../../../components/buttons/button01'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
-
-import I from '../../../utils/Icons'
+import List from '../../../components/list-items'
+import RegisterAndUpdate from '../../../components/register-and-update'
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../../components/toastify'
 
 import * as S from './styles'
 
@@ -40,28 +39,27 @@ const RegisterSupports = () => {
 
   async function handleRegisterSupport(data, { reset }) {
     try {
-      const schema = Yup.object().shape({
-        nome: Yup.string().min(3).required('Informe a descrição')
-      })
+      // const schema = Yup.object().shape({
+      //   nome: Yup.string().min(3).required('Informe a descrição')
+      // })
 
-      await schema.validate(data, {
-        abortEarly: false
-      })
+      // await schema.validate(data, {
+      //   abortEarly: false
+      // })
+
       api
         .post('/support/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Suporte já cadastrado!')
+          notifySuccess(res.data.message)
+          toggleRegisterVisible()
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError('Houve um erro inexperado! Tente novamente.')
           }
         })
 
       formRef.current.setErrors({})
-
-      toggleRegisterVisible()
 
       reset()
     } catch (error) {
@@ -78,56 +76,30 @@ const RegisterSupports = () => {
   }
 
   return (
-    <Layout page="Suportes">
+    <Layout page="Suportes" register={() => toggleRegisterVisible()}>
       <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
-
-        <S.Info>
-          <S.Text> nome </S.Text>
-        </S.Info>
+        <S.InfoContainer>
+          <S.Text> Nome </S.Text>
+        </S.InfoContainer>
 
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.nome} </S.Text>
-              </S.ListWrapper>
+              <List key={item.id} description={item.nome} />
             ))}
         </S.ScrollArea>
       </S.Container>
 
       <Form ref={formRef} onSubmit={handleRegisterSupport}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Novo Suporte</h6>
-            </S.ContentHeader>
-
-            <S.ContentMain>
-              <S.SupportInputWrapper>
-                <Input03 label="Nome" name="nome" type="text" />
-
-                <Input04 name="id_usuario" Options={users} />
-              </S.SupportInputWrapper>
-            </S.ContentMain>
-
-            <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-              />
-            </S.ContentFooter>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          title="Cadastro de suporte"
+          visible={registerVisible}
+          toggleVisible={() => toggleRegisterVisible()}
+          users={users}
+        />
       </Form>
+
+      <ToastContainer />
     </Layout>
   )
 }

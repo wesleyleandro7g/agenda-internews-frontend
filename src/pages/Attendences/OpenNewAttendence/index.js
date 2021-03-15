@@ -6,9 +6,12 @@ import React, { useState, useEffect } from 'react'
 import api from '../../../services/API'
 
 import Modal from '../../../components/modal'
-import Button01 from '../../../components/buttons/button01'
+import Button02 from '../../../components/buttons/button02'
 import CheckBox from '../../../components/inputs/checkbox'
 import Radio from '../../../components/inputs/radio'
+import CircleBtn from '../../../components/buttons/circle-button'
+
+import { notifySuccess, notifyError } from '../../../components/toastify'
 
 import I from '../../../utils/Icons'
 
@@ -80,12 +83,12 @@ const OpenNewAttendence = ({
   }
 
   function handleNewAttendence() {
-    if (!selected) return alert('Selecione um cliente!')
+    if (!selected) return notifyError('Selecione um cliente!')
 
-    if (!idAbertura) return alert('Selecione um motivo!')
+    if (!idAbertura) return notifyError('Selecione um motivo!')
 
     if (clientNotRequested && requestedName.length <= 2) {
-      return alert('Informe o nome do solicitante!')
+      return notifyError('Informe o nome do solicitante!')
     } else {
       api
         .post('/attendence/update/create', {
@@ -109,11 +112,11 @@ const OpenNewAttendence = ({
           id_setor: sectorID
         })
         .then(res => {
-          alert(res.data.mensage)
+          notifySuccess(res.data.mensage)
           finish()
         })
         .catch(err => {
-          alert(err)
+          notifyError(err)
           return console.log(err)
         })
 
@@ -126,12 +129,13 @@ const OpenNewAttendence = ({
 
   return (
     <Modal visible={newAttendenceVisible}>
-      <S.ModalWrapper>
-        <S.ModalHeaderBig>
-          <S.TitleCard>Novo atendimento</S.TitleCard>
-          <I.RiCloseLine cursor="pointer" size={24} onClick={cancelable} />
-        </S.ModalHeaderBig>
-        <S.MainWrapper>
+      <S.Container>
+        <S.Header>
+          <S.Title>Novo atendimento</S.Title>
+
+          <CircleBtn icon={I.RiCloseLine} onClick={cancelable} />
+        </S.Header>
+        <S.Main>
           {selected ? (
             <S.LeftWrapper>
               <S.ClientSelected>
@@ -159,7 +163,7 @@ const OpenNewAttendence = ({
           ) : (
             <S.LeftWrapper>
               <S.InputNewAttendence
-                placeholder="Cliente"
+                placeholder="Nome da empresa"
                 onChange={e => setSearchInput(e.target.value)}
               />
               <S.ScrollClients>
@@ -187,18 +191,20 @@ const OpenNewAttendence = ({
               {clientNotRequested && (
                 <S.RequestWrapper>
                   <S.InputRequesterName
-                    placeholder="Nome*"
+                    placeholder="*Nome do solicitante"
                     onChange={e => setRequestedName(e.target.value)}
                   />
                   <S.InputRequesterName
-                    placeholder="Contato"
-                    type="number"
+                    placeholder="Contato do solicitante"
+                    type="text"
                     onChange={e => setRequestedContact(e.target.value)}
                   />
                 </S.RequestWrapper>
               )}
 
-              <S.TextClientSelected>Selecione um motivo</S.TextClientSelected>
+              <S.TextClientSelected>
+                Motivo da abertura do atendimento
+              </S.TextClientSelected>
               <S.ScrollReasons>
                 <form onChange={handleInputRadio}>
                   <S.MainGrid>
@@ -217,20 +223,24 @@ const OpenNewAttendence = ({
             </S.ItemsRightTop>
 
             <S.ModalFooter>
-              <Button01
+              <Button02
                 label="Confirmar"
                 bgColor="#79D279"
+                icon={I.RiCheckboxCircleLine}
                 onClick={() => handleNewAttendence()}
               />
-              <Button01
+              <Button02
                 label="Cancelar"
                 bgColor="#FF6666"
+                icon={I.RiCloseLine}
                 onClick={cancelable}
               />
             </S.ModalFooter>
           </S.RightWrapper>
-        </S.MainWrapper>
-      </S.ModalWrapper>
+        </S.Main>
+      </S.Container>
+
+      {/* <ToastContainer /> */}
     </Modal>
   )
 }

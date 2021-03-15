@@ -6,8 +6,12 @@ import api from '../../../services/API'
 // import { useClientContext } from '../../../context/ClientContext'
 
 import Modal from '../../../components/modal'
-import Button01 from '../../../components/buttons/button01'
 import Radio from '../../../components/inputs/radio'
+import Button02 from '../../../components/buttons/button02'
+
+import I from '../../../utils/Icons'
+
+import { notifySuccess } from '../../../components/toastify'
 
 // import I from '../../../utils/Icons'
 
@@ -36,21 +40,25 @@ const RepassAttendence = ({
   }
 
   function handleRepassAttendence() {
-    api.put('/attendence/update/repass', {
-      id: attendenceID,
-      id_suporte: supportSelected
-    })
+    api
+      .put('/attendence/update/repass', {
+        id: attendenceID,
+        id_suporte: supportSelected
+      })
+      .then(response => notifySuccess('Atendimento repassado!'))
     repassed()
   }
 
   return (
     <Modal visible={modalRepassVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
+      <S.Container>
+        <S.Header>
           <S.Title> {clientName} </S.Title>
-        </S.ModalHeader>
-        <S.ModalMain>
-          <h6>Selecione o suporte</h6>
+        </S.Header>
+        <S.Main>
+          <S.SubTitle>
+            Selecione o suporte para qual deseja transferir o atendimento
+          </S.SubTitle>
 
           <form onChange={handleInputRadio}>
             <S.ModalMainGrid>
@@ -65,16 +73,22 @@ const RepassAttendence = ({
               ))}
             </S.ModalMainGrid>
           </form>
-        </S.ModalMain>
+        </S.Main>
         <S.ModalFooter>
-          <Button01
+          <Button02
             label="Confirmar"
             bgColor="#79D279"
             onClick={() => handleRepassAttendence()}
+            icon={I.RiCheckboxCircleLine}
           />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
+          <Button02
+            label="Cancelar"
+            bgColor="#FF6666"
+            onClick={closeModal}
+            icon={I.RiCloseLine}
+          />
         </S.ModalFooter>
-      </S.ModalContent>
+      </S.Container>
     </Modal>
   )
 }

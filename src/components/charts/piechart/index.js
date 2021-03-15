@@ -11,7 +11,7 @@ const renderCustomizedLabel = ({
   percent,
   index
 }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.2
   const x = cx + radius * Math.cos(-midAngle * RADIAN)
   const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
@@ -19,10 +19,11 @@ const renderCustomizedLabel = ({
     <text
       x={x}
       y={y}
-      fill="white"
+      fill="dark"
       textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
-      fontSize="12"
+      fontSize="14"
+      fontWeight="600"
     >
       {percent > 0 && `${(percent * 100).toFixed(0)}%`}
     </text>
@@ -39,6 +40,7 @@ const PieChartComponent = ({ data, COLORS }) => {
           cy={'50%'}
           labelLine={false}
           label={renderCustomizedLabel}
+          innerRadius={'60%'}
           outerRadius={'100%'}
           fill="#8884d8"
           dataKey="quantidade"

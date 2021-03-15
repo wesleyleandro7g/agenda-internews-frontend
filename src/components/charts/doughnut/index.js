@@ -6,8 +6,8 @@ const COLORS = ['#00C49F', '#e6fffa']
 const renderCustomizedLabel = ({ name, percent }) => {
   return (
     <text
-      x={'37%'}
-      y={'40%'}
+      x={'45%'}
+      y={'50%'}
       fill="#00C49F"
       dominantBaseline="central"
       fontSize="35"
@@ -24,7 +24,7 @@ const Doughnut = ({ data }) => {
         <Pie
           data={data}
           cx={'50%'}
-          cy={'40%'}
+          cy={'50%'}
           startAngle={90}
           endAngle={-360}
           innerRadius={'70%'}

@@ -5,13 +5,12 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Input04 from '../../../components/inputs/input04'
-import Button01 from '../../../components/buttons/button01'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
-
-import I from '../../../utils/Icons'
+import List from '../../../components/list-items'
+import RegisterAndUpdate from '../../../components/register-and-update'
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../../components/toastify'
 
 import { StateOptions, DataInfoOptions } from './data'
 
@@ -21,6 +20,8 @@ const RegisterCities = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
+  // const [updateVisible, setUpdateVisible] = useState(false)
+  // const [identifier, setIdentifier] = useState()
 
   useEffect(() => {
     handleCallApi()
@@ -38,7 +39,7 @@ const RegisterCities = () => {
     setRegisterVisible(!registerVisible)
   }
 
-  async function handleRegisterActivite(data, { reset }) {
+  async function handleRegister(data, { reset }) {
     try {
       const schema = Yup.object().shape({
         descricao: Yup.string().min(5).required('Informe a descrição')
@@ -51,12 +52,11 @@ const RegisterCities = () => {
       api
         .post('/cities/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Atividade já cadastrada!')
+          notifySuccess(res.data.message)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError('Houve um erro inexperado! Tente novamente.')
           }
         })
 
@@ -78,61 +78,99 @@ const RegisterCities = () => {
     }
   }
 
-  return (
-    <Layout page="Cidades">
-      <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
+  // async function handleUpdate(data, { reset }) {
+  //   try {
+  //     const schema = Yup.object().shape({
+  //       descricao: Yup.string().min(5).required('Informe a descrição')
+  //     })
 
-        <S.Info>
+  //     await schema.validate(data, {
+  //       abortEarly: false
+  //     })
+
+  //     api
+  //       .post(`/cities/update/${identifier}`, data)
+  //       .then(res => {
+  //         if (res.status === 400) alert('Erro! Atividade já cadastrada!')
+  //       })
+  //       .catch(err => {
+  //         if (err) {
+  //           alert('Houve um erro inexperado! Tente novamente.')
+  //         }
+  //       })
+
+  //     formRef.current.setErrors({})
+
+  //     toggleRegisterVisible()
+
+  //     reset()
+  //   } catch (error) {
+  //     if (error instanceof Yup.ValidationError) {
+  //       const errorMessages = {}
+
+  //       error.inner.forEach(err => {
+  //         errorMessages[err.path] = err.message
+  //       })
+
+  //       formRef.current.setErrors(errorMessages)
+  //     }
+  //   }
+  // }
+
+  // function handleFill(item) {
+  //   formRef.current.setData({
+  //     descricao: item.descricao,
+  //     id_estado: item.estado
+  //   })
+
+  //   setIdentifier(item.id)
+  //   toggleUpdateVisible()
+  // }
+
+  // function toggleUpdateVisible() {
+  //   setUpdateVisible(!updateVisible)
+  // }
+
+  return (
+    <Layout page="Cidades" register={() => toggleRegisterVisible()}>
+      <S.Container>
+        <S.InfoContainer>
           {DataInfoOptions.map(item => (
             <S.Text key={item.id}>{item.descricao}</S.Text>
           ))}
-        </S.Info>
+        </S.InfoContainer>
 
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-                <S.Text> {item.estado && item.estado.descricao} </S.Text>
-              </S.ListWrapper>
+              <List
+                key={item.id}
+                description={item.descricao}
+                description2={item.estado && item.estado.descricao}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
 
-      <Form ref={formRef} onSubmit={handleRegisterActivite}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Nova Cidade</h6>
-            </S.ContentHeader>
-
-            <S.ContentMain>
-              <S.CityInputWrapper>
-                <Input03 label="Descrição" name="descricao" type="text" />
-                <S.OptionWrapper>
-                  <Input04 name="id_estado" Options={StateOptions} />
-                </S.OptionWrapper>
-              </S.CityInputWrapper>
-            </S.ContentMain>
-
-            <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-              />
-            </S.ContentFooter>
-          </S.ModalWrapper>
-        </Modal>
+      <Form ref={formRef} onSubmit={handleRegister}>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleRegisterVisible()}
+          title="Cadastro de cidade"
+          visible={registerVisible}
+          state={StateOptions}
+        />
       </Form>
+
+      {/* <Form ref={formRef} onSubmit={handleUpdate}>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleUpdateVisible()}
+          title="Edição de cidade"
+          visible={updateVisible}
+          state={StateOptions}
+        />
+      </Form> */}
+
+      <ToastContainer />
     </Layout>
   )
 }

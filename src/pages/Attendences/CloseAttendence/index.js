@@ -4,8 +4,12 @@ import React, { useState, useEffect } from 'react'
 import api from '../../../services/API'
 
 import Modal from '../../../components/modal'
-import Button01 from '../../../components/buttons/button01'
 import CheckBox from '../../../components/inputs/checkbox'
+import Button02 from '../../../components/buttons/button02'
+
+import I from '../../../utils/Icons'
+
+import { notifySuccess } from '../../../components/toastify'
 
 import * as S from './styles'
 
@@ -40,42 +44,54 @@ const CloseAttendence = ({
   }
 
   function handleCosingAttendence() {
-    api.put('/attendence/update/close', {
-      id_atendimento: attendenceID,
-      fech_motivos: reasonSelected
-    })
+    api
+      .put('/attendence/update/close', {
+        id_atendimento: attendenceID,
+        fech_motivos: reasonSelected
+      })
+      .then(response => notifySuccess('Atendimento finalizado!'))
 
     finish()
   }
 
   return (
     <Modal visible={modalCloseVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
+      <S.Container>
+        <S.Header>
           <S.Title> {clientName} </S.Title>
-        </S.ModalHeader>
-        <S.ModalMain>
-          <h6>Opções de fechamento</h6>
-          <S.ModalMainGrid>
-            {reasonsClosing.map(item => (
-              <CheckBox
-                key={item.id}
-                label={item.descricao}
-                value={item.id}
-                onChange={e => handleReasonsSelected(e.target.checked, item.id)}
-              />
-            ))}
-          </S.ModalMainGrid>
-        </S.ModalMain>
+        </S.Header>
+        <S.Main>
+          <S.SubTitle>Selecione o que foi feito no atendimento:</S.SubTitle>
+          <S.ScrollReasons>
+            <S.ModalMainGrid>
+              {reasonsClosing.map(item => (
+                <CheckBox
+                  key={item.id}
+                  label={item.descricao}
+                  value={item.id}
+                  onChange={e =>
+                    handleReasonsSelected(e.target.checked, item.id)
+                  }
+                />
+              ))}
+            </S.ModalMainGrid>
+          </S.ScrollReasons>
+        </S.Main>
         <S.ModalFooter>
-          <Button01
+          <Button02
             label="Confirmar"
             bgColor="#79D279"
             onClick={() => handleCosingAttendence()}
+            icon={I.RiCheckboxCircleLine}
           />
-          <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
+          <Button02
+            label="Cancelar"
+            bgColor="#FF6666"
+            onClick={closeModal}
+            icon={I.RiCloseLine}
+          />
         </S.ModalFooter>
-      </S.ModalContent>
+      </S.Container>
     </Modal>
   )
 }

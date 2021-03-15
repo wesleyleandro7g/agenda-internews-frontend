@@ -2,14 +2,21 @@ import styled from 'styled-components'
 import I from '../../utils/Icons'
 
 export const Container = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
-  height: 56px;
+  height: 65px;
+
+  display: flex;
+  justify-content: space-between;
+
   top: 0%;
-  padding: 0 10px;
-  background-color: #e6e6e6;
+
+  background-color: #fff;
+
+  -webkit-box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 0.5px 5px 0px rgba(0, 0, 0, 0.75);
+
+  border-bottom: 1px solid #dadada;
 
   @media (max-width: 800px) {
     display: none;
@@ -25,20 +32,55 @@ export const ContainerMobile = styled(Container)`
     position: relative;
   }
 `
-export const WrapperItems = styled.div`
+export const ContainItems = styled.div`
   display: flex;
   align-items: center;
+
+  height: 100%;
+
+  :first-child {
+    border-right: 1px solid #dadada;
+  }
+
+  :last-child {
+    border-left: 1px solid #dadada;
+  }
+`
+export const WrapperItems = styled.div`
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 20px;
+
+  border-left: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+
+  :first-child {
+    border-left: 0;
+  }
+
+  :last-child {
+    border-right: 0;
+  }
 `
 export const Avatar = styled.button`
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000;
+
   border: 0;
+  border-radius: 50%;
+  margin-right: 10px;
+
   outline: none;
+
+  background-color: #000;
+
   cursor: pointer;
 
   @media (max-width: 800px) {
@@ -46,12 +88,13 @@ export const Avatar = styled.button`
   }
 `
 export const AvatarText = styled.h6`
-  font-size: 10px;
+  font-size: 12px;
   color: #fff;
 `
 export const MenuIcon = styled(I.RiMenuLine)`
   color: #000;
   cursor: pointer;
+  font-size: 20px;
 
   @media (max-width: 800px) {
     color: #fff;
@@ -62,12 +105,10 @@ export const MenuIcon = styled(I.RiMenuLine)`
 export const AlertIcon = styled(I.RiAlertLine)`
   color: #cccc00;
   cursor: pointer;
-  margin-right: 15px;
 `
 export const Title = styled.h3`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  margin-left: 10px;
   color: #000;
   text-transform: uppercase;
 
@@ -75,4 +116,7 @@ export const Title = styled.h3`
     color: #fff;
     font-size: 16px;
   }
+`
+export const UserName = styled.h6`
+  text-transform: uppercase;
 `

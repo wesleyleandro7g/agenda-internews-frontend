@@ -112,10 +112,10 @@ export const StateOptions = [
 export const DataInfoOptions = [
   {
     id: 0,
-    descricao: 'cidade'
+    descricao: 'Cidade'
   },
   {
     id: 1,
-    descricao: 'estado'
+    descricao: 'Estado'
   }
 ]

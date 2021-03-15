@@ -5,12 +5,12 @@ import * as Yup from 'yup'
 import api from '../../../services/API'
 
 import Layout from '../../../components/layout'
-import Input03 from '../../../components/inputs/input03'
-import Button01 from '../../../components/buttons/button01'
-import Button02 from '../../../components/buttons/button02'
-import Modal from '../../../components/modal'
-
-import I from '../../../utils/Icons'
+import RegisterAndUpdate from '../../../components/register-and-update'
+import List from '../../../components/list-items'
+import ToastContainer, {
+  notifyError,
+  notifySuccess
+} from '../../../components/toastify'
 
 import * as S from './styles'
 
@@ -48,12 +48,11 @@ const RegisterInternalActivities = () => {
       api
         .post('/activity/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Atividade já cadastrada!')
+          notifySuccess(res.data.message)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError('Houve um erro inexperado! Tente novamente.')
           }
         })
 
@@ -76,52 +75,29 @@ const RegisterInternalActivities = () => {
   }
 
   return (
-    <Layout page="Atividades Interna">
+    <Layout page="Atividades Interna" register={() => toggleRegisterVisible()}>
       <S.Container>
-        <S.HeaderWrapper>
-          <Button02
-            label="Cadastrar"
-            icon={I.RiAddCircleLine}
-            onClick={() => toggleRegisterVisible()}
-          />
-        </S.HeaderWrapper>
-
-        <S.Info>
-          <S.Text> descrição </S.Text>
-        </S.Info>
+        <S.InfoContainer>
+          <S.Text> Descrição </S.Text>
+        </S.InfoContainer>
 
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <S.ListWrapper key={item.id}>
-                <S.Text> {item.descricao} </S.Text>
-              </S.ListWrapper>
+              <List key={item.id} description={item.descricao} />
             ))}
         </S.ScrollArea>
       </S.Container>
 
       <Form ref={formRef} onSubmit={handleRegisterActivite}>
-        <Modal visible={registerVisible}>
-          <S.ModalWrapper>
-            <S.ContentHeader>
-              <h6>Nova Atividade</h6>
-            </S.ContentHeader>
-
-            <S.ContentMain>
-              <Input03 label="Descrição" name="descricao" type="text" />
-            </S.ContentMain>
-
-            <S.ContentFooter>
-              <Button01 label="Cadastrar" bgColor="#79D279" type="submit" />
-              <Button01
-                label="Cancelar"
-                bgColor="#FF6666"
-                onClick={() => toggleRegisterVisible()}
-              />
-            </S.ContentFooter>
-          </S.ModalWrapper>
-        </Modal>
+        <RegisterAndUpdate
+          toggleVisible={() => toggleRegisterVisible()}
+          title="Cadastrar atividade interna"
+          visible={registerVisible}
+        />
       </Form>
+
+      <ToastContainer />
     </Layout>
   )
 }

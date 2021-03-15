@@ -4,7 +4,9 @@
 import React from 'react'
 
 import Modal from '../../../components/modal'
-import Button01 from '../../../components/buttons/button01'
+import Button02 from '../../../components/buttons/button02'
+
+import I from '../../../utils/Icons'
 
 import * as S from './styles'
 
@@ -29,12 +31,13 @@ const DetailsAttendence = ({
 
   return (
     <Modal visible={modalDetailsVisible}>
-      <S.ModalContent>
-        <S.ModalHeader>
+      <S.Container>
+        <S.Header>
           <S.Title>
             {attendenceDataTemp.cliente &&
               attendenceDataTemp.cliente.razao_social}
           </S.Title>
+
           <S.StatusContent
             status={attendenceDataTemp.status && attendenceDataTemp.status.id}
           >
@@ -42,8 +45,8 @@ const DetailsAttendence = ({
               {attendenceDataTemp.status && attendenceDataTemp.status.descricao}
             </S.TextStatus>
           </S.StatusContent>
-        </S.ModalHeader>
-        <S.ModalMain>
+        </S.Header>
+        <S.Main>
           <S.TextDetailsModal>
             <S.Span>Tipo de solicitação: </S.Span>
             {attendenceDataTemp.abertura &&
@@ -73,43 +76,57 @@ const DetailsAttendence = ({
               {convertDate(attendenceDataTemp.updatedAt)}
             </S.TextDetailsModal>
           )}
-        </S.ModalMain>
+        </S.Main>
         {attendenceDataTemp.status && attendenceDataTemp.status.id !== 4 ? (
           <S.ModalFooter>
             {attendenceDataTemp.status && attendenceDataTemp.status.id === 1 ? (
-              <Button01
+              <Button02
                 label="Finalizar"
                 bgColor="#79D279"
                 onClick={closeAttendence}
                 disabled={sectorID == 1 ? true : false}
+                icon={I.RiCheckboxCircleLine}
               />
             ) : (
-              <Button01
+              <Button02
                 label="Iniciar"
                 bgColor="#79D279"
                 onClick={openAttendence}
                 disabled={sectorID == 1 ? true : false}
+                icon={I.RiCheckboxCircleLine}
               />
             )}
-            <Button01
+            <Button02
               label="Agendar"
               bgColor="#8CB3D9"
               onClick={scheduleAttendence}
               disabled={true}
+              icon={I.RiCalendarEventFill}
             />
-            <Button01
+            <Button02
               label="Repassar"
               bgColor="#FFB84D"
               onClick={repassAttendence}
+              icon={I.RiArrowLeftRightFill}
             />
-            <Button01 label="Cancelar" bgColor="#FF6666" onClick={closeModal} />
+            <Button02
+              label="Cancelar"
+              bgColor="#FF6666"
+              onClick={closeModal}
+              icon={I.RiCloseLine}
+            />
           </S.ModalFooter>
         ) : (
           <S.ModalFooter>
-            <Button01 label="Fechar" bgColor="#FF6666" onClick={closeModal} />
+            <Button02
+              label="Fechar"
+              bgColor="#FF6666"
+              onClick={closeModal}
+              icon={I.RiCloseLine}
+            />
           </S.ModalFooter>
         )}
-      </S.ModalContent>
+      </S.Container>
     </Modal>
   )
 }
