@@ -2,9 +2,9 @@
 import React, { useEffect, useRef } from 'react'
 import { useField } from '@unform/core'
 
-import { Container, Input, Label } from './styles'
+import { Container, Input, InputMaskComponent, Label } from './styles'
 
-const Input02 = ({ name, label, mask, ...rest }) => {
+const Input03 = ({ name, label, mask = '', ...rest }) => {
   const inputRef = useRef(null)
   const { fieldName, registerField, error, clearError } = useField(name)
 
@@ -18,18 +18,34 @@ const Input02 = ({ name, label, mask, ...rest }) => {
 
   return (
     <Container>
-      <Input
-        ref={inputRef}
-        placeholder=" "
-        error={error}
-        onFocus={clearError}
-        mask={mask}
-        {...rest}
-      />
+      {mask ? (
+        <>
+          <InputMaskComponent
+            ref={inputRef}
+            placeholder=" "
+            error={error}
+            onFocus={clearError}
+            mask={mask}
+            {...rest}
+          />
 
-      <Label error={error}>{label}</Label>
+          <Label error={error}>{label}</Label>
+        </>
+      ) : (
+        <>
+          <Input
+            ref={inputRef}
+            placeholder=" "
+            error={error}
+            onFocus={clearError}
+            {...rest}
+          />
+
+          <Label error={error}>{label}</Label>
+        </>
+      )}
     </Container>
   )
 }
 
-export default Input02
+export default Input03

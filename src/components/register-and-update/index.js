@@ -29,7 +29,14 @@ const RegisterAndUpdate = ({
 
         <S.Main>
           <Input03 label="Descrição" name="descricao" type="text" />
-          {contact && <Input03 label="Contato" name="contato" type="text" />}
+          {contact && (
+            <Input03
+              label="Contato"
+              name="contato"
+              type="text"
+              mask="(99) 9 9999-9999"
+            />
+          )}
           {password && <Input03 label="Senha" name="senha" type="text" />}
           {state && <Input04 name="id_estado" Options={state} />}
           {users && <Input04 name="id_usuario" Options={users} />}

@@ -39,6 +39,7 @@ const RegisterUser = () => {
   }
 
   async function handleRegisterUser(data, { reset }) {
+    console.log(data)
     try {
       const schema = Yup.object().shape({
         descricao: Yup.string().min(3).required('Informe o nome'),
@@ -57,7 +58,6 @@ const RegisterUser = () => {
         .catch(err => {
           if (err) {
             notifyError(err.message)
-            console.log(err)
           }
         })
 
