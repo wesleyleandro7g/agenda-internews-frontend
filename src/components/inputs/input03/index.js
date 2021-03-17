@@ -1,9 +1,10 @@
+/* eslint-disable multiline-ternary */
 import React, { useEffect, useRef } from 'react'
 import { useField } from '@unform/core'
 
 import { Container, Input, Label } from './styles'
 
-const Input02 = ({ name, label, ...rest }) => {
+const Input02 = ({ name, label, mask, ...rest }) => {
   const inputRef = useRef(null)
   const { fieldName, registerField, error, clearError } = useField(name)
 
@@ -22,8 +23,10 @@ const Input02 = ({ name, label, ...rest }) => {
         placeholder=" "
         error={error}
         onFocus={clearError}
+        mask={mask}
         {...rest}
       />
+
       <Label error={error}>{label}</Label>
     </Container>
   )

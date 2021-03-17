@@ -9,7 +9,8 @@ export const InputsClientData = [
     id: 1,
     name: 'cnpj',
     label: 'CNPJ',
-    type: 'text'
+    type: 'text',
+    mask: '99.999.999/9999-99'
   },
   {
     id: 2,
