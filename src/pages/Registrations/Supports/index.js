@@ -39,13 +39,13 @@ const RegisterSupports = () => {
 
   async function handleRegisterSupport(data, { reset }) {
     try {
-      // const schema = Yup.object().shape({
-      //   nome: Yup.string().min(3).required('Informe a descrição')
-      // })
+      const schema = Yup.object().shape({
+        descricao: Yup.string().min(3).required('Informe a descrição')
+      })
 
-      // await schema.validate(data, {
-      //   abortEarly: false
-      // })
+      await schema.validate(data, {
+        abortEarly: false
+      })
 
       api
         .post('/support/create', data)
