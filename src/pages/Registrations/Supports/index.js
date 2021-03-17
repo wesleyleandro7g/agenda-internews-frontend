@@ -85,7 +85,7 @@ const RegisterSupports = () => {
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <List key={item.id} description={item.nome} />
+              <List key={item.id} description={item.descricao} />
             ))}
         </S.ScrollArea>
       </S.Container>
