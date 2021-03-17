@@ -103,6 +103,7 @@ const RegisterUser = () => {
           contact
           password
           sector={SectorOptions}
+          large
         />
         {/* <Modal visible={registerVisible}>
           <S.ModalWrapper>
