@@ -53,6 +53,12 @@ export const InputsClientData = [
     name: 'mensalidade',
     label: 'Mensalidade (R$)',
     type: 'text'
+  },
+  {
+    id: 9,
+    name: 'versao_internews',
+    label: 'Versão do sistema',
+    type: 'text'
   }
 ]
 
