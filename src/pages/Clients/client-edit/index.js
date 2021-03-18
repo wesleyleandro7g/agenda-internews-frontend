@@ -79,15 +79,11 @@ const ClientEditable = () => {
       api
         .put('/clients/update', data)
         .then(res => {
-          if (res.status === 200) {
-            notifySuccess('Sucesso!!')
-            formRef.current.setErrors({})
-            handleGoBack()
+          notifySuccess(res.data.message)
+          formRef.current.setErrors({})
+          handleGoBack()
 
-            reset()
-          } else if (res.status === 400) {
-            notifyError('Erro! Cliente já cadastrado!')
-          }
+          reset()
         })
         .catch(err => {
           if (err) {
@@ -181,6 +177,7 @@ const ClientEditable = () => {
               label="Salvar alterações"
               icon={I.RiCheckboxCircleLine}
               bgColor="#79D279"
+              type="submit"
             />
           </S.RegisterButtonWrapper>
         </S.Content>
