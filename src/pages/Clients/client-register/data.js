@@ -2,7 +2,7 @@ export const InputsClientData = [
   {
     id: 0,
     name: 'razao_social',
-    label: 'Razão social',
+    label: 'Nome',
     type: 'text'
   },
   {
@@ -39,7 +39,7 @@ export const InputsClientData = [
   {
     id: 6,
     name: 'identificador_servidor',
-    label: 'ID no sistema',
+    label: 'ID do servidor',
     type: 'text'
   },
   {

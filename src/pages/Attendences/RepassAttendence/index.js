@@ -66,7 +66,7 @@ const RepassAttendence = ({
                 <Radio
                   key={item.id}
                   name="id_suporte"
-                  label={item.nome}
+                  label={item.descricao}
                   id={item.id}
                   value={item.id}
                 />

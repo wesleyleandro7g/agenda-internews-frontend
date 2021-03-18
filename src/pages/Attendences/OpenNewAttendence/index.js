@@ -112,7 +112,7 @@ const OpenNewAttendence = ({
           id_setor: sectorID
         })
         .then(res => {
-          notifySuccess(res.data.mensage)
+          notifySuccess(res.data.message)
           finish()
         })
         .catch(err => {
@@ -239,8 +239,6 @@ const OpenNewAttendence = ({
           </S.RightWrapper>
         </S.Main>
       </S.Container>
-
-      {/* <ToastContainer /> */}
     </Modal>
   )
 }

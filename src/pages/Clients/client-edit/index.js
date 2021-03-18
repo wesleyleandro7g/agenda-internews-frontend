@@ -11,6 +11,11 @@ import Input03 from '../../../components/inputs/input03'
 import Input04 from '../../../components/inputs/input04'
 import Button02 from '../../../components/buttons/button02'
 
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../../components/toastify'
+
 import I from '../../../utils/Icons'
 
 import { InputsClientData, ModuleOptions } from './data'
@@ -71,25 +76,22 @@ const ClientEditable = () => {
         abortEarly: false
       })
 
-      // console.log(data)728 642 498
-
       api
         .put('/clients/update', data)
         .then(res => {
           if (res.status === 200) {
-            alert('Sucesso!!')
+            notifySuccess('Sucesso!!')
             formRef.current.setErrors({})
             handleGoBack()
 
             reset()
           } else if (res.status === 400) {
-            alert('Erro! Cliente já cadastrado!')
+            notifyError('Erro! Cliente já cadastrado!')
           }
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError('Houve um erro inexperado! Tente novamente.')
           }
         })
     } catch (error) {
@@ -183,6 +185,8 @@ const ClientEditable = () => {
           </S.RegisterButtonWrapper>
         </S.Content>
       </Form>
+
+      <ToastContainer />
     </Layout>
   )
 }

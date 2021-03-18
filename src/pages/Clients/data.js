@@ -21,7 +21,7 @@ export const DataInfoOptions = [
   },
   {
     id: 6,
-    title: 'Código Alternativo'
+    title: 'Id do servidor'
   },
   {
     id: 7,

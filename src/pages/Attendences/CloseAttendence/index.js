@@ -49,7 +49,7 @@ const CloseAttendence = ({
         id_atendimento: attendenceID,
         fech_motivos: reasonSelected
       })
-      .then(response => notifySuccess('Atendimento finalizado!'))
+      .then(response => notifySuccess(response.data.message))
 
     finish()
   }

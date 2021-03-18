@@ -54,7 +54,7 @@ const Attendences = () => {
   const userID = localStorage.getItem('user-id')
   const sectorID = localStorage.getItem('user-sector-id')
 
-  const TIME_FOR_NEW_CALL_API = 100000
+  const TIME_FOR_NEW_CALL_API = 20000
 
   const defaultOptions = {
     loop: true,
@@ -215,7 +215,7 @@ const Attendences = () => {
     api
       .put('/attendence/update/open', { id })
       .then(res => {
-        notifySuccess(res.data.mensage)
+        notifySuccess(res.data.message)
       })
       .catch(err => notifyError(err))
 
