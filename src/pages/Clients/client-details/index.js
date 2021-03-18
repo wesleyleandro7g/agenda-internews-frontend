@@ -45,15 +45,17 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
                 <S.DetailTitle>Quantidade de acessos</S.DetailTitle>
                 <S.DetailTitle>Quantidade de empresas</S.DetailTitle>
                 <S.DetailTitle>Quantidade de bancos</S.DetailTitle>
+                <S.DetailTitle>Versão do InterNews</S.DetailTitle>
                 <S.DetailTitle>mensalidade</S.DetailTitle>
               </S.SectionDataInfoTitle>
               <S.SectionDataInfoDetail>
-                <S.DatailInfo>: {data.suporte.nome}</S.DatailInfo>
+                <S.DatailInfo>: {data.suporte.descricao}</S.DatailInfo>
                 <S.DatailInfo>: {data.identificador_servidor}</S.DatailInfo>
                 <S.DatailInfo>: {data.identificador_internews}</S.DatailInfo>
                 <S.DatailInfo>: {data.quantidade_acessos}</S.DatailInfo>
                 <S.DatailInfo>: {data.quantidade_empresas}</S.DatailInfo>
                 <S.DatailInfo>: {data.quantidade_bancos}</S.DatailInfo>
+                <S.DatailInfo>: {data.versao_internews}</S.DatailInfo>
                 <S.DatailInfo>: {data.mensalidade}</S.DatailInfo>
               </S.SectionDataInfoDetail>
             </S.SectionInfoTwo>

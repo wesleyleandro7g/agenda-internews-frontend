@@ -62,7 +62,7 @@ const DetailsAttendence = ({
           </S.TextDetailsModal>
           <S.TextDetailsModal>
             <S.Span>Aberto por: </S.Span>
-            {attendenceDataTemp.usuario && attendenceDataTemp.usuario.nome}
+            {attendenceDataTemp.usuario && attendenceDataTemp.usuario.descricao}
           </S.TextDetailsModal>
           <S.TextDetailsModal>
             <S.Span>Solicitado em: </S.Span>

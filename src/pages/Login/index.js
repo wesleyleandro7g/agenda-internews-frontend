@@ -36,11 +36,11 @@ const Login = () => {
   async function handleLogin(data, { reset }) {
     try {
       const schema = Yup.object().shape({
-        nome: Yup.string().required('Digite seu nome'),
+        descricao: Yup.string().required('Digite seu nome'),
         senha: Yup.string().required('Disgite sua senha')
       })
 
-      data.nome = data.nome.toLowerCase()
+      data.descricao = data.descricao.toLowerCase()
       data.senha = data.senha.toLowerCase()
 
       console.log(data)
@@ -106,7 +106,7 @@ const Login = () => {
 
         <S.InputWrapper>
           <Form ref={formRef} onSubmit={handleLogin}>
-            <Input01 label="Nome" name="nome" type="text" />
+            <Input01 label="Nome" name="descricao" type="text" />
             <Input01 label="Senha" name="senha" type="password" />
 
             <S.Button type="submit">Entrar</S.Button>

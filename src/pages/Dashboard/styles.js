@@ -4,6 +4,8 @@ export const Container = styled.div`
   width: 100%;
   height: 90vh;
   overflow: auto;
+
+  padding: 5px 10px;
 `
 export const SubHeader = styled.div`
   width: 100%;
@@ -73,10 +75,8 @@ export const ContentChartAttendence = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 40%;
+  width: 100%;
   height: 100%;
-
-  border-right: 0.5px solid #d9d9d9;
 `
 export const ContentMainAttendence = styled.div`
   width: 60%;
@@ -107,6 +107,7 @@ export const InfoWrapperDetail = styled.div`
   text-align: center;
 
   border-left: 0.5px solid #d9d9d9;
+  background-color: #f2f2f2;
 `
 export const InfoText = styled.h6`
   font-weight: 400;

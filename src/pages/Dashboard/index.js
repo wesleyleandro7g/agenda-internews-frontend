@@ -40,9 +40,9 @@ const HandleDoughnutChart = ({ title, onChange, data }) => {
             </S.InfoWrapperDetail>
           </S.InfoWrapper>
         </S.ContentChartAttendence>
-        <S.ContentMainAttendence>
+        {/* <S.ContentMainAttendence>
           <h6>Main</h6>
-        </S.ContentMainAttendence>
+        </S.ContentMainAttendence> */}
       </S.ContentAttendence>
     </S.ChartWrapper2>
   )

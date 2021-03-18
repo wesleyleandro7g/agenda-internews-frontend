@@ -87,6 +87,7 @@ const RegisterClient = ({ visible, onClose }) => {
                   label={item.label}
                   name={item.name}
                   type={item.type}
+                  mask={item.mask}
                 />
               ))}
             </S.ScopeWrapper>

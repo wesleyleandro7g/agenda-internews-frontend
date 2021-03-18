@@ -8,6 +8,11 @@ import Layout from '../../../components/layout'
 import List from '../../../components/list-items'
 import RegisterAndUpdate from '../../../components/register-and-update'
 
+import ToastContainer, {
+  notifySuccess,
+  notifyError
+} from '../../../components/toastify'
+
 import { SectorOptions, DataInfoOptions } from './data'
 
 import * as S from './styles'
@@ -34,24 +39,25 @@ const RegisterUser = () => {
   }
 
   async function handleRegisterUser(data, { reset }) {
+    console.log(data)
     try {
       const schema = Yup.object().shape({
-        nome: Yup.string().min(3).required('Informe o nome'),
+        descricao: Yup.string().min(3).required('Informe o nome'),
         senha: Yup.string().min(3).required('Informe a senha')
       })
 
       await schema.validate(data, {
         abortEarly: false
       })
+
       api
         .post('/users/create', data)
         .then(res => {
-          if (res.status === 400) alert('Erro! Suporte já cadastrado!')
+          notifySuccess(res.data.message)
         })
         .catch(err => {
           if (err) {
-            alert('Houve um erro inexperado! Tente novamente.')
-            console.log(err)
+            notifyError(err.message)
           }
         })
 
@@ -87,8 +93,8 @@ const RegisterUser = () => {
             industries.map(item => (
               <List
                 key={item.id}
-                description={item.nome}
-                description2={item.setor.nome}
+                description={item.descricao}
+                description2={item.setor.descricao}
                 description3={item.contato}
               />
             ))}
@@ -103,6 +109,7 @@ const RegisterUser = () => {
           contact
           password
           sector={SectorOptions}
+          large
         />
         {/* <Modal visible={registerVisible}>
           <S.ModalWrapper>
@@ -131,6 +138,8 @@ const RegisterUser = () => {
           </S.ModalWrapper>
         </Modal> */}
       </Form>
+
+      <ToastContainer />
     </Layout>
   )
 }

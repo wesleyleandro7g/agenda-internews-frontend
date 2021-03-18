@@ -6,7 +6,7 @@ const COLORS = ['#00C49F', '#e6fffa']
 const renderCustomizedLabel = ({ name, percent }) => {
   return (
     <text
-      x={'45%'}
+      x={'48%'}
       y={'50%'}
       fill="#00C49F"
       dominantBaseline="central"

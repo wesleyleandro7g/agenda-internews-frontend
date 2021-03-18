@@ -24,6 +24,9 @@ export const OptionsWraper = styled.div`
 export const MainWrapper = styled.div`
   display: flex;
   flex-direction: row;
+
+  width: 100%;
+  height: 100%;
 `
 export const DataWrapper = styled.div`
   width: 100%;

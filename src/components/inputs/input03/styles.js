@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import InputMask from 'react-input-mask'
 
 export const Container = styled.div`
   width: 98%;
@@ -9,6 +10,31 @@ export const Container = styled.div`
   border-radius: 3px;
 `
 export const Input = styled.input`
+  width: 100%;
+  height: 40px;
+
+  border: 1px solid ${props => (props.error ? '#ffcccc' : '#FFFFFF')};
+  border-radius: 3px;
+  padding-left: 5px;
+  outline: none;
+
+  font-size: 14px;
+  text-transform: uppercase;
+
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -webkit-appearance: none;
+
+  background-color: ${props => (props.error ? '#ffe6e6' : '#EEEEEE')};
+
+  :focus + label,
+  :not(:placeholder-shown) + label {
+    font-size: 12px;
+    margin-top: 0;
+  }
+`
+export const InputMaskComponent = styled(InputMask)`
   width: 100%;
   height: 40px;
 

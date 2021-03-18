@@ -9,7 +9,8 @@ export const InputsClientData = [
     id: 1,
     name: 'cnpj',
     label: 'CNPJ',
-    type: 'text'
+    type: 'text',
+    mask: '99.999.999/9999-99'
   },
   {
     id: 2,
@@ -51,6 +52,12 @@ export const InputsClientData = [
     id: 8,
     name: 'mensalidade',
     label: 'Mensalidade (R$)',
+    type: 'text'
+  },
+  {
+    id: 9,
+    name: 'versao_internews',
+    label: 'Versão do sistema',
     type: 'text'
   }
 ]

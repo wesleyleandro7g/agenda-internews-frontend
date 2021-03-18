@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 50%;
-  height: ${props => (props.large ? '50%' : '60%')};
+  height: ${props => (props.large ? '60%' : '50%')};
 
   display: flex;
   flex-direction: column;
@@ -32,20 +32,19 @@ export const Header = styled.div`
 `
 export const Main = styled.div`
   width: 100%;
-  height: 30%;
-  background-color: red;
+  height: 60%;
 
   padding: 20px;
 `
 export const Footer = styled.div`
   width: 100%;
-  height: 50%;
+  height: 20%;
 
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  align-items: center;
 
-  padding: 20px;
+  padding-right: 20px;
 `
 export const Title = styled.h4`
   font-size: 18px;

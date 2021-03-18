@@ -39,13 +39,13 @@ const RegisterSupports = () => {
 
   async function handleRegisterSupport(data, { reset }) {
     try {
-      // const schema = Yup.object().shape({
-      //   nome: Yup.string().min(3).required('Informe a descrição')
-      // })
+      const schema = Yup.object().shape({
+        descricao: Yup.string().min(3).required('Informe a descrição')
+      })
 
-      // await schema.validate(data, {
-      //   abortEarly: false
-      // })
+      await schema.validate(data, {
+        abortEarly: false
+      })
 
       api
         .post('/support/create', data)
@@ -85,7 +85,7 @@ const RegisterSupports = () => {
         <S.ScrollArea speed={0.6}>
           {industries &&
             industries.map(item => (
-              <List key={item.id} description={item.nome} />
+              <List key={item.id} description={item.descricao} />
             ))}
         </S.ScrollArea>
       </S.Container>
