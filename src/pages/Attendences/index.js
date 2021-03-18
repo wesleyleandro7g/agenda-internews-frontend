@@ -15,6 +15,7 @@ import Fab from '../../components/buttons/fab'
 import SelectOptions from '../../components/select-options'
 
 import LoadingAnimation from '../../assets/loader.json'
+import LivelyAnimated from '../../components/lively-animated'
 
 import OpenNewAttendence from './OpenNewAttendence'
 import RepassAttendence from './RepassAttendence'
@@ -53,6 +54,8 @@ const Attendences = () => {
   const userID = localStorage.getItem('user-id')
   const sectorID = localStorage.getItem('user-sector-id')
 
+  const TIME_FOR_NEW_CALL_API = 100000
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -86,7 +89,7 @@ const Attendences = () => {
       } else {
         handleCallApi()
       }
-    }, 100000)
+    }, TIME_FOR_NEW_CALL_API)
   }, [])
 
   function handleRefresh() {
@@ -271,7 +274,7 @@ const Attendences = () => {
       {loading ? (
         attendenceData.length <= 0 ? (
           <S.MainWrapper>
-            <h3>Sem registros</h3>
+            <LivelyAnimated />
           </S.MainWrapper>
         ) : (
           <S.MainWrapper>
