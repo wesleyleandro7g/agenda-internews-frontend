@@ -49,7 +49,7 @@ const Clients = () => {
       descricao: ''
     },
     suporte: {
-      nome: ''
+      descricao: ''
     },
     ferramentas: []
   })
@@ -149,7 +149,7 @@ const Clients = () => {
           {supports.map(item => (
             <SelectOptions
               key={item.id}
-              title={item.nome}
+              title={item.descricao}
               handle={() => handleToggleSupportClients(item.id)}
             />
           ))}
@@ -198,7 +198,7 @@ const Clients = () => {
                         {item.identificador_servidor}
                       </S.ProvidersInfoText>
                       <S.ProvidersInfoTextMobileDetails>
-                        {item.suporte.nome}
+                        {item.suporte.descricao}
                       </S.ProvidersInfoTextMobileDetails>
                     </S.ProvidersListWrapper>
                   ))}
