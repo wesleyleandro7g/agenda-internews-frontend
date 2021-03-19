@@ -60,7 +60,7 @@ const OpenNewAttendence = ({
 
   function handleFilterData() {
     const dataFiltered = dataClient.filter(item =>
-      item.razao_social.toLowerCase().includes(searchInput)
+      item.nome.toLowerCase().includes(searchInput)
     )
 
     setFiltered(dataFiltered)
@@ -140,7 +140,7 @@ const OpenNewAttendence = ({
             <S.LeftWrapper>
               <S.ClientSelected>
                 <S.TextClientSelected>
-                  {clientSelected.razao_social}
+                  {clientSelected.nome}
                 </S.TextClientSelected>
                 <I.RiCloseLine
                   cursor="pointer"
@@ -173,7 +173,7 @@ const OpenNewAttendence = ({
                     onClick={() => handleSelectClient(item)}
                   >
                     <S.ClientText> {item.identificador_servidor} </S.ClientText>
-                    <S.ClientText> {item.razao_social} </S.ClientText>
+                    <S.ClientText> {item.nome} </S.ClientText>
                   </S.ClientWrapper>
                 ))}
               </S.ScrollClients>

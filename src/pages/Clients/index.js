@@ -36,12 +36,19 @@ const Clients = () => {
   const [modalDetailVisible, setModalDetailsVisible] = useState(false)
   const [modalRegisterVisible, setModalRegisterVisible] = useState(false)
   const [clientViewData, setClientViewData] = useState({
+    nome: '',
     razao_social: '',
     cnpj: '',
     identificador_servidor: '',
     identificador_internews: '',
     quantidade_acessos: '',
     endereco: '',
+    responsavel: '',
+    contato: '',
+    email: '',
+    mensalidade: '',
+    vencimento_mensalidade: '',
+    versao_internews: '',
     atividade: {
       descricao: ''
     },
@@ -108,7 +115,7 @@ const Clients = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   function handleFilterData() {
     const dataFiltered = data.filter(item =>
-      item.razao_social.toLowerCase().includes(searchInput.toLowerCase())
+      item.nome.toLowerCase().includes(searchInput.toLowerCase())
     )
 
     setFiltered(dataFiltered)
@@ -129,6 +136,8 @@ const Clients = () => {
       pathname: '/clientes/cadastro/editar',
       state: { data }
     })
+
+    console.log(data)
   }
 
   function toggleRegisterVisible() {
@@ -180,7 +189,7 @@ const Clients = () => {
                       onClick={() => handleDetails(item)}
                     >
                       <S.ProvidersInfoTextMobile>
-                        {item.razao_social}
+                        {item.nome}
                       </S.ProvidersInfoTextMobile>
                       <S.ProvidersInfoText>
                         {item.cidade.descricao}

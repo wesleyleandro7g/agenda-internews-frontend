@@ -18,7 +18,7 @@ import ToastContainer, {
 
 import I from '../../../utils/Icons'
 
-import { InputsClientData, ModuleOptions } from './data'
+import { InputsClientData, ModuleOptions } from '../data'
 
 import * as S from './styles'
 
@@ -47,16 +47,24 @@ const ClientEditable = () => {
   function handleHystoryData() {
     const dataOrigin = history.location.state.data
 
+    // console.log(dataOrigin)
+
     formRef.current.setData({
+      nome: dataOrigin.nome,
       razao_social: dataOrigin.razao_social,
       cnpj: dataOrigin.cnpj,
       endereco: dataOrigin.endereco,
+      responsavel: dataOrigin.responsavel,
+      contato: dataOrigin.contato,
+      email: dataOrigin.email,
       quantidade_acessos: dataOrigin.quantidade_acessos,
       quantidade_empresas: dataOrigin.quantidade_empresas,
       quantidade_bancos: dataOrigin.quantidade_bancos,
       identificador_servidor: dataOrigin.identificador_servidor,
       identificador_internews: dataOrigin.identificador_internews,
-      mensalidade: dataOrigin.mensalidade
+      mensalidade: dataOrigin.mensalidade,
+      versao_internews: dataOrigin.versao_internews,
+      vencimento_mensalidade: dataOrigin.vencimento_mensalidade
     })
 
     setModuleSelected(dataOrigin.id_modulo)
@@ -69,7 +77,12 @@ const ClientEditable = () => {
   async function handleRegisterClient(data, { reset }) {
     try {
       const schema = Yup.object().shape({
-        razao_social: Yup.string().min(3).required('Informe o nome da empresa')
+        nome: Yup.string().min(3).required('Informe o nome da empresa'),
+        cnpj: Yup.string().min(18).required('Informe o cnpj da empresa'),
+        endereco: Yup.string().min(3).required('Informe o endereço da empresa'),
+        responsavel: Yup.string()
+          .min(3)
+          .required('Informe o responsável pela empresa')
       })
 
       await schema.validate(data, {
@@ -122,6 +135,7 @@ const ClientEditable = () => {
                 label={item.label}
                 name={item.name}
                 type={item.type}
+                mask={item.mask}
               />
             ))}
           </S.ScopeWrapper>

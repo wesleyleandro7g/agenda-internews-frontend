@@ -173,9 +173,7 @@ const Attendences = () => {
 
   function handleFilterData() {
     const dataFiltered = attendenceData.filter(item =>
-      item.cliente.razao_social
-        .toLowerCase()
-        .includes(searchInput.toLowerCase())
+      item.cliente.nome.toLowerCase().includes(searchInput.toLowerCase())
     )
 
     setFiltered(dataFiltered)

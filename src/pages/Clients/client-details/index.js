@@ -12,7 +12,7 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
     <Modal visible={visible}>
       <S.Container>
         <S.Header>
-          <S.Title>{data.razao_social}</S.Title>
+          <S.Title>{data.nome}</S.Title>
 
           <S.HeaderItemsWrapper>
             <CircleBtn icon={I.RiEditBoxLine} onClick={openEdit} />
@@ -30,7 +30,7 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
                 <S.DetailTitle>ramo de atividade</S.DetailTitle>
               </S.SectionDataInfoTitle>
               <S.SectionDataInfoDetail>
-                <S.DatailInfo>: {data.razao_social}</S.DatailInfo>
+                <S.DatailInfo>: {data.nome}</S.DatailInfo>
                 <S.DatailInfo>: {data.cnpj}</S.DatailInfo>
                 <S.DatailInfo>: {data.cidade.descricao}</S.DatailInfo>
                 <S.DatailInfo>: {data.endereco}</S.DatailInfo>

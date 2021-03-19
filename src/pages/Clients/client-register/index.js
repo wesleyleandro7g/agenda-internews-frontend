@@ -14,7 +14,7 @@ import { notifyError, notifySuccess } from '../../../components/toastify'
 
 import I from '../../../utils/Icons'
 
-import { InputsClientData, ModuleOptions } from './data'
+import { InputsClientData, ModuleOptions } from '../data'
 
 import * as S from './styles'
 
@@ -34,9 +34,15 @@ const RegisterClient = ({ visible, onClose }) => {
   }, [])
 
   async function handleRegisterClient(data, { reset }) {
+    console.log(data)
     try {
       const schema = Yup.object().shape({
-        razao_social: Yup.string().min(3).required('Informe o nome da empresa')
+        nome: Yup.string().min(3).required('Informe o nome da empresa'),
+        cnpj: Yup.string().min(18).required('Informe o cnpj da empresa'),
+        endereco: Yup.string().min(3).required('Informe o endereço da empresa'),
+        responsavel: Yup.string()
+          .min(3)
+          .required('Informe o responsável pela empresa')
       })
 
       await schema.validate(data, {
