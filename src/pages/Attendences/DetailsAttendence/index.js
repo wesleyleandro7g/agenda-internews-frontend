@@ -34,8 +34,7 @@ const DetailsAttendence = ({
       <S.Container>
         <S.Header>
           <S.Title>
-            {attendenceDataTemp.cliente &&
-              attendenceDataTemp.cliente.razao_social}
+            {attendenceDataTemp.cliente && attendenceDataTemp.cliente.nome}
           </S.Title>
 
           <S.StatusContent

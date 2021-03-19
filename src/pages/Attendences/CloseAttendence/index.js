@@ -1,11 +1,14 @@
 /* eslint-disable array-callback-return */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Form } from '@unform/web'
+// import * as Yup from 'yup'
 
 import api from '../../../services/API'
 
 import Modal from '../../../components/modal'
 import CheckBox from '../../../components/inputs/checkbox'
 import Button02 from '../../../components/buttons/button02'
+import Input03 from '../../../components/inputs/input03'
 
 import I from '../../../utils/Icons'
 
@@ -20,6 +23,7 @@ const CloseAttendence = ({
   closeModal,
   finish
 }) => {
+  const formRef = useRef(null)
   const [reasonsClosing, setReasonsClosing] = useState([])
   const [reasonSelected, setReasonSelected] = useState([])
 
@@ -61,6 +65,17 @@ const CloseAttendence = ({
           <S.Title> {clientName} </S.Title>
         </S.Header>
         <S.Main>
+          <Form ref={formRef}>
+            <S.Details>
+              <Input03 label="Atendido por" name="nome_atendente" type="text" />
+              <Input03
+                label="Versão do InterNews"
+                name="versao_internews"
+                type="text"
+                mask="9.99.9"
+              />
+            </S.Details>
+          </Form>
           <S.SubTitle>Selecione o que foi feito no atendimento:</S.SubTitle>
           <S.ScrollReasons>
             <S.ModalMainGrid>

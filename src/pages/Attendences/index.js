@@ -291,7 +291,7 @@ const Attendences = () => {
                       statusBorder={item.status.id}
                     >
                       <S.ProvidersInfoTextMobile>
-                        {item.cliente.razao_social}
+                        {item.cliente.nome}
                       </S.ProvidersInfoTextMobile>
                       <S.ProvidersInfoTextMobileDetails>
                         {item.nome_solicitante}
@@ -335,7 +335,7 @@ const Attendences = () => {
         modalCloseVisible={modalCloseVisible}
         attendenceID={attendenceDataTemp.id}
         clientName={
-          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.nome
         }
         closeModal={() => toggleModalCloseAndDetailsAttendence()}
         finish={() => setModalCloseVisible(!modalCloseVisible)}
@@ -344,7 +344,7 @@ const Attendences = () => {
       <ScheduleAttendence
         modalScheduledVisible={modalScheduledVisible}
         clientName={
-          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.nome
         }
         closeModal={() => toggleModalSchuledAndDetailsAttendence()}
       />
@@ -352,7 +352,7 @@ const Attendences = () => {
       <RepassAttendence
         modalRepassVisible={modalRepassVisible}
         clientName={
-          attendenceDataTemp.cliente && attendenceDataTemp.cliente.razao_social
+          attendenceDataTemp.cliente && attendenceDataTemp.cliente.nome
         }
         attendenceID={attendenceDataTemp.id}
         closeModal={() => toggleModalRepassAndDetailsAttedence()}

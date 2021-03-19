@@ -91,3 +91,9 @@ export const SubTitle = styled.h5`
   font-weight: 500;
   color: #333;
 `
+export const Details = styled.div`
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+`
