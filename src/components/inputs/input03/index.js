@@ -4,7 +4,7 @@ import { useField } from '@unform/core'
 
 import { Container, Input, InputMaskComponent, Label } from './styles'
 
-const Input03 = ({ name, label, mask = '', ...rest }) => {
+const Input03 = ({ name, label, mask = '', onChange, ...rest }) => {
   const inputRef = useRef(null)
   const { fieldName, registerField, error, clearError } = useField(name)
 
@@ -26,6 +26,7 @@ const Input03 = ({ name, label, mask = '', ...rest }) => {
             error={error}
             onFocus={clearError}
             mask={mask}
+            onChange={onChange}
             {...rest}
           />
 
@@ -38,6 +39,7 @@ const Input03 = ({ name, label, mask = '', ...rest }) => {
             placeholder=" "
             error={error}
             onFocus={clearError}
+            onChange={onChange}
             {...rest}
           />
 

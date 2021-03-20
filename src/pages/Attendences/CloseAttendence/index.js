@@ -26,6 +26,8 @@ const CloseAttendence = ({
   const formRef = useRef(null)
   const [reasonsClosing, setReasonsClosing] = useState([])
   const [reasonSelected, setReasonSelected] = useState([])
+  const [version, setVersion] = useState('')
+  const [receptionist, setReceptionist] = useState('')
 
   useEffect(() => {
     handleCallApi()
@@ -51,7 +53,9 @@ const CloseAttendence = ({
     api
       .put('/attendence/update/close', {
         id_atendimento: attendenceID,
-        fech_motivos: reasonSelected
+        fech_motivos: reasonSelected,
+        versao_internews: version,
+        nome_atendente: receptionist
       })
       .then(response => notifySuccess(response.data.message))
 
@@ -67,12 +71,18 @@ const CloseAttendence = ({
         <S.Main>
           <Form ref={formRef}>
             <S.Details>
-              <Input03 label="Atendido por" name="nome_atendente" type="text" />
+              <Input03
+                label="Atendido por"
+                name="nome_atendente"
+                type="text"
+                onChange={e => setReceptionist(e.target.value)}
+              />
               <Input03
                 label="Versão do InterNews"
                 name="versao_internews"
                 type="text"
                 mask="9.99.9"
+                onChange={e => setVersion(e.target.value)}
               />
             </S.Details>
           </Form>

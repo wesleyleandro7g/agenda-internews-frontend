@@ -64,6 +64,16 @@ const DetailsAttendence = ({
             {attendenceDataTemp.usuario && attendenceDataTemp.usuario.descricao}
           </S.TextDetailsModal>
           <S.TextDetailsModal>
+            <S.Span>Atendido por: </S.Span>
+            {attendenceDataTemp.nome_atendente &&
+              attendenceDataTemp.nome_atendente}
+          </S.TextDetailsModal>
+          <S.TextDetailsModal>
+            <S.Span>Versão do sistema: </S.Span>
+            {attendenceDataTemp.versao_internews &&
+              attendenceDataTemp.versao_internews}
+          </S.TextDetailsModal>
+          <S.TextDetailsModal>
             <S.Span>Solicitado em: </S.Span>
             {convertDate(attendenceDataTemp.createdAt)}
           </S.TextDetailsModal>
