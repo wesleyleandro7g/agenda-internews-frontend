@@ -7,6 +7,7 @@ import api from '../../../services/API'
 import Layout from '../../../components/layout'
 import RegisterAndUpdate from '../../../components/register-and-update'
 import List from '../../../components/list-items'
+
 import ToastContainer, {
   notifyError,
   notifySuccess
@@ -18,6 +19,7 @@ const RegisterInternalActivities = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
+  const [block, setBlock] = useState(false)
 
   useEffect(() => {
     handleCallApi()
@@ -46,7 +48,10 @@ const RegisterInternalActivities = () => {
       })
 
       api
-        .post('/activity/create', data)
+        .post('/activity/create', {
+          descricao: data.descricao,
+          desconsiderar_relatorio: block
+        })
         .then(res => {
           notifySuccess(res.data.message)
         })
@@ -79,12 +84,17 @@ const RegisterInternalActivities = () => {
       <S.Container>
         <S.InfoContainer>
           <S.Text> Descrição </S.Text>
+          <S.Text> Desconsiderar no Relatório de Atendimentos </S.Text>
         </S.InfoContainer>
 
-        <S.ScrollArea speed={0.6}>
+        <S.ScrollArea>
           {industries &&
             industries.map(item => (
-              <List key={item.id} description={item.descricao} />
+              <List
+                key={item.id}
+                description={item.descricao}
+                description2={item.desconsiderar_relatorio ? 'sim' : 'não'}
+              />
             ))}
         </S.ScrollArea>
       </S.Container>
@@ -94,6 +104,7 @@ const RegisterInternalActivities = () => {
           toggleVisible={() => toggleRegisterVisible()}
           title="Cadastrar atividade interna"
           visible={registerVisible}
+          block={() => setBlock(!block)}
         />
       </Form>
 

@@ -10,7 +10,7 @@ export const InfoContainer = styled.div`
   height: 40px;
 
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
 
   padding: 0 10px;
