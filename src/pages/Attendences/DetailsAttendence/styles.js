@@ -57,6 +57,10 @@ export const Main = styled.div`
   width: 100%;
   height: 70%;
 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+
   padding: 20px;
 `
 export const Title = styled.h4`
@@ -70,21 +74,13 @@ export const Title = styled.h4`
     font-size: 14px;
   }
 `
-export const TextDetailsModal = styled.h4`
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-`
-export const ModalFooter = styled.div`
+export const Footer = styled.div`
   width: 100%;
   height: 20%;
 
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+
   padding-bottom: 15px;
-`
-export const Span = styled.span`
-  font-weight: bold;
 `

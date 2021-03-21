@@ -5,6 +5,7 @@ import React from 'react'
 
 import Modal from '../../../components/modal'
 import Button02 from '../../../components/buttons/button02'
+import ShowInfo from '../../../components/show-info'
 
 import I from '../../../utils/Icons'
 
@@ -20,6 +21,7 @@ const DetailsAttendence = ({
   repassAttendence
 }) => {
   const sectorID = localStorage.getItem('user-sector-id')
+
   function convertDate(date) {
     const converted = new Date(date)
 
@@ -46,48 +48,57 @@ const DetailsAttendence = ({
           </S.StatusContent>
         </S.Header>
         <S.Main>
-          <S.TextDetailsModal>
-            <S.Span>Tipo de solicitação: </S.Span>
-            {attendenceDataTemp.abertura &&
-              attendenceDataTemp.abertura.descricao}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            <S.Span>Solicitante: </S.Span>
-            {attendenceDataTemp.nome_solicitante}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            <S.Span>Contato: </S.Span>
-            {attendenceDataTemp.contato_solicitante}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            <S.Span>Aberto por: </S.Span>
-            {attendenceDataTemp.usuario && attendenceDataTemp.usuario.descricao}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            <S.Span>Atendido por: </S.Span>
-            {attendenceDataTemp.nome_atendente &&
-              attendenceDataTemp.nome_atendente}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            <S.Span>Versão do sistema: </S.Span>
-            {attendenceDataTemp.versao_internews &&
-              attendenceDataTemp.versao_internews}
-          </S.TextDetailsModal>
-          <S.TextDetailsModal>
-            <S.Span>Solicitado em: </S.Span>
-            {convertDate(attendenceDataTemp.createdAt)}
-          </S.TextDetailsModal>
-          {attendenceDataTemp.status && attendenceDataTemp.status.id !== 4 ? (
-            ''
-          ) : (
-            <S.TextDetailsModal>
-              <S.Span>Finalizado em: </S.Span>
-              {convertDate(attendenceDataTemp.updatedAt)}
-            </S.TextDetailsModal>
+          <ShowInfo
+            title="Tipo de solicitação"
+            value={
+              attendenceDataTemp.abertura &&
+              attendenceDataTemp.abertura.descricao
+            }
+          />
+          <ShowInfo
+            title="Solicitante"
+            value={
+              attendenceDataTemp.nome_solicitante &&
+              attendenceDataTemp.nome_solicitante
+            }
+          />
+          <ShowInfo
+            title="Contato"
+            value={attendenceDataTemp.contato_solicitante}
+          />
+          <ShowInfo
+            title="Aberto por"
+            value={
+              attendenceDataTemp.usuario && attendenceDataTemp.usuario.descricao
+            }
+          />
+          <ShowInfo
+            title="Atendido por"
+            value={
+              attendenceDataTemp.usuario && attendenceDataTemp.nome_atendente
+            }
+          />
+          <ShowInfo
+            title="Versão do sistema"
+            value={
+              attendenceDataTemp.versao_internews &&
+              attendenceDataTemp.versao_internews
+            }
+          />
+          <ShowInfo
+            title="Solicitado em"
+            value={convertDate(attendenceDataTemp.createdAt)}
+          />
+          {attendenceDataTemp.status && attendenceDataTemp.status.id === 4 && (
+            <ShowInfo
+              title="Finalizado em"
+              value={convertDate(attendenceDataTemp.updatedAt)}
+            />
           )}
         </S.Main>
+
         {attendenceDataTemp.status && attendenceDataTemp.status.id !== 4 ? (
-          <S.ModalFooter>
+          <S.Footer>
             {attendenceDataTemp.status && attendenceDataTemp.status.id === 1 ? (
               <Button02
                 label="Finalizar"
@@ -124,16 +135,16 @@ const DetailsAttendence = ({
               onClick={closeModal}
               icon={I.RiCloseLine}
             />
-          </S.ModalFooter>
+          </S.Footer>
         ) : (
-          <S.ModalFooter>
+          <S.Footer>
             <Button02
               label="Fechar"
               bgColor="#FF6666"
               onClick={closeModal}
               icon={I.RiCloseLine}
             />
-          </S.ModalFooter>
+          </S.Footer>
         )}
       </S.Container>
     </Modal>
