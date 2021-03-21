@@ -178,6 +178,10 @@ const Dashboard = () => {
       setClientsForIndustries(res.data.Data)
     })
 
+    api.get('/dashboard/manager/cities').then(res => {
+      setClientsForCity(res.data.Data)
+    })
+
     api.get('/dashboard/manager/attendences').then(res => {
       setAttendencesForType(res.data.Data)
     })
