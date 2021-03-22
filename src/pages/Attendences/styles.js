@@ -101,6 +101,10 @@ export const StatusContent = styled.div`
   padding: 5px;
   border-radius: 3px;
 
+  -webkit-box-shadow: 1px 1px 3px 0px rgba(121, 121, 121, 1);
+  -moz-box-shadow: 1px 1px 3px 0px rgba(121, 121, 121, 1);
+  box-shadow: 1px 1px 3px 0px rgba(121, 121, 121, 1);
+
   background-color: ${props => {
     switch (props.status) {
       case 'ABERTO':
