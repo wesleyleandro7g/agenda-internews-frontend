@@ -3,7 +3,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import Lottie from 'react-lottie'
 
 import api from '../../services/API'
@@ -46,7 +45,6 @@ const Attendences = () => {
   const [attendenceDataTemp, setAttendenceDataTemp] = useState({})
   const [newAttendenceVisible, setNewAttendenceVisible] = useState(false)
   const { dataClientContext, setDataClientContext } = useClientContext()
-  const history = useHistory()
 
   const dateNow = new Date().toISOString()
   const fullDate = new Date(dateNow).toLocaleDateString()
@@ -248,7 +246,6 @@ const Attendences = () => {
       page="Atendimentos"
       search={e => setSearchInput(e.target.value)}
       register={() => setNewAttendenceVisible(!newAttendenceVisible)}
-      attendenceRepports={() => history.push('atendimentos/relatório')}
       attendenceRefresh={() => handleRefresh()}
     >
       <S.Container>

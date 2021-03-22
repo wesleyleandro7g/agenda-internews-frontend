@@ -5,12 +5,16 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { isAuthorized } from './config/VerifyAuthorization'
 
 import Login from './pages/Login'
+
 import Dashboard from './pages/Dashboard'
+
 import Clients from './pages/Clients'
 import ClientsEditRegister from './pages/Clients/client-edit'
+
 import Attendences from './pages/Attendences'
-import AttendenceReport from './pages/Attendences/AttendenceReport'
+
 import Requests from './pages/Requests'
+
 import RegistrationClients from './pages/Registrations/Clients'
 import RegistrationActivities from './pages/Registrations/Activities'
 import RegistrationCities from './pages/Registrations/Cities'
@@ -21,9 +25,16 @@ import RegistrationInternalActivities from './pages/Registrations/InternalActivi
 import RegistrationTools from './pages/Registrations/Tools'
 import RegistrationSupports from './pages/Registrations/Supports'
 import RegistrationUsers from './pages/Registrations/Users'
+
+import Reports from './pages/Reports'
+import ReportAttendences from './pages/Reports/Attendences'
+
 import Prospects from './pages/Prospects'
+
 import Schedules from './pages/Schedules'
+
 import Tables from './pages/Tables'
+
 import Pendencies from './pages/Pendencies'
 
 const PrivateRoutes = ({ component: Component, ...rest }) => (
@@ -51,11 +62,6 @@ export default function Routes() {
         component={ClientsEditRegister}
       />
       <PrivateRoutes path="/atendimentos" exact component={Attendences} />
-      <PrivateRoutes
-        path="/atendimentos/relatório"
-        exact
-        component={AttendenceReport}
-      />
       <PrivateRoutes path="/solicitações" exact component={Requests} />
       <PrivateRoutes
         path="/cadastros/clientes"
@@ -107,6 +113,14 @@ export default function Routes() {
         exact
         component={RegistrationUsers}
       />
+
+      <PrivateRoutes path="/relatorios" exact component={Reports} />
+      <PrivateRoutes
+        path="/relatorios/atendimentos"
+        exact
+        component={ReportAttendences}
+      />
+
       <PrivateRoutes path="/prospectos" exact component={Prospects} />
       <PrivateRoutes path="/agendamentos" exact component={Schedules} />
       <PrivateRoutes path="/pendencias" exact component={Pendencies} />

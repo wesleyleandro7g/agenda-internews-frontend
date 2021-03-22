@@ -18,6 +18,12 @@ export const DataInternal = [
     handlePage: 'Atendimentos',
     icon: I.RiQuestionAnswerLine,
     select: false
+  },
+  {
+    id: 3,
+    handlePage: 'Relatorios',
+    icon: I.RiFileTextLine,
+    select: false
   }
   // {
   //   id: 3,
@@ -76,18 +82,25 @@ export const DataExternal = [
     icon: I.RiGroupLine,
     select: false
   },
+  {
+    id: 2,
+    handlePage: 'Atendimentos',
+    icon: I.RiQuestionAnswerLine,
+    select: false
+  },
+  {
+    id: 3,
+    handlePage: 'Relatorios',
+    icon: I.RiFileTextLine,
+    select: false
+  }
   // {
   //   id: 2,
   //   handlePage: 'Prospectos',
   //   icon: I.RiUserVoiceLine,
   //   select: false
   // },
-  {
-    id: 3,
-    handlePage: 'Atendimentos',
-    icon: I.RiQuestionAnswerLine,
-    select: false
-  }
+
   // {
   //   id: 4,
   //   handlePage: 'Agendamentos',
@@ -149,9 +162,15 @@ export const DataAdmin = [
   //   select: false
   // },
   {
-    id: 3,
+    id: 2,
     handlePage: 'Atendimentos',
     icon: I.RiQuestionAnswerLine,
+    select: false
+  },
+  {
+    id: 3,
+    handlePage: 'Relatorios',
+    icon: I.RiFileTextLine,
     select: false
   },
   // {
