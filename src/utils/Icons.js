@@ -32,7 +32,9 @@ import {
   RiAddLine,
   RiDeleteBin7Line,
   RiCalendarEventFill,
-  RiArrowLeftRightFill
+  RiArrowLeftRightFill,
+  RiFullscreenLine,
+  RiFullscreenExitLine
 } from 'react-icons/ri'
 
 const Icons = {
@@ -69,7 +71,9 @@ const Icons = {
   RiAddLine,
   RiDeleteBin7Line,
   RiCalendarEventFill,
-  RiArrowLeftRightFill
+  RiArrowLeftRightFill,
+  RiFullscreenLine,
+  RiFullscreenExitLine
 }
 
 export default Icons

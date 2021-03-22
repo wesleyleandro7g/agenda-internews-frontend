@@ -25,6 +25,14 @@ export const Description = styled.h3`
   text-transform: uppercase;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+
   margin-left: 5px;
+
   color: #333;
+
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
 `

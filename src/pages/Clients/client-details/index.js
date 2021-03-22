@@ -1,66 +1,80 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Modal from '../../../components/modal'
 import CircleBtn from '../../../components/buttons/circle-button'
+import ShowInfo from '../../../components/show-info'
 
 import I from '../../../utils/Icons'
 
 import * as S from './styles'
 
 const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
+  const [fullScreen, setFullScreen] = useState(false)
+
   return (
     <Modal visible={visible}>
-      <S.Container>
+      <S.Container fullScreen={fullScreen}>
         <S.Header>
           <S.Title>{data.nome}</S.Title>
 
           <S.HeaderItemsWrapper>
+            <CircleBtn
+              icon={fullScreen ? I.RiFullscreenExitLine : I.RiFullscreenLine}
+              onClick={() => setFullScreen(!fullScreen)}
+            />
             <CircleBtn icon={I.RiEditBoxLine} onClick={openEdit} />
             <CircleBtn icon={I.RiCloseLine} onClick={onClose} />
           </S.HeaderItemsWrapper>
         </S.Header>
         <S.Main>
-          <S.SectionOne>
-            <S.SectionInfoOne>
-              <S.SectionDataInfoTitle>
-                <S.DetailTitle>razão social</S.DetailTitle>
-                <S.DetailTitle>cnpj</S.DetailTitle>
-                <S.DetailTitle>cidade</S.DetailTitle>
-                <S.DetailTitle>endereço</S.DetailTitle>
-                <S.DetailTitle>ramo de atividade</S.DetailTitle>
-              </S.SectionDataInfoTitle>
-              <S.SectionDataInfoDetail>
-                <S.DatailInfo>: {data.nome}</S.DatailInfo>
-                <S.DatailInfo>: {data.cnpj}</S.DatailInfo>
-                <S.DatailInfo>: {data.cidade.descricao}</S.DatailInfo>
-                <S.DatailInfo>: {data.endereco}</S.DatailInfo>
-                <S.DatailInfo>: {data.atividade.descricao}</S.DatailInfo>
-              </S.SectionDataInfoDetail>
-            </S.SectionInfoOne>
-            <S.SectionInfoTwo>
-              <S.SectionDataInfoTitle>
-                <S.DetailTitle>suporte</S.DetailTitle>
-                <S.DetailTitle>id no sistema</S.DetailTitle>
-                <S.DetailTitle>id no controle OS</S.DetailTitle>
-                <S.DetailTitle>Quantidade de acessos</S.DetailTitle>
-                <S.DetailTitle>Quantidade de empresas</S.DetailTitle>
-                <S.DetailTitle>Quantidade de bancos</S.DetailTitle>
-                <S.DetailTitle>Versão do InterNews</S.DetailTitle>
-                <S.DetailTitle>mensalidade</S.DetailTitle>
-              </S.SectionDataInfoTitle>
-              <S.SectionDataInfoDetail>
-                <S.DatailInfo>: {data.suporte.descricao}</S.DatailInfo>
-                <S.DatailInfo>: {data.identificador_servidor}</S.DatailInfo>
-                <S.DatailInfo>: {data.identificador_internews}</S.DatailInfo>
-                <S.DatailInfo>: {data.quantidade_acessos}</S.DatailInfo>
-                <S.DatailInfo>: {data.quantidade_empresas}</S.DatailInfo>
-                <S.DatailInfo>: {data.quantidade_bancos}</S.DatailInfo>
-                <S.DatailInfo>: {data.versao_internews}</S.DatailInfo>
-                <S.DatailInfo>: {data.mensalidade}</S.DatailInfo>
-              </S.SectionDataInfoDetail>
-            </S.SectionInfoTwo>
-          </S.SectionOne>
-          <S.SectionTwo>
+          <ShowInfo title="Nome" value={data.nome} />
+          <ShowInfo title="Razão social" value={data.razao_social} />
+          <ShowInfo title="Cnpj" value={data.cnpj} />
+          <ShowInfo title="Cidade" value={data.cidade.descricao} />
+          <ShowInfo title="Endereço" value={data.endereco} />
+          <ShowInfo
+            title="Ramo de atividade"
+            value={data.atividade.descricao}
+          />
+          <ShowInfo title="Atividade interna" value="Informar aqui" />
+          <ShowInfo
+            title="ID do servidor"
+            value={data.identificador_servidor}
+          />
+          <ShowInfo
+            title="ID no controle OS"
+            value={data.identificador_internews}
+          />
+          <ShowInfo
+            title="Quantidade de acessos"
+            value={data.quantidade_acessos}
+          />
+          <ShowInfo
+            title="Quantidade de empresas"
+            value={data.quantidade_empresas}
+          />
+          <ShowInfo
+            title="Quantidade de banco de dados"
+            value={data.quantidade_bancos}
+          />
+          <ShowInfo title="Versão do sistema" value={data.versao_internews} />
+          <ShowInfo
+            title="Suporte responsável"
+            value={data.suporte.descricao}
+          />
+          <ShowInfo
+            title="Valor da mensalidade"
+            value={Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL'
+            }).format(data.mensalidade)}
+          />
+          <ShowInfo
+            title="Dia do vencimento da mensalidade"
+            value={data.vencimento_mensalidade}
+          />
+
+          {/* <S.SectionTwo>
             <S.SectionToolsHeader>
               <S.ToolsTitle>Ferramentas</S.ToolsTitle>
             </S.SectionToolsHeader>
@@ -71,7 +85,7 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
                 </S.DatailInfo>
               ))}
             </S.SectionToolsMain>
-          </S.SectionTwo>
+          </S.SectionTwo>  */}
         </S.Main>
       </S.Container>
     </Modal>
