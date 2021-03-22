@@ -54,7 +54,7 @@ const Attendences = () => {
   const userID = localStorage.getItem('user-id')
   const sectorID = localStorage.getItem('user-sector-id')
 
-  const TIME_FOR_NEW_CALL_API = 30000
+  const TIME_FOR_NEW_CALL_API = 100000
 
   const defaultOptions = {
     loop: true,
@@ -277,38 +277,36 @@ const Attendences = () => {
         ) : (
           <S.MainWrapper>
             <S.DataWrapper>
-              <S.ProvidersInfo>
+              <S.Info>
                 {DataInfoOptions.map(item => (
-                  <S.InfoTextTitle key={item.id}>{item.title}</S.InfoTextTitle>
+                  <S.InfoTitle key={item.id}>{item.title}</S.InfoTitle>
                 ))}
-              </S.ProvidersInfo>
+              </S.Info>
               <S.ContainScrollArea>
                 <S.ScrollArea>
                   {filtered.map(item => (
-                    <S.ProvidersListWrapper
+                    <S.ListWrapper
                       key={item.id}
                       onClick={() => handlePreviewAttendence(item)}
                       statusBorder={item.status.id}
                     >
-                      <S.ProvidersInfoTextMobile>
-                        {item.cliente.nome}
-                      </S.ProvidersInfoTextMobile>
-                      <S.ProvidersInfoTextMobileDetails>
+                      <S.InfoTextMobile>{item.cliente.nome}</S.InfoTextMobile>
+                      <S.InfoTextMobileDetails>
                         {item.nome_solicitante}
-                      </S.ProvidersInfoTextMobileDetails>
-                      <S.ProvidersInfoTextMobileDetails>
+                      </S.InfoTextMobileDetails>
+                      <S.InfoTextMobileDetails>
                         {item.contato_solicitante}
-                      </S.ProvidersInfoTextMobileDetails>
-                      <S.ProvidersInfoTextMobileDetails>
+                      </S.InfoTextMobileDetails>
+                      <S.InfoTextMobileDetails>
                         {item.abertura.descricao}
-                      </S.ProvidersInfoTextMobileDetails>
-                      <S.ProvidersInfoText>
-                        {item.status.descricao}
-                      </S.ProvidersInfoText>
-                      <S.ProvidersInfoTextMobileDetails>
+                      </S.InfoTextMobileDetails>
+                      <S.StatusContent status={item.status.descricao}>
+                        <S.InfoText>{item.status.descricao}</S.InfoText>
+                      </S.StatusContent>
+                      <S.InfoTextMobileDetails>
                         {convertDate(item.createdAt)}
-                      </S.ProvidersInfoTextMobileDetails>
-                    </S.ProvidersListWrapper>
+                      </S.InfoTextMobileDetails>
+                    </S.ListWrapper>
                   ))}
                 </S.ScrollArea>
               </S.ContainScrollArea>

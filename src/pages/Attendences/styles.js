@@ -43,7 +43,7 @@ export const ScrollArea = styled.div`
     height: 80vh;
   }
 `
-export const ProvidersListWrapper = styled.button`
+export const ListWrapper = styled.button`
   width: 100%;
   height: 55px;
 
@@ -71,11 +71,7 @@ export const ProvidersListWrapper = styled.button`
     height: 70px;
   }
 `
-export const InfoTextTitle = styled.h6`
-  font-weight: bold;
-  font-size: 12px;
-`
-export const ProvidersInfo = styled.div`
+export const Info = styled.div`
   width: 100%;
   height: 40px;
 
@@ -93,7 +89,32 @@ export const ProvidersInfo = styled.div`
     display: none;
   }
 `
-export const ProvidersInfoText = styled.h6`
+export const InfoTitle = styled.h6`
+  font-weight: bold;
+  font-size: 12px;
+`
+export const StatusContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 5px;
+  border-radius: 3px;
+
+  background-color: ${props => {
+    switch (props.status) {
+      case 'ABERTO':
+        return '#79D279'
+      case 'AGUARDANDO':
+        return '#FFB84D'
+      case 'AGENDADO':
+        return '#8CB3D9'
+      case 'FINALIZADO':
+        return '#FF6666'
+    }
+  }};
+`
+export const InfoText = styled.h6`
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
@@ -102,14 +123,14 @@ export const ProvidersInfoText = styled.h6`
     display: none;
   }
 `
-export const ProvidersInfoTextMobile = styled(ProvidersInfoText)`
+export const InfoTextMobile = styled(InfoText)`
   @media (max-width: 800px) {
     display: block;
     font-size: 14px;
     font-weight: 500;
   }
 `
-export const ProvidersInfoTextMobileDetails = styled(ProvidersInfoTextMobile)`
+export const InfoTextMobileDetails = styled(InfoTextMobile)`
   font-size: 12px;
   font-weight: 400;
 `
@@ -157,15 +178,7 @@ export const ModalFooter = styled.div`
 export const ModalFooterDual = styled(ModalFooter)`
   grid-template-columns: repeat(2, 1fr);
 `
-export const StatusContent = styled.div`
-  width: 80px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${props =>
-    props.status === 'aberto' ? '#79D279' : '#FFB84D'};
-`
+
 export const TextStatus = styled.h6`
   font-size: 10px;
   text-transform: uppercase;

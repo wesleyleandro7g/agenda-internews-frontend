@@ -40,7 +40,9 @@ const DetailsAttendence = ({
           </S.Title>
 
           <S.StatusContent
-            status={attendenceDataTemp.status && attendenceDataTemp.status.id}
+            status={
+              attendenceDataTemp.status && attendenceDataTemp.status.descricao
+            }
           >
             <S.TextStatus>
               {attendenceDataTemp.status && attendenceDataTemp.status.descricao}

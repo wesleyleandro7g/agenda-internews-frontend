@@ -45,7 +45,18 @@ export const StatusContent = styled.div`
 
   border-radius: 3px;
 
-  background-color: ${props => (props.status === 1 ? '#79D279' : '#FFB84D')};
+  background-color: ${props => {
+    switch (props.status) {
+      case 'ABERTO':
+        return '#79D279'
+      case 'AGUARDANDO':
+        return '#FFB84D'
+      case 'AGENDADO':
+        return '#8CB3D9'
+      case 'FINALIZADO':
+        return '#FF6666'
+    }
+  }};
 `
 export const TextStatus = styled.h6`
   font-size: 12px;
