@@ -17,6 +17,20 @@ export const Container = styled.button`
 
   position: relative;
 `
+export const ContentIcon = styled.div`
+  width: 90%;
+  height: 25vh;
+
+  display: flex;
+
+  border-radius: 3px;
+
+  transition: all 200ms;
+
+  ${Container}:hover & {
+    transform: scale(1.1);
+  }
+`
 export const Content = styled.div`
   width: 100%;
   height: 100%;
@@ -44,4 +58,10 @@ export const Title = styled.h3`
   font-size: 18px;
   font-weight: 500;
   text-transform: uppercase;
+
+  transition: all 200ms;
+
+  ${Container}:hover & {
+    transform: scale(1.1);
+  }
 `

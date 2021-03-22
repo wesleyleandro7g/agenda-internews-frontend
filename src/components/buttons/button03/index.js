@@ -7,7 +7,9 @@ const Button03 = ({ title, icon, onClick }) => {
 
   return (
     <S.Container onClick={onClick}>
-      <Icon size={120} color="#fff" />
+      <S.ContentIcon>
+        <Icon size={120} color="#fff" />
+      </S.ContentIcon>
 
       <S.Content>
         <S.Title> {title} </S.Title>
