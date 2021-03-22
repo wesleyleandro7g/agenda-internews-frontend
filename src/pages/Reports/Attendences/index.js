@@ -9,7 +9,7 @@ import * as S from './styles'
 
 const AttendencesReport = () => {
   return (
-    <Layout page="Relatório de Atendimentos">
+    <Layout page="Relatório de Clientes não Atendidos">
       <S.Container>
         <h1>Relatório</h1>
       </S.Container>
