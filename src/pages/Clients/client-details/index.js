@@ -10,7 +10,7 @@ import * as S from './styles'
 
 const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
   const [fullScreen, setFullScreen] = useState(false)
-
+  const sectorID = localStorage.getItem('user-sector-id')
   return (
     <Modal visible={visible}>
       <S.Container fullScreen={fullScreen}>
@@ -22,7 +22,9 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
               icon={fullScreen ? I.RiFullscreenExitLine : I.RiFullscreenLine}
               onClick={() => setFullScreen(!fullScreen)}
             />
-            <CircleBtn icon={I.RiEditBoxLine} onClick={openEdit} />
+            {sectorID !== '2' && (
+              <CircleBtn icon={I.RiEditBoxLine} onClick={openEdit} />
+            )}
             <CircleBtn icon={I.RiCloseLine} onClick={onClose} />
           </S.HeaderItemsWrapper>
         </S.Header>

@@ -60,6 +60,7 @@ const Clients = () => {
     },
     ferramentas: []
   })
+  const sectorID = localStorage.getItem('user-sector-id')
   const { setDataClientContext } = useClientContext()
 
   const defaultOptions = {
@@ -148,7 +149,7 @@ const Clients = () => {
     <Layout
       page="Clientes"
       search={e => setSearchInput(e.target.value)}
-      register={() => toggleRegisterVisible()}
+      register={() => (sectorID !== '2' ? toggleRegisterVisible() : {})}
     >
       <S.Container>
         <S.OptionsWraper>
