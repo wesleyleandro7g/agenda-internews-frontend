@@ -80,6 +80,8 @@ const Clients = () => {
     setLoading(false)
     api.get('/clients/index').then(res => {
       setData(res.data.clients)
+      console.log(res.data.clients)
+
       // setTotalClients(res.data.count)
       setFiltered(res.data.clients)
       setDataClientContext(res.data.clients)
@@ -136,8 +138,6 @@ const Clients = () => {
       pathname: '/clientes/cadastro/editar',
       state: { data }
     })
-
-    console.log(data)
   }
 
   function toggleRegisterVisible() {
@@ -201,10 +201,10 @@ const Clients = () => {
                         {item.cnpj}
                       </S.ProvidersInfoTextMobileDetails>
                       <S.ProvidersInfoText>
-                        {item.identificador_internews}
+                        {item.modulo.descricao}
                       </S.ProvidersInfoText>
                       <S.ProvidersInfoText>
-                        {item.identificador_servidor}
+                        {item.atividade_interna.descricao}
                       </S.ProvidersInfoText>
                       <S.ProvidersInfoTextMobileDetails>
                         {item.suporte.descricao}

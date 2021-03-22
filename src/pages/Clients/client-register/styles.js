@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 70%;
-  height: 80%;
+  width: ${props => (props.fullScreen ? '100%' : '70%')};
+  height: ${props => (props.fullScreen ? '100%' : '80%')};
 
   background-color: #fff;
 
@@ -34,6 +34,13 @@ export const Header = styled.div`
     rgba(99, 176, 194, 1) 0%,
     rgba(3, 76, 111, 1) 100%
   );
+`
+export const HeaderItemsWrapper = styled.div`
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 export const Main = styled.div`
   width: 100%;

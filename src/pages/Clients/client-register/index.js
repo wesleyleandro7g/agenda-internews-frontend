@@ -25,6 +25,7 @@ const RegisterClient = ({ visible, onClose }) => {
   const [industry, setIndustry] = useState([])
   const [internalActivity, setInternalActivity] = useState([])
   const [supports, setSupports] = useState([])
+  const [fullScreen, setFullScreen] = useState(false)
 
   useEffect(() => {
     api.get('/cities/index').then(res => setCities(res.data))
@@ -78,11 +79,17 @@ const RegisterClient = ({ visible, onClose }) => {
 
   return (
     <Modal visible={visible}>
-      <S.Container>
+      <S.Container fullScreen={fullScreen}>
         <S.Header>
           <S.Title> Novo cliente </S.Title>
 
-          <CircleBtn icon={I.RiCloseLine} onClick={onClose} />
+          <S.HeaderItemsWrapper>
+            <CircleBtn
+              icon={fullScreen ? I.RiFullscreenExitLine : I.RiFullscreenLine}
+              onClick={() => setFullScreen(!fullScreen)}
+            />
+            <CircleBtn icon={I.RiCloseLine} onClick={onClose} />
+          </S.HeaderItemsWrapper>
         </S.Header>
         <Form ref={formRef} onSubmit={handleRegisterClient}>
           <S.Main>

@@ -17,11 +17,11 @@ export const DataInfoOptions = [
   },
   {
     id: 5,
-    title: 'Código InterNews'
+    title: 'Módulo'
   },
   {
     id: 6,
-    title: 'Id do servidor'
+    title: 'Atividade interna'
   },
   {
     id: 7,
