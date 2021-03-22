@@ -11,6 +11,7 @@ import * as S from './styles'
 const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
   const [fullScreen, setFullScreen] = useState(false)
   const sectorID = localStorage.getItem('user-sector-id')
+
   return (
     <Modal visible={visible}>
       <S.Container fullScreen={fullScreen}>

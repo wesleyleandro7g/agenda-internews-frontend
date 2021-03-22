@@ -104,7 +104,7 @@ const DetailsAttendence = ({
                 label="Finalizar"
                 bgColor="#79D279"
                 onClick={closeAttendence}
-                disabled={sectorID == 1 ? true : false}
+                disabled={sectorID == 1 || sectorID == 2 ? true : false}
                 icon={I.RiCheckboxCircleLine}
               />
             ) : (
@@ -112,7 +112,7 @@ const DetailsAttendence = ({
                 label="Iniciar"
                 bgColor="#79D279"
                 onClick={openAttendence}
-                disabled={sectorID == 1 ? true : false}
+                disabled={sectorID == 1 || sectorID == 2 ? true : false}
                 icon={I.RiCheckboxCircleLine}
               />
             )}
@@ -127,6 +127,7 @@ const DetailsAttendence = ({
               label="Repassar"
               bgColor="#FFB84D"
               onClick={repassAttendence}
+              disabled={sectorID == 2 ? true : false}
               icon={I.RiArrowLeftRightFill}
             />
             <Button02

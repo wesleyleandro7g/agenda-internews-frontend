@@ -54,7 +54,7 @@ const Attendences = () => {
   const userID = localStorage.getItem('user-id')
   const sectorID = localStorage.getItem('user-sector-id')
 
-  const TIME_FOR_NEW_CALL_API = 20000
+  const TIME_FOR_NEW_CALL_API = 30000
 
   const defaultOptions = {
     loop: true,
@@ -63,7 +63,7 @@ const Attendences = () => {
   }
 
   useEffect(() => {
-    if (sectorID == 1) {
+    if (sectorID == 1 || sectorID == 2) {
       handleCallApiManager()
     } else {
       handleCallApi()
@@ -71,7 +71,7 @@ const Attendences = () => {
   }, [])
 
   useEffect(() => {
-    if (sectorID == 1) {
+    if (sectorID == 1 || sectorID == 2) {
       handleCallApiManager()
     } else {
       handleCallApi()
@@ -84,7 +84,7 @@ const Attendences = () => {
 
   useEffect(() => {
     setInterval(() => {
-      if (sectorID == 1) {
+      if (sectorID == 1 || sectorID == 2) {
         handleCallApiManager()
       } else {
         handleCallApi()
@@ -93,7 +93,7 @@ const Attendences = () => {
   }, [])
 
   function handleRefresh() {
-    if (sectorID == 1) {
+    if (sectorID == 1 || sectorID == 2) {
       handleCallApiManager()
     } else {
       handleCallApi()
@@ -120,7 +120,7 @@ const Attendences = () => {
   }
 
   function handleAttendences() {
-    if (sectorID == 1) {
+    if (sectorID == 1 || sectorID == 2) {
       api.get('/attendence/index/index').then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
@@ -138,7 +138,7 @@ const Attendences = () => {
   }
 
   function handleClosedAttendences() {
-    if (sectorID == 1) {
+    if (sectorID == 1 || sectorID == 2) {
       api.get('/attendence/index/closed').then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
