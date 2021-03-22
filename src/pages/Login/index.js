@@ -43,8 +43,6 @@ const Login = () => {
       data.descricao = data.descricao.toLowerCase()
       data.senha = data.senha.toLowerCase()
 
-      console.log(data)
-
       await schema.validate(data, {
         abortEarly: false
       })

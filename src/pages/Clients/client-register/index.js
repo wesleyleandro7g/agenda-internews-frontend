@@ -35,7 +35,6 @@ const RegisterClient = ({ visible, onClose }) => {
   }, [])
 
   async function handleRegisterClient(data, { reset }) {
-    console.log(data)
     try {
       const schema = Yup.object().shape({
         nome: Yup.string().min(3).required('Informe o nome da empresa'),

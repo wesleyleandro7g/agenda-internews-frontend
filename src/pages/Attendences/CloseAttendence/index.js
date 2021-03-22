@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect, useRef } from 'react'
 import { Form } from '@unform/web'
-// import * as Yup from 'yup'
+import * as Yup from 'yup'
 
 import api from '../../../services/API'
 
@@ -49,17 +49,48 @@ const CloseAttendence = ({
     }
   }
 
-  function handleCosingAttendence() {
-    api
-      .put('/attendence/update/close', {
-        id_atendimento: attendenceID,
-        fech_motivos: reasonSelected,
-        versao_internews: version,
-        nome_atendente: receptionist
+  async function handleCosingAttendence() {
+    try {
+      const schema = Yup.object().shape({
+        fech_motivos: Yup.array().min(1).required('Requerido'),
+        versao_internews: Yup.string().required('Requerido'),
+        nome_atendente: Yup.string().required('Requerido')
       })
-      .then(response => notifySuccess(response.data.message))
 
-    finish()
+      await schema.validate(
+        {
+          id_atendimento: attendenceID,
+          fech_motivos: reasonSelected,
+          versao_internews: version,
+          nome_atendente: receptionist
+        },
+        {
+          abortEarly: false
+        }
+      )
+
+      api
+        .put('/attendence/update/close', {
+          id_atendimento: attendenceID,
+          fech_motivos: reasonSelected,
+          versao_internews: version,
+          nome_atendente: receptionist
+        })
+        .then(response => {
+          finish()
+          notifySuccess(response.data.message)
+        })
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {}
+
+        error.inner.forEach(err => {
+          errorMessages[err.path] = err.message
+        })
+
+        formRef.current.setErrors(errorMessages)
+      }
+    }
   }
 
   return (

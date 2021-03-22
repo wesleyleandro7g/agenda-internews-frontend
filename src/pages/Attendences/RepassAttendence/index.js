@@ -3,17 +3,13 @@ import React, { useState, useEffect } from 'react'
 
 import api from '../../../services/API'
 
-// import { useClientContext } from '../../../context/ClientContext'
-
 import Modal from '../../../components/modal'
 import Radio from '../../../components/inputs/radio'
 import Button02 from '../../../components/buttons/button02'
 
 import I from '../../../utils/Icons'
 
-import { notifySuccess } from '../../../components/toastify'
-
-// import I from '../../../utils/Icons'
+import { notifySuccess, notifyError } from '../../../components/toastify'
 
 import * as S from './styles'
 
@@ -26,6 +22,7 @@ const RepassAttendence = ({
 }) => {
   const [supports, setSupports] = useState([])
   const [supportSelected, setSupportSelected] = useState()
+  const supportID = localStorage.getItem('support-id')
 
   useEffect(() => {
     handleGetSupports()
@@ -40,12 +37,21 @@ const RepassAttendence = ({
   }
 
   function handleRepassAttendence() {
+    if (supportSelected === undefined || supportSelected === supportID) {
+      notifyError(
+        'Informe para qual suporte você deseja transferir o atendimento'
+      )
+
+      return 0
+    }
+
     api
       .put('/attendence/update/repass', {
         id: attendenceID,
         id_suporte: supportSelected
       })
       .then(response => notifySuccess('Atendimento repassado!'))
+
     repassed()
   }
 
