@@ -14,7 +14,8 @@ const Layout = ({
   search,
   register,
   attendenceRepports,
-  attendenceRefresh
+  attendenceRefresh,
+  reportParams
 }) => {
   const { open } = useDrawer()
 
@@ -29,6 +30,7 @@ const Layout = ({
           register={register}
           attendenceRepports={attendenceRepports}
           attendenceRefresh={attendenceRefresh}
+          reportParams={reportParams}
         />
         <S.Content>{children}</S.Content>
       </S.Contain>

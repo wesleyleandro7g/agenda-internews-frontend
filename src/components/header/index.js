@@ -17,7 +17,8 @@ const Header = ({
   search,
   register,
   attendenceRepports,
-  attendenceRefresh
+  attendenceRefresh,
+  reportParams
 }) => {
   const [modalUserVisible, setModalUserVisible] = useState(false)
   const [modalAlertVisible, setModalAlertVisible] = useState(false)
@@ -100,6 +101,18 @@ const Header = ({
           {search && (
             <S.WrapperItems>
               <Search onChange={search} data-tip="Pesquisar" />
+            </S.WrapperItems>
+          )}
+
+          {reportParams && (
+            <S.WrapperItems>
+              <I.RiFilterLine
+                size={22}
+                cursor="pointer"
+                color="#333"
+                onClick={reportParams}
+                data-tip="Informar parâmetros"
+              />
             </S.WrapperItems>
           )}
 

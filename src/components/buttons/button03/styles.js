@@ -60,8 +60,4 @@ export const Title = styled.h3`
   text-transform: uppercase;
 
   transition: all 200ms;
-
-  ${Container}:hover & {
-    transform: scale(1.1);
-  }
 `

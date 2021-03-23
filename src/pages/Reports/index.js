@@ -15,7 +15,7 @@ const Reports = () => {
     <Layout page="Relatórios">
       <S.Container>
         <Button03
-          title="Clientes não atendidos"
+          title="Atendimentos"
           icon={I.RiQuestionAnswerLine}
           onClick={() => history.push('/relatorios/atendimentos')}
         />
