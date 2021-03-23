@@ -9,6 +9,7 @@ import CircleBtn from '../../../components/buttons/circle-button'
 import Input03 from '../../../components/inputs/input03'
 import Input04 from '../../../components/inputs/input04'
 import Button02 from '../../../components/buttons/button02'
+import Tooltip from '../../../components/tooltip'
 
 import { notifyError, notifySuccess } from '../../../components/toastify'
 
@@ -86,8 +87,17 @@ const RegisterClient = ({ visible, onClose }) => {
             <CircleBtn
               icon={fullScreen ? I.RiFullscreenExitLine : I.RiFullscreenLine}
               onClick={() => setFullScreen(!fullScreen)}
+              dataTip={
+                fullScreen ? 'Sair do modo tela cheia' : 'Modo tela cheia'
+              }
+              dataDelayShow={1000}
             />
-            <CircleBtn icon={I.RiCloseLine} onClick={onClose} />
+            <CircleBtn
+              icon={I.RiCloseLine}
+              onClick={onClose}
+              dataTip="Fechar"
+              dataDelayShow={1000}
+            />
           </S.HeaderItemsWrapper>
         </S.Header>
         <Form ref={formRef} onSubmit={handleRegisterClient}>
@@ -143,6 +153,8 @@ const RegisterClient = ({ visible, onClose }) => {
           </S.Footer>
         </Form>
       </S.Container>
+
+      <Tooltip />
     </Modal>
   )
 }

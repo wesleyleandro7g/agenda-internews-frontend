@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Modal from '../../../components/modal'
 import CircleBtn from '../../../components/buttons/circle-button'
 import ShowInfo from '../../../components/show-info'
+import Tooltip from '../../../components/tooltip'
 
 import I from '../../../utils/Icons'
 
@@ -22,11 +23,25 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
             <CircleBtn
               icon={fullScreen ? I.RiFullscreenExitLine : I.RiFullscreenLine}
               onClick={() => setFullScreen(!fullScreen)}
+              dataTip={
+                fullScreen ? 'Sair do modo tela cheia' : 'Modo tela cheia'
+              }
+              dataDelayShow={1000}
             />
             {sectorID !== '2' && (
-              <CircleBtn icon={I.RiEditBoxLine} onClick={openEdit} />
+              <CircleBtn
+                icon={I.RiEditBoxLine}
+                onClick={openEdit}
+                dataTip="Editar cadastro"
+                dataDelayShow={1000}
+              />
             )}
-            <CircleBtn icon={I.RiCloseLine} onClick={onClose} />
+            <CircleBtn
+              icon={I.RiCloseLine}
+              onClick={onClose}
+              dataTip="Fechar"
+              dataDelayShow={1000}
+            />
           </S.HeaderItemsWrapper>
         </S.Header>
         <S.Main>
@@ -91,6 +106,8 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
           </S.SectionTwo>  */}
         </S.Main>
       </S.Container>
+
+      <Tooltip />
     </Modal>
   )
 }

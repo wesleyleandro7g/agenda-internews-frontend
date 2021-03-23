@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import I from '../../utils/Icons'
 
 import PlataformOptions from '../plataform-options'
+import Tooltip from '../tooltip'
 
 import { useDrawer } from '../../context/DrawerContext'
 
@@ -40,11 +41,17 @@ const Header = ({
       <S.Container>
         <S.ContainItems>
           <S.WrapperItems>
-            <S.MenuIcon onClick={() => setOpen(!open)} />
+            <S.MenuIcon
+              onClick={() => setOpen(!open)}
+              data-tip={open ? 'Recolher menu' : 'Exibir menu'}
+              data-delay-show={1000}
+            />
           </S.WrapperItems>
 
           <S.WrapperItems>
-            <S.Title> {page} </S.Title>
+            <S.Title data-tip={page} data-delay-show={4000}>
+              {page}
+            </S.Title>
           </S.WrapperItems>
         </S.ContainItems>
 
@@ -62,6 +69,7 @@ const Header = ({
                 cursor="pointer"
                 color="#333"
                 onClick={register}
+                data-tip="Adicionar"
               />
             </S.WrapperItems>
           )}
@@ -84,19 +92,24 @@ const Header = ({
                 cursor="pointer"
                 color="#333"
                 onClick={attendenceRefresh}
+                data-tip="Recarregar"
               />
             </S.WrapperItems>
           )}
 
           {search && (
             <S.WrapperItems>
-              <Search onChange={search} />
+              <Search onChange={search} data-tip="Pesquisar" />
             </S.WrapperItems>
           )}
 
           <S.WrapperItems>
-            <S.Avatar onClick={handleModalUserVisible}>
-              <S.AvatarText> {sig} </S.AvatarText>
+            <S.Avatar
+              onClick={handleModalUserVisible}
+              data-tip={userName.toUpperCase()}
+              data-delay-show={2000}
+            >
+              <S.AvatarText>{sig}</S.AvatarText>
             </S.Avatar>
             <S.UserName> {userName} </S.UserName>
           </S.WrapperItems>
@@ -118,6 +131,8 @@ const Header = ({
         visible={modalUserVisible}
         onClose={() => setModalUserVisible(!modalUserVisible)}
       />
+
+      <Tooltip />
     </>
   )
 }

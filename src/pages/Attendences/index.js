@@ -4,6 +4,7 @@
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
 import Lottie from 'react-lottie'
+import Tooltip from '../../components/tooltip'
 
 import api from '../../services/API'
 
@@ -251,7 +252,12 @@ const Attendences = () => {
       <S.Container>
         <S.OptionsWraper>
           <S.Button onClick={() => handleAttendences()}>
-            <S.Text>Todos</S.Text>
+            <S.Text
+              data-tip="Atendimentos não finalizados"
+              data-delay-show={1000}
+            >
+              Todos
+            </S.Text>
           </S.Button>
           {StatusAttendence.map(item => (
             <SelectOptions
@@ -261,7 +267,9 @@ const Attendences = () => {
             />
           ))}
           <S.Button onClick={() => handleClosedAttendences()}>
-            <S.Text>Finalizados</S.Text>
+            <S.Text data-tip="Atendimentos finalizados" data-delay-show={1000}>
+              Finalizados
+            </S.Text>
           </S.Button>
         </S.OptionsWraper>
       </S.Container>
@@ -367,6 +375,7 @@ const Attendences = () => {
       />
 
       <ToastContainer />
+      <Tooltip />
     </Layout>
   )
 }
