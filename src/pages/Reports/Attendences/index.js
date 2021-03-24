@@ -1,16 +1,18 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable multiline-ternary */
 import React, { useState, useRef } from 'react'
 import { Form } from '@unform/web'
+import Loader from 'react-spinners/ScaleLoader'
 
 import API from '../../../services/API'
 
 import Layout from '../../../components/layout'
 import Modal from '../../../components/modal'
-import CircleBtn from '../../../components/buttons/circle-button'
 import Button02 from '../../../components/buttons/button02'
 import DateInput from '../../../components/inputs/date'
 import List from '../../../components/list-items'
 import Tooltip from '../../../components/tooltip'
+import CheckBox from '../../../components/inputs/checkbox'
 
 import * as S from './styles'
 import * as M from './modalStyles'
@@ -21,14 +23,31 @@ const AttendencesReport = () => {
   const [visible, setVisible] = useState(false)
   const [attendencesData, setAttendencesData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [statusAttendenceClients, setStatusAttendenceClients] = useState(
+    '-served'
+  )
   const formRef = useRef(null)
+
+  const sectorID = localStorage.getItem('user-sector-id')
+  const userID = localStorage.getItem('user-id')
 
   function handleFilters(data) {
     setLoading(true)
-    API.post('/report/index', data).then(res => {
-      setAttendencesData(res.data.unattendedCostumer)
-      setLoading(false)
-    })
+
+    if (sectorID == 1) {
+      API.post(`/report/index${statusAttendenceClients}`, data).then(res => {
+        setAttendencesData(res.data.unattendedCostumer)
+        setLoading(false)
+      })
+    } else {
+      API.post(`/report/support${statusAttendenceClients}`, data, {
+        headers: { id_usuario: userID }
+      }).then(res => {
+        setAttendencesData(res.data.unattendedCostumer)
+        console.log(res.data)
+        setLoading(false)
+      })
+    }
 
     setVisible(!visible)
   }
@@ -40,19 +59,21 @@ const AttendencesReport = () => {
         reportParams={() => setVisible(!visible)}
       >
         {loading ? (
-          <S.Container>
-            <h4>Carregando...</h4>
-          </S.Container>
+          <S.ContainLoader>
+            <Loader loading={loading} size={200} color="#003333" />
+          </S.ContainLoader>
         ) : (
-          <S.Container>
+          <>
             <S.ContainSubHeader>
               <S.Title>Cliente</S.Title>
             </S.ContainSubHeader>
 
-            {attendencesData.map((item, index) => (
-              <List key={index} description={item.nome} />
-            ))}
-          </S.Container>
+            <S.ScrollArea>
+              {attendencesData.map((item, index) => (
+                <List key={index} description={item.nome} />
+              ))}
+            </S.ScrollArea>
+          </>
         )}
       </Layout>
 
@@ -61,21 +82,29 @@ const AttendencesReport = () => {
           <M.ModalContainer>
             <M.ModalHeader>
               <M.ModalTitle> Parâmetros para o relatório </M.ModalTitle>
-              <CircleBtn
-                icon={I.RiCloseLine}
-                onClick={() => setVisible(!visible)}
-                dataTip="Fechar"
-                dataDelayShow={1000}
-              />
             </M.ModalHeader>
 
             <M.ModalMain>
               <DateInput name="initial_date" label="Data Inicial" />
               <DateInput name="finish_date" label="Data Final" />
+
+              <CheckBox
+                label="Clientes não atendidos"
+                onChange={() =>
+                  setStatusAttendenceClients(
+                    statusAttendenceClients ? '' : '-served'
+                  )
+                }
+              />
             </M.ModalMain>
 
             <M.ModalFooter>
-              <Button02 label="Buscar" icon={I.RiSearchLine} type="submit" />
+              <Button02
+                label="Buscar"
+                icon={I.RiSearchLine}
+                type="submit"
+                bgColor="#5FACBF"
+              />
             </M.ModalFooter>
           </M.ModalContainer>
           <Tooltip />

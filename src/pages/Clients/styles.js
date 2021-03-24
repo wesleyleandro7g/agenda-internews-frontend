@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-// import Scroll from 'react-scrollbar'
 
 export const Container = styled.div``
 export const SubHeader = styled.div`

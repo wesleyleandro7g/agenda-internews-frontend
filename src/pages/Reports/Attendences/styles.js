@@ -1,6 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div``
+export const ContainLoader = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 export const ContainSubHeader = styled.div`
   width: 100%;
   height: 40px;
@@ -16,6 +24,16 @@ export const ContainSubHeader = styled.div`
 
   @media (max-width: 800px) {
     display: none;
+  }
+`
+export const ScrollArea = styled.div`
+  width: 100%;
+  height: 70vh;
+
+  overflow: auto;
+
+  @media (max-width: 800px) {
+    height: 80vh;
   }
 `
 export const Title = styled.h6`
