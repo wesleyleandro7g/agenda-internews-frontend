@@ -1,11 +1,15 @@
+/* eslint-disable multiline-ternary */
 import React, { useState, useRef } from 'react'
 import { Form } from '@unform/web'
+
+import API from '../../../services/API'
 
 import Layout from '../../../components/layout'
 import Modal from '../../../components/modal'
 import CircleBtn from '../../../components/buttons/circle-button'
 import Button02 from '../../../components/buttons/button02'
 import DateInput from '../../../components/inputs/date'
+import List from '../../../components/list-items'
 import Tooltip from '../../../components/tooltip'
 
 import * as S from './styles'
@@ -15,21 +19,41 @@ import I from '../../../utils/Icons'
 
 const AttendencesReport = () => {
   const [visible, setVisible] = useState(false)
+  const [attendencesData, setAttendencesData] = useState([])
+  const [loading, setLoading] = useState(false)
   const formRef = useRef(null)
 
   function handleFilters(data) {
-    console.log(data)
+    setLoading(true)
+    API.post('/report/index', data).then(res => {
+      setAttendencesData(res.data.unattendedCostumer)
+      setLoading(false)
+    })
+
+    setVisible(!visible)
   }
 
   return (
     <>
       <Layout
-        page="Relatório de Clientes não Atendidos"
+        page="Relatório de atendimentos"
         reportParams={() => setVisible(!visible)}
       >
-        <S.Container>
-          <h1>Relatório</h1>
-        </S.Container>
+        {loading ? (
+          <S.Container>
+            <h4>Carregando...</h4>
+          </S.Container>
+        ) : (
+          <S.Container>
+            <S.ContainSubHeader>
+              <S.Title>Cliente</S.Title>
+            </S.ContainSubHeader>
+
+            {attendencesData.map((item, index) => (
+              <List key={index} description={item.nome} />
+            ))}
+          </S.Container>
+        )}
       </Layout>
 
       <Form ref={formRef} onSubmit={handleFilters}>
