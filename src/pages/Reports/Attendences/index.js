@@ -28,6 +28,18 @@ const AttendencesReport = () => {
   )
   const formRef = useRef(null)
 
+  const date = new Date()
+  const firstDay = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  ).toLocaleDateString()
+  const lastDay = new Date(
+    date.getFullYear(),
+    date.getMonth() + 1,
+    0
+  ).toLocaleDateString()
+
   const sectorID = localStorage.getItem('user-sector-id')
   const userID = localStorage.getItem('user-id')
 
@@ -44,7 +56,6 @@ const AttendencesReport = () => {
         headers: { id_usuario: userID }
       }).then(res => {
         setAttendencesData(res.data.unattendedCostumer)
-        console.log(res.data)
         setLoading(false)
       })
     }
@@ -64,8 +75,13 @@ const AttendencesReport = () => {
           </S.ContainLoader>
         ) : (
           <>
+            <S.Container>
+              <S.Title>{`Clientes ${
+                statusAttendenceClients ? '' : 'não'
+              } atendidos - ${firstDay} a ${lastDay}`}</S.Title>
+            </S.Container>
             <S.ContainSubHeader>
-              <S.Title>Cliente</S.Title>
+              <S.Description>Cliente</S.Description>
             </S.ContainSubHeader>
 
             <S.ScrollArea>
