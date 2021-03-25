@@ -1,5 +1,14 @@
 import styled from 'styled-components'
 
+export const Wrapper = styled.div`
+  display: flex;
+  height: 100%;
+`
+export const AttendenceContainer = styled.div`
+  width: ${props => (props.visible ? '70%' : '100%')};
+
+  transition: width 200ms;
+`
 export const Container = styled.div`
   /* width: 100%; */
   height: 50px;
@@ -34,8 +43,7 @@ export const ContainSubHeader = styled.div`
   height: 40px;
 
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  grid-gap: 30px;
+  grid-template-columns: 1fr 0.47fr 0fr;
   align-items: center;
 
   padding: 0 10px;

@@ -35,7 +35,8 @@ import {
   RiArrowLeftRightFill,
   RiFullscreenLine,
   RiFullscreenExitLine,
-  RiFilterLine
+  RiFilterLine,
+  RiMessage2Line
 } from 'react-icons/ri'
 
 const Icons = {
@@ -75,7 +76,8 @@ const Icons = {
   RiArrowLeftRightFill,
   RiFullscreenLine,
   RiFullscreenExitLine,
-  RiFilterLine
+  RiFilterLine,
+  RiMessage2Line
 }
 
 export default Icons

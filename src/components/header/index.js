@@ -98,12 +98,6 @@ const Header = ({
             </S.WrapperItems>
           )}
 
-          {search && (
-            <S.WrapperItems>
-              <Search onChange={search} data-tip="Pesquisar" />
-            </S.WrapperItems>
-          )}
-
           {reportParams && (
             <S.WrapperItems>
               <I.RiFilterLine
@@ -113,6 +107,12 @@ const Header = ({
                 onClick={reportParams}
                 data-tip="Informar parâmetros"
               />
+            </S.WrapperItems>
+          )}
+
+          {search && (
+            <S.WrapperItems>
+              <Search onChange={search} data-tip="Pesquisar" />
             </S.WrapperItems>
           )}
 
