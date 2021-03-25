@@ -8,7 +8,9 @@ import Loader from 'react-spinners/ScaleLoader'
 import API from '../../../services/API'
 
 import Layout from '../../../components/layout'
+import Modal from '../../../components/modal'
 import Button02 from '../../../components/buttons/button02'
+import CircleBnt from '../../../components/buttons/circle-button'
 import DateInput from '../../../components/inputs/date'
 import List from '../../../components/list-items'
 import Tooltip from '../../../components/tooltip'
@@ -16,6 +18,7 @@ import CheckBox from '../../../components/inputs/checkbox'
 
 import * as S from './styles'
 import * as F from './filterStyles'
+import * as M from './modalStyles'
 
 import I from '../../../utils/Icons'
 
@@ -23,6 +26,9 @@ const AttendencesReport = () => {
   const date = new Date()
 
   const [visible, setVisible] = useState(false)
+  const [historyVisible, setHistoryVisible] = useState(false)
+  const [historyDetails, setHistoryDetails] = useState([])
+  const [fullScreen, setFullScreen] = useState(false)
   const [attendencesData, setAttendencesData] = useState([])
   const [loading, setLoading] = useState(false)
   const [searchInput, setSearchInput] = useState('')
@@ -88,6 +94,11 @@ const AttendencesReport = () => {
     }
   }
 
+  function handleHistory(item) {
+    setHistoryVisible(!historyVisible)
+    setHistoryDetails(item)
+  }
+
   function handleFilterAttendencesPerStatus() {
     setStatusAttendence(!statusAttendence)
 
@@ -140,7 +151,7 @@ const AttendencesReport = () => {
                       key={item.clientID}
                       description={item.clientName}
                       description3={item.totalAttendences}
-                      onHistoric={() => {}}
+                      onHistoric={() => handleHistory(item.details)}
                     />
                   ))}
                 </S.ScrollArea>
@@ -182,6 +193,41 @@ const AttendencesReport = () => {
             </Form>
           </F.FilterContainer>
         </S.Wrapper>
+
+        <Modal visible={historyVisible}>
+          <M.ModalContainer fullScreen={fullScreen}>
+            <M.ModalHeader>
+              <M.ModalTitle>Detalhes de atendimento</M.ModalTitle>
+              <M.ModalHeaderLeftItems>
+                <CircleBnt
+                  icon={
+                    fullScreen ? I.RiFullscreenExitLine : I.RiFullscreenLine
+                  }
+                  onClick={() => setFullScreen(!fullScreen)}
+                  dataTip={
+                    fullScreen ? 'Sair do modo tela cheia' : 'Modo tela cheia'
+                  }
+                  dataDelayShow={1000}
+                />
+                <CircleBnt
+                  icon={I.RiCloseLine}
+                  onClick={() => setHistoryVisible(!historyVisible)}
+                  dataTip="Fechar"
+                  dataDelayShow={1000}
+                />
+              </M.ModalHeaderLeftItems>
+            </M.ModalHeader>
+            <M.ModalMain>
+              <M.ModalScrollArea>
+                {historyDetails.map(item => (
+                  <M.ModalListWrapper key={item.id}>
+                    <h6>{item.attendence.nome_solicitante}</h6>
+                  </M.ModalListWrapper>
+                ))}
+              </M.ModalScrollArea>
+            </M.ModalMain>
+          </M.ModalContainer>
+        </Modal>
       </Layout>
     </>
   )
