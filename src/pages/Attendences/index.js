@@ -221,12 +221,12 @@ const Attendences = () => {
       <S.Container>
         <S.OptionsWraper>
           <S.Button onClick={() => handleAttendences()}>
-            <S.Text
+            <S.TextFilter
               data-tip="Atendimentos não finalizados"
               data-delay-show={1000}
             >
               Todos
-            </S.Text>
+            </S.TextFilter>
           </S.Button>
           {StatusAttendence.map(item => (
             <SelectOptions
@@ -236,20 +236,23 @@ const Attendences = () => {
             />
           ))}
           <S.Button onClick={() => handleClosedAttendences()}>
-            <S.Text data-tip="Atendimentos finalizados" data-delay-show={1000}>
+            <S.TextFilter
+              data-tip="Atendimentos finalizados"
+              data-delay-show={1000}
+            >
               Finalizados
-            </S.Text>
+            </S.TextFilter>
           </S.Button>
         </S.OptionsWraper>
       </S.Container>
 
       {loading ? (
         attendenceData.length <= 0 ? (
-          <S.MainWrapper>
+          <S.Main>
             <LivelyAnimated />
-          </S.MainWrapper>
+          </S.Main>
         ) : (
-          <S.MainWrapper>
+          <S.Main>
             <S.DataWrapper>
               <S.Info>
                 {DataInfoOptions.map(item => (
@@ -264,33 +267,33 @@ const Attendences = () => {
                       onClick={() => handlePreviewAttendence(item)}
                       statusBorder={item.status.id}
                     >
-                      <S.InfoTextMobile>{item.cliente.nome}</S.InfoTextMobile>
-                      <S.InfoTextMobileDetails>
+                      <S.TextMobile>{item.cliente.nome}</S.TextMobile>
+                      <S.TextMobileDetails>
                         {item.nome_solicitante}
-                      </S.InfoTextMobileDetails>
-                      <S.InfoTextMobileDetails>
+                      </S.TextMobileDetails>
+                      <S.TextMobileDetails>
                         {item.contato_solicitante}
-                      </S.InfoTextMobileDetails>
-                      <S.InfoTextMobileDetails>
+                      </S.TextMobileDetails>
+                      <S.TextMobileDetails>
                         {item.abertura.descricao}
-                      </S.InfoTextMobileDetails>
+                      </S.TextMobileDetails>
                       <S.StatusContent status={item.status.descricao}>
-                        <S.InfoText>{item.status.descricao}</S.InfoText>
+                        <S.Text>{item.status.descricao}</S.Text>
                       </S.StatusContent>
-                      <S.InfoTextMobileDetails>
+                      <S.TextMobileDetails>
                         {convertDate(item.createdAt)}
-                      </S.InfoTextMobileDetails>
+                      </S.TextMobileDetails>
                     </S.ListWrapper>
                   ))}
                 </S.ScrollArea>
               </S.ContainScrollArea>
             </S.DataWrapper>
-          </S.MainWrapper>
+          </S.Main>
         )
       ) : (
-        <S.MainWrapper loading>
+        <S.Main loading>
           <Loader loading={true} color="#003333" />
-        </S.MainWrapper>
+        </S.Main>
       )}
 
       <DetailsAttendence

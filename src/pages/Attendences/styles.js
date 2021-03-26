@@ -21,7 +21,7 @@ export const OptionsWraper = styled.div`
     display: none;
   }
 `
-export const MainWrapper = styled.div`
+export const Main = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -124,7 +124,7 @@ export const StatusContent = styled.div`
     }
   }};
 `
-export const InfoText = styled.h6`
+export const Text = styled.h6`
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
@@ -133,14 +133,14 @@ export const InfoText = styled.h6`
     display: none;
   }
 `
-export const InfoTextMobile = styled(InfoText)`
+export const TextMobile = styled(Text)`
   @media (max-width: 800px) {
     display: block;
     font-size: 14px;
     font-weight: 500;
   }
 `
-export const InfoTextMobileDetails = styled(InfoTextMobile)`
+export const TextMobileDetails = styled(TextMobile)`
   font-size: 12px;
   font-weight: 400;
 `
@@ -298,7 +298,7 @@ export const Button = styled.button`
     color: #040e18;
   }
 `
-export const Text = styled.h6`
+export const TextFilter = styled.h6`
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;
