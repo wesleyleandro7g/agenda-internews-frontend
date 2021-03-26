@@ -26,7 +26,7 @@ export const ItemsRigthSubHeader = styled.div`
     display: none;
   }
 `
-export const MainWrapper = styled.div`
+export const Main = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -57,7 +57,7 @@ export const ScrollArea = styled.div`
     height: 80vh;
   }
 `
-export const ProvidersListWrapper = styled.button`
+export const ListWrapper = styled.button`
   width: 100%;
   height: 55px;
 
@@ -102,7 +102,7 @@ export const ProvidersInfo = styled.div`
     display: none;
   }
 `
-export const ProvidersInfoText = styled.h6`
+export const Text = styled.h6`
   font-size: 13px;
   font-weight: 400;
   text-transform: uppercase;
@@ -111,28 +111,21 @@ export const ProvidersInfoText = styled.h6`
     display: none;
   }
 `
-export const ProvidersInfoTextTitle = styled.h6`
+export const TextTitle = styled.h6`
   font-weight: bold;
   font-size: 12px;
 `
-export const ProvidersInfoTextMobile = styled(ProvidersInfoText)`
+export const TextMobile = styled(Text)`
   @media (max-width: 800px) {
     display: block;
     font-size: 14px;
     font-weight: 500;
   }
 `
-export const ProvidersInfoTextMobileDetails = styled(ProvidersInfoTextMobile)`
+export const TextMobileDetails = styled(TextMobile)`
   /* margin-left: 5px; */
   font-size: 12px;
   font-weight: 400;
-`
-export const AnimationWrapper = styled.div`
-  width: 100%;
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 export const OptionsWraper = styled.div`
   height: 50px;
@@ -163,7 +156,7 @@ export const Button = styled.button`
     color: #040e18;
   }
 `
-export const Text = styled.h6`
+export const TextFilter = styled.h6`
   font-size: 13px;
   font-weight: 500;
   text-transform: uppercase;

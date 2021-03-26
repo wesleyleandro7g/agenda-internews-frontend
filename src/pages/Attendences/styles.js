@@ -27,6 +27,12 @@ export const MainWrapper = styled.div`
 
   width: 100%;
   height: 100%;
+
+  ${props =>
+    props.loading && {
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}
 `
 export const DataWrapper = styled.div`
   width: 100%;

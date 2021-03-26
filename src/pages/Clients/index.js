@@ -2,8 +2,8 @@
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import Lottie from 'react-lottie'
 import Loader from 'react-spinners/ScaleLoader'
+
 import api from '../../services/API'
 
 import { useClientContext } from '../../context/ClientContext'
@@ -11,13 +11,9 @@ import { useClientContext } from '../../context/ClientContext'
 import Layout from '../../components/layout'
 import Filter from '../../components/filter'
 import SelectOptions from '../../components/select-options'
-
 import ClientDatails from './client-details'
 import ClientTools from './client-tools'
 import ClientRegister from './client-register'
-
-import LoadingAnimation from '../../assets/loader.json'
-
 import ToastContainer from '../../components/toastify'
 
 import { DataInfoOptions } from './data'
@@ -61,15 +57,10 @@ const Clients = () => {
     ferramentas: []
   })
   const sectorID = localStorage.getItem('user-sector-id')
-  const { setDataClientContext } = useClientContext()
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: LoadingAnimation
-  }
+  const { dataClientContext, setDataClientContext } = useClientContext()
 
   useEffect(() => {
+    setLoading(false)
     handleCallApi()
   }, [modalRegisterVisible])
 
@@ -78,31 +69,22 @@ const Clients = () => {
   }, [searchInput])
 
   function handleCallApi() {
-    setLoading(false)
     api.get('/clients/index').then(res => {
       setData(res.data.clients)
-      console.log(res.data.clients)
-
-      // setTotalClients(res.data.count)
       setFiltered(res.data.clients)
       setDataClientContext(res.data.clients)
+
+      setLoading(true)
     })
 
     api.get('/support/index').then(res => {
       setSupports(res.data)
     })
-    setLoading(true)
   }
 
   function handleClients() {
-    setLoading(false)
-    api.get('/clients/index').then(res => {
-      setData(res.data.clients)
-      // setTotalClients(res.data.count)
-      setFiltered(res.data.clients)
-      setDataClientContext(res.data.clients)
-    })
-    setLoading(true)
+    setData(dataClientContext)
+    setFiltered(dataClientContext)
   }
 
   function handleToggleSupportClients(type) {
@@ -154,7 +136,7 @@ const Clients = () => {
       <S.Container>
         <S.OptionsWraper>
           <S.Button onClick={() => handleClients()}>
-            <S.Text>Todos</S.Text>
+            <S.TextFilter>Todos</S.TextFilter>
           </S.Button>
           {supports.map(item => (
             <SelectOptions
@@ -168,49 +150,35 @@ const Clients = () => {
 
       {loading ? (
         data.length <= 0 ? (
-          <S.MainWrapper loading>
-            <Loader loading={true} color="#003333" />
-          </S.MainWrapper>
+          <S.Main loading>
+            <h6> Sem registros </h6>
+          </S.Main>
         ) : (
-          <S.MainWrapper>
+          <S.Main>
             <S.DataWrapper>
               <S.ProvidersInfo>
                 {DataInfoOptions.map(item => (
-                  <S.ProvidersInfoTextTitle key={item.id}>
-                    {item.title}
-                  </S.ProvidersInfoTextTitle>
+                  <S.TextTitle key={item.id}>{item.title}</S.TextTitle>
                 ))}
               </S.ProvidersInfo>
 
               <S.ContainScrollArea>
                 <S.ScrollArea>
                   {filtered.map(item => (
-                    <S.ProvidersListWrapper
+                    <S.ListWrapper
                       key={item.id}
                       onClick={() => handleDetails(item)}
                     >
-                      <S.ProvidersInfoTextMobile>
-                        {item.nome}
-                      </S.ProvidersInfoTextMobile>
-                      <S.ProvidersInfoText>
-                        {item.cidade.descricao}
-                      </S.ProvidersInfoText>
-                      <S.ProvidersInfoText>
-                        {item.atividade.descricao}
-                      </S.ProvidersInfoText>
-                      <S.ProvidersInfoTextMobileDetails>
-                        {item.cnpj}
-                      </S.ProvidersInfoTextMobileDetails>
-                      <S.ProvidersInfoText>
-                        {item.modulo.descricao}
-                      </S.ProvidersInfoText>
-                      <S.ProvidersInfoText>
-                        {item.atividade_interna.descricao}
-                      </S.ProvidersInfoText>
-                      <S.ProvidersInfoTextMobileDetails>
+                      <S.TextMobile>{item.nome}</S.TextMobile>
+                      <S.Text>{item.cidade.descricao}</S.Text>
+                      <S.Text>{item.atividade.descricao}</S.Text>
+                      <S.TextMobileDetails>{item.cnpj}</S.TextMobileDetails>
+                      <S.Text>{item.modulo.descricao}</S.Text>
+                      <S.Text>{item.atividade_interna.descricao}</S.Text>
+                      <S.TextMobileDetails>
                         {item.suporte.descricao}
-                      </S.ProvidersInfoTextMobileDetails>
-                    </S.ProvidersListWrapper>
+                      </S.TextMobileDetails>
+                    </S.ListWrapper>
                   ))}
                 </S.ScrollArea>
               </S.ContainScrollArea>
@@ -219,12 +187,12 @@ const Clients = () => {
               toggle={activeFilters}
               onClose={() => setActiveFilters(!activeFilters)}
             />
-          </S.MainWrapper>
+          </S.Main>
         )
       ) : (
-        <S.AnimationWrapper>
-          <Lottie options={defaultOptions} width="15%" height="15%" />
-        </S.AnimationWrapper>
+        <S.Main loading>
+          <Loader loading={true} color="#003333" />
+        </S.Main>
       )}
 
       <ClientDatails

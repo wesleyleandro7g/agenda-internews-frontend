@@ -3,8 +3,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable multiline-ternary */
 import React, { useState, useEffect } from 'react'
-import Lottie from 'react-lottie'
-import Tooltip from '../../components/tooltip'
+import Loader from 'react-spinners/ScaleLoader'
 
 import api from '../../services/API'
 
@@ -13,9 +12,8 @@ import { useClientContext } from '../../context/ClientContext'
 import Layout from '../../components/layout'
 import Fab from '../../components/buttons/fab'
 import SelectOptions from '../../components/select-options'
-
-import LoadingAnimation from '../../assets/loader.json'
 import LivelyAnimated from '../../components/lively-animated'
+import Tooltip from '../../components/tooltip'
 
 import OpenNewAttendence from './OpenNewAttendence'
 import RepassAttendence from './RepassAttendence'
@@ -29,6 +27,7 @@ import ToastContainer, {
 } from '../../components/toastify'
 
 import I from '../../utils/Icons'
+import { convertDate } from '../../utils/ConvetData'
 
 import { DataInfoOptions, StatusAttendence } from './data'
 
@@ -47,19 +46,10 @@ const Attendences = () => {
   const [newAttendenceVisible, setNewAttendenceVisible] = useState(false)
   const { dataClientContext, setDataClientContext } = useClientContext()
 
-  const dateNow = new Date().toISOString()
-  const fullDate = new Date(dateNow).toLocaleDateString()
-
   const userID = localStorage.getItem('user-id')
   const sectorID = localStorage.getItem('user-sector-id')
 
   const TIME_FOR_NEW_CALL_API = 100000
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: LoadingAnimation
-  }
 
   useEffect(() => {
     if (sectorID == 1 || sectorID == 2) {
@@ -109,13 +99,13 @@ const Attendences = () => {
       .then(res => {
         setAttendenceData(res.data.attendences)
         setFiltered(res.data.attendences)
+
+        setLoading(true)
       })
 
     api.get('/clients/index').then(res => {
       setDataClientContext(res.data.clients)
     })
-
-    setLoading(true)
   }
 
   function handleAttendences() {
@@ -221,27 +211,6 @@ const Attendences = () => {
     setModalDetailsVisible(!modalDetailsVisible)
   }
 
-  function convertDate(date) {
-    const converted = new Date(date)
-
-    const days = converted.toLocaleDateString()
-    const hours = converted.toLocaleTimeString()
-
-    const today = new Date()
-
-    const AUX_01 = new Date(today.getTime())
-    AUX_01.setDate(today.getDate() - 1)
-    const yesterday = AUX_01.toLocaleDateString()
-
-    if (days === fullDate) {
-      return `Hoje as ${hours}`
-    } else if (days === yesterday) {
-      return `Ontem as ${hours}`
-    } else {
-      return `${days} as ${hours}`
-    }
-  }
-
   return (
     <Layout
       page="Atendimentos"
@@ -319,9 +288,9 @@ const Attendences = () => {
           </S.MainWrapper>
         )
       ) : (
-        <S.AnimationWrapper>
-          <Lottie options={defaultOptions} width="10%" height="10%" />
-        </S.AnimationWrapper>
+        <S.MainWrapper loading>
+          <Loader loading={true} color="#003333" />
+        </S.MainWrapper>
       )}
 
       <DetailsAttendence
