@@ -1,8 +1,10 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Form } from '@unform/web'
 import * as Yup from 'yup'
 import { useHistory } from 'react-router-dom'
+import Loader from 'react-spinners/ScaleLoader'
 
 import api from '../../services/API'
 
@@ -16,6 +18,7 @@ import * as S from './styles'
 const Login = () => {
   const formRef = useRef(null)
   const history = useHistory()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     handleVerify()
@@ -47,9 +50,12 @@ const Login = () => {
         abortEarly: false
       })
 
+      setLoading(true)
+
       api
         .post('/auth/authenticate', data)
         .then(response => {
+          console.log(response)
           const sig = response.data.payload.userName.substr(0, 1).toUpperCase()
 
           localStorage.setItem('user-name', response.data.payload.userName)
@@ -67,13 +73,17 @@ const Login = () => {
             ? history.push('clientes')
             : history.push('dashboard')
 
+          setLoading(false)
+
           reset()
         })
         .catch(err => {
+          setLoading(false)
+
           if (err) {
             if (err.response && err.response.status === 404) {
               formRef.current.setErrors({
-                nome: 'Erro'
+                descricao: 'Erro'
               })
             } else if (err.response && err.response.status === 401) {
               formRef.current.setErrors({
@@ -107,7 +117,9 @@ const Login = () => {
             <Input01 label="Nome" name="descricao" type="text" />
             <Input01 label="Senha" name="senha" type="password" />
 
-            <S.Button type="submit">Entrar</S.Button>
+            <S.Button type="submit">
+              {loading ? <Loader loading={true} color="#003333" /> : 'Entrar'}
+            </S.Button>
           </Form>
         </S.InputWrapper>
       </S.Content>
