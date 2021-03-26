@@ -21,6 +21,7 @@ import * as F from './filterStyles'
 import * as M from './modalStyles'
 
 import I from '../../../utils/Icons'
+import { convertDate } from '../../../utils/ConvetData'
 
 const AttendencesReport = () => {
   const date = new Date()
@@ -28,6 +29,7 @@ const AttendencesReport = () => {
   const [visible, setVisible] = useState(false)
   const [historyVisible, setHistoryVisible] = useState(false)
   const [historyDetails, setHistoryDetails] = useState([])
+  const [historyClient, setHistoryClient] = useState('')
   const [fullScreen, setFullScreen] = useState(false)
   const [attendencesData, setAttendencesData] = useState([])
   const [loading, setLoading] = useState(false)
@@ -96,7 +98,8 @@ const AttendencesReport = () => {
 
   function handleHistory(item) {
     setHistoryVisible(!historyVisible)
-    setHistoryDetails(item)
+    setHistoryDetails(item.details)
+    setHistoryClient(item.clientName)
   }
 
   function handleFilterAttendencesPerStatus() {
@@ -137,7 +140,7 @@ const AttendencesReport = () => {
             ) : (
               <>
                 <S.Container>
-                  <S.Title>{`Atendimentos - ${firstDay} a ${lastDay}`}</S.Title>
+                  <S.Title>{`Atendimentos por cliente de ${firstDay} a ${lastDay}`}</S.Title>
                 </S.Container>
                 <S.ContainSubHeader>
                   <S.Description>Cliente</S.Description>
@@ -151,7 +154,7 @@ const AttendencesReport = () => {
                       key={item.clientID}
                       description={item.clientName}
                       description3={item.totalAttendences}
-                      onHistoric={() => handleHistory(item.details)}
+                      onHistoric={() => handleHistory(item)}
                     />
                   ))}
                 </S.ScrollArea>
@@ -197,7 +200,7 @@ const AttendencesReport = () => {
         <Modal visible={historyVisible}>
           <M.ModalContainer fullScreen={fullScreen}>
             <M.ModalHeader>
-              <M.ModalTitle>Detalhes de atendimento</M.ModalTitle>
+              <M.ModalTitle> {historyClient} </M.ModalTitle>
               <M.ModalHeaderLeftItems>
                 <CircleBnt
                   icon={
@@ -218,10 +221,31 @@ const AttendencesReport = () => {
               </M.ModalHeaderLeftItems>
             </M.ModalHeader>
             <M.ModalMain>
+              <M.ModalListWrapper reduce>
+                <M.ModalSubTitle>Solicitação</M.ModalSubTitle>
+                <M.ModalSubTitle>Atendente</M.ModalSubTitle>
+                <M.ModalSubTitle>Suporte</M.ModalSubTitle>
+                <M.ModalSubTitle>Versão do sistema</M.ModalSubTitle>
+                <M.ModalSubTitle>Data</M.ModalSubTitle>
+              </M.ModalListWrapper>
               <M.ModalScrollArea>
                 {historyDetails.map(item => (
                   <M.ModalListWrapper key={item.id}>
-                    <h6>{item.attendence.nome_solicitante}</h6>
+                    <M.ModalDescription>
+                      {item.attendence.abertura.descricao}
+                    </M.ModalDescription>
+                    <M.ModalDescription>
+                      {item.attendence.nome_atendente}
+                    </M.ModalDescription>
+                    <M.ModalDescription>
+                      {item.attendence.suporte.descricao}
+                    </M.ModalDescription>
+                    <M.ModalDescription>
+                      {item.attendence.versao_internews}
+                    </M.ModalDescription>
+                    <M.ModalDescription>
+                      {convertDate(item.attendence.createdAt)}
+                    </M.ModalDescription>
                   </M.ModalListWrapper>
                 ))}
               </M.ModalScrollArea>

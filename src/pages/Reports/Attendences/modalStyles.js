@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const ModalContainer = styled.div`
-  width: ${props => (props.fullScreen ? '100%' : '60%')};
-  height: ${props => (props.fullScreen ? '100%' : '70%')};
+  width: ${props => (props.fullScreen ? '100%' : '70%')};
+  height: ${props => (props.fullScreen ? '100%' : '80%')};
 
   border-radius: 3px;
 
@@ -47,11 +47,11 @@ export const ModalMain = styled.div`
   width: 100%;
   height: 90%;
 
-  padding: 5px;
+  padding: 0 5px;
 `
 export const ModalScrollArea = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90%;
 
   overflow: auto;
 
@@ -61,21 +61,22 @@ export const ModalScrollArea = styled.div`
 `
 export const ModalListWrapper = styled.button`
   width: 100%;
-  height: 55px;
+  height: ${props => (props.reduce ? '40px' : '55px')};
 
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   grid-gap: 30px;
+
   align-items: center;
   text-align: start;
 
   padding: 0 10px;
   border-bottom: 1px solid #e6e6e6;
 
-  background-color: #fff;
+  background-color: ${props => (props.reduce ? '#eee' : '#fff')};
 
   :first-child {
-    border-top: 1px solid #e6e6e6;
+    border-top: ${props => (props.reduce ? '0' : '1px')} solid #e6e6e6;
   }
 
   :hover {
@@ -97,4 +98,14 @@ export const ModalTitle = styled.h4`
   @media (max-width: 800px) {
     font-size: 14px;
   }
+`
+export const ModalSubTitle = styled.h5`
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #333;
+`
+export const ModalDescription = styled(ModalSubTitle)`
+  font-weight: 400;
+  text-transform: uppercase;
 `
