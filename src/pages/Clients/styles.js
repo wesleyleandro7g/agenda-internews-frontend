@@ -29,6 +29,14 @@ export const ItemsRigthSubHeader = styled.div`
 export const MainWrapper = styled.div`
   display: flex;
   flex-direction: row;
+
+  ${props =>
+    props.loading && {
+      width: '100%',
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}
 `
 export const DataWrapper = styled.div`
   width: 100%;

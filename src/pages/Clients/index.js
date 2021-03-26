@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Lottie from 'react-lottie'
-
+import Loader from 'react-spinners/ScaleLoader'
 import api from '../../services/API'
 
 import { useClientContext } from '../../context/ClientContext'
@@ -168,8 +168,8 @@ const Clients = () => {
 
       {loading ? (
         data.length <= 0 ? (
-          <S.MainWrapper>
-            <h3>Sem registros</h3>
+          <S.MainWrapper loading>
+            <Loader loading={true} color="#003333" />
           </S.MainWrapper>
         ) : (
           <S.MainWrapper>
