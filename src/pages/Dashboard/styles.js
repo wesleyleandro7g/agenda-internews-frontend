@@ -107,7 +107,7 @@ export const InfoWrapperDetail = styled.div`
   text-align: center;
 
   border-left: 0.5px solid #d9d9d9;
-  background-color: #f2f2f2;
+  background-color: #fff;
 `
 export const InfoText = styled.h6`
   font-weight: 400;

@@ -25,48 +25,6 @@ export const DataInternal = [
     icon: I.RiFileTextLine,
     select: false
   }
-  // {
-  //   id: 3,
-  //   handlePage: 'Solicitações',
-  //   icon: I.RiMailDownloadLine,
-  //   select: false
-  // },
-  // {
-  //   id: 4,
-  //   handlePage: 'Cadastros',
-  //   icon: I.RiAddCircleLine,
-  //   select: false,
-  //   options: [
-  //     // {
-  //     //   id: 3,
-  //     //   pageName: 'Ferramentas',
-  //     //   handlePage: 'cadastros/ferramentas',
-  //     //   icon: I.RiToolsLine,
-  //     //   select: false
-  //     // },
-  //     {
-  //       id: 5,
-  //       pageName: 'Motivos de abertura',
-  //       handlePage: 'cadastros/abertura',
-  //       icon: I.RiBookReadLine,
-  //       select: false
-  //     },
-  //     {
-  //       id: 6,
-  //       pageName: 'Motivos de fechamento',
-  //       handlePage: 'cadastros/fechamento',
-  //       icon: I.RiBookMarkLine,
-  //       select: false
-  //     }
-  //     // {
-  //     //   id: 8,
-  //     //   pageName: 'Sistemas',
-  //     //   handlePage: 'cadastros/sistemas',
-  //     //   icon: I.RiMacLine,
-  //     //   select: false
-  //     // },
-  //   ]
-  // }
 ]
 
 export const DataExternal = [
@@ -94,37 +52,6 @@ export const DataExternal = [
     icon: I.RiFileTextLine,
     select: false
   }
-  // {
-  //   id: 2,
-  //   handlePage: 'Prospectos',
-  //   icon: I.RiUserVoiceLine,
-  //   select: false
-  // },
-
-  // {
-  //   id: 4,
-  //   handlePage: 'Agendamentos',
-  //   icon: I.RiCalendarEventLine,
-  //   select: false
-  // },
-  // {
-  //   id: 5,
-  //   handlePage: 'Pendencias',
-  //   icon: I.RiSpam2Line,
-  //   select: false
-  // },
-  // {
-  //   id: 6,
-  //   handlePage: 'Solicitações',
-  //   icon: I.RiMailDownloadLine,
-  //   select: false
-  // },
-  // {
-  //   id: 7,
-  //   handlePage: 'Tabelas',
-  //   icon: I.RiFileListLine,
-  //   select: false
-  // }
 ]
 
 export const DataOnline = [

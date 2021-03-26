@@ -54,7 +54,10 @@ const DetailsClient = ({ visible, onClose, data, openTools, openEdit }) => {
             title="Ramo de atividade"
             value={data.atividade.descricao}
           />
-          <ShowInfo title="Atividade interna" value="Informar aqui" />
+          <ShowInfo
+            title="Atividade interna"
+            value={data.atividade_interna && data.atividade_interna.descricao}
+          />
           <ShowInfo
             title="ID do servidor"
             value={data.identificador_servidor}

@@ -192,10 +192,6 @@ const Dashboard = () => {
     })
   }
 
-  // function handleSelectDate(e) {
-  //   console.log(e.target.value)
-  // }
-
   function handleDate() {
     const date = new Date()
 
@@ -210,11 +206,6 @@ const Dashboard = () => {
   return (
     <Layout page={`Bem vindo(a), ${user}.`}>
       <S.Container>
-        {/* <S.SubHeader>
-          <h6>Você possui 5 novas solicitações de atendimento</h6>
-          <S.ItemsRigthSubHeader></S.ItemsRigthSubHeader>
-        </S.SubHeader> */}
-
         <S.ContentPieCharts>
           <HandlePieChartCards
             title="Clientes por ramo de atividade"
