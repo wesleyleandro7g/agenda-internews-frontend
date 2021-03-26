@@ -79,7 +79,7 @@ const RegisterCities = () => {
     }
   }
 
-  async function handleUpdate(data, { reset }) {
+  async function handleUpdate(data) {
     try {
       const schema = Yup.object().shape({
         descricao: Yup.string().min(5).required('Informe a descrição')
@@ -90,10 +90,10 @@ const RegisterCities = () => {
       })
 
       api
-        .post(`/cities/update/${identifier}`, data)
+        .put(`/cities/update/${identifier}`, data)
         .then(res => {
           notifySuccess(res.data.message)
-          toggleRegisterVisible()
+          toggleUpdateVisible()
         })
         .catch(err => {
           if (err) {
@@ -102,8 +102,6 @@ const RegisterCities = () => {
         })
 
       formRef.current.setErrors({})
-
-      reset()
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errorMessages = {}
