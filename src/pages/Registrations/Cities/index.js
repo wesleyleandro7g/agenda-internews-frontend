@@ -7,6 +7,7 @@ import api from '../../../services/API'
 import Layout from '../../../components/layout'
 import List from '../../../components/list-items'
 import RegisterAndUpdate from '../../../components/register-and-update'
+import Alert from '../../../components/alert'
 import ToastContainer, {
   notifySuccess,
   notifyError
@@ -20,8 +21,9 @@ const RegisterCities = () => {
   const formRef = useRef(null)
   const [industries, setIndustries] = useState([])
   const [registerVisible, setRegisterVisible] = useState(false)
-  // const [updateVisible, setUpdateVisible] = useState(false)
-  // const [identifier, setIdentifier] = useState()
+  const [updateVisible, setUpdateVisible] = useState(false)
+  const [deleteVisible, setDeleteVisible] = useState(false)
+  const [identifier, setIdentifier] = useState()
 
   useEffect(() => {
     handleCallApi()
@@ -29,7 +31,7 @@ const RegisterCities = () => {
 
   useEffect(() => {
     handleCallApi()
-  }, [registerVisible])
+  }, [registerVisible, updateVisible, deleteVisible])
 
   function handleCallApi() {
     api.get('/cities/index').then(response => setIndustries(response.data))
@@ -53,6 +55,7 @@ const RegisterCities = () => {
         .post('/cities/create', data)
         .then(res => {
           notifySuccess(res.data.message)
+          toggleRegisterVisible()
         })
         .catch(err => {
           if (err) {
@@ -61,8 +64,6 @@ const RegisterCities = () => {
         })
 
       formRef.current.setErrors({})
-
-      toggleRegisterVisible()
 
       reset()
     } catch (error) {
@@ -78,58 +79,74 @@ const RegisterCities = () => {
     }
   }
 
-  // async function handleUpdate(data, { reset }) {
-  //   try {
-  //     const schema = Yup.object().shape({
-  //       descricao: Yup.string().min(5).required('Informe a descrição')
-  //     })
+  async function handleUpdate(data, { reset }) {
+    try {
+      const schema = Yup.object().shape({
+        descricao: Yup.string().min(5).required('Informe a descrição')
+      })
 
-  //     await schema.validate(data, {
-  //       abortEarly: false
-  //     })
+      await schema.validate(data, {
+        abortEarly: false
+      })
 
-  //     api
-  //       .post(`/cities/update/${identifier}`, data)
-  //       .then(res => {
-  //         if (res.status === 400) alert('Erro! Atividade já cadastrada!')
-  //       })
-  //       .catch(err => {
-  //         if (err) {
-  //           alert('Houve um erro inexperado! Tente novamente.')
-  //         }
-  //       })
+      api
+        .post(`/cities/update/${identifier}`, data)
+        .then(res => {
+          notifySuccess(res.data.message)
+          toggleRegisterVisible()
+        })
+        .catch(err => {
+          if (err) {
+            notifyError(err.message)
+          }
+        })
 
-  //     formRef.current.setErrors({})
+      formRef.current.setErrors({})
 
-  //     toggleRegisterVisible()
+      reset()
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {}
 
-  //     reset()
-  //   } catch (error) {
-  //     if (error instanceof Yup.ValidationError) {
-  //       const errorMessages = {}
+        error.inner.forEach(err => {
+          errorMessages[err.path] = err.message
+        })
 
-  //       error.inner.forEach(err => {
-  //         errorMessages[err.path] = err.message
-  //       })
+        formRef.current.setErrors(errorMessages)
+      }
+    }
+  }
 
-  //       formRef.current.setErrors(errorMessages)
-  //     }
-  //   }
-  // }
+  function handleFill(item) {
+    formRef.current.setData({
+      descricao: item.descricao,
+      id_estado: item.estado
+    })
 
-  // function handleFill(item) {
-  //   formRef.current.setData({
-  //     descricao: item.descricao,
-  //     id_estado: item.estado
-  //   })
+    setIdentifier(item.id)
+    toggleUpdateVisible()
+  }
 
-  //   setIdentifier(item.id)
-  //   toggleUpdateVisible()
-  // }
+  function toggleUpdateVisible() {
+    setUpdateVisible(!updateVisible)
+  }
 
-  // function toggleUpdateVisible() {
-  //   setUpdateVisible(!updateVisible)
-  // }
+  function setDelete(item) {
+    setIdentifier(item.id)
+    setDeleteVisible(!deleteVisible)
+  }
+
+  function handleDelete() {
+    api
+      .delete(`/cities/delete/${identifier}`)
+      .then(res => {
+        notifyError(res.data.message)
+        setDeleteVisible(!deleteVisible)
+      })
+      .catch(err => {
+        notifyError(err.message)
+      })
+  }
 
   return (
     <Layout page="Cidades" register={() => toggleRegisterVisible()}>
@@ -147,6 +164,8 @@ const RegisterCities = () => {
                 key={item.id}
                 description={item.descricao}
                 description2={item.estado && item.estado.descricao}
+                onUpdate={() => handleFill(item)}
+                onDelete={() => setDelete(item)}
               />
             ))}
         </S.ScrollArea>
@@ -161,15 +180,21 @@ const RegisterCities = () => {
         />
       </Form>
 
-      {/* <Form ref={formRef} onSubmit={handleUpdate}>
+      <Form ref={formRef} onSubmit={handleUpdate}>
         <RegisterAndUpdate
           toggleVisible={() => toggleUpdateVisible()}
           title="Edição de cidade"
           visible={updateVisible}
           state={StateOptions}
         />
-      </Form> */}
+      </Form>
 
+      <Alert
+        visible={deleteVisible}
+        message="Essa operação é irreversível! Deseja realmente deletar essa cidade?"
+        closeAlert={() => setDeleteVisible(!deleteVisible)}
+        onDelete={() => handleDelete()}
+      />
       <ToastContainer />
     </Layout>
   )
