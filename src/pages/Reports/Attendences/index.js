@@ -31,6 +31,7 @@ const AttendencesReport = () => {
   const [historyDetails, setHistoryDetails] = useState([])
   const [historyClient, setHistoryClient] = useState('')
   const [fullScreen, setFullScreen] = useState(false)
+  const [moreDatails, setMoreDeails] = useState(false)
   const [attendencesData, setAttendencesData] = useState([])
   const [loading, setLoading] = useState(false)
   const [searchInput, setSearchInput] = useState('')
@@ -227,10 +228,11 @@ const AttendencesReport = () => {
                 <M.ModalSubTitle>Suporte</M.ModalSubTitle>
                 <M.ModalSubTitle>Versão do sistema</M.ModalSubTitle>
                 <M.ModalSubTitle>Data</M.ModalSubTitle>
+                <M.ModalSubTitle>Opções</M.ModalSubTitle>
               </M.ModalListWrapper>
               <M.ModalScrollArea>
                 {historyDetails.map(item => (
-                  <M.ModalListWrapper key={item.id}>
+                  <M.ModalListWrapper key={item.id} more={moreDatails}>
                     <M.ModalDescription>
                       {item.attendence.abertura.descricao}
                     </M.ModalDescription>
@@ -246,6 +248,12 @@ const AttendencesReport = () => {
                     <M.ModalDescription>
                       {convertDate(item.attendence.createdAt)}
                     </M.ModalDescription>
+
+                    <CircleBnt
+                      icon={I.RiAddCircleLine}
+                      dark
+                      onClick={() => setMoreDeails(!moreDatails)}
+                    />
                   </M.ModalListWrapper>
                 ))}
               </M.ModalScrollArea>

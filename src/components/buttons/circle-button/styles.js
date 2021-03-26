@@ -15,14 +15,14 @@ export const Container = styled.button`
   border-radius: 50%;
 
   cursor: pointer;
-  color: #fff;
+  color: ${props => (props.dark ? '#333' : '#fff')};
 
   transition: 200ms ease;
 
   background-color: transparent;
 
   :hover {
-    background-color: #0a658f;
+    background-color: ${props => (props.dark ? '#e6e6e6' : '#0a658f')};
   }
 `
 export const Text = styled.h5`

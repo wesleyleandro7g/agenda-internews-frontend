@@ -46,8 +46,6 @@ export const ModalHeaderLeftItems = styled.div`
 export const ModalMain = styled.div`
   width: 100%;
   height: 90%;
-
-  padding: 0 5px;
 `
 export const ModalScrollArea = styled.div`
   width: 100%;
@@ -64,7 +62,7 @@ export const ModalListWrapper = styled.button`
   height: ${props => (props.reduce ? '40px' : '55px')};
 
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
   grid-gap: 30px;
 
   align-items: center;
@@ -80,7 +78,7 @@ export const ModalListWrapper = styled.button`
   }
 
   :hover {
-    background-color: #f5f5f5;
+    background-color: ${props => (props.reduce ? '#eee' : '#f5f5f5')};
   }
 
   @media (max-width: 800px) {
@@ -108,4 +106,7 @@ export const ModalSubTitle = styled.h5`
 export const ModalDescription = styled(ModalSubTitle)`
   font-weight: 400;
   text-transform: uppercase;
+`
+export const ReasonColsingWrapper = styled.div`
+  height: ${props => (props.moreDatails ? '50px' : '0')};
 `

@@ -2,7 +2,14 @@ import React from 'react'
 
 import * as S from './styles'
 
-const CircleButton = ({ icon, onClick, disabled, dataTip, dataDelayShow }) => {
+const CircleButton = ({
+  icon,
+  onClick,
+  disabled,
+  dataTip,
+  dataDelayShow,
+  dark
+}) => {
   const Icon = icon
 
   return (
@@ -11,8 +18,9 @@ const CircleButton = ({ icon, onClick, disabled, dataTip, dataDelayShow }) => {
       disabled={disabled}
       data-tip={dataTip}
       data-delay-show={dataDelayShow}
+      dark={dark}
     >
-      <Icon size={20} />
+      <Icon size={20} dark={dark} />
     </S.Container>
   )
 }
