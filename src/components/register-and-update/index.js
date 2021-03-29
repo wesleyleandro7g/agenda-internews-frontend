@@ -4,6 +4,7 @@ import Modal from '../modal'
 import Input03 from '../inputs/input03'
 import Input04 from '../inputs/input04'
 import Button02 from '../buttons/button02'
+// import CircleBtn from '../buttons/circle-button'
 import CheckBox from '../inputs/checkbox'
 
 import I from '../../utils/Icons'
@@ -27,6 +28,8 @@ const RegisterAndUpdate = ({
       <S.Container large={large}>
         <S.Header>
           <S.Title> {title} </S.Title>
+
+          {/* <CircleBtn icon={I.RiCloseLine} /> */}
         </S.Header>
 
         <S.Main>
